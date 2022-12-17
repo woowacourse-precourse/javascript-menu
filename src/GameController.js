@@ -19,6 +19,10 @@ class GameController {
   inputCoach(input) {
     this.#service.inputCoach(input);
   }
+
+  outputCoach() {
+    return this.#service.outputCoach();
+  }
 }
 
 module.exports = Object.freeze(new GameController());

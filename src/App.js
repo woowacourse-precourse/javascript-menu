@@ -21,7 +21,7 @@ class App {
   #successReadCoachEvent(input) {
     InputException.checkCoach(input);
     controller.inputCoach(input);
-
+    this.#questionNotEat();
     return this;
   }
 
@@ -39,7 +39,24 @@ class App {
   }
 
   // 못먹는 음식 입력
-  // readNotEat() {}
+  #questionNotEat() {
+    const notEat = Object.entries(controller.outputCoach());
+    // eslint-disable-next-line no-restricted-syntax
+    for (const [coach, foodList] of notEat) {
+      if (foodList.length === 0) {
+        this.readNotEat(coach);
+        break;
+      }
+    }
+  }
+
+  #readNotEatEvent(input) {}
+
+  readNotEat(coach) {
+    Console.readLine(`${coach}GAME_TEXT.notEat`, (input) => {
+      this.#readNotEatEvent(input);
+    });
+  }
 
   play() {
     this.readCoach();

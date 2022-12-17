@@ -17,8 +17,11 @@ class GameService {
   }
 
   inputCoach(input) {
-    console.log(GameService.makeCoachData(input));
     this.#repo.update(MODEL_KEY.coach, GameService.makeCoachData(input));
+  }
+
+  outputCoach() {
+    return this.#repo.read(MODEL_KEY.coach);
   }
 }
 
