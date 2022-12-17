@@ -11,12 +11,12 @@ const Io = class {
     this.#outputView = new OutputView();
   }
 
-  readNames() {
-    throw new OverrideError();
+  readNames(saveNames) {
+    this.#inputView.readNames(saveNames);
   }
 
-  readHateMenus() {
-    throw new OverrideError();
+  readHateMenus(name, saveNames) {
+    this.#inputView.readHateMenus(name, saveNames);
   }
 
   printOpening() {
@@ -24,7 +24,7 @@ const Io = class {
   }
 
   printRecommendMenu() {
-    throw new OverrideError();
+    this.#outputView.printRecommendMenu();
   }
 
   printClosing() {
