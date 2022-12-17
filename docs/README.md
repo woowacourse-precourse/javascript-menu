@@ -33,6 +33,12 @@
     - [x] 카테코리 출력
     - [x] 코치에게 추천하는 메뉴 출력
 
+### 🔗 진행 (model - view 연결)
+- [] menu sample로 MenuRecommend 객체 생성
+- [] 초기 값을 입력받아 Coach 객체 생성
+- [] MenuRecommend을 이용해 메뉴 추천 결과 생성
+- [] 메뉴 추천 결과 출력
+
 <br>
 
 ### ✅ checkList
