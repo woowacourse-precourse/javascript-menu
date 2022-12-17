@@ -36,11 +36,11 @@ class MenuController {
   // 코치 생성
   createCoach(names) {
     Coach.create(names);
-    this.getCoach();
+    this.getCurrentCoachName();
   }
 
   // 코치 이름 받기(카운팅)
-  getCoach() {
+  getCurrentCoachName() {
     const coachName = Coach.getName();
     this.readNoMenu(coachName);
   }
@@ -68,27 +68,26 @@ class MenuController {
     if (inputCount === coachCount) {
       this.generateCategory();
     } else {
-      this.getCoach();
+      this.getCurrentCoachName();
     }
   }
 
   generateCategory() {
     Category.generate();
-    this.recommendMenu();
+    this.tarverseCoach();
   }
 
-  recommendMenu() {
-    const category = Category.getCategory();
-
+  tarverseCoach() {
     for (const [coachName, noMenu] of Coach.people()) {
-      const recommendMenu = MenuPicker.recommend(
-        noMenu,
-        category,
-        this.#samples
-      );
-      Coach.assignMenu(coachName, recommendMenu);
+      this.recommendMenu(coachName, noMenu);
     }
     this.showResult();
+  }
+
+  recommendMenu(coachName, noMenu) {
+    const category = Category.getCategory();
+    const recommendMenu = MenuPicker.recommend(noMenu, category, this.#samples);
+    Coach.assignMenu(coachName, recommendMenu);
   }
 
   showResult() {

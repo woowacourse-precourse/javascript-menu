@@ -1,5 +1,3 @@
-//TODO: 각 코치를 객체에서 관리한다면 좋을듯하다
-//TODO: 배열이 아니라
 class Coach {
   static #coaches = new Map();
   static #inputCount = 0;

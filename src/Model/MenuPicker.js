@@ -28,7 +28,7 @@ class MenuPicker {
       return '일식';
     }
     if (categoryIndex === 2) {
-      return '일식';
+      return '한식';
     }
     if (categoryIndex === 3) {
       return '중식';
