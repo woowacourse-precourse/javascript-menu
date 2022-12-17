@@ -1,3 +1,4 @@
+const Menu = require("./Controller/Menu");
 const OutputView = require("./View/OutputView");
 
 const SAMPLE = {
@@ -12,6 +13,7 @@ const SAMPLE = {
 class App {
   play() {
     OutputView.printStart();
+	new Menu().getCoachNames();
   }
 }
 
