@@ -38,11 +38,15 @@ class MenuController {
         return newList.map((item) => item.trim());
     }
 
+    checkCoach(coach) {
+        if(!this.#checkedCoach.includes(coach)){
+            this.inputView.readNoEatFood(this.handleFoodList.bind(this), coach);
+        }
+    }
+
     requestNoEatFood() {
         this.#coachList.forEach((coach) => {
-            if(!this.#checkedCoach.includes(coach)){
-                this.inputView.readNoEatFood(this.handleFoodList.bind(this), coach);
-            }
+            checkCoach(coach);
         })
     }
 
