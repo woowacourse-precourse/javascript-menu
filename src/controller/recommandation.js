@@ -2,7 +2,7 @@ const inputView = require("../view/inputView");
 const outputView = require("../view/outputView");
 const Category = require("../model/category");
 const Coach = require("../model/coach");
-const food = require("../model/foodDb");
+const FoodDB = require("../model/foodDb");
 
 class Recommendation {
   #output;
@@ -19,6 +19,9 @@ class Recommendation {
     this.#coachIdx = 0;
   }
   #init() {
+    const foodDb = new FoodDB();
+    const food = foodDb.getFood();
+
     const foodKeys = Object.keys(food);
     const foodValues = Object.values(food);
     const length = foodKeys.length;
