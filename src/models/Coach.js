@@ -3,10 +3,12 @@ const {
   CoachNameListValidation,
   HateMenuListValidation,
 } = require('../utils/Validation');
+const Shuffle = require('../utils/Shuffle');
 
 class Coach {
   #name;
-  #hateMenuList;
+  #hateMenuList = [];
+  #recommendedMenuList = [];
 
   constructor(coachName) {
     this.#name = coachName;
@@ -48,6 +50,16 @@ class Coach {
     hateMenuList.split(',').forEach((hateMenu) => {
       this.#hateMenuList.push(hateMenu);
     });
+  }
+
+  recommendMenu(menuList) {
+    let decidedMenu = Shuffle.getRandomMenu(menuList);
+
+    while (this.#hateMenuList.includes(decidedMenu)) {
+      decidedMenu = Shuffle.getRandomMenu(menuList);
+    }
+
+    this.#recommendedMenuList.push(decidedMenu);
   }
 }
 

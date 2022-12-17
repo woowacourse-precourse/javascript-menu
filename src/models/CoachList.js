@@ -18,6 +18,10 @@ class CoachList {
     )[0];
     coach.addHateMenuList(hateMenuList);
   }
+
+  recommendMenu(menuList) {
+    this.#coachList.forEach((coach) => coach.recommendMenu(menuList));
+  }
 }
 
 module.exports = CoachList;

@@ -1,12 +1,14 @@
 const CategoryList = require('../models/CategoryList');
 const Coach = require('../models/Coach');
 const CoachList = require('../models/CoachList');
+const { createCategoryNum } = require('../utils/CreateCategoryNum');
 const { Output, Input } = require('../views/View');
 
 class Controller {
   #coachList = new CoachList();
   #coachNameList;
   #categoryList = new CategoryList();
+  #count = 0;
 
   constructor(categoryList) {
     this.#categoryList.addCategoryList(categoryList);
@@ -50,6 +52,19 @@ class Controller {
     const coach = this.#coachNameList.shift();
     if (this.#coachNameList.length > 0) return this.inputHateMenuList();
   }
+
+  setRecommendation() {
+    if (this.#count === 5) return this.printRecommendation();
+    this.#count++;
+    const categoryNum = createCategoryNum();
+    const categoryMenuList =
+      this.#categoryList.getCategoryMenuList(categoryNum);
+    this.#coachList.recommendMenu(categoryMenuList);
+
+    return this.setRecommendation();
+  }
+
+  printRecommendation() {}
 }
 
 module.exports = Controller;
