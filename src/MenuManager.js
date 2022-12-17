@@ -1,4 +1,4 @@
-class CoachList {
+class MenuManager {
   #coachs;
 
   constructor(coachs) {
@@ -17,4 +17,4 @@ class CoachList {
   }
 }
 
-module.exports = CoachList;
+module.exports = MenuManager;

@@ -1,5 +1,5 @@
 const Coach = require("./Coach");
-const CoachList = require("./CoachList");
+const MenuManager = require("./MenuManager");
 const Validator = require("./Validator");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
@@ -13,7 +13,7 @@ const SAMPLE = {
 };
 
 class App {
-  #coachList;
+  #menuManager;
 
   play() {
     OutputView.printOpening();
@@ -30,12 +30,12 @@ class App {
     Validator.validateCoachNames(nameInput);
     const coachNameList = nameInput.split(",");
     const coachs = coachNameList.map((name) => new Coach(name));
-    this.#coachList = new CoachList(coachs);
+    this.#menuManager = new MenuManager(coachs);
     this.requestFirstCoachsBannedMenu();
   }
 
   requestFirstCoachsBannedMenu() {
-    const firstCoach = this.#coachList.getFirstCoach();
+    const firstCoach = this.#menuManager.getFirstCoach();
     this.requestBannedMenu(firstCoach);
   }
 
@@ -46,7 +46,7 @@ class App {
   }
 
   splitMenu(menuInput) {
-    if (menus === "") return [];
+    if (menuInput === "") return [];
     return menuInput.split(",");
   }
 
@@ -55,7 +55,7 @@ class App {
     const menus = this.splitMenu(menuInput);
     coach.addBannedMenu(menus);
 
-    const nextCoach = this.#coachList.getNextCoach(coach.getName());
+    const nextCoach = this.#menuManager.getNextCoach(coach.getName());
     if (!nextCoach) {
       console.log("wow");
       return;
