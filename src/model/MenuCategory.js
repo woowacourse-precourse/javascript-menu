@@ -1,4 +1,4 @@
-class Gategory {
+class MenuCategory {
   #index;
   #category;
   #menus = [];
@@ -10,4 +10,4 @@ class Gategory {
   }
 }
 
-module.exports = Gategory;
+module.exports = MenuCategory;

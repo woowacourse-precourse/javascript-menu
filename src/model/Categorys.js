@@ -1,4 +1,4 @@
-const Gategory = require('./Gategory');
+const MenuCategory = require('./MenuCategory');
 
 class Categorys {
   #list = [];
@@ -8,7 +8,7 @@ class Categorys {
   addGategorys(categorys) {
     let count = 1;
     for (let [category, menus] of Object.entries(categorys)) {
-      this.#list.push(new Gategory([category, menus, count]));
+      this.#list.push(new MenuCategory([category, menus, count]));
       this.#allCategorys.push(category);
       this.#addAllMenus(menus);
       count += 1;
