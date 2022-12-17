@@ -20,6 +20,11 @@ class Coach {
     });
     this.#coachList = coachList;
   }
+
+  getCoachList () {
+    return this.#coachList;
+  }
+
 }
 
 module.exports = Coach;
