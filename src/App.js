@@ -27,11 +27,25 @@ class App {
     try {
       this.validateNames(coachArray);
     } catch (error) {
-      MissionUtils.Console.print(error.massage);
+      MissionUtils.Console.print(error.message);
+      this.readCoachName(this.namesCallback);
     }
   }
 
-  validateNames(coachArray) {}
+  validateNames(coachArray) {
+    for (let i = 0; i < coachArray.length; i++) {
+      if (!(coachArray[i].length > 2 && coachArray[i].length < 4)) {
+        throw Error(PRINT_ERROR_STRING.COACH_NAME_LENGTH);
+      }
+    }
+
+    let setCoachArray = new Set(coachArray);
+    if (setCoachArray.size !== coachArray.length)
+      throw Error(PRINT_ERROR_STRING.COACH_NAME_DUPLE);
+
+    if (!(coachArray.length < 2 && coachArray.length > 5))
+      throw Error(PRINT_ERROR_STRING.COACH_NAME_NUMBER);
+  }
 
   play() {
     this.printRecommendedStart();
