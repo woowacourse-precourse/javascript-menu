@@ -41,7 +41,10 @@ class MenuController {
 
   getRandomCategory() {
     for (let i = 0; i < 5; i++) {
-      const category = generate(Object.keys(this.#menus));
+      let category = generate(Object.keys(this.#menus));
+      while (this.#categories.filter((el) => category === el).length == 2) {
+        category = generate(Object.keys(this.#menus));
+      }
       this.#categories.push(category);
     }
   }
