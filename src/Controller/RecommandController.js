@@ -82,7 +82,7 @@ class RecommandController {
     const dupCnt = this.categories.filter(
       (category) => category === tmpCategory,
     ).length;
-    if (dupCnt >= 2) {
+    if (dupCnt === 2) {
       this.selectCategory();
       return;
     }

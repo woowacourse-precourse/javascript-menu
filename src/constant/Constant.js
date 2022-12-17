@@ -97,6 +97,8 @@ const INPUT_MESSAGE = Object.freeze({
 const ERROR = "[ERROR]";
 const ERROR_MESSAGE = Object.freeze({
   NAMES_MIN_LEN: `${ERROR} 코치는 최소 2명 이상 입력해야 합니다.`,
+  NAMES_MAX_LEN: `${ERROR} 코치는 최대 5명 이하 입력해야 합니다.`,
+  NAME_LEN: `${ERROR} 코치 이름은 최소 2글자, 최대 4글자 입력해야 합니다.`,
   NO_EAT_MENU_MAX_LEN: `${ERROR} 못먹는 메뉴는 2개 이하로 입력해야 합니다.`,
 });
 
