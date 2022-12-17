@@ -20,14 +20,19 @@ class MenuRecommendManager {
       const coachesNames = coaches.split(",");
       this.#menuRecommend.registerCoaches(coachesNames);
 
-      this.onReadHateFood(coachesNames[this.#counter++], coachesNames);
+      this.onReadHateFood(coachesNames[this.#counter], coachesNames);
     });
   }
   onReadHateFood(name, coachesNames) {
     this.#inputView.readHateFood(name, (food) => {
-      console.log(food);
-      if (this.#counter !== coachesNames.length)
-        this.onReadHateFood(coachesNames[this.#counter++], coachesNames);
+      this.#menuRecommend.registerHateFoods(name, food);
+      this.#counter += 1;
+      if (this.#counter !== coachesNames.length) {
+        this.onReadHateFood(coachesNames[this.#counter], coachesNames);
+      }
+      if (this.#counter === coachesNames.length) {
+        this.#menuRecommend.recommendMenus();
+      }
     });
   }
 }

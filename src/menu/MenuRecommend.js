@@ -23,8 +23,20 @@ class MenuRecommend {
       this.#coaches.push(coach);
     }
   }
-  registerHateFoods(foods) {}
-  recommendMenus() {}
+  registerHateFoods(name, foods) {
+    const targetCoach = this.#coaches.find((coach) => coach.getName() === name);
+    targetCoach.registerHateFood(foods.split(","));
+  }
+  recommendMenus() {
+    const category = this.#menuList.getCategory();
+
+    const isMoreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
+    if (!isMoreThanTwice) {
+      this.#categoryRecorder.writeRecord(category);
+      return;
+    }
+    this.recommendMenus();
+  }
 }
 
 module.exports = MenuRecommend;
