@@ -17,5 +17,4 @@ class App {
     this.controller.play();
   }
 }
-
 module.exports = App;

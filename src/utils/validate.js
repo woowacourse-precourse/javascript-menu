@@ -8,6 +8,17 @@ const Validate = {
       throw new Error('[ERROR] 인원은 최소 2명 최대 5명입니다\n');
     }
   },
+  exceptionFoodsValidate(foods) {
+    // eslint-disable-next-line no-useless-escape
+    const iskorean = /[a-z0-9]|[ \[\]{}()<>?|`~!@#$%^&*-_+=,.;:\"'\\]/g;
+    const splitFoods = foods.split(',');
+    if (!splitFoods || splitFoods === '') return;
+    splitFoods.forEach((food) => {
+      if (iskorean.test(food)) {
+        throw new Error('[ERROR] 한글 입력만 가능합니다.');
+      }
+    });
+  },
 };
 
 module.exports = Validate;
