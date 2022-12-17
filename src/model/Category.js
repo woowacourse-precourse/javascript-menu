@@ -8,7 +8,10 @@ class Category {
   }
 
   getRandomMenu() {
-    const index = Random.shuffle([0, 1, 2, 3, 4])[0];
+    const index = Random.shuffle(Array.from(
+      { length: this.#menus.length },
+      (value, index) => index,
+    ))[0];
     return this.#menus[index];
   }
 
