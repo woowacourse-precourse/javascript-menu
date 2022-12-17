@@ -16,7 +16,12 @@ const InputView = {
 
   readNotEatMenu(coachName, callback) {
     Console.readLine(INPUT_MESSAGE.notEatMenu(coachName), (menus) => {
-      callback(coachName, menus);
+      try {
+        Validation.notEatMenu(menus);
+        callback(coachName, menus);
+      } catch {
+        this.readNotEatMenu(callback);
+      }
     });
   },
 };
