@@ -15,6 +15,7 @@ const OutputView = {
       MissionUtils.Console.print(RESULT_MESSAGE.coachMenus(coach, menus[coach]));
     });
 
+    MissionUtils.Console.print(RESULT_MESSAGE.end);
     MissionUtils.Console.close();
   },
 };
