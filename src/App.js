@@ -54,6 +54,7 @@ class App {
 		if(this.index !== this.#coaches.length) {
 			InputView.readDisabledFood(this.#coaches[this.index].getName(), this.survey.bind(this))
 		} else if (this.index === this.#coaches.length) {
+			// 설문이 끝나면
 			this.recommend();
 			OutputView.end();
 			Console.close();
@@ -75,14 +76,10 @@ class App {
 
 			// 메뉴
 			const menus = SAMPLE[categoryOfDay].split(",")
-			const menusIndex = []
-
-			for (let i = 0; i < menus.length; i++) {
-				menusIndex.push(i);
-			}
+			
 
 			this.#coaches.map((coach) => {
-				coach.setDayFood(menus[Random.shuffle(menusIndex)[0]])
+				coach.setDayFood(this.pickFood(coach, menus))
 			})
 
 		}
@@ -90,7 +87,20 @@ class App {
 		this.#coaches.map((coach) => {
 			OutputView.food(coach.getName(), coach.getDayFood().join(" | "))
 		})
+	}
 
+
+	pickFood(coach, menus) {
+		const menusIndex = []
+		for (let i = 0; i < menus.length; i++) {
+			menusIndex.push(i);
+		}
+		const randomFood = menus[Random.shuffle(menusIndex)[0]]
+
+		if(coach.getDayFood().includes(randomFood)){
+			pickFood(coach)
+		}
+		return randomFood;
 	}
 
 
