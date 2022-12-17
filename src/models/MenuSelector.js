@@ -133,6 +133,10 @@ class MenuSelector {
       (dayCategory) => dayCategory === category
     ).length;
   }
+
+  getWeekCategories() {
+    return this.#weekCategories;
+  }
 }
 
 module.exports = MenuSelector;
