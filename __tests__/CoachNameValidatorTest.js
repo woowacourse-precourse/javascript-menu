@@ -1,4 +1,4 @@
-const CoachNameValidator = require('../src/CoachNameValidator');
+const CoachNameValidator = require('../src/validators/CoachNameValidator');
 
 describe('코치 이름에 대한 입력값의 유효성을 검사하는 객체 테스트', () => {
   test.each([
