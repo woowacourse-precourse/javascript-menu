@@ -15,6 +15,18 @@ const Exception = {
       return true;
     });
   },
+
+
+  checkInputInedibleMenuLength (menuList) {
+    if (nameList.length > 2) {
+      return false;
+    }
+    return true;
+  }
+
+
+
+
 };
 
 module.exports = Exception;
