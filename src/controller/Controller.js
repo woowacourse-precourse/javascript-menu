@@ -3,6 +3,7 @@ const InputView = require('../view/InputView');
 const Recommendor = require('../model/Recommendor');
 const Validation = require('../utils/Validation');
 const { MESSAGE } = require('../utils/constants');
+const { close } = require('../utils/utils');
 
 class Controller {
   #index = 0;
@@ -82,6 +83,13 @@ class Controller {
     OutputView.printMessage(MESSAGE.showWeek);
     OutputView.printCategory(this.recommendor);
     OutputView.printMenus(this.recommendor);
+
+    this.close();
+  }
+
+  close() {
+    OutputView.printMessage(MESSAGE.close);
+    close();
   }
 }
 
