@@ -4,7 +4,6 @@ const { PARAMETERS, ERROR_MESSAGE } = require('./utils/constants');
 const Exception = {
   checkCoachesInput(input) {
     const COACHES = input.split(',');
-    console.log(COACHES);
 
     if (!this.checkInputFormat(COACHES, PARAMETERS.coachNumberRange)) {
       MissionUtils.Console.print(ERROR_MESSAGE.invalidCoachLength);
@@ -17,6 +16,18 @@ const Exception = {
         throw new Error(ERROR_MESSAGE.invalidCoachNameLength);
       }
     });
+  },
+
+  checkInedibleMenusInput(input) {
+    const INEDIBLE_MENUS = input.split(',');
+
+    if (
+      !this.checkInputFormat(INEDIBLE_MENUS, PARAMETERS.inedibleMenuRange) ||
+      PARAMETERS.checkBlackSpace.test(INEDIBLE_MENUS[0])
+    ) {
+      MissionUtils.Console.print(ERROR_MESSAGE.invalidInedibleMenuLength);
+      throw new Error(ERROR_MESSAGE.invalidInedibleMenuLength);
+    }
   },
 
   checkInputFormat(input, range) {

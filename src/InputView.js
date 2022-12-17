@@ -11,19 +11,19 @@ const InputView = {
         return this.readCoaches();
       }
 
-      // 각 코치들이 먹지 못하는 메뉴 입력받기
+      // for each coach readInedibleMenus;
     });
   },
 
-  readInedibleMenus() {
-    MissionUtils.Console.readLine(CONSOLE_MESSAGE.inedibleMenuInput, (input) => {
+  readInedibleMenus(coach) {
+    MissionUtils.Console.readLine(CONSOLE_MESSAGE.inedibleMenuInput(coach), (input) => {
       try {
-        // check exception;
+        Exception.checkInedibleMenusInput(input);
       } catch (error) {
         return this.readInedibleMenus();
       }
 
-      // 각 요일별 메뉴 생성하기 
+      //  각 요일별 메뉴 생성하기
     });
   },
 };

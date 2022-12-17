@@ -10,13 +10,14 @@ const PARAMETERS = {
     아시안: '팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
     양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
   },
+  checkBlackSpace: /^\S+$/g,
 };
 
 const CONSOLE_MESSAGE = {
   start: '점심 메뉴 추천을 시작합니다.\n',
   coachInput: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
   inedibleMenuInput(name) {
-    return `${name}(이)가 못 먹는 메뉴를 입력해 주세요.`;
+    return `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`;
   },
 };
 
