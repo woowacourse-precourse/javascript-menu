@@ -17,7 +17,9 @@ class App {
     this.coach = null;
     this.category = null;
     this.dislikeMenu = {};
+    this.recommendMenu = [];
   }
+
   play() {
     OutputView.printStart();
     InputView.readCoachName(this.getCoachNameInput.bind(this));
@@ -33,15 +35,19 @@ class App {
   getDislikeMenuInput(menu, idx) {
     const dislikeMenu = menu.split(',');
     validateDislikeMenu(dislikeMenu);
-    //this.dislikeMenu[this.coach[idx]] = menuArr;
-    const menuMaker = new MenuMaker(this.category, dislikeMenu);
-    menuMaker.createMenu();
+    this.getMenuRecommendation(dislikeMenu);
 
     idx++;
     if (idx === this.coach.length) {
       return;
     }
     InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
+  }
+
+  getMenuRecommendation(dislikeMenu) {
+    const menuMaker = new MenuMaker(this.category, dislikeMenu);
+    const weekMenu = menuMaker.createMenu();
+    this.recommendMenu.push(weekMenu);
   }
 }
 
