@@ -30,6 +30,9 @@ class App {
     this.makeCoachList(nameList);
     this.getDisableMenu();
   }
+  makeCoachList(nameList) {
+    this.coachList = nameList;
+  }
 }
 
 module.exports = App;
