@@ -30,6 +30,12 @@ const OutputView = {
   printFinish() {
     Console.print(OUTPUT_MESSAGE.FINISH);
   },
+
+  printError(error) {
+    OutputView.printEmptyLine();
+    Console.print(error.message);
+    OutputView.printEmptyLine();
+  },
 };
 
 module.exports = OutputView;

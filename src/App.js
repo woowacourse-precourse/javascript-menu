@@ -14,6 +14,7 @@ const {
   printDays,
   printEmptyLine,
   printFinish,
+  printError,
 } = require('./views/OutputView');
 
 const SAMPLE = {
@@ -35,22 +36,32 @@ class App {
   }
 
   #onCoachesSubmit(names) {
-    const coaches = names.split(',').map((coach) => new Coach(coach));
-    this.#coaches = new Coaches(coaches);
-    return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+    try {
+      const coaches = names.split(',').map((coach) => new Coach(coach));
+      this.#coaches = new Coaches(coaches);
+      return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+    } catch (error) {
+      printError(error);
+      readCoaches(this.#onCoachesSubmit.bind(this));
+    }
   }
 
   #onMenuSubmit(menu) {
-    const menus = menu.split(',');
-    this.#coaches.setCoachMenu(this.#index, menus);
-    this.#index += 1;
+    try {
+      const menus = menu.split(',');
+      this.#coaches.setCoachMenu(this.#index, menus);
+      this.#index += 1;
 
-    if (this.#index === this.#coaches.count()) {
-      this.#runFinish();
-      return Console.close();
+      if (this.#index === this.#coaches.count()) {
+        this.#runFinish();
+        return Console.close();
+      }
+
+      return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+    } catch (error) {
+      printError(error);
+      readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
     }
-
-    return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
   }
 
   #runFinish() {
