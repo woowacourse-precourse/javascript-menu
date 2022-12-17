@@ -12,6 +12,7 @@ class MenuRecommendController {
   #recommendWeeklyMenu = new RecommendWeeklyMenu;
 
   constructor() {
+    OutputView.printStart();
     this.#initCategories();
   }
 
