@@ -23,10 +23,27 @@ const Names = []
 const Categories = []
 const Recommended = []
 
+function finishService() {
+  Console.close()
+  return
+}
+
+function printRecommende(toPrint, idx) {
+  Console.print(toPrint)
+  return makePrintRecommended(idx+1)
+}
+
 function makePrintRecommended(idx) {
+  if(idx === Names.length) {
+    Console.print('추천을 완료했습니다.')
+    return finishService()
+  }
   const toPrint = [`[ ${Names[idx]} `]
   Recommended[idx].forEach((menu) => {
+    toPrint.push(`| ${menu} `)
   })
+  toPrint.push(']')
+  return printRecommende(toPrint.join(''), idx)
 }
 
 function printCategories(toPrint) {
@@ -39,7 +56,7 @@ function makePrintCategories() {
   Categories.forEach((category) => {
     toPrint.push(`| ${category} `)
   })
-  toPrint.push((']'))
+  toPrint.push(']')
   return printCategories(toPrint.join(''))
 }
 
