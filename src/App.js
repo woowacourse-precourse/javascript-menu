@@ -26,10 +26,10 @@ class App {
     const coachNameList = splitCoachName(nameInput);
     const coachs = coachNameList.map((name) => new Coach(name));
     this.#menuManager = new MenuManager(coachs);
-    this.requestFirstCoachsBannedMenu();
+    this.findFirstCoach();
   }
 
-  requestFirstCoachsBannedMenu() {
+  findFirstCoach() {
     const firstCoach = this.#menuManager.getFirstCoach();
     this.requestBannedMenu(firstCoach);
   }
@@ -46,11 +46,7 @@ class App {
     coach.addBannedMenu(menus);
 
     const nextCoach = this.#menuManager.getNextCoach(coach.getName());
-    if (!nextCoach) {
-      this.makeRecommendedMenu();
-      return;
-    }
-    this.requestBannedMenu(nextCoach);
+    nextCoach ? this.requestBannedMenu(nextCoach) : this.makeRecommendedMenu();
   }
 
   makeRecommendedMenu() {
@@ -58,6 +54,10 @@ class App {
     this.#menuManager.setMenus(randomCategorys);
     const coachsMenus = this.#menuManager.getCoachsMenus();
     OutputView.printRecommendedMenu(randomCategorys, coachsMenus);
+    this.close();
+  }
+
+  close() {
     MissionUtils.Console.close();
   }
 
