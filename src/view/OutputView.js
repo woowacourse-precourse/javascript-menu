@@ -6,7 +6,9 @@ const MESSAGE = require("./view.constants");
  */
 const OutputView = {
   printResult(result) {
-    Console.print(result);
+    const startMsg =
+      MESSAGE.MENU_RECOMMENDATION_RESULT + MESSAGE.MENU_WEEK + "\n";
+    Console.print(startMsg + result + MESSAGE.SERVICE_END_MESSAGE);
   },
 
   printStart() {
