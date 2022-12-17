@@ -14,6 +14,20 @@ const verify = {
     return false;
   },
 
+  nameCount(data) {
+    const result = data.split(',');
+    if (result.length < 2 || result.length > 5) throw new Error('Invalid Coach Count');
+  },
+
+  nameLengthCount(data) {
+    const result = data.split(',');
+    result.forEach((name) => {
+      if (name.length < 2 || name.length > 4) {
+        throw new Error('Invalid Name Length');
+      }
+    });
+  },
+
   //
 };
 
