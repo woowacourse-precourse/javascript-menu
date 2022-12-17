@@ -41,8 +41,11 @@ class Coach {
       if (this.#unableEatList.includes(menu)) continue;
       if (verify.eatenTwice(this.#eatenFoods, menu)) continue;
       this.#eatenFoods.push(menu);
-      console.log(menu);
     }
+  }
+
+  getResultData() {
+    return this.#eatenFoods.join(' | ');
   }
 }
 

@@ -98,7 +98,25 @@ class App {
     this.#coaches.forEach((coach) => {
       coach.suggestMenu(this.#foodCategory[4]);
     });
-    console.log(this.#foodCategory);
+    return this.printResult();
+  }
+
+  printResult() {
+    OutputView.printResultMessage();
+    OutputView.printDays();
+    OutputView.printCategory(this.#foodCategory);
+    return this.printCoaches();
+  }
+
+  printCoaches() {
+    this.#coaches.forEach((coach) => {
+      OutputView.printCoachResult(coach.getResultData());
+    });
+    return this.gameEnd();
+  }
+
+  gameEnd() {
+    OutputView.quitGame();
   }
 }
 
