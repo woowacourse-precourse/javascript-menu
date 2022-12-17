@@ -29,7 +29,7 @@ class MenuSelector {
       CATEGORIES[category][
         Random.shuffle(
           CATEGORIES[category].map((_, i) => {
-            return i;
+            return i + 1;
           })
         )[0] - 1
       ];
