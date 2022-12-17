@@ -29,17 +29,21 @@ const Menu ={
      * 못먹거나 이미 선택한 경우 다시 섞어서 첫번째 값 사용
      */
     pickMenu(COACH, category, hateMenu) {
-        let pickMenu = [];
+        let pickMenu = new Array(COACH.length);
+        for(let i = 0; i <pickMenu.length; i++) {
+            pickMenu[i] = new Array(5);
+        }
         for(let i = 0; i < COACH.length; i++) {
             let j = 0;
             while(j < 5) {
-                let pick = MU.Random.shuffle(SAMPLE[category[j]-1])[0];
-                if(pickMenu[i].includes(pick) || hateMenu[i].includes(pick)) continue;
-                pickMenu[i][j] = pick;
+                const pick = MU.Random.shuffle([1,2,3,4,5,6,7,8,9])[0];
+                const menu = SAMPLE[category[j] - 1][pick-1];
+                if(pickMenu[i].includes(menu) ||hateMenu[i].includes(menu)) continue;
+                pickMenu[i][j] = menu;
                 j++;
             }
         }
-        console.log(pickMenu);
+        return pickMenu;
     }
 };
 
