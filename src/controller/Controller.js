@@ -20,8 +20,8 @@ class Controller {
 
   coachesHandler(coaches) {
     try {
-      Validator.validateCoach(coaches.split(","));
-      this.#coaches = coaches.split(",");
+      Validator.validateCoach(coaches.split(",").map((name) => name.trim()));
+      this.#coaches = coaches.split(",").map((name) => name.trim());
       this.inputHateHandler(this.#idx);
     } catch (error) {
       Console.print(error);
@@ -37,8 +37,8 @@ class Controller {
 
   hateHandler(hates) {
     try {
-      Validator.validateHates(hates.split(","));
-      this.makeHates(hates.split(","));
+      Validator.validateHates(hates.split(",").map((name) => name.trim()));
+      this.makeHates(hates.split(",").map((name) => name.trim()));
     } catch (error) {
       Console.print(error);
       this.inputHateHandler(this.#idx);

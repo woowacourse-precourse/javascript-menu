@@ -31,7 +31,7 @@ class Recommend {
 
   makeRandomCategory(categories, rcmCategory) {
     let idx = 0;
-    while (idx < 5) {
+    while (idx < DAYS) {
       const category = categories[Random.pickNumberInRange(MIN, MAX) - 1];
       if (idx > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
         idx = this.addCategory(rcmCategory, category, idx);
@@ -72,7 +72,7 @@ class Recommend {
   }
 
   makeIdxMenu(idx_menu) {
-    for (let i = 0; i < MAX; i++) {
+    for (let i = 1; i <= MAX; i++) {
       idx_menu.push(i);
     }
   }
@@ -84,15 +84,16 @@ class Recommend {
       const dish = dishes[Random.shuffle(idx_menu)[0] - 1];
       if (
         this.checkHateDish(idx, dish) &&
-        this.checkDuplicatedDish(menu, dish)
+        this.checkDuplicateDish(menu, dish)
       ) {
+        console.log(dish);
         menu.push(dish);
         day += 1;
       }
     }
   }
 
-  checkDuplicatedDish(menu, dish) {
+  checkDuplicateDish(menu, dish) {
     if (menu.length == 0) return true;
     if (menu.length > 0 && menu.includes(dish)) return false;
     return true;

@@ -12,7 +12,7 @@ const Validator = {
   },
 
   coachesLength(coaches) {
-    if (coaches.length < INFO.C_MIN || coaches > INFO.C_MAX)
+    if (coaches.length < INFO.C_MIN || coaches.length > INFO.C_MAX)
       throw ERR_MSG.C_LEN_ERR;
   },
 
