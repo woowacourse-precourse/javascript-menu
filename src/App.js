@@ -1,6 +1,6 @@
 const MenuView = require('./view/MenuView');
 const MenuModel = require('./model/MenuModel');
-const MenuCtrl = require('./controller/MenuGame');
+const MenuCtrl = require('./controller/MenuCtrl');
 const InputView = require('./view/InputView');
 const OutputView = require('./view/OutputView');
 

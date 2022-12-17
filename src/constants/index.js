@@ -29,8 +29,8 @@ const VALIDATION_MESSAGE = deepFreeze({
     range: '코치 숫자는 2명에서 5명 사이여야 합니다.',
     length: '코치의 이름은 2글자에서 4글자 사이여야 합니다.',
   },
-  move_space: {
-    command: '플레이어가 이동할 칸은 대문자 U 또는 D중 하나만 입력할 수 있습니다.',
+  menus: {
+    range: '각 코치가 먹을 수 없는 음식은 0개에서 2개 사이입니다.',
   },
   replay: {
     command: '게임 재시작 또는 종료를 하기 위해서는 각각 대문자 R, Q를 입력해주셔야 합니다.',

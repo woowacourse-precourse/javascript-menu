@@ -1,4 +1,4 @@
-const { VALIDATION_MESSAGE, REGEX } = require('../constants');
+const { VALIDATION_MESSAGE } = require('../constants');
 const { GameError } = require('../errors');
 
 class NameValidator {
