@@ -1,4 +1,7 @@
 const { OUTPUT_MESSAGES } = require('../constants/messages');
+const menuList = require('../menuData');
+const { pickNumberInRange, shuffle } = require('../utils/mission');
+const Validator = require('../validate/Validator');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -6,7 +9,9 @@ class MenuController {
   #coachMembers;
   #unableToEatMenu = [];
 
-  constructor() {}
+  constructor() {
+    this.validator = new Validator();
+  }
 
   start() {
     OutputView.printStart(OUTPUT_MESSAGES.start);
@@ -17,12 +22,17 @@ class MenuController {
     const callback = (coachName) => {
       try {
         this.#coachMembers = coachName.split(',');
+        console.log(this.#coachMembers);
+
+        this.validator.checkCoachMemberCount(this.#coachMembers.length);
+        this.validator.checkCoachNameLength(this.#coachMembers);
         // 예외처리 : 코치 이름 2글자 ~ 4글자가 아닌 경우
         // 예외처리 : 코치 2명 이상, 5명 이하가 아닌 경우
         // 예외처리 : 콤마로 구분하지 않는 경우
         this.getUnableToEatMenu();
       } catch (error) {
-        console.log(error);
+        OutputView.printError(error);
+        this.getCoachName();
       }
     };
 
