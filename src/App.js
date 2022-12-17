@@ -51,10 +51,8 @@ class App {
 				const menu = new MenuRecommend()
 				for (let i = 0; i < 5; i++) {
 					this.recommendMenu(menu,coachs,i)
-					
 				}
 				this.getResults(menu, coachs)
-
 			}
 		})
 	}
