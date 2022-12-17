@@ -20,6 +20,21 @@ class App {
     OutputView.printMessage(ANNOUNCE.START);
     this.#inputCoachesPhase();
   }
+
+  #inputCoachesPhase() {
+    InputView.readNames((coachNames) => {
+      try {
+        Validator.errorIfCoachNamesInvalid(coachNames);
+        this.#coaches = coachNames.split(',');
+        console.log(this.#coaches);
+        this.#chooseSystem.addCoaches(this.#coaches);
+        this.#inputBanMenuPhase(0);
+      } catch (error) {
+        OutputView.printMessage(ERROR.NAME_INVALID);
+        this.#inputCoachesPhase();
+      }
+    });
+  }
 }
 
 module.exports = App;
