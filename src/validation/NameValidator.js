@@ -6,6 +6,7 @@ const { MAX_NAME_LENGTH, MIN_NAME_LENGTH, MAX_NAMES_COUNT, MIN_NAMES_COUNT } =
 class NameValidator {
   constructor(namesArr) {
     this.validateNameLength(namesArr);
+    this.validateNamesCount(namesArr);
   }
 
   validateNameLength(namesArr) {
@@ -15,9 +16,12 @@ class NameValidator {
         throw ERROR_MESSAGE.NAME_LENGTH;
     });
   }
+
+  validateNamesCount(namesArr) {
+    const namesCount = namesArr.length;
+    if (namesCount < MIN_NAMES_COUNT || namesCount > MAX_NAMES_COUNT)
+      throw ERROR_MESSAGE.NAME_COUNT;
+  }
 }
 
 module.exports = NameValidator;
-
-// 이름 글자수 최소 2, 최대 4
-// 인원수 최소 2, 최대 5
