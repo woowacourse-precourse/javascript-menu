@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 
 const OutputView = {
   SERVICE_START: '점심 메뉴 추천을 시작합니다.',
-  MENU_RESULT: '메뉴 추천 결과입니다.',
+  MENU_RESULT: '\n메뉴 추천 결과입니다.',
   SERVICE_END: '\n추천을 완료했습니다.',
   ERROR_HEADER: '[ERROR]',
 
