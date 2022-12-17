@@ -16,6 +16,10 @@ const OutputView = {
     }
     Console.print('\n추천을 완료했습니다.');
   },
+
+  printError(e) {
+    Console.print(`[ERROR] ${e.message}`);
+  },
 };
 
 module.exports = OutputView;

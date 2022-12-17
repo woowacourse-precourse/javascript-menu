@@ -3,6 +3,7 @@ const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 const MissionUtils = require('@woowacourse/mission-utils');
 const Menu = require('./models/Menu');
+const Validator = require('./utils/Validator');
 
 class App {
   #categoris;
@@ -18,12 +19,28 @@ class App {
   }
 
   #handleNames(input) {
-    this.#names = input.split(',');
-    InputView.readHates(this.#handleHates.bind(this), this.#names[this.#menus.length]);
+    try {
+      Validator.checkNames(input);
+      this.#names = input.split(',');
+      InputView.readHates(this.#handleHates.bind(this), this.#names[this.#menus.length]);
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readNames(this.#handleNames.bind(this));
+    }
   }
 
   #handleHates(input) {
-    const hates = input.split(',');
+    try {
+      Validator.checkHates(input);
+      const hates = input.split(',');
+      this.#controllHates(hates);
+    } catch (e) {
+      OutputView.printError(e);
+      InputView.readHates(this.#handleHates.bind(this), this.#names[this.#menus.length]);
+    }
+  }
+
+  #controllHates(hates) {
     this.#menus.push(new Menu(this.#categoris, hates));
     if (this.#menus.length < this.#names.length) {
       InputView.readHates(this.#handleHates.bind(this), this.#names[this.#menus.length]);
