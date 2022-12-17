@@ -2,8 +2,8 @@ const { MENU_CONSTANTS } = require('../constants/Setting');
 const CategoryRepository = require('../repositorys/CategoryRepository');
 const CoachRepository = require('../repositorys/CoachRepository');
 
-const Category = require('../model/Category');
 const InputView = require('../view/InputView');
+const OutputView = require('../view/OutputView');
 
 class MenuRecommendController {
   #categoryRepository = new CategoryRepository;
@@ -27,7 +27,24 @@ class MenuRecommendController {
   #readCrewName() {
     InputView.readCoachName(coachNames => {
       coachNames.forEach(name => this.#coachRepository.addCoach(name));
+
+      this.#readNotGoodFoodEachCoachs(this.#coachRepository.getEachCoach());
     });
+  }
+
+  #readNotGoodFoodEachCoachs(coach) {
+    InputView.readNotGoodFood(coach, foods => {
+      coach.setNotGoodFood(foods);
+      if (this.#coachRepository.checkNextCoach()) {
+        this.#readNotGoodFoodEachCoachs(this.#coachRepository.getEachCoach());
+      } else {
+        this.#returnRecommendMenu();
+      }
+    });
+  }
+
+  #returnRecommendMenu() {
+    
   }
 }
 

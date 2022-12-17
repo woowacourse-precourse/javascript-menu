@@ -12,6 +12,14 @@ const InputView = {
     });
   },
 
+  readNotGoodFood(coach, callback) {
+    InputView.question(`\n${coach.getName() + MESSAGE.process.inputNotGoodFood}`, input => {
+      const foods = InputView.convertInputToItems(input);
+
+      callback(foods);
+    });
+  },
+
   question(string, callback) {
     Console.readLine(string, input => {
       try {
