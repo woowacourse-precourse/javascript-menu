@@ -3,7 +3,7 @@ const OutputView = require('./OutputView');
 const MESSAGE = require('../constants/Message');
 
 const InputView = {
-  readCoach(callback) {
+  readCoachName(callback) {
     InputView.question(MESSAGE.process.inputCoachName, input => {
       const names = InputView.convertInputToItems(input);
 
