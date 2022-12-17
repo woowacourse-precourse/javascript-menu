@@ -43,11 +43,9 @@ class MenuRecommendation {
         !new Set(this.coachs[i].getLunch()).size ===
         this.coachs[i].getLunch().length
       ) {
-        console.log("dup");
         chooseMenuForCoach(i);
       }
     }
-
     this.receiveResult();
   }
 
