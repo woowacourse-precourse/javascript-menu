@@ -11,6 +11,13 @@ class Coach {
     if (!(coaches.length >= 2 && coaches.length <= 5)) {
       throw new Error("[ERROR] 코치 인원은 최소 2명, 최대 5명이어야 합니다");
     }
+    coaches.forEach((name) => {
+      if (!(name.length >= 2 && name.length <= 4)) {
+        throw new Error(
+          "[ERROR] 코치 이름은 최소 2글자, 최대 4글자이어야 합니다"
+        );
+      }
+    });
   }
 }
 
