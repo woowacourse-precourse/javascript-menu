@@ -1,4 +1,5 @@
 const Coach = require('../Model/Coach');
+const Validate = require('../Model/Validate');
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 
@@ -15,9 +16,12 @@ class MenuController {
 
   // 유효성 검사
   validateCoach(names) {
-    //TODO: try catch & validate
-    Validate.names(names);
-    this.createCoach(names);
+    try {
+      Validate.names(names);
+      this.createCoach(names);
+    } catch ({ message }) {
+      OutputView.print(message);
+    }
   }
 
   // 코치 생성
@@ -37,11 +41,9 @@ class MenuController {
   }
 
   validateMenu(menus) {
-    //TODO: try catch
     try {
       Validate.noMenu(menus);
       Coach.addNoFood(menus);
-      Coach.addInputCount();
     } catch ({ message }) {
       OutputView.print(message);
     }

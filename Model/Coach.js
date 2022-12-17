@@ -15,8 +15,9 @@ class Coach {
 
   static create(names) {
     const coachNames = names.split(',');
+
+    // 일단 set으로 설정
     coachNames.forEach((name) => {
-      // 일단 set으로 설정
       this.#coaches.set(name, new Set());
       this.#coachOrder.push(name);
     });
@@ -35,6 +36,8 @@ class Coach {
   static addNoFood(foods) {
     const name = this.getName();
     const foodSet = new Set(foods);
+
+    this.addInputCount();
     this.#coaches.set(name, foodSet);
   }
 }
