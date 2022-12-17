@@ -75,9 +75,9 @@
 ---
 ## coach ##
 
-constructor(name)
-#notEat
-weekMenu
+* constructor(name)
+* #notEat
+* weekMenu
 
 ---
 ## app ##
