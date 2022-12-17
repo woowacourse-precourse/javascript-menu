@@ -17,7 +17,7 @@ class Coach {
   }
 
   #validate() {
-    if (this.#name.length < 2 || 4 < this.#name.length) {
+    if (this.#name.length < 2 || this.#name.length > 4) {
       throw new AppValidationError('코치의 이름은 최소 2글자, 최대 4글자여야 합니다.');
     }
   }
@@ -30,7 +30,7 @@ class Coach {
    * @param {Menu[]} dislikeMenus
    */
   setDislikeMenus(dislikeMenus) {
-    if (2 < dislikeMenus.length) {
+    if (dislikeMenus.length > 2) {
       throw new AppValidationError('못 먹는 메뉴는 최소 0개, 최대 2개여야 합니다.');
     }
     this.#dislikeMenus = dislikeMenus;
