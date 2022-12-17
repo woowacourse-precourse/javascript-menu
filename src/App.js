@@ -16,12 +16,43 @@ CATEGORIES.set(3, '중식')
 CATEGORIES.set(4, '아시안')
 CATEGORIES.set(5, '양식')
 
+const RANDOM_ARRAY = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+
 const BannedMenu = {}
 const Names = []
 const Categories = []
+const Recommended = []
 
 function printCategories() {
-  Console.print(Categories)
+  Console.print('[ ')
+  Categories.forEach((category) => {
+    Console.print(`| ${category}`)
+  })
+  Console.print(' ]')
+}
+
+function printResult() {
+  Console.print('메뉴 추천 결과입니다.')
+  Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]')
+  return printCategories()
+}
+
+function getMenu(idx, date) {
+  const menu = SAMPLE[Categories[date]].split(', ')[Random.shuffle(RANDOM_ARRAY)[0]]
+  if(Recommended[idx].includes(menu)) return getMenu(idx, date)
+  if(BannedMenu[Names[idx].includes(menu)]) return getMenu(idx, date)
+  Recommended[idx].push(menu)
+}
+
+function recommendMenu(idx) {
+  if(idx === Names.length) {
+    return printResult()
+  }
+  Recommended.push([])
+  for(let date=0; date <5; date++) {
+    getMenu(idx, date)
+  }
+  recommendMenu(idx+1)
 }
 
 function pushCategory(category) {
@@ -34,7 +65,7 @@ function chooseCategory() {
     const category = CATEGORIES.get(Random.pickNumberInRange(1, 5))
     pushCategory(category)
   }
-  return printCategories()
+  return recommendMenu(0)
 }
 
 function menusCntValid(menus) {
@@ -79,7 +110,7 @@ function inputCantEat(idx) {
       BannedMenu[name] = cantEatArray.slice()
       return cantEat(idx+1)
     } catch(error) {
-      Console.print(error.message)
+      Console.print(error)
       return inputCantEat(idx)
     }
   }))
