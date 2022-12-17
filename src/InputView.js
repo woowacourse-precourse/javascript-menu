@@ -21,7 +21,7 @@ const InputView = {
         });
         this.readImpossibleFoods(coachDietList[0].getName(), 0);
       } catch (error) {
-        console.log(error);
+        OutputView.printError(error);
         this.readCoachesName();
       }
     });
@@ -31,7 +31,6 @@ const InputView = {
     Console.readLine(MESSAGE.ASK_COACH_IMPOSSIBLE(name), (foods) => {
       try {
         coachDietList[idx].setImpossibles(foods);
-        console.log(coachDietList[idx].getImpossibles());
         if (idx === coachDietList.length - 1) {
           const categoryListOfWeek = CategoriesGenerator();
           for (const category of categoryListOfWeek) {
@@ -44,7 +43,7 @@ const InputView = {
         }
         this.readImpossibleFoods(coachDietList[idx + 1].getName(), idx + 1);
       } catch (error) {
-        console.log(error);
+        OutputView.printError(error);
         this.readImpossibleFoods();
       }
     });

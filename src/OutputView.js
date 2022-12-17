@@ -17,6 +17,9 @@ const OutputView = {
     Console.print(MESSAGE.RESULT_COMPLETE);
     Console.close();
   },
+  printError(error) {
+    Console.print(error);
+  },
 };
 
 module.exports = OutputView;
