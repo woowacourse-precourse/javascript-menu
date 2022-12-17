@@ -15,7 +15,6 @@ class MenuController {
     for (const menu in menus) {
       this.#menus[menu] = menus[menu].split(', ');
     }
-    console.log(this.#menus);
     this.#coachs = [];
     this.#categories = [];
   }
@@ -55,12 +54,20 @@ class MenuController {
     return this.recommendMenu();
   }
 
+  recommendCoachMenu(menus) {
+    for (const coach of this.#coachs) {
+      let menu = menuGenerate(menus);
+      while (!coach.checkMenu(menu)) {
+        menu = menuGenerate(menus);
+      }
+      coach.recommendedMenu.push(menu);
+    }
+  }
+
   recommendMenu() {
     for (const category of this.#categories) {
       const menus = this.#menus[category];
-      for (const coach of this.#coachs) {
-        console.log(menuGenerate(menus));
-      }
+      this.recommendCoachMenu(menus);
     }
   }
 }
