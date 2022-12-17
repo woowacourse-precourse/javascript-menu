@@ -61,12 +61,21 @@ class App {
   }
 
   getInputNotEatMenu(name) {
-    Console.readLine(NOT_EAT_MENU(name), menu => {
+    Console.readLine(NOT_EAT_MENU(name), menus => {
       this.step += 1;
-      this.makeNotEatMenuObject(name, menu);
+      this.menu = menus.split(',').join();
+      this.makeNotEatMenuObject(name, this.menu);
       this.moveName();
     });
   }
+
+  // validateMenu(){
+  // 	try{
+
+  // 	}catch(error){
+  // 		Console.print(error)
+  // 	}
+  // }
 
   makeNotEatMenuObject(name, menu) {
     this.coachNotEatMenu[name] = menu;
@@ -74,6 +83,7 @@ class App {
 
   test() {
     console.log(this.coachNotEatMenu);
+    console.log(Object.values(this.coachNotEatMenu)[0][0]);
   }
 
   // getCategories() {
