@@ -1,6 +1,6 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
-const CoachNamesChecker = require('../utils/CoachNamesChecker');
+const NamesChecker = require('../utils/NamesChecker');
 const HateMenusChecker = require('../utils/HateMenusChecker');
 const Convertor = require('../utils/Convertor');
 const CoachNames = require('../models/CoachNames');
@@ -13,6 +13,9 @@ class Service {
 
   #instance = {
     coachNames: null,
+    coachHateMenus: null,
+    category: null,
+    menu: null,
   };
 
   constructor() {
@@ -25,12 +28,12 @@ class Service {
   }
 
   #enterNames(names) {
-    if (!CoachNamesChecker.checkInput(names)) {
+    if (!NamesChecker.checkInput(names)) {
       this.start();
       return;
     }
     this.#instance.coachNames = new CoachNames(names);
-    if (!CoachNamesChecker.check(this.#instance.coachNames.get())) {
+    if (!NamesChecker.check(this.#instance.coachNames.get())) {
       this.start();
       return;
     }
@@ -44,15 +47,20 @@ class Service {
 
     InputView.readHateMenus(
       names[this.#index],
-      this.#setHateMenus.bind(this, names.length)
+      this.#checkHateMenusInput.bind(this, names.length)
     );
   }
 
-  #setHateMenus(length, hateMenus) {
+  #checkHateMenusInput(length, hateMenus) {
     if (!HateMenusChecker.checkInput(hateMenus)) {
       this.#enterHateMenus();
       return;
     }
+
+    this.#setHateMenus(length, hateMenus);
+  }
+
+  #setHateMenus(length, hateMenus) {
     this.#instance.coachHateMenus.set(hateMenus);
     if (!HateMenusChecker.check(this.#instance.coachHateMenus.get())) {
       this.#instance.coachHateMenus.pop();

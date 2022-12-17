@@ -63,6 +63,9 @@ const FOOD = Object.freeze({
   western: 5,
 });
 
+const STYLE = ['일식', '한식', '중식', '아시안', '양식'];
+
 module.exports = {
   FOOD,
+  STYLE,
 };

@@ -1,7 +1,7 @@
 const OutputView = require('../views/OutputView');
 const Validator = require('./Validator');
 
-const CoachNamesChecker = {
+const NamesChecker = {
   checkInput(names) {
     try {
       this.validateInput(names);
@@ -36,4 +36,4 @@ const CoachNamesChecker = {
   },
 };
 
-module.exports = CoachNamesChecker;
+module.exports = NamesChecker;

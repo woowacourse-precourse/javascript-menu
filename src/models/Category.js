@@ -1,5 +1,5 @@
 const Random = require('../utils/Random');
-const { FOOD } = require('../constants/values');
+const { STYLE } = require('../constants/values');
 
 class Category {
   #data = {
@@ -25,25 +25,9 @@ class Category {
     let number = 0;
 
     while (true) {
-      number = Random.pickNumberInRange(1, 5);
-      switch (number) {
-        case FOOD.japan:
-          this.#data.selected = '일식';
-          break;
-        case FOOD.korea:
-          this.#data.selected = '한식';
-          break;
-        case FOOD.china:
-          this.#data.selected = '중식';
-          break;
-        case FOOD.asian:
-          this.#data.selected = '아시안';
-          break;
-        case FOOD.western:
-          this.#data.selected = '양식';
-          break;
-      }
-      if (this.#checkHistory(number - 1, i)) {
+      number = Random.pickNumberInRange(1, 5) - 1;
+      this.#data.selected = STYLE[number];
+      if (this.#checkHistory(number, i)) {
         break;
       }
     }
@@ -55,7 +39,7 @@ class Category {
     let count = 0;
     this.#data.history.forEach(v => {
       if (v === number) {
-        count++;
+        count += 1;
       }
     });
     if (count > 2) {
