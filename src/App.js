@@ -69,11 +69,39 @@ class App {
   }
 
   isValidCategory(category) {
-    const categories = this.#recommendedMenuInfo.categories;
+    const categories = this.#recommendedMenuInfo['카테고리'];
 
     if (!categories.includes(category)) return true;
 
     categories.filter(c => c === category).length < 2;
+  }
+
+  initMenus() {
+    const categories = this.#recommendedMenuInfo['카테고리'];
+    const coachList = Object.keys(this.#hateMenuInfo);
+
+    coachList.forEach(coach => (this.#recommendedMenuInfo[coach] = []));
+
+    coachList.forEach(coach => {
+      categories.forEach(category => {
+        const menuList = this.#recommendedMenuInfo[coach];
+        const hateMenus = this.#hateMenuInfo[coach];
+        let menu = RecommendedMenuGenerator.getRandomMenu(category);
+
+        // TODO: Refactor these
+        while (!this.isValidMenu({ menuList, menu, hateMenus })) {
+          menu = RecommendedMenuGenerator.getRandomMenu(category);
+        }
+
+        this.#recommendedMenuInfo[coach].push(menu);
+      });
+    });
+
+    this.showRecommendResult();
+  }
+
+  isValidMenu({ menuList, menu, hateMenus }) {
+    return !menuList.includes(menu) && !hateMenus.includes(menu);
   }
 
   isValidInputValue(validator, inputValue) {
