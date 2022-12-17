@@ -9,6 +9,8 @@ class MenuRecommenderController {
   #outputView;
   #menuRecommender;
   #counter;
+  #coaches;
+  #coachNames;
 
   constructor() {
     this.#inputView = inputView;
@@ -24,46 +26,49 @@ class MenuRecommenderController {
     });
   }
 
-  readUserInputInedible(coaches, coachNames) {
+  readUserInputInedible(name, coach) {
     this.#inputView.readInedible((input) => {
-      console.log(input);
-      //  this.handleInedibleInput(input, coaches[this.#counter]);
-    }, coachNames[this.#counter]);
-    if (this.#counter < coachNames.length) {
-      this.readUserInputInedible(coachNames, coaches);
-    }
+      this.handleInedibleInput(input, coach);
+    }, name);
   }
 
   handleCoachNamesInput(input) {
-    //try{
-    const names = input.split(',');
-    validate.names(names);
-    this.#menuRecommender = new MenuRecommender(names);
-    const coaches = this.#menuRecommender.getCoaches();
-    const coachNames = coaches.map((coach) => coach.getName());
-    this.readUserInputInedible(coaches, coachNames);
-    //}
-    //catch (error) {
-    //	this.#outputView.printError(ERROR.invalidName);
-    //	this.readUserInputCoachNames();
-    //}
+    try {
+      const names = input.split(',');
+      validate.names(names);
+      this.#menuRecommender = new MenuRecommender(names);
+      this.#coaches = this.#menuRecommender.getCoaches();
+      this.#coachNames = this.#coaches.map((coach) => coach.getName());
+      this.readUserInputInedible(
+        this.#coachNames[this.#counter],
+        this.#coaches[this.#counter]
+      );
+    } catch (error) {
+      this.#outputView.printError(ERROR.invalidName);
+      this.readUserInputCoachNames();
+    }
   }
 
   handleInedibleInput(input, coach) {
-    //try {
-    if (input === '') {
+    try {
+      const inedible = input.split(',');
+      validate.inedible(inedible);
+      for (item of inedible) {
+        coach.addInedible(item);
+      }
       this.#counter = this.#counter + 1;
-      return;
+      if (this.#counter < this.#menuRecommender.getCoaches().length) {
+        this.readUserInputInedible(
+          this.#coachNames[this.#counter],
+          this.#coaches[this.#counter]
+        );
+        return;
+      }
+      this.#menuRecommender.getRecommendation();
+      this.#outputView.printRecommendationResult(this.#menuRecommender);
+    } catch (error) {
+      this.#outputView.printError(ERROR.invalidInedible);
     }
-    const inedible = input.split(',');
-    validate.inedible(inedible);
-    for (item of inedible) {
-      coach.addInedible(item);
-    }
-    this.#counter = this.#counter + 1;
-    //} catch (error) {
-    //  this.#outputView.printError(ERROR.invalidInedible);
-    //}
   }
 }
 

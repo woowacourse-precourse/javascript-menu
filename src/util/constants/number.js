@@ -7,8 +7,9 @@ const NUMBER = {
   maxInedible: 2,
   minRandomMenu: 0,
   maxRandomMenu: 8,
-  minRandomCategory: 0,
-  maxRandomCategory: 4,
+  minRandomCategory: 1,
+  maxRandomCategory: 5,
+  weekDays: 5,
 };
 
 module.exports = { NUMBER };

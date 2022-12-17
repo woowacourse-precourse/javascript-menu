@@ -7,11 +7,10 @@ const SIGN = {
   opener: '[ ',
   closer: ' ]',
   divider: ' | ',
-  weekTitle: '구분',
-  categoryTitle: '카테고리',
 };
 
 const WEEK = {
+  weekTitle: '구분',
   monday: '월요일',
   tuesday: '화요일',
   wednesday: '수요일',
@@ -19,13 +18,7 @@ const WEEK = {
   friday: '금요일',
 };
 
-const CATEGORY = {
-  japanese: '일식',
-  korean: '한식',
-  chinese: '중식',
-  asian: '아시안',
-  western: '양식',
-};
+const CATEGORY = ['카테고리', '일식', '한식', '중식', '아시안', '양식'];
 
 const MENU = {
   일식: [

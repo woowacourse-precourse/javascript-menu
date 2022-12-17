@@ -1,24 +1,60 @@
 const Coach = require('./Coach');
 const randomGenerator = require('../util/randomGenerator');
 const { CATEGORY, MENU } = require('../util/constants/string');
+const { NUMBER } = require('../util/constants/number');
+const { Random } = require('@woowacourse/mission-utils');
 
 class MenuRecommender {
   #coaches = [];
+  #categories = [];
 
   constructor(names) {
     this.#coaches = names.map((name) => new Coach(name));
   }
 
+  getCoaches() {
+    return this.#coaches;
+  }
+
   getRandomCategory() {
     const randomIndex = randomGenerator.generateRandomCategoryNumber();
-    const categoryArray = Object.values(CATEGORY);
-    return [randomIndex, categoryArray[index]];
+    return CATEGORY[randomIndex];
   }
 
   getRandomMenu(categoryIndex) {
     const menuArray = Object.values(MENU);
-    const randomIndex = randomGenerator.generateRandomMenuNumber();
-    return menuArray[categoryIndex][randomIndex];
+    const randomMenu = randomGenerator.ShuffleMenu(
+      menuArray[categoryIndex - 1]
+    )[0];
+    return randomMenu;
+  }
+
+  getRecommendation() {
+    this.getRecommendationCategories();
+    this.getRecommendationMenus();
+    console.log(this.#coaches);
+    console.log(this.#categories);
+  }
+
+  getRecommendationCategories() {
+    const categories = [];
+    while (categories.length < NUMBER.weekDays) {
+      const category = this.getRandomCategory();
+      if (!categories.includes(category)) {
+        categories.push(category);
+      }
+    }
+    this.#categories = categories;
+  }
+
+  getRecommendationMenus() {
+    const indexArray = this.#categories.map((item) => CATEGORY.indexOf(item));
+    this.#coaches.forEach((coach) => {
+      indexArray.forEach((index) => coach.addMenu(this.getRandomMenu(index)));
+    });
+    this.#coaches.forEach((coach) => {
+      console.log(coach.getRecommendation());
+    });
   }
 }
 

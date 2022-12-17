@@ -9,8 +9,11 @@ const randomGenerator = {
     );
   },
 
-  generateRandomMenuNumber() {
-    return Random.pickNumberInRange(NUMBER.minRandomMenu, NUMBER.maxRandomMenu);
+  ShuffleMenu(menu) {
+    const indexArray = menu.map((item) => menu.indexOf(item));
+    const shuffledIndex = Random.shuffle(indexArray);
+    const shuffledMenu = shuffledIndex.map((idx) => menu[idx]);
+    return shuffledMenu;
   },
 };
 
