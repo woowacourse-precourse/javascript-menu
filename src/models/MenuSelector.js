@@ -71,6 +71,15 @@ class MenuSelector {
     return this.#coachs;
   }
 
+  decideDayCategory() {
+    let dayCategory;
+    do {
+      dayCategory = this.selectCategory();
+    } while (this.countSameCategory(dayCategory) > 2);
+    this.#weekCategories.push(dayCategory);
+    return dayCategory;
+  }
+
   //한 코치의 일주일 메뉴정하기
   decideWeekMenu(coach) {
     this.#weekCategories.forEach((dayCategory) => {
