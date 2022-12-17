@@ -2,7 +2,8 @@ const Menu = require('./Menu');
 const Coach = require('./Coach');
 const OutputView = require('./Views/OutputView');
 const InputView = require('./Views/InputView');
-const { MESSAGE } = require('./Constants');
+const RandomMaker = require('./RandomMaker');
+const { MESSAGE, DAYS } = require('./Constants');
 
 class MenuController {
   constructor(sampleMenu) {
@@ -24,20 +25,28 @@ class MenuController {
 
   setCoaches(coaches) {
     this.coachList = coaches.split(',').map((coach) => new Coach(coach));
-    this.count = 0;
+    this.coachCount = 0;
     this.setAvoids();
   }
 
   setAvoids(avoidMenu) {
-    if (this.count !== 0) {
-      this.coachList[this.count - 1].setAvoidMenu(avoidMenu);
+    if (this.coachCount !== 0) {
+      this.coachList[this.coachCount - 1].setAvoidMenu(avoidMenu);
     }
-    if (this.count === this.coachList.length) return this.recommandMenu();
-    InputView.readAvoidMenu(this.coachList[this.count++].name, this.setAvoids.bind(this));
+    if (this.coachCount === this.coachList.length) return this.recommandMenu();
+    InputView.readAvoidMenu(this.coachList[this.coachCount++].name, this.setAvoids.bind(this));
   }
 
   recommandMenu() {
-    console.log('Coach list : \n', this.coachList);
+    // console.log('Coach list : \n', this.coachList);
+    DAYS.forEach(() => {
+      const category = RandomMaker.category();
+      this.pickMenu(this.menuCategory[category].list);
+    });
+  }
+
+  pickMenu(menuList) {
+    // this.coachList.forEach();
   }
 }
 
