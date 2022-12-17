@@ -44,17 +44,20 @@ class MenuService {
 
   pickMenu(coach, category) {
     const menus = Menus[category];
-    const indicies = Array.from(menus, (_, i) => i + 1);
-    const menuIndex = Random.shuffle(indicies)[0] - 1;
-    const menu = menus[menuIndex];
+    const menu = this.getRandomMenu(menus);
 
     if (coach.hasHateFoods(menu) || coach.hasMenu(menu)) {
       return this.pickMenu(coach, category);
     }
 
-    console.log(menus, menuIndex, menu);
-
     coach.selectMenu(menu);
+  }
+
+  getRandomMenu(menus) {
+    const indicies = Array.from(menus, (_, i) => i + 1);
+    const menuIndex = Random.shuffle(indicies)[0] - 1;
+
+    return menus[menuIndex];
   }
 
   getResult() {
