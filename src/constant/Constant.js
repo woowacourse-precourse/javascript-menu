@@ -67,6 +67,14 @@ const MENUS = {
   5: ['라자냐', '그라탱', '뇨끼', '끼슈', '프렌치 토스트', '바게트', '스파게티', '피자', '파니니'],
 };
 
+const CATEGORY_NAME = {
+  1: '일식',
+  2: '한식',
+  3: '중식',
+  4: '아시안',
+  5: '양식',
+};
+
 module.exports = {
   ANNOUNCE,
   QUESTION,
@@ -74,4 +82,5 @@ module.exports = {
   ERROR,
   CATEGORY,
   MENUS,
+  CATEGORY_NAME,
 };
