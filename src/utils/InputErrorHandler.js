@@ -11,4 +11,4 @@ const InputErrorHandler = (validate, catchFunc, nextFunc) => {
   }
 };
 
-module.exports = inputErrorHandler;
+module.exports = InputErrorHandler;
