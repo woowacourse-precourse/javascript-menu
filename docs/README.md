@@ -30,11 +30,11 @@
 
 ### 순서에 따른 구현 목차
 
-- [ ] View/ Model/ Controller로 나누어서 폴더 구조를 잡아보기
+- [x] View/ Model/ Controller로 나누어서 폴더 구조를 잡아보기
 
-  - [ ] 이때 View에는 OutputView와 InputView를 통해서 관리한다.
-  - [ ] 이때 Model에는 Coach와 Category 그리고 Menu 오브젝트가 존재한다.
-  - [ ] Controller에는 View와 Model을 관장할 시스템인 Recommandation이 존재한다.
+  - [x] 이때 View에는 OutputView와 InputView를 통해서 관리한다.
+  - [x] 이때 Model에는 Coach와 Category 그리고 Menu 오브젝트가 존재한다.
+  - [x] Controller에는 View와 Model을 관장할 시스템인 Recommandation이 존재한다.
 
 - [ ] 사용자에게 출력한 안내문구를 'constant' 폴더 하위의 파일에 정리하기
 
