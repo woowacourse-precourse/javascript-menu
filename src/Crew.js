@@ -1,5 +1,6 @@
 const Utils = require('./Utils');
 const { CATEGORY, SAMPLE } = require('./Sample');
+const Constant = require('./Constant');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 class Crew {
@@ -26,14 +27,16 @@ class Crew {
     this.canNotEat = notEatList;
   }
 
-  getMenu() {
-    return this.menu;
-  }
+  // getMenu() {
+  //   return this.menu;
+  // }
 
   setMenu(category) {
+    const random = MissionUtils.Random
     const sameCategory = this.menu.category.filter(menu => menu === category);
-    if (sameCategory.length === 2) {
-      category = CATEGORY[MissionUtils.Random.pickNumberInRange(1, 5)];
+
+    if (sameCategory.length === Constant.NOT_EAT_MAX) {
+      category = CATEGORY[random.pickNumberInRange(Constant.ONE, Constant.FIVE)];
       return this.setMenu(category);
     } else this.menu.category.push(category);
   }
@@ -42,29 +45,16 @@ class Crew {
     const categorys = this.menu.category;
     categorys.forEach(category => {
       let menus = SAMPLE[category].split(', ');
-      let numberMenu = this.getMenuIndex(menus);
+      const numberMenu = this.getMenuIndex(menus);
       let selectedNumber = MissionUtils.Random.shuffle(numberMenu)[0] - 1;
       let recomendedMenu = menus[selectedNumber];
       while (this.canNotEat.includes(recomendedMenu)) {
         selectedNumber = MissionUtils.Random.shuffle(numberMenu)[0] - 1;
-
         recomendedMenu = menus[selectedNumber];
       }
       this.menu.dayMenu.push(recomendedMenu);
     });
   }
-
-  // setDetailMenu() {
-  //   const categorys = this.menu.category;
-  //   categorys.forEach(category => {
-  //     let menus = SAMPLE[category].replace(/ /g, '').split(',');
-  //     let selectedNumber = MissionUtils.Random.shuffle(menus)[0];
-  //     while (this.canNotEat.includes(selectedNumber)) {
-  //       selectedNumber = MissionUtils.Random.shuffle(menus)[0];
-  //     }
-  //     this.menu.dayMenu.push(selectedNumber);
-  //   });
-  // }
 
   getMenuIndex(menus) {
     const temp = [];

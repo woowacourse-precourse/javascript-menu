@@ -1,36 +1,29 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const Utils = require('./Utils');
+const Constant = require('./Constant');
 
 class InputView {
   constructor(menuController) {
     this.menuController = menuController;
   }
 
-  readCrewNames(callback) {
-    MissionUtils.Console.readLine(
-      '코치의 이름을 입력해 주세요. (, 로 구분)',
-      names => {
-        callback(names);
-      },
-    );
+  readCrewNames(setCrewNameFn) {
+    MissionUtils.Console.readLine(Constant.INSERT_NAMES, names => {
+      setCrewNameFn(names);
+    });
   }
 
-  readCanNotEat(crews, number, callback) {
-    let count = number;
-    if (crews[count] === undefined) return callback();
-    let name = crews[count].getName();
-    MissionUtils.Console.readLine(
-      `${name}(이)가 못 먹는 메뉴를 입력해 주세요`,
-      list => {
-        crews[count].setCanNotEat(list);
+  readCanNotEat(crews, count, callback) {
+    let index = count;
+    if (crews[index] === undefined) return callback();
 
-        if (count < crews.length) {
-          crews.splice[count];
-          count += 1;
-          return this.readCanNotEat(crews, count, callback);
-        }
-      },
-    );
+    const name = crews[index].getName();
+    MissionUtils.Console.readLine(`${name}${Constant.CANNOT_EAT}`, list => {
+      crews[index].setCanNotEat(list);
+      if (index < crews.length) {
+        index += 1;
+        return this.readCanNotEat(crews, index, callback);
+      }
+    });
   }
 }
 

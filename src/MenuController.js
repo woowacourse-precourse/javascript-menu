@@ -4,6 +4,7 @@ const Crew = require('./Crew');
 const Utils = require('./Utils');
 const MissionUtils = require('@woowacourse/mission-utils');
 const { CATEGORY, DAY } = require('./Sample');
+const Constant = require('./Constant');
 
 class MenuController {
   crews = [];
@@ -15,17 +16,16 @@ class MenuController {
   }
 
   start() {
-    const callback = names => this.makingCrews(names);
-    this.outputView.initialMessage('점심 메뉴 추천을 시작합니다.');
-    this.inputView.readCrewNames(callback);
+    const makeCewFn = names => this.makingCrews(names);
+    this.outputView.initialMessage(Constant.INITMESSAGE);
+    this.inputView.readCrewNames(makeCewFn);
   }
 
   makingCrews(names) {
     const crewList = Utils.stringConvertor(names);
     crewList.forEach(name => this.crews.push(new Crew(name)));
 
-    this.canNotEat();
-    // this.recomandMenu();
+    this.setCanNotEat();
   }
 
   setMenuCategory() {
@@ -38,7 +38,7 @@ class MenuController {
     this.setDetailMenu();
   }
 
-  canNotEat() {
+  setCanNotEat() {
     const crews = this.crews;
     const callback = this.setMenuCategory.bind(this);
     this.inputView.readCanNotEat(crews, 0, callback);
