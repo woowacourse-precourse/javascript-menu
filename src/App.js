@@ -3,6 +3,7 @@ const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
 const findFoodLocation = require('./utils/findFoodLocation');
 const getCategory = require('./utils/getCategory');
+const getSuggestMenu = require('./utils/getSuggestMenu');
 const verify = require('./utils/verify');
 
 class App {
@@ -48,8 +49,7 @@ class App {
         this.#coaches[coachLength].setUnableFood(findFoodLocation(input));
         if (coachLength < this.#coaches.length - 1)
           return this.unableEatCheckStart(coachLength + 1);
-        // return this.mondaySuggest();
-        return this.suggestMenu(0);
+        return this.suggestCoachMenu(0);
       } catch (error) {
         console.error(error);
         if (error.message === 'No Food') OutputView.ErrorNoMenu();
@@ -59,13 +59,13 @@ class App {
     });
   }
 
-  suggestMenu(coachLength) {
+  suggestCoachMenu(coachLength) {
     if (coachLength === this.#coaches.length) return;
     this.#foodCategory.forEach((category) => {
       console.log(category);
-      this.#coaches[coachLength].suggestMenu(category);
+      this.#coaches[coachLength].suggestMenu(category, verify.eatenTwice, getSuggestMenu);
     });
-    if (coachLength < this.#coaches.length - 1) return this.suggestMenu(coachLength + 1);
+    if (coachLength < this.#coaches.length - 1) return this.suggestCoachMenu(coachLength + 1);
     return this.printResult();
   }
 

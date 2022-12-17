@@ -1,4 +1,3 @@
-const { ERROR } = require('../constants/constants');
 const { FOODLIST } = require('../constants/FoodList');
 
 const verify = {

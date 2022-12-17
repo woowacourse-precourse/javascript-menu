@@ -1,6 +1,3 @@
-const getSuggestMenu = require('../utils/getSuggestMenu');
-const verify = require('../utils/verify');
-
 class Coach {
   #unableEatList;
   #eatenFoods;
@@ -33,11 +30,11 @@ class Coach {
     return coachName;
   }
 
-  suggestMenu(category) {
+  suggestMenu(category, verify, suggestFunc) {
     const addCheck = this.#eatenFoods.length;
     while (addCheck === this.#eatenFoods.length) {
-      let menu = getSuggestMenu(category);
-      if (verify.eatenTwice(this.#eatenFoods, menu)) continue;
+      let menu = suggestFunc(category);
+      if (verify(this.#eatenFoods, menu)) continue;
       if (this.#unableEatList.includes(menu)) menu = '';
       this.#eatenFoods.push(menu);
     }
