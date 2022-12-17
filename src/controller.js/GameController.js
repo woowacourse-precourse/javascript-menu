@@ -1,5 +1,7 @@
 const { Validate } = require('../constant/Libs');
 const MenuEnroll = require('../model/MenuEnroll');
+const MenuPicker = require('../model/MenuPicker');
+const MenuSelect = require('../model/MenuSelect');
 const Validation = require('../model/Validation');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -36,13 +38,14 @@ class GameController {
       this.catchError('CoachNotEat', notEat) &&
         this.#checkInMenu(notEat.split(',')) &&
         (this.turn += 1);
-      this.turn >= this.#coachName.length ? this.move() : this.#inputCoachNotEat();
+      this.turn >= this.#coachName.length ? this.makeMenu() : this.#inputCoachNotEat();
     });
   }
 
   #checkInMenu(value) {
     try {
       const judge = new MenuEnroll(value);
+
       this.#coachNotWant.push(judge.getNotWantMenu());
       return true;
     } catch (error) {
@@ -51,9 +54,13 @@ class GameController {
     }
   }
 
-  move() {
-    console.log(this.#coachNotWant);
-    console.log('끝');
+  makeMenu() {
+    const weekcategory = new MenuPicker().weekPick();
+    const menu = new MenuSelect(
+      [this.#coachName, this.#coachNotWant],
+      weekcategory
+    ).makeTodayMenu();
+    OutputView.printMenu(this.#coachName, menu);
   }
 }
 
