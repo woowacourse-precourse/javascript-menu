@@ -13,11 +13,6 @@ class Coach {
     this.#unableEatList.push(...location.slice());
   }
 
-  hasUnableToEatList() {
-    if (this.#unableEatList.length) return true;
-    return false;
-  }
-
   isAlreadyEatenTwice(menu) {
     const food = this.#eatenFoods.slice();
     food = food.filter((value) => value === menu);
