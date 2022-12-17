@@ -7,25 +7,29 @@ class MenuMaker {
   }
 
   creatMenu() {
-    const selectMenu = this.selectMenu(this.SAMPLE, this.randomCategories());
+    return this.selectMenu(this.SAMPLE, this.randomCategories());
   }
 
   selectMenu(SAMPLE, select) {
     if (select === 1) {
-      return SAMPLE.일식;
+      return this.mixMenu(SAMPLE.일식);
     }
     if (select === 2) {
-      return SAMPLE.한식;
+      return this.mixMenu(SAMPLE.한식);
     }
     if (select === 3) {
-      return SAMPLE.중식;
+      return this.mixMenu(SAMPLE.중식);
     }
     if (select === 4) {
-      return SAMPLE.아시안;
+      return this.mixMenu(SAMPLE.아시)안;
     }
     if (select === 5) {
-      return SAMPLE.양식;
+      return this.mixMenu(SAMPLE.양식);
     }
+  }
+
+  mixMenu(menus) {
+    return MissionUtils.Randoms.shuffle(menus)[0];
   }
 
   setSAMPLE(SAMPLE) {
