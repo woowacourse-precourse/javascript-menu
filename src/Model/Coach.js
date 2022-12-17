@@ -30,6 +30,11 @@ class Coach {
     return this.#menuOfWeek;
   }
 
+  addMenu(categoryNumber) {
+    const newMenu = this.randomMenu(categoryNumber);
+    this.#menuOfWeek.push(newMenu);
+  }
+
   randomMenu(categoryNumber) {
     const category = Object.keys(MENU_SAMPLE)[categoryNumber - 1];
     const menuArray = MENU_SAMPLE[category].split(", ");
