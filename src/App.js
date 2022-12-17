@@ -11,7 +11,7 @@ const SAMPLE = {
 
 class App {
   constructor() {
-    this.controller = new Controller();
+    this.controller = new Controller(SAMPLE);
   }
   play() {
     this.controller.init();

@@ -5,7 +5,10 @@ const Validation = require('../utils/Validation');
 const { MESSAGE } = require('../utils/constants');
 
 class Controller {
-  constructor() {
+  #index = 0;
+
+  constructor(SAMPLE) {
+    this.sample = SAMPLE;
     this.recommendor = new Recommendor();
   }
 
@@ -35,7 +38,36 @@ class Controller {
   makeLunchTeams(coaches) {
     coaches = coaches.split(',');
     this.recommendor.setCoaches(coaches);
+
+    this.inputHateMenu();
   }
+
+  inputHateMenu() {
+    let coachNames = this.recommendor.getCoaches();
+    if (this.#index === coachNames.length) {
+      return this.recommendMenus();
+    }
+    InputView.readHateMenu(
+      coachNames[this.#index],
+      this.validateMenus.bind(this)
+    );
+  }
+
+  validateMenus(menus) {
+    try {
+      Validation.checkStringType(menus);
+      Validation.checkValidLengthOfMenus(menus);
+      Validation.checkValidMenu(menus, this.sample);
+    } catch (error) {
+      OutputView.printMessage(error);
+      return this.inputHateMenu();
+    }
+
+    this.#index += 1;
+    this.inputHateMenu();
+  }
+
+  recommendMenus() {}
 }
 
 module.exports = Controller;
