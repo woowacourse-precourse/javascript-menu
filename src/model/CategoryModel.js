@@ -1,4 +1,4 @@
-const { Randoms } = require("@woowacourse/mission-utils");
+const { Random } = require("@woowacourse/mission-utils");
 const GetOccurrence = require("../utils/GetOccurrence");
 const { GIVEN_DATA } = require("../constants/Data");
 
