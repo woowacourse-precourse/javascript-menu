@@ -33,6 +33,7 @@ class App {
 
   play() {
     printStart();
+    printEmptyLine();
     readCoaches(this.#onCoachesSubmit.bind(this));
   }
 
@@ -50,6 +51,7 @@ class App {
     ListValidator.validate(nameList, 2, 5);
     const coaches = names.split(',').map((coach) => new Coach(coach));
     this.#coaches = new Coaches(coaches);
+    printEmptyLine();
     return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
   }
 
@@ -67,6 +69,7 @@ class App {
     ListValidator.validate(cantEat, 0, 2);
     this.#coaches.setCoachMenu(this.#index, cantEat);
     this.#index += 1;
+    printEmptyLine();
 
     if (this.#index === this.#coaches.count()) {
       this.#runFinish();
