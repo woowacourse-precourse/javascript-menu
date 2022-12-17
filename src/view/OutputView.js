@@ -11,7 +11,7 @@ const OutputView = {
         PrintRecommandResult();
         MissionUtils.Console.print('추천을 완료했습니다.');
     },
-    printRecommandResult(category, coachs) {
+    printRecommandResult(categorys, coachs) {
         MissionUtils.Console.print(this.classToString());
         MissionUtils.Console.print(categorys.toString());
         coachs.array.forEach(coach => {
