@@ -1,5 +1,6 @@
 const Coach = require('../models/Coach');
 const MenuSelector = require('../models/MenuSelector');
+const Validator = require('../utils/Validator');
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
@@ -18,8 +19,10 @@ class MenuSelectorController {
 
   //["토미,제임스" Coach(토미), Coach(제임스), ..]
   #registerCoachPhase(names) {
+    Validator.checkCoachNames(names);
     this.#menuSelector = new MenuSelector(
       names.split(',').map((name) => {
+        Validator.checkNameLength(name);
         return new Coach(name);
       })
     );
@@ -36,6 +39,7 @@ class MenuSelectorController {
   }
 
   #registerDislikeMenuPhase(menu) {
+    Validator.checkDislikeMenu(menu);
     this.#tempDislikeMenu.push(menu);
     this.personNumber += 1;
     if (this.personNumber !== this.#menuSelector.getCoachs().length) {
