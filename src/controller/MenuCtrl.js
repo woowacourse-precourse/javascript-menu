@@ -4,6 +4,8 @@ const { NameValidator, MenusCantEatValidator } = require('../validators');
 const { GAME_MESSAGE, ERROR_MESSAGE } = require('../constants');
 
 class MenuCtrl extends GameCtrl {
+  #currentCoachflag = 0;
+
   constructor(view, model) {
     super();
     this.view = view;
@@ -28,27 +30,32 @@ class MenuCtrl extends GameCtrl {
       NameValidator.validateList(splittedNameList);
 
       this.model.setCoachesName(splittedNameList);
-      this.#inputMenusCoachCantEat();
+      this.#inputMenusCoachesCantEat();
     });
   }
 
   // TODO: 코치 이름을 메세지에 추가해서 에러 바운더리에서 처리할 수 있게끔 리팩터링
-  #inputMenusCoachCantEat() {
+  #inputMenusCoachesCantEat() {
     const coachesList = this.model.getCoachesName();
 
-    coachesList.forEach(coach => {
-      const message = `${coach}${GAME_MESSAGE.input_menu_coach_cant_eat}`;
-      this.view.input(message, menusCoachCantEat => {
-        try {
-          const splittedMenusCoachCantEat = menusCoachCantEat.split(',');
-          MenusCantEatValidator.validateList(splittedMenusCoachCantEat);
+    const coach = coachesList[this.#currentCoachflag];
+    const message = `\n${coach}${GAME_MESSAGE.input_menu_coach_cant_eat}`;
 
-          console.log(splittedMenusCoachCantEat);
-        } catch (error) {
-          this.view.output(error.message);
-          this.#inputMenusCoachCantEat();
+    this.view.input(message, menusCoachCantEat => {
+      try {
+        const splittedMenusCoachCantEat = menusCoachCantEat.split(',');
+        MenusCantEatValidator.validateList(splittedMenusCoachCantEat);
+
+        this.model.setMenusCoachesCantEat(splittedMenusCoachCantEat);
+        this.#currentCoachflag += 1;
+
+        if (coachesList.length !== this.#currentCoachflag) {
+          this.#inputMenusCoachesCantEat();
         }
-      });
+      } catch (error) {
+        this.view.output(error.message);
+        this.#inputMenusCoachesCantEat();
+      }
     });
   }
 
