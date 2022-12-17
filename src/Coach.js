@@ -4,7 +4,7 @@ class Coach {
     this.#name = CoachName;
   }
 
-  getName() {
+  getName(answer) {
     return this.#name;
   }
 }
