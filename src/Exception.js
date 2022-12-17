@@ -22,7 +22,7 @@ const Exception = {
     const INEDIBLE_MENUS = input.split(',');
 
     if (
-      !this.checkInputFormat(INEDIBLE_MENUS, PARAMETERS.inedibleMenuRange) ||
+      !this.checkInputFormat(INEDIBLE_MENUS, PARAMETERS.inedibleMenuRange) &&
       PARAMETERS.checkBlackSpace.test(INEDIBLE_MENUS[0])
     ) {
       MissionUtils.Console.print(ERROR_MESSAGE.invalidInedibleMenuLength);
