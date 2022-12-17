@@ -1,18 +1,21 @@
 const ViewController = {
+  DAYS: '구분',
+  CATEGORY: '카테고리',
+
   buildMenuResult({ days, categories, coaches }) {
     const dayView = ViewController.buildDayView(days);
-    const categoryView = ViewController.buildCategorieView(categories);
+    const categoryView = ViewController.buildCategoriView(categories);
     const coachMenuView = ViewController.buildCoachMenuView(coaches);
 
     return dayView + '\n' + categoryView + '\n' + coachMenuView;
   },
 
   buildDayView(days) {
-    return ViewController.buildStrings('구분', days);
+    return ViewController.buildStrings(ViewController.DAYS, days);
   },
 
-  buildCategorieView(categories) {
-    return ViewController.buildStrings('카테고리', categories);
+  buildCategoriView(categories) {
+    return ViewController.buildStrings(ViewController.CATEGORY, categories);
   },
 
   buildCoachMenuView(coaches) {
