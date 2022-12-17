@@ -1,9 +1,9 @@
-const MenuController = require('./controller/MenuController');
+const MenuRecommendController = require('./controller/MenuRecommendController');
 
 class App {
-  #menuController = new MenuController();
+  #menuRecommendController = new MenuRecommendController();
   play() {
-
+    this.#menuRecommendController.run();
   }
 }
 
