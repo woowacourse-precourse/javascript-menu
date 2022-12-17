@@ -1,6 +1,7 @@
 const { Console , Random } = require("@woowacourse/mission-utils");
 const Message = require('./Message');
 const ErrorHandler = require('./ErrorHandler');
+const Output = require('./Output');
 
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -42,13 +43,11 @@ class App {
 			coachNameList.push(name);
 			idx++;
 		
-			if (idx<coachList.length) {
-				this.makeNotEatList(coachList, idx);
-			}
+			if (idx < coachList.length) this.makeNotEatList(coachList, idx);
 			else {
 				this.makeCategory();
 				this.recommandCoachEat(coachList);
-				this.printResult(coachEatObject);
+				this.printRecommnadResult(coachEatObject);
 				Console.close();
 			}
 		}
@@ -88,7 +87,7 @@ class App {
   }
 
   makeEatObject(coachName) {
-	for(let day=0 ; day<dayCategories.length ; day++) {
+	for(let day=0 ; day < dayCategories.length ; day++) {
 		const selectedFood = this.pickRandomMenu(dayCategories[day]);
 		if (coachNotEatObject[coachName].includes(selectedFood) || coachEatObject[coachName].includes(selectedFood)) {
 			day--;
@@ -105,42 +104,15 @@ class App {
 	  return menus[menuIdx[0] - 1];
   }
 
-  printResult() {
+  printRecommnadResult() {
 	  Console.print(`\n${Message.OUTPUT_MESSAGE.MENU_RESULT}`);
 	  Console.print(`${Message.OUTPUT_MESSAGE.DAY_LIST}`);
-	  this.printCategories();
+	  Output.printCategories(dayCategories);
+
 	  coachNameList.forEach(name => {
-		this.printCoachEatList(name);
+		Output.printCoachEatList(name, coachEatObject);
 	  });
 	  Console.print(`\n${Message.OUTPUT_MESSAGE.MENU_FINISH}`);
-  }
-  
-  printCoachEatList(name) {
-	  let eatString = "";
-	  eatString += `[ ${name}`;
-	  
-	  const coachFood = coachEatObject[name];
-	  coachFood.forEach(fd => {
-		  eatString += " | ";
-		  eatString += fd;
-	  })
-
-	  eatString += " ]";
-
-	  Console.print(eatString);
-  }
-
-  printCategories() {
-	  let stringCategories = "";
-	  stringCategories += `[ ${Message.INPUT_MESSAGE.CATEGORIE}`;
-
-	  for(let day=0 ; day<5 ; day++) {
-		  stringCategories += " | "
-		  stringCategories += dayCategories[day];
-	  }
-	  stringCategories += " ]";
-
-	  Console.print(stringCategories);
   }
 }
 
