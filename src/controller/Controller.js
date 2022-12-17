@@ -26,7 +26,6 @@ class Controller {
     try {
       this.#coachs = input.split(',');
       this.#checkCoachList();
-      console.log(this.#coachs);
     } catch (error) {}
   }
 
@@ -46,7 +45,6 @@ class Controller {
   #checkNotEat(coachName, input) {
     try {
       this.#notEatList.push([coachName, input]);
-      console.log(this.#notEatList);
     } catch (error) {}
   }
 
@@ -68,7 +66,6 @@ class Controller {
 
   #outputResult() {
     const results = this.#service.defineCoachFoodOfWeak();
-    console.log(results);
     results.forEach((list) => {
       OuputView.listResult(list.coach, list.result.join(',').replace(/,/g, ' | '));
     });
