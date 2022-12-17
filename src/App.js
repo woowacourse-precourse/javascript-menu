@@ -1,8 +1,8 @@
 const Coach = require('./models/Coach');
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
-const CategorisMaker = require('./utils/CategorisMaker');
 const Validator = require('./utils/Validator');
+const makeCategoris = require('./utils/makeCategoris');
 
 class App {
   #categoris;
@@ -10,10 +10,11 @@ class App {
   #coachs;
 
   play() {
-    OutputView.printStart();
-    this.#categoris = CategorisMaker.make();
+    this.#categoris = makeCategoris();
     this.#names = [];
     this.#coachs = [];
+
+    OutputView.printStart();
     InputView.readNames(this.#handleNames.bind(this));
   }
 
