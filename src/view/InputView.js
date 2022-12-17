@@ -2,6 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const UserError = require('../util/UserError');
 const Message = require('../constant/PrintMessage');
 const CoachNameList = require('../model/CoachNameList');
+const NoMenuList = require('../model/NoMenuList');
 
 const InputView = {
   readCoachName() {
@@ -19,7 +20,7 @@ const InputView = {
     Console.readLine(`${coach}${Message.INPUT_NO_MENU}`, answer => {
       Console.print(answer);
       noMenuList.push(answer);
-      // this.validateNoMenuList(noMenuList);
+      this.validateNoMenuList(noMenuList);
     });
     return noMenuList;
   },
@@ -31,6 +32,16 @@ const InputView = {
       this.isUserError(error);
       Console.print(error.message);
       this.readCoachName();
+    }
+  },
+
+  validateNoMenuList(noMenuList) {
+    try {
+      const inputNoMenu = new NoMenuList(noMenuList);
+    } catch (error) {
+      this.isUserError(error);
+      Console.print(error.message);
+      this.readNoMenu();
     }
   },
 
