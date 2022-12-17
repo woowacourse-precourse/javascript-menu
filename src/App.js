@@ -11,9 +11,13 @@ const SAMPLE = {
 
 class App {
 	#coachNames;
+	#eachCoachUnableToEat;
+	#coachNumber;
 
 	constructor(){
 		this.#coachNames=[]
+		this.#eachCoachUnableToEat={}
+		this.#coachNumber=0
 	}
   play() {
 		MissionUtils.Console.print("점심 메뉴 추천을 시작합니다.\n")
@@ -23,7 +27,17 @@ class App {
 	insertCoachName(){
 		MissionUtils.Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)\n',(name)=>{
 			this.#coachNames=name.split(',');
-			console.log(this.#coachNames)
+			this.unableToEat(this.#coachNames[this.#coachNumber]);
+		});
+	}
+
+	unableToEat(coach){
+		MissionUtils.Console.readLine(`${coach}(이)가 못 먹는 메뉴를 입력해 주세요.`, (menu)=>{
+			this.#eachCoachUnableToEat[coach] = menu.split(',')
+			console.log(this.#eachCoachUnableToEat)
+			if(this.#coachNumber+1 === this.#coachNames.length) MissionUtils.Console.close()
+			this.#coachNumber++;
+			this.unableToEat(this.#coachNames[this.#coachNumber])
 		})
 	}
 
