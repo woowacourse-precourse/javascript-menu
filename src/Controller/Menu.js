@@ -1,6 +1,7 @@
 const CoachValidation = require("../Validation/coachValidation");
 const InputView = require("../View/InputView");
 const { Console } = require("@woowacourse/mission-utils");
+const DislikeMenuValidation = require("../Validation/DislikeMenuValidation");
 
 class Menu {
   #coachNames;
@@ -30,6 +31,8 @@ class Menu {
   }
 
   handleDislikeMenu = (menu) => {
+    const error = DislikeMenuValidation.validateMenu(menu);
+    if (error) return this.getDislikeMenu(this.#coachNames);
     this.#dislikeMenu = menu.split(",").map((menu) => {
       return menu;
     });
