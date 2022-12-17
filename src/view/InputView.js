@@ -11,16 +11,16 @@ const InputView = {
 
   validateCoachNames(input, callback) {
     try {
-      const names = input.split(SERVICE_SETTINGS.separationCriteria);
-      this.handleWrongCoachNamesException(names);
-      callback(names);
+      this.handleWrongCoachNamesException(input);
+      callback(input.split(SERVICE_SETTINGS.separationCriteria));
     } catch (error) {
       Console.print(error);
       this.readCoachName(callback);
     }
   },
 
-  handleWrongCoachNamesException(names) {
+  handleWrongCoachNamesException(input) {
+    const names = input.split(SERVICE_SETTINGS.separationCriteria);
     this.handleWrongNumberCoachesException(names);
     this.handleWrongNameLengthException(names);
   },
