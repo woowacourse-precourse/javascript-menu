@@ -10,14 +10,23 @@ const SAMPLE = {
 };
 
 class App {
-  constructor() {}
+  constructor() {
+    this.namesCallback = this.namesCallback.bind(this);
+  }
 
   printRecommendedStart() {
     MissionUtils.Console.print(PRINT_STRING.OUTPUT_GAME_START);
   }
 
+  readCoachName(callback) {
+    MissionUtils.Console.readLine(PRINT_STRING.INPUT_COACH_NAME, callback);
+  }
+
+  namesCallback(coachName) {}
+
   play() {
     this.printRecommendedStart();
+    this.readCoachName(this.namesCallback);
   }
 }
 
