@@ -1,6 +1,6 @@
 const { deepFreeze } = require('../utils/deepFreeze');
 
-const SAMPLE = {
+const MENUS = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
   중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
@@ -9,15 +9,14 @@ const SAMPLE = {
 };
 
 const GAME_MESSAGE = deepFreeze({
-  start: '다리 건너기 게임을 시작합니다.\n',
-  input_size: '다리의 길이를 입력해주세요.\n',
-  choose_space: '\n이동할 칸을 선택해주세요. (위: U, 아래: D)\n',
-  replay: '\n게임을 다시 시도할지 여부를 입력해주세요. (재시도: R, 종료: Q)\n',
-  result: '\n최종 게임 결과',
-  is_success: '\n게임 성공 여부',
-  try_count: '총 시도한 횟수',
-  success: '성공',
-  fail: '실패',
+  start: '점심 메뉴 추천을 시작합니다.\n',
+  input_coach_name: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
+  input_menu_coach_cant_eat: '(이)가 못 먹는 메뉴를 입력해 주세요.\n',
+  result: {
+    division: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+    category: '[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]',
+  },
+  end: '\n추천을 완료했습니다.',
 });
 
 const ERROR_MESSAGE = deepFreeze({
@@ -43,32 +42,11 @@ const SPACE = deepFreeze({
   1: 'U',
 });
 
-const BRIDGE_MAP = deepFreeze({
-  up_direction: 'U',
-  down_direction: 'D',
-  success_space: ' O ',
-  empty_space: '   ',
-  fail_space: ' X ',
-});
-
-const REGEX = {
-  is_number: /^[1-9]\d*$/,
-  move: /^[UD]$/,
-  replay: /^[RQ]$/,
-};
-
-const CHOICE = {
-  replay: 'R',
-  quit: 'Q',
-};
-
 module.exports = {
-  SAMPLE,
+  MENUS,
   GAME_MESSAGE,
   ERROR_MESSAGE,
   VALIDATION_MESSAGE,
   REGEX,
   SPACE,
-  BRIDGE_MAP,
-  CHOICE,
 };

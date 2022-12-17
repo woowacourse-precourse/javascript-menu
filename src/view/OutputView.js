@@ -1,9 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { GAME_MESSAGE } = require('../constants');
 
-/**
- * 사용자에게 게임 진행 상황과 결과를 출력하는 역할을 한다.
- */
 const OutputView = {
   output(message) {
     Console.print(message);
@@ -13,9 +10,21 @@ const OutputView = {
     Console.close();
   },
 
-  // printErrorMessage(error) {
-  //   this.output(error.message);
-  // },
+  printErrorMessage(error) {
+    this.output(error.message);
+  },
+
+  printStartMessage() {
+    this.output(GAME_MESSAGE.start);
+  },
+
+  printMenuList(menuList) {
+    this.output(menuList);
+  },
+
+  printEndMessage() {
+    this.output(GAME_MESSAGE.end);
+  },
 };
 
 module.exports = OutputView;

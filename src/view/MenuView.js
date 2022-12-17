@@ -1,7 +1,6 @@
 const GameView = require('./GameView');
 
 class MenuView extends GameView {
-  // retryWhenError: 에러 발생 시 에러 문구 출력 후 재시작
   #retryWhenError(callerFunction, callback) {
     return input => {
       try {
@@ -13,36 +12,31 @@ class MenuView extends GameView {
     };
   }
 
-  // closeWhenError: 에러 발생 시 에러 문구 출력 후 종료
-  #closeWhenError(callback) {
-    return input => {
-      try {
-        callback(input);
-      } catch (error) {
-        this.#errorHandler(error);
-        this.outputView.close();
-      }
-    };
-  }
-
   #errorHandler(error) {
     this.outputView.printErrorMessage(error);
   }
 
-  // readBridgeSize(callback) {
-  //   this.inputView.readBridgeSize(
-  //     this.#retryWhenError(this.readBridgeSize.bind(this), callback),
-  //     // this.#closeWhenError(callback),
-  //   );
-  // }
+  readCoachesName(callback) {
+    this.inputView.readCoachesName(this.#retryWhenError(this.readCoachesName.bind(this), callback));
+  }
 
-  // readMoving(callback) {
-  //   this.inputView.readMoving(this.#retryWhenError(this.readMoving.bind(this), callback));
-  // }
+  readMenuCoachCantEat(message, callback) {
+    this.inputView.readMenuCoachCantEat(
+      this.#retryWhenError(this.readMenuCoachCantEat.bind(this), callback),
+    );
+  }
 
-  // printErrorMessage(error) {
-  //   this.outputView.printErrorMessage(error);
-  // }
+  printStartMessage() {
+    this.outputView.printStartMessage();
+  }
+
+  printMenuList(menuList) {
+    this.outputView.printMenuList(menuList);
+  }
+
+  printEndMessage() {
+    this.outputView.printEndMessage();
+  }
 }
 
 module.exports = MenuView;
