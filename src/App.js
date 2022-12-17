@@ -2,9 +2,9 @@ const { Random } = require('@woowacourse/mission-utils');
 
 const OutputUI = require('./view/OutputUI');
 const InputUI = require('./view/InputUI');
-const Coach = require('./Coach');
+const Coach = require('./model/Coach');
 const InputProcessor = require('./util/InputProcessor');
-const Food = require('./Food');
+const Food = require('./model/Food');
 const MenuUtil = require('./util/menuUtil');
 const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
