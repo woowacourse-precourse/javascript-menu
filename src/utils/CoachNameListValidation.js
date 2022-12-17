@@ -1,8 +1,8 @@
 const CoachNameListValidation = {
   validation(coachNameList) {
-    coachNameList = coachNameList.split(',');
-    CoachNameListValidation.validateNameLength(coachNameList);
-    CoachNameListValidation.validateNameListLength(coachNameList);
+    coachName = coachNameList.split(',');
+    CoachNameListValidation.validateNameLength(coachName);
+    CoachNameListValidation.validateNameListLength(coachName);
   },
 
   validateNameLength(coachNameList) {

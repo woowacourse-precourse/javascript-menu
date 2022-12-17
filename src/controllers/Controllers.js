@@ -44,6 +44,9 @@ class Controller {
   }
 
   checkHateMenuList(hateMenuList) {
+    const validation = Coach.validateHateMenuList(hateMenuList);
+    if (validation === false) return this.inputHateMenuList();
+
     const coach = this.#coachNameList.shift();
     if (this.#coachNameList.length > 0) return this.inputHateMenuList();
   }

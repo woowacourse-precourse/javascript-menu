@@ -1,5 +1,8 @@
 const Error = require('../utils/error');
-const { CoachNameListValidation } = require('../utils/Validation');
+const {
+  CoachNameListValidation,
+  HateMenuListValidation,
+} = require('../utils/Validation');
 
 class Coach {
   #name;
@@ -11,6 +14,18 @@ class Coach {
   static validateCoachNameList(coachNameList) {
     try {
       CoachNameListValidation.validation(coachNameList);
+    } catch (error) {
+      Error.throwError(error);
+
+      return false;
+    }
+
+    return true;
+  }
+
+  static validateHateMenuList(hateMenuList) {
+    try {
+      HateMenuListValidation.validation(hateMenuList);
     } catch (error) {
       Error.throwError(error);
 

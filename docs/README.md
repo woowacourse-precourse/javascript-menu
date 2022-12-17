@@ -25,7 +25,7 @@
 - "xx(이)가 못 먹는 메뉴를 입력해 주세요." 문자열 출력 및 사용자 입력 값을 입력받음
 - 출력 및 입력은 [MissionUtils 라이브러리]에서 제공하는 `Console.readLine()` 메서드를 사용
 
-## [] 기능 6 - Category, CategoryList 클래스 생성
+## [✅] 기능 6 - Category, CategoryList 클래스 생성
 
 ## [] 기능 7 - 사용자의 입력 값(각 코치가 먹지 못하는 메뉴)의 유효성 검사 함수 구현
 
