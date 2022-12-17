@@ -63,13 +63,17 @@ class Controller {
       return this.inputHateMenu();
     }
 
-    this.recommendor.setHateMenuLists.push(menus.split(','));
+    this.recommendor.setHateMenuLists(menus.split(','));
     this.#index += 1;
 
     this.inputHateMenu();
   }
 
-  recommendMenus() {}
+  recommendMenus() {
+    this.recommendor.setCategories();
+    // console.log(this.recommendor.setCategories());
+    // this.recommendor.recommend();
+  }
 }
 
 module.exports = Controller;

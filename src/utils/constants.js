@@ -17,6 +17,17 @@ const ERROR = Object.freeze({
     '[ERROR] 못 먹는 메뉴를 3개 이상 입력할 수 없습니다.',
 });
 
+const CATEGORY_LENGTH = Object.freeze(5);
+
 const ZERO = Object.freeze(0);
 
-module.exports = { MESSAGE, INPUT_HATE_MENU, ERROR, ZERO };
+const MAX_LENGTH_OF_DUPLICATED_CATEGORY = Object.freeze(2);
+
+module.exports = {
+  MESSAGE,
+  INPUT_HATE_MENU,
+  ERROR,
+  CATEGORY_LENGTH,
+  ZERO,
+  MAX_LENGTH_OF_DUPLICATED_CATEGORY,
+};
