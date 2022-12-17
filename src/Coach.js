@@ -1,6 +1,10 @@
+const { SAMPLE } = require("./model/repository");
+
 class Coach {
   #name = "";
-  #noFood = [];
+  #disabledFoods = [];
+  #dayCategoty = [];
+  #dayFood = []
 
   constructor(name) {
     this.#name = name;
@@ -8,6 +12,14 @@ class Coach {
 
   getName() {
     return this.#name;
+  }
+
+  setDisabledFood(foods) {
+    foods.split(",").map((food) => {
+      this.#disabledFoods.push(food);
+    })
+
+    console.log(this.#disabledFoods)
   }
 
 }
