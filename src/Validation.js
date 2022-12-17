@@ -26,6 +26,9 @@ const Validation = {
     isCorrectCoachsLength(coachNames);
     isCorrectCoachNameLength(coachNames);
   },
+  notEatMenu: (inputNotEatMenu) => {
+    const notEatMenu = inputNotEatMenu.split(",");
+  },
 };
 
 module.exports = Validation;
