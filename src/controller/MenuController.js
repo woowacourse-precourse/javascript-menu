@@ -1,3 +1,4 @@
+const Category = require('../model/Category');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -22,6 +23,12 @@ class MenuController {
       noMenuAllList[coach] = noMenus;
     });
     console.log('no', noMenuAllList);
+    this.recommendCategory();
+  }
+
+  recommendCategory() {
+    const categories = new Category();
+    const category = categories.recommend();
   }
 }
 
