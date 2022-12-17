@@ -5,6 +5,10 @@ const OutputView = {
   printStart() {
     Console.print(OUTPUT_MESSAGE.start);
   },
+
+  printError(errorMessage) {
+    Console.print(errorMessage);
+  },
 };
 
 module.exports = OutputView;
