@@ -1,6 +1,18 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { SERVICE_MESSAGE } = require('./Constants');
-const InputView = require('./InputView');
+class Category {
+  constructor() {
+    this.category = ['일식', '한식', '중식', '아시안', '양식'];
+    this.selectedCategory = [];
+  }
+
+  get(index) {
+    return this.category[index];
+  }
+
+  push(category) {
+    this.selectedCategory.push(category);
+  }
+}
+
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -9,17 +21,4 @@ const SAMPLE = {
   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
-class App {
-  constructor() {
-    this.inputView = new InputView();
-  }
-  play() {
-    Console.print(SERVICE_MESSAGE.START);
-    this.inputView.inputCoach();
-  }
-}
-
-module.exports = App;
-
-const app = new App();
-app.play();
+module.exports = Category;
