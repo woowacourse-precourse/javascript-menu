@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
+const InputView = require('./InputView');
 const OutputView = require('./OutpuView');
 
 const SAMPLE = {
@@ -15,14 +16,7 @@ class App {
 	play() {
 		OutputView.print('점심 메뉴 추천을 시작합니다.');
 
-		Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)' + '\n', (names) => {
-			const coaches = names.split(',');
-			console.log(coaches)
-
-
-		});
-
-
+		InputView.readCoaches();
 	}
 
 
