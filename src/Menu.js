@@ -31,8 +31,9 @@ const Menu ={
      */
     pickMenu(COACH, category, hateMenu) {
         let pickMenu = new Array(COACH.length);
-        for(let i = 0; i <pickMenu.length; i++) 
+        for(let i = 0; i <pickMenu.length; i++) {
             pickMenu[i] = new Array(5);
+        }
         for(let i = 0; i < COACH.length; i++) {
             pickMenu[i] = this.helpPickMenu(pickMenu, category, hateMenu ,i);
         }
