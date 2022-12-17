@@ -1,5 +1,5 @@
 class Menu {
-  #uneatableMenu = [];
+  #uneatableMenus = [];
 
   validate(menus) {
     const uneatableMenus = menus.split(",");

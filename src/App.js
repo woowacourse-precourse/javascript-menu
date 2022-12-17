@@ -35,12 +35,18 @@ class App {
   }
 
   divideEachCoach(names) {
-    this.#coachesManager = new Coach(names);
-    this.#coaches = this.#coachesManager.getCoaches();
+    try {
+      this.#coachesManager = new Coach(names);
+      this.#coaches = this.#coachesManager.getCoaches();
 
-    OutputView.printEmptyLine();
+      OutputView.printEmptyLine();
 
-    this.readUneatableMenu();
+      this.readUneatableMenu();
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+
+      this.readCoachesName();
+    }
   }
 
   readUneatableMenu() {
