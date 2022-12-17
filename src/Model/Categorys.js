@@ -13,21 +13,21 @@ class Categorys {
 
   saveCategory() {
     Array.from({ length: 5 }).forEach((_, i) => {
-      this.decideCategory();
+      this.#decideCategory();
     });
   }
 
-  decideCategory() {
-    const categoryName = this.getCategoryName();
+  #decideCategory() {
+    const categoryName = this.#getCategoryName();
 
-    if (this.getCategoryCount(categoryName) <= 2) {
+    if (this.#getCategoryCount(categoryName) <= 2) {
       this.#categorys.push(categoryName);
       return;
     }
-    this.decideCategory();
+    this.#decideCategory();
   }
 
-  getCategoryCount(target) {
+  #getCategoryCount(target) {
     return this.#categorys.reduce((count, category) => {
       if (target === category) {
         return (count += 1);
@@ -36,7 +36,7 @@ class Categorys {
     }, 0);
   }
 
-  getCategoryName() {
+  #getCategoryName() {
     return this.categorysNames[CategoryRandomNumberGenerator.generate() - 1];
   }
 }
