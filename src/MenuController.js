@@ -1,8 +1,10 @@
 const Console = require('./utils/Console');
 const InputView = require('./InputView');
+const MenuGame = require('./MenuGame');
 
 class MenuController {
-  constructor() {
+  constructor(SAMPLE) {
+    this.menuGame = new MenuGame();
     this.#initPrint();
   }
 
