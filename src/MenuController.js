@@ -1,7 +1,8 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const Coach = require('./Coach');
-const { generate } = require('./CategoryRandomGenerator');
+const { categoryGenerate } = require('./CategoryRandomGenerator');
+const { menuGenerate } = require('./MenuRandomGenerator');
 
 class MenuController {
   #menus;
@@ -10,7 +11,11 @@ class MenuController {
   #categories;
 
   constructor(menus) {
-    this.#menus = menus;
+    this.#menus = {};
+    for (const menu in menus) {
+      this.#menus[menu] = menus[menu].split(', ');
+    }
+    console.log(this.#menus);
     this.#coachs = [];
     this.#categories = [];
   }
@@ -41,11 +46,21 @@ class MenuController {
 
   getRandomCategory() {
     for (let i = 0; i < 5; i++) {
-      let category = generate(Object.keys(this.#menus));
+      let category = categoryGenerate(Object.keys(this.#menus));
       while (this.#categories.filter((el) => category === el).length == 2) {
-        category = generate(Object.keys(this.#menus));
+        category = categoryGenerate(Object.keys(this.#menus));
       }
       this.#categories.push(category);
+    }
+    return this.recommendMenu();
+  }
+
+  recommendMenu() {
+    for (const category of this.#categories) {
+      const menus = this.#menus[category];
+      for (const coach of this.#coachs) {
+        console.log(menuGenerate(menus));
+      }
     }
   }
 }
