@@ -60,7 +60,15 @@ class MenuController {
     }
 
     menuRecommand() {
-        const result = menu[key[Random.pickNumberInRange(1, 5)]];
+        this.selectCategory();
+    }
+
+    selectCategory() {
+        const randnum = Random.pickNumberInRange(1, 5);
+        const category = key[randnum];
+        const menuResult = menu[category];
+
+        
     }
 }
 
