@@ -1,6 +1,7 @@
 const { MESSAGE } = require("./constants");
 const MenuRecommender = require("./MenuRecommender");
 const { makeArray } = require("./util/ArrayMaker");
+const { getDivision } = require("./util/MapMaker");
 const MenuValidator = require("./validation/MenuValidator");
 const NameValidator = require("./validation/NameValidator");
 const InputView = require("./views/InputView");
@@ -63,7 +64,9 @@ class Controller {
   }
 
   returnResult() {
-    console.log("결과");
+    const division = getDivision();
+    const result = [MESSAGE.RESULT_START, division];
+    OutputView.printResult(result);
   }
 }
 module.exports = Controller;

@@ -64,7 +64,7 @@ module.exports = {
   MESSAGE,
   ERROR_MESSAGE,
   SYMBOL,
-  DAY,
+  DAYS,
   CATEGORY,
   NAME_VALIDITY,
   MENU_VALIDITY,
