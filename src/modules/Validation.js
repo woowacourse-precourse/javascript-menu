@@ -1,12 +1,14 @@
+const { ERROR } = require('./Constants');
+
 const Validation = {
   validateGroup(stringOfCoaches) {
-    if (!stringOfCoaches.includes(',')) throw new Error('!');
+    if (!stringOfCoaches.includes(',')) throw new Error(ERROR.GROUP_SIZE);
     const coaches = stringOfCoaches.split(',');
-    if (coaches.length > 5) throw new Error('!');
+    if (coaches.length > 5) throw new Error(ERROR.GROUP_SIZE);
     return;
   },
   validateName(name) {
-    if (name.length < 2 || name.length > 4) throw new Error('!');
+    if (name.length < 2 || name.length > 4) throw new Error(ERROR.NAME_SIZE);
     return;
   },
   validateDuplicateCategory(categories) {

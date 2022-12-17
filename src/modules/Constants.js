@@ -10,4 +10,9 @@ const MESSAGE = {
   RESULT_COMPLETE: '\n추천을 완료했습니다.',
 };
 
-module.exports = { MESSAGE };
+const ERROR = {
+  NAME_SIZE: `[ERROR] 닉네임은 최소 2글자 최대 4글자로 입력해야 합니다.`,
+  GROUP_SIZE: `[ERROR] 코치는 최소 2명 이상 최대 5명 이하로 입력해야 합니다.`,
+};
+
+module.exports = { MESSAGE, ERROR };

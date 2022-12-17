@@ -22,6 +22,7 @@ const InputView = {
         this.readImpossibleFoods(coachDietList[0].getName(), 0);
       } catch (error) {
         console.log(error);
+        this.readCoachesName();
       }
     });
   },
@@ -33,8 +34,6 @@ const InputView = {
         console.log(coachDietList[idx].getImpossibles());
         if (idx === coachDietList.length - 1) {
           const categoryListOfWeek = CategoriesGenerator();
-          console.log(coachDietList);
-          console.log(categoryListOfWeek);
           for (const category of categoryListOfWeek) {
             for (const coach of coachDietList) {
               coach.recommendMenu(category);
@@ -46,6 +45,7 @@ const InputView = {
         this.readImpossibleFoods(coachDietList[idx + 1].getName(), idx + 1);
       } catch (error) {
         console.log(error);
+        this.readImpossibleFoods();
       }
     });
   },
