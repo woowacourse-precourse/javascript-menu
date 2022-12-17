@@ -1,3 +1,8 @@
+const RESULT = {
+  noDuplicates: '중복 없음',
+  hasDuplicates: '중복됨',
+};
+
 const SIGN = {
   opener: '[ ',
   closer: ' ]',
@@ -83,4 +88,4 @@ const MENU = {
     '파니니',
   ],
 };
-module.exports = { SIGN, WEEK, CATEGORY, MENU };
+module.exports = { RESULT, SIGN, WEEK, CATEGORY, MENU };
