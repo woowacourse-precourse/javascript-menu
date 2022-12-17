@@ -7,7 +7,7 @@ const verify = {
     arr.forEach((value) => {
       if (data === value) count += 1;
     });
-    if (count > 2) return true;
+    if (count >= 2) return true;
     return false;
   },
 
@@ -35,6 +35,12 @@ const verify = {
   unableMenuLength(input) {
     const data = input.split(',');
     if (data.length > 2) throw new Error('OverFlow Foods');
+  },
+
+  eatenTwice(eatenList, menu) {
+    const result = eatenList.filter((value) => value === menu);
+    if (result.length > 2) return true;
+    return false;
   },
 };
 
