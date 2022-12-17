@@ -1,9 +1,11 @@
 class Coach {
   #name;
+  #menus;
   #bannedMenu;
 
   constructor(name) {
     this.#name = name;
+    this.#menus = [];
   }
 
   addBannedMenu(bannedMenu) {
@@ -12,6 +14,12 @@ class Coach {
 
   getName() {
     return this.#name;
+  }
+
+  addMenu(menu) {
+    if (this.#menus.includes(menu) || this.#bannedMenu.includes(menu)) return false;
+    this.#menus.push(menu);
+    return true;
   }
 }
 
