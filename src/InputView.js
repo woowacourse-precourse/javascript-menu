@@ -13,5 +13,16 @@ const InputView = {
       }
     });
   },
+  readCoachesAllergies(callback, i, names) {
+    Console.readLine(INPUT_MSG.ALLERGY(names[i]), input => {
+      try {
+        const allergies = Array.from(input.split(','));
+        callback(i, allergies, names);
+      } catch (e) {
+        Console.print(e.message);
+        this.readCoachesAllergies(callback, i, names);
+      }
+    });
+  },
 };
 module.exports = InputView;

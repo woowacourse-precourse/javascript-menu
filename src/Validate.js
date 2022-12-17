@@ -10,10 +10,20 @@ const isTeamInRange = input => {
   return false;
 };
 
+const allergyLength = input => {
+  if (input.length >= 0 && input.length <= 2) return true;
+  return false;
+};
 const Validate = {
   validateReadCoachName(input) {
     if (!isNameInRange(input)) throw new Error(ERROR_MSG.NAME_LENGTH);
     if (!isTeamInRange(input)) throw new Error(ERROR_MSG.TEAM_LENGTH);
+    return true;
+    //return Array.from(input.split(','));
+  },
+  validateReadAllergy(input) {
+    if (!allergyLength(input)) throw new Error(ERROR_MSG.NO_EAT_FOOD_LENGTH);
+    return true;
   },
 };
 

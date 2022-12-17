@@ -1,6 +1,7 @@
 const InputView = require('./InputView');
+const MenuMachine = require('./MenuMachine');
 const OutputView = require('./OutputView');
-const { validateReadCoachName } = require('./Validate');
+const { validateReadCoachName, validateReadAllergy } = require('./Validate');
 
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -11,6 +12,8 @@ const SAMPLE = {
 };
 
 class App {
+  #menuMachine;
+
   play() {
     OutputView.printStart();
     InputView.readCoachName(this.onReadCoachName.bind(this));
@@ -18,6 +21,22 @@ class App {
 
   onReadCoachName(input) {
     validateReadCoachName(input);
+    this.#menuMachine = new MenuMachine(input, SAMPLE);
+    this.readAllergies(input, 0);
+  }
+
+  readAllergies(input, i) {
+    if (i === input.length) {
+      console.log('FINSIHED');
+      return;
+    }
+    InputView.readCoachesAllergies(this.onReadAllergies.bind(this), i, input);
+  }
+
+  onReadAllergies(i, allergy, names) {
+    validateReadAllergy(allergy);
+    this.#menuMachine.setAllergies(names[i], allergy);
+    this.readAllergies(names, ++i);
   }
 }
 const app = new App();

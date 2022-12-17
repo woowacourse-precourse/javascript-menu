@@ -8,9 +8,9 @@ const TEAM_LENGTH = Object.freeze({
 });
 
 const INPUT_MSG = Object.freeze({
-  NAME: '코치의 이름을 입력해 주세요. (, 로 구분)',
-  NO_EAT_FOOD(name) {
-    return `${name}(이)가 못 먹는 메뉴를 입력해 주세요.`;
+  NAME: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
+  ALLERGY(name) {
+    return `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`;
   },
 });
 
