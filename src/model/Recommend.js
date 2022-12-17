@@ -86,7 +86,6 @@ class Recommend {
         this.checkHateDish(idx, dish) &&
         this.checkDuplicateDish(menu, dish)
       ) {
-        console.log(dish);
         menu.push(dish);
         day += 1;
       }
