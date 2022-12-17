@@ -4,7 +4,7 @@ const SERVICE_MESSAGE = {
   DAYS: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
   CATEGORY: category => `[ 카테고리 | ${category.join(' | ')} ]`,
   MENU: (name, menus) => `[ ${name} | ${menus.join(' | ')} ]`,
-  FINISH: '추천을 완료했습니다.',
+  FINISH: '\n추천을 완료했습니다.',
 };
 
 const INPUT_MESSAGE = {
