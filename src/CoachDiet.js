@@ -45,7 +45,6 @@ class CoachDiet {
       menu = RandomMenuGenerator(category);
     }
     this.setMenu(menu);
-    console.log(this.#name, this.#menu);
   }
 
   getMenu() {
