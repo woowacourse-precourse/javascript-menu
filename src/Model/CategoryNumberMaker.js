@@ -16,7 +16,10 @@ const CategoryNumberMaker = {
   },
 
   generateRandomNumber() {
-    return Random.pickNumberInRange(CategoryMaker.RANDOM_LOWER_INCLUSIVE, CategoryMaker.RANDOM_UPPER_INCLUSIVE);
+    return Random.pickNumberInRange(
+      CategoryNumberMaker.RANDOM_LOWER_INCLUSIVE,
+      CategoryNumberMaker.RANDOM_UPPER_INCLUSIVE,
+    );
   },
 };
 
