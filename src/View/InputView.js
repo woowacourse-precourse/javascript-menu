@@ -5,8 +5,12 @@ const Validation = require("../Validation");
 const InputView = {
   readCoachNames(callback) {
     Console.readLine(INPUT_MESSAGE.coachNames, (coachNames) => {
-      //Validation.coachNames(coachNames);
-      callback(coachNames);
+      try {
+        Validation.coachNames(coachNames);
+        callback(coachNames);
+      } catch {
+        this.readCoachNames(callback);
+      }
     });
   },
 
