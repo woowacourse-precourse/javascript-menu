@@ -4,9 +4,11 @@ const { Console } = require("@woowacourse/mission-utils");
 
 class Menu {
   #coachNames;
+  #dislikeMenu;
 
   constructor() {
     this.#coachNames;
+    this.#dislikeMenu;
   }
 
   getCoachNames() {
@@ -27,9 +29,12 @@ class Menu {
     InputView.getDislikeMenu(coachNames, this.handleDislikeMenu);
   }
 
-  handleDislikeMenu = (dislikeMenu) => {
-    console.log(dislikeMenu)
-  }
+  handleDislikeMenu = (menu) => {
+    this.#dislikeMenu = menu.split(",").map((menu) => {
+      return menu;
+    });
+    console.log(this.#dislikeMenu)
+  };
 }
 
 module.exports = Menu;
