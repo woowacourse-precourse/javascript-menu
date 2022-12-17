@@ -18,6 +18,9 @@ module.exports = {
     'jsdoc/require-param-description': 'off',
     'jsdoc/require-returns-description': 'off',
     'jsdoc/require-yield': 'off',
+
+    // 기타 허용 항목들
+    'no-continue': 'off',
   },
   overrides: [
     // 테스트 파일을 대상으로 일부 규칙 비활성화
