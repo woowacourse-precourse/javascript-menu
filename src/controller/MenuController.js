@@ -4,8 +4,9 @@ const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
 const Validator = require('../utils/Validator');
-const { REGEX } = require('../constants');
 const toArray = require('../utils/toArray');
+
+const { REGEX } = require('../constants');
 
 class MenuController {
   #menuService;
@@ -66,6 +67,8 @@ class MenuController {
   #onInputNonEdibleMenus(coachName, menus) {
     this.#menuService.addNonEdibleMenus(coachName, menus);
   }
+
+  #printResult() {}
 }
 
 module.exports = MenuController;
