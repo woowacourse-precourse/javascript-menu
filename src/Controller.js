@@ -10,13 +10,20 @@ class Controller {
   }
 
   askName() {
-    const callback = (input) => {
-      const namesArr = input.split(SYMBOL.COMMA);
+    InputView.readInput(MESSAGE.ASK_NAME, this.askNameCallback.bind(this));
+  }
+
+  askNameCallback(input) {
+    let namesArr = input
+      .split(SYMBOL.COMMA)
+      .map((name) => name.replaceAll(" ", ""));
+    try {
       new NameValidator(namesArr);
       console.log(namesArr);
-    };
-
-    InputView.readInput(MESSAGE.ASK_NAME, callback);
+    } catch (error) {
+      OutputView.printMessage(error);
+      this.askName();
+    }
   }
 }
 module.exports = Controller;
