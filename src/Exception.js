@@ -1,6 +1,24 @@
-const { PARAMETERS } = require('./utils/constants');
+const MissionUtils = require('@woowacourse/mission-utils');
+const { PARAMETERS, ERROR_MESSAGE } = require('./utils/constants');
 
 const Exception = {
+  checkCoachesInput(input) {
+    const COACHES = input.split(',');
+    console.log(COACHES);
+
+    if (!this.checkInputFormat(COACHES, PARAMETERS.coachNumberRange)) {
+      MissionUtils.Console.print(ERROR_MESSAGE.invalidCoachLength);
+      throw new Error(ERROR_MESSAGE.invalidCoachLength);
+    }
+
+    COACHES.forEach((coach) => {
+      if (!this.checkInputFormat(coach, PARAMETERS.coachNameLengthRange)) {
+        MissionUtils.Console.print(ERROR_MESSAGE.invalidCoachNameLength);
+        throw new Error(ERROR_MESSAGE.invalidCoachNameLength);
+      }
+    });
+  },
+
   checkInputFormat(input, range) {
     const [MIN_LENGTH, MAX_LENGTH] = range;
 

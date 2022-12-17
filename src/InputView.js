@@ -1,11 +1,12 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Exception = require('./Exception');
 const { CONSOLE_MESSAGE } = require('./utils/constants');
 
 const InputView = {
   readCoaches() {
     MissionUtils.Console.readLine(CONSOLE_MESSAGE.coachInput, (input) => {
       try {
-        // 예외 사항 검증하기
+        Exception.checkCoachesInput(input);
       } catch (error) {
         return this.readCoaches();
       }
