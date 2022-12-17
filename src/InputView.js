@@ -1,9 +1,12 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+const { Console} = MissionUtils;
+
 const InputView = {
-    InputName(callback) {
+    inputName(callback) {
       Console.readLine(`코치의 이름을 입력해 주세요. (, 로 구분)\n`, callback);
     },
 
-    InputName(name, callback) {
+    inputName(name, callback) {
         Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback);
     },
 
@@ -17,10 +20,14 @@ const InputView = {
     },
 
     validateNames(names){
-        const names = names.split(',');
-        if (names.length < 2 || names.length > 5){
+        const names_split = names.split(',');
+        if (names_split.length < 2 || names_split.length > 5){
             this.errorHandling("[ERROR] 인원은 2~5명이여야 합니다.\n");
             return false;
+        }
+        
+        for(let name of names_split){
+            if(!this.validateName(name)) return false;
         }
 
         return true;

@@ -18,3 +18,5 @@ class Coach{
         return this.#name;
     }
 }
+
+module.exports = Coach;
