@@ -15,7 +15,22 @@ const categoryKey = {
   5: "양식",
 };
 
+const DEFAULT = Object.freeze({
+  COMMA: ",",
+  ZERO: 0,
+  EMPTYS_STRING: "",
+  EMPTY_ARRAY: [],
+  DAY_WEEKS: 5,
+  ONE: 1,
+  FALSE: false,
+  TRUE: true,
+  MAX_COACH: 5,
+  MIN_COACH: 2,
+  MAX_FOOD: 2,
+});
+
 module.exports = {
   SAMPLE,
   categoryKey,
+  DEFAULT,
 };
