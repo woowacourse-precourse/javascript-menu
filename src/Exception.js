@@ -15,11 +15,14 @@ const Exception = {
         MissionUtils.Console.print(ERROR_MESSAGE.invalidCoachNameLength);
         throw new Error(ERROR_MESSAGE.invalidCoachNameLength);
       }
+      
+      this.checkSpecialCharacters(coach);
     });
   },
 
   checkInedibleMenusInput(input) {
     const INEDIBLE_MENUS = input.split(',');
+    this.checkSpecialCharacters(INEDIBLE_MENUS);
 
     if (
       !this.checkInputFormat(INEDIBLE_MENUS, PARAMETERS.inedibleMenuRange) &&
@@ -39,6 +42,15 @@ const Exception = {
 
     return false;
   },
+
+  checkSpecialCharacters(input) {
+    if (PARAMETERS.checkSpecialCharacters.test(input)) {
+      MissionUtils.Console.print(ERROR_MESSAGE.invalidSplit);
+      throw new Error(ERROR_MESSAGE.invalidSplit);
+    }
+
+    return true;
+  }
 };
 
 module.exports = Exception;
