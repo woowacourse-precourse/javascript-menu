@@ -1,13 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
 const {
-  DEFAULT: { TRUE, FALSE },
+  DEFAULT: { TRUE, FALSE, MAX_CHAR, MIN_CHAR, MAX_COACH, MIN_COACH, MAX_FOOD },
   ERROR,
 } = require("./utils/constant");
 
 const coachNameLength = function checkCoachNameLength(coaches, callback) {
   try {
     for (const name of coaches) {
-      if (name.length > DEFAULT.MAX_CHAR || name.length < DEFAULT.MIN_CHAR)
+      if (name.length > MAX_CHAR || name.length < MIN_CHAR)
         throw new Error(ERROR.COACH_CHAR_LENGTH);
     }
     return TRUE;
@@ -20,10 +20,7 @@ const coachNameLength = function checkCoachNameLength(coaches, callback) {
 
 const coachCount = function checkCoachTotalCount(coaches, callack) {
   try {
-    if (
-      coaches.length > DEFAULT.MAX_COACH ||
-      coaches.length < DEFAULT.MIN_COACH
-    )
+    if (coaches.length > MAX_COACH || coaches.length < MIN_COACH)
       throw new Error(ERROR.COACH_COUNT);
     return TRUE;
   } catch (error) {
@@ -45,7 +42,7 @@ const checkCoach = function checkCoachValidation(coaches, callback) {
 
 const foodCount = function checkFoodCharCount(foods, callback) {
   try {
-    if (foods.length > DEFAULT.MAX_FOOD) throw new Error(ERROR.FOOD_RANGE);
+    if (foods.length > MAX_FOOD) throw new Error(ERROR.FOOD_RANGE);
     return TRUE;
   } catch (error) {
     Console.print(error);
