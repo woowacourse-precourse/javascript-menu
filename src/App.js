@@ -1,3 +1,4 @@
+const CategoryRandomNumberGenerator = require("./CategoryRandomNumberGenerator");
 const Coachs = require("./Model/Coachs");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
@@ -11,7 +12,10 @@ const SAMPLE = {
   양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
 };
 
+const categorysArray = Object.keys(SAMPLE);
+
 class App {
+  categorys = {};
   play() {
     OutputView.printServiceStart();
 
@@ -27,11 +31,19 @@ class App {
 
     // 각 코치가 못 먹는 메뉴를 입력받는다.
     this.coachs.setCoachNotEatMenu("구구", "김밥");
-    this.coachs.setCoachNotEatMenu("구구", "떡볶이");
+    this.coachs.setCoachNotEatMenu("제임스", "떡볶이");
+
+    this.decideCategory();
+  }
+
+  decideCategory() {
+    const category =
+      categorysArray[CategoryRandomNumberGenerator.generate() - 1];
+    this.categorys[category] = this.categorys[category] + 1 || 1;
   }
 }
 
 const app = new App();
-app.set();
+app.play();
 
 module.exports = App;
