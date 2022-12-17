@@ -11,7 +11,12 @@ class MenuGame {
     this.userCount = 0;
   }
 
-  progressMenu() {}
+  progressMenu() {
+    console.log(this.userName, this.menu, this.userCount);
+    if (this.userName.length !== this.userCount) {
+      return this.progressSelectMenu(this.userName[this.userCount]);
+    }
+  }
 
   setUserName(userName) {
     return (this.userName = userName);
