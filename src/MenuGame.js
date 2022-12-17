@@ -5,19 +5,17 @@ const Validation = require('./Validation');
 
 class MenuGame {
   constructor() {
-    this.coaches = [];
     this.inedibleMenus = {};
-    this.categories = [];
     this.menus = {};
+    this.coaches = [];
+    this.categories = [];
   }
 
   setCoachesMenu() {
-    // first set weekly category 
     for (let day = 0; day < PARAMETERS.dayCount; day += 1) {
       this.setCategory();
     }
 
-    // forEachCoaches set weekly menus
     this.coaches.forEach((coach) => {
       this.setWeeklyMenu(coach);
     });
@@ -27,8 +25,8 @@ class MenuGame {
 
   setCategory() {
     const CATEGORY = PARAMETERS.category[this.getCategory() - 1];
-    const DUPLICATES = this.categories.filter((ele) => ele === CATEGORY).length;
-    if (DUPLICATES.length === 2) {
+
+    if (!Validation.checkCategory(this.categories, CATEGORY)) {
       this.setCategory();
     }
 
