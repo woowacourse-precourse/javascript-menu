@@ -58,7 +58,7 @@ class MenuGame {
   }
 
   getMenu(category) {
-    const MENU_INDEX = MissionUtils.Random.shuffle(PARAMETERS.menu[category])[0];
+    const MENU_INDEX = MissionUtils.Random.shuffle(PARAMETERS.menuIndex)[0];
     return PARAMETERS.menu[category][MENU_INDEX - 1];
   }
 }
