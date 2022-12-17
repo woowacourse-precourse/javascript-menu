@@ -6,7 +6,8 @@ const CatchError = require('./validation/CatchError');
 
 class MenuController {
   constructor(SAMPLE) {
-    this.menuGame = new MenuGame();
+    this.SAMPLE = SAMPLE;
+    this.menuGame = new MenuGame(this.SAMPLE, () => this.progressSelectMenu());
     this.#initPrint();
   }
 
@@ -15,15 +16,18 @@ class MenuController {
   }
 
   progressUserName() {
-    InputView.readUserName(name => {
-      if (!CatchError.UserName(name)) {
+    InputView.readUserName(names => {
+      if (!CatchError.UserName(names)) {
         return this.progressUserName();
       }
+
+      this.menuGame.setUserName(names.split(','));
+      this.menuGame.progressMenu();
     });
   }
 
-  progressSelectMenu() {
-    InputView.readSelectMenu(menu => {});
+  progressSelectMenu(name) {
+    InputView.readSelectMenu(name, menu => {});
   }
 }
 
