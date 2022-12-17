@@ -1,39 +1,50 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { categoryKey } = require("../utils/constant");
+const { OUTPUT, DEFAULT } = require("../utils/constant");
 
 const OutputView = {
   startRecommend() {
-    Console.print("점심 메뉴 추천을 시작합니다.");
+    Console.print(OUTPUT.START);
   },
 
   printRecommendMenuResult() {
-    Console.print("메뉴 추천 결과입니다.");
+    Console.print(OUTPUT.RESULT);
   },
 
   printDayRow() {
-    Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
+    Console.print(OUTPUT.DAYROW);
   },
 
   printCategoryRow(categories) {
     const randomCategories = getCategoryString(categories);
-    Console.print(`[ 카테고리 ${randomCategories}]`);
+    Console.print(
+      `${OUTPUT.OPEN_BRACKET} ${OUTPUT.CATEGORY} ${randomCategories}${OUTPUT.CLOSE_BRACKET}`,
+    );
   },
 
   printCoachRecommendMenus(name, menus) {
     const recommendMenus = getMenuString(menus);
-    Console.print(`[ ${name} ${recommendMenus}]`);
+    Console.print(
+      `${OUTPUT.OPEN_BRACKET} ${name} ${recommendMenus}${OUTPUT.CLOSE_BRACKET}`,
+    );
   },
 
   printRecommendEnd() {
-    Console.print("추천을 완료했습니다.");
+    Console.print(OUTPUT.END);
     Console.close();
   },
 };
 
 const getCategoryString = (categories) =>
-  categories.reduce((acc, cur) => acc + `| ${categoryKey[cur]} `, "");
+  categories.reduce(
+    (acc, cur) => acc + `${OUTPUT.BAR} ${categoryKey[cur]} `,
+    DEFAULT.EMPTYS_STRING,
+  );
 
 const getMenuString = (menus) =>
-  menus.reduce((acc, cur) => acc + `| ${cur} `, "");
+  menus.reduce(
+    (acc, cur) => acc + `${OUTPUT.BAR} ${cur} `,
+    DEFAULT.EMPTYS_STRING,
+  );
 
 module.exports = { OutputView };
