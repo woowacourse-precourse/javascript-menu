@@ -7,6 +7,8 @@ const InputView = {
     InputView.question(MESSAGE.process.inputCoachName, input => {
       const names = InputView.convertInputToItems(input);
 
+      if (names.length <= 1) throw new Error('[ERROR] 코치는 최소 2명 이상 입력해야 합니다.');
+
       names.forEach(name => InputView.validateName(name));
       callback(names);
     });
