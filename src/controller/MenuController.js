@@ -1,5 +1,9 @@
+const OutputView = require('../view/OutputView');
+
 class MenuController {
-  start() {}
+  start() {
+    OutputView.printStart();
+  }
 }
 
 module.exports = MenuController;
