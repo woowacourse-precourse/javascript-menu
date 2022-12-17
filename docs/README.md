@@ -10,9 +10,11 @@ Randoms.pickNumberInRange()의 결과가 1이면 일식, 2면 한식, 3이면 �
 
 ### 기능목록 1 유저에게 코치 이름 입력받는다.
 * [Mission Utils Library](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)를 사용해서 ,로 구분지어 이름들을 입력받는다.(코치수 2~5),(코치이름길이 2~4)
+
+### 기능목록 2 유저에게 코치가 못 먹는 음식을 입력받는다.
 * 입력한 코치들에 대해 각각 못먹는 메뉴를 입력받는다.(0~2)
 
-### 기능목록 2 위에서 받은 데이터로 음식을 추천해준다.
+### 기능목록 3 위에서 받은 데이터로 음식을 추천해준다.
 * 플레이어에게 [Mission Utils Library](https://github.com/woowacourse-projects/javascript-mission-utils#mission-utils)를 이용해 메뉴 추천을 출력해준다.
 * [ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]
 [ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]
