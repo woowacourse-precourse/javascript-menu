@@ -43,7 +43,7 @@ class Category {
           this.#data.selected = '양식';
           break;
       }
-      if (this.#checkHistory(number, i)) {
+      if (this.#checkHistory(number - 1, i)) {
         break;
       }
     }
@@ -51,8 +51,13 @@ class Category {
 
   #checkHistory(number, i) {
     this.#data.history[i] = number;
-    const sorted = this.#data.history.sort((a, b) => a - b);
-    if (sorted[0] > 2) {
+    let count = 0;
+    this.#data.history.forEach(v => {
+      if (v === number) {
+        count++;
+      }
+    });
+    if (count > 2) {
       return false;
     }
 

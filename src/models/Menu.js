@@ -34,6 +34,7 @@ class Menu {
 
     while (j < 5) {
       const num = Random.shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8])[0];
+      // console.log(categoryHistory, categoryHistory[j], j, num);
       const selected = FOOD.data[categoryHistory[j]][num];
       if (this.#checkMenu(selected, hateMenus, i)) {
         menus.push(selected);

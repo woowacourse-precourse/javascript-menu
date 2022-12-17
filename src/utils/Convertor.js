@@ -3,7 +3,7 @@ const { FOOD } = require('../constants/values');
 const Convertor = {
   convertCategoryToPrintable(category) {
     const categoryList = category.map(v => {
-      switch (v) {
+      switch (v + 1) {
         case FOOD.japan:
           return '일식';
         case FOOD.korea:
