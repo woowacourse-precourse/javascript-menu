@@ -18,12 +18,26 @@ const validateNameLength = (name) => {
   }
 };
 
+const validateMenuNumbers = (menus) => {
+  if (menus.length < ValidConfig.MIN_CANNOTEAT_LENGTH
+    || menus.length > ValidConfig.MAX_CANNOTEAT_LENGTH) {
+    throw new Error(Message.ERROR_CANNOTEAT);
+  }
+};
+
 const Validator = {
   validateCoachNames(names) {
     validateCoachNumbers(names);
     names.forEach((name) => {
       validateSeparatorSpace(name);
       validateNameLength(name);
+    });
+  },
+
+  validateCannotEat(menus) {
+    validateMenuNumbers(menus);
+    menus.forEach((menu) => {
+      validateSeparatorSpace(menu);
     });
   },
 };
