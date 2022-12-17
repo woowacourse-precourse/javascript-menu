@@ -1,5 +1,5 @@
 <테스트 관련 확인사항>
-- async/await 구문을 사용하지 않아야 한다.
+- async/await 구문을 사용하지 않아야 한다. ✔️
 - 파일 이름의 대소문자를 엄격히 체크해야 한다.
 
 <프로그래밍 동작>
@@ -61,7 +61,7 @@ Randoms.pickNumberInRange()의 결과가 1이면 일식, 2면 한식, 3이면 �
 InputView - 사용자 입력을 받는 곳
 
 - readCoachName() - 코치 이름 받음
-
+코치이름 중복, 코치 2명미만/5명초과, 코치이름 2글자미만/4글자 초과
 - readHateMenu() - 못먹는 메뉴 입력 받음
 
 - coachsHat() - 개인별 못먹는거 받아서 문자열로 return
@@ -84,6 +84,7 @@ Menu - 메뉴 추천하는 곳
 const menu = Randoms.shuffle(menus)[0];//Menu는 무작위 배열 > 못먹거나 이미 선택한 경우 다시 섞어서 첫번째 값 사용
 - pickMenu() - 픽한 카테고리에 맞춰 개별로 음식 뽑아주기~
 
+- helpPickMenu() - 코치별 메뉴 고르기~
 -----------------------------------------------------
 ErrorHandler - 에러 처리
 coachNameError() -  이름 입력시 발생 가능한 에러 처리

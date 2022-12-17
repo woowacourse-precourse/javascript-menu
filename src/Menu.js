@@ -31,11 +31,16 @@ const Menu ={
      */
     pickMenu(COACH, category, hateMenu) {
         let pickMenu = new Array(COACH.length);
-        for(let i = 0; i <pickMenu.length; i++) {
+        for(let i = 0; i <pickMenu.length; i++) 
             pickMenu[i] = new Array(5);
-        }
         for(let i = 0; i < COACH.length; i++) {
-            let j = 0;
+            pickMenu[i] = this.helpPickMenu(pickMenu, category, hateMenu ,i);
+        }
+        OutputView.printMenu(COACH, category, pickMenu)
+    },
+
+    helpPickMenu(pickMenu, category, hateMenu ,i) {
+        let j = 0;
             while(j < 5) {
                 const pick = MU.Random.shuffle([1,2,3,4,5,6,7,8,9])[0];
                 const menu = SAMPLE[category[j] - 1][pick-1];
@@ -43,8 +48,7 @@ const Menu ={
                 pickMenu[i][j] = menu;
                 j++;
             }
-        }
-        OutputView.printMenu(COACH, category, pickMenu)
+        return pickMenu[i];
     }
 };
 
