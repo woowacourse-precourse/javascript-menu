@@ -1,4 +1,6 @@
 const Coach = require('./Coach');
+const { CATEGORY } = require('../utils/constants');
+const { Random } = require('@woowacourse/mission-utils');
 
 class MenuService {
   #coaches = [];
@@ -11,6 +13,10 @@ class MenuService {
 
   tossHateFoods(index, foods) {
     if (foods[0] !== '') this.#coaches[index].setHateFoods(foods);
+  }
+
+  pickCategory() {
+    const category = CATEGORY[Random.pickNumberInRange(CATEGORY.min, CATEGORY.max)];
   }
 }
 

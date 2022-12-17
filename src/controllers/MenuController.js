@@ -38,12 +38,20 @@ class MenuController {
       validateHateFoods(hateFoodsInput.split(','));
       this.#menuService.tossHateFoods(index, hateFoodsInput.split(','));
       if (index <= this.#coachNames.length - 2) {
-        readHateFoods(this.#coachNames[index + 1], this.onReadHateFoods.bind(this, [index + 1]));
+        return readHateFoods(
+          this.#coachNames[index + 1],
+          this.onReadHateFoods.bind(this, [index + 1]),
+        );
       }
+      this.startRealService();
     } catch (err) {
       printError(err.message);
       readHateFoods(this.#coachNames[index], this.onReadHateFoods.bind(this, [index]));
     }
+  }
+
+  startRealService() {
+    this.#menuService.pickCategory();
   }
 }
 
