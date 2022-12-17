@@ -24,4 +24,14 @@ const makeRandomCategory = () => {
   return recommendCategory;
 };
 
-module.exports = { catchError, makeRandomCategory };
+const makeRandomMenu = (category) => {
+  const menus = SAMPLE[category].split(',');
+  const menuNumber = [];
+  for(let i=0; i<menus.length; i++) {
+    menuNumber.push(i+1)
+  }
+  const menu = Random.shuffle(menuNumber)[0];
+  return menus[menu];
+}
+
+module.exports = { catchError, makeRandomCategory, makeRandomMenu };

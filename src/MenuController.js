@@ -1,11 +1,12 @@
+const SAMPLE = require("./Constants");
 const InputView = require("./InputView");
-const { makeRandomCategory } = require("./util");
+const { makeRandomCategory, makeRandomMenu } = require("./util");
 
 class MenuController {
   constructor() {
     this.coach = [];
     this.coachAvoidMenu = {};
-    this.recommendMenu = {};
+    this.recommendMenu = [];
     this.coachIndex = 0;
   }
 
@@ -21,17 +22,27 @@ class MenuController {
       this.coachAvoidMenu[this.coach[this.coachIndex]] = menu;
       this.coachIndex++;
       console.log(this.coachAvoidMenu);
-      if (this.coachIndex === this.coach.length) return this.recommend();
+      if (this.coachIndex === this.coach.length) return this.recommendCategory();
       this.readEachCoachAvoidMenu(this.coach[this.coachIndex]);
     });
   }
 
-  recommend() {
+  recommendCategory() {
       this.recommendedCategories = Array(5)
       .fill("")
       .map((item) => item + makeRandomCategory());
-      console.log(this.recommendedCategories)
+      this.recommendEachMenu()
   }
+
+  recommendEachMenu() {
+    this.recommendedMenu =  [];
+    this.recommendedCategories.map((category) => {
+      this.recommendedMenu.push(makeRandomMenu(category))
+    })
+    console.log(this.recommendedMenu)
+  }
+
+
 }
 
 module.exports = MenuController;
