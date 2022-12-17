@@ -21,6 +21,10 @@ const InputView = {
   readCoachName(callback) {
     InputView.readInput(InputView.MESSAGE.coachName, callback);
   },
+
+  readInedibleMenu(callback, coachName) {
+    InputView.readInput(`\n${coachName}${InputView.MESSAGE.inedibleMenu}`, callback);
+  },
 };
 
 module.exports = InputView;
