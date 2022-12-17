@@ -51,6 +51,12 @@ class MenuService {
   passName() {
     this.#names.shift();
   }
+
+  makeCoach(name, pickyMenu) {
+    const coach = new Coach(name, pickyMenu);
+    this.#coaches.push(coach);
+    console.log(this.#coaches.length);
+  }
 }
 
 module.exports = MenuService;
