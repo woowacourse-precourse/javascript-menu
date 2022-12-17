@@ -43,7 +43,8 @@ class MenuRecommendation {
         !new Set(this.coachs[i].getLunch()).size ===
         this.coachs[i].getLunch().length
       ) {
-        i--;
+        console.log("dup");
+        chooseMenuForCoach(i);
       }
     }
 
@@ -86,9 +87,12 @@ class MenuRecommendation {
     names.split(",").forEach((name) => {
       this.coachs.push(new Coach(name));
     });
+
     if (checkCoachNumber(this.coachs.length)) {
+      this.coachs = [];
       return InputView.readCoachName(this.receiveCoachName.bind(this));
     }
+
     InputView.readDislikeMenu(
       this.receiveDislikeMenu.bind(this),
       this.coachs,
