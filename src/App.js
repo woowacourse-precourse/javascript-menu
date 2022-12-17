@@ -33,6 +33,12 @@ class App {
   makeCoachList(nameList) {
     this.coachList = nameList;
   }
+  getDisableMenu() {
+    InputView.readCoachDisableMenu(
+      this.coachList[this.turn],
+      this.manageCoachDisableMenu.bind(this)
+    );
+  }
 }
 
 module.exports = App;
