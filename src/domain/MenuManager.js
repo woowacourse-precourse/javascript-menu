@@ -42,8 +42,8 @@ class MenuManager {
   }
 
   setMenus(categorys) {
-    categorys.forEach((category) => {
-      this.#coachs.forEach((coach) => this.addMenuToCoach(coach, category));
+    this.#coachs.forEach((coach) => {
+      categorys.forEach((category) => this.addMenuToCoach(coach, category));
     });
   }
 
