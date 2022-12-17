@@ -2,11 +2,12 @@ const { Output, Input } = require('../views/View');
 
 class Controller {
   init() {
-    Output.printInit()
+    Output.printInit();
+    this.getCoachNameList();
   }
 
   getCoachNameList() {
-    Input.readCoachNameList((CoachNameList) => {})
+    Input.readCoachNameList((coachNameList) => {});
   }
 }
 
