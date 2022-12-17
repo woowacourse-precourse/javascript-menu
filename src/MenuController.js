@@ -19,7 +19,7 @@ class MenuController {
 
   progressUserName() {
     InputView.readUserName(names => {
-      if (!CatchError.UserName(names)) {
+      if (!CatchError.userName(names)) {
         return this.progressUserName();
       }
 
@@ -30,6 +30,10 @@ class MenuController {
 
   progressSelectMenu(name) {
     InputView.readSelectMenu(name, menu => {
+      if (!CatchError.selectMenu(this.SAMPLE, menu)) {
+        return this.progressSelectMenu();
+      }
+
       this.menuGame.setMenu([menu]);
       this.menuGame.increseUserCount();
       return this.menuGame.progressMenu();
