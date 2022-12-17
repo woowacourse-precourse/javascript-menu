@@ -1,6 +1,8 @@
 const { Random } = require('@woowacourse/mission-utils');
 
 class MenuPicker {
+  static menuIndices = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
   static recommend(noMenu, category, samples) {
     return this.makeMenuList(noMenu, category, samples);
   }
@@ -10,8 +12,8 @@ class MenuPicker {
 
     while (menus.length < 5) {
       const categoryIndex = category[menus.length];
-      const menuIndex = this.getRandomNumber();
       const categoryName = this.getMenuName(categoryIndex);
+      const menuIndex = this.getRandomNumber(this.menuIndices);
       const menu = samples[categoryName].split(', ')[menuIndex - 1];
 
       if (!noMenu.has(menu)) {
@@ -34,12 +36,8 @@ class MenuPicker {
     return categoryIndex === 4 ? '아시안' : '양식';
   }
 
-  static getRandomNumber() {
-    return Random.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9]).shift();
+  static getRandomNumber(numbers) {
+    return Random.shuffle(numbers)[0];
   }
 }
 module.exports = MenuPicker;
-
-// 각 요일에 해당하는 카테고리가 주어짐
-// 그러면 일단 배열에다가 추가해
-// 근데 있는 거면 안 되는 거야 set 사용해도 좋고

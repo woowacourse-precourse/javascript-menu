@@ -16,7 +16,6 @@ class Coach {
   static create(names) {
     const coachNames = names.split(',');
 
-    // 일단 set으로 설정
     coachNames.forEach((name) => {
       this.#coaches.set(name, new Set());
       this.#coachOrder.push(name);
@@ -27,12 +26,10 @@ class Coach {
     return this.#coaches.size;
   }
 
-  // 순서에 해당하는 코치 이름 반환
   static getName() {
     return this.#coachOrder[this.#inputCount];
   }
 
-  // 코치의 못 먹는 음식 저장
   static addNoFood(foods) {
     const name = this.getName();
     const foodSet = new Set(foods.split(','));
@@ -45,12 +42,13 @@ class Coach {
     return this.#coaches;
   }
 
-  static setMenu(coachName, menus) {
+  static assignMenu(coachName, menus) {
     this.#coaches.set(coachName, menus);
   }
 
   static toString() {
     const strings = [];
+
     for (const [name, datas] of this.#coaches) {
       strings.push([name, ...datas].join(' | '));
     }

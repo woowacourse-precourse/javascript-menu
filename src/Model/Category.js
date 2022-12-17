@@ -16,7 +16,6 @@ class Category {
     return this.categories;
   }
 
-  // 랜덤 넘버 생성
   static generateRandom() {
     return Random.pickNumberInRange(1, 5);
   }
@@ -25,7 +24,6 @@ class Category {
     return this.categories.filter((category) => category === number).length > 1;
   }
 
-  // 카테고리 선택
   static pickCategory() {
     let pickCount = 0;
 
@@ -59,6 +57,3 @@ class Category {
   }
 }
 module.exports = Category;
-
-Category.init();
-Category.generate();

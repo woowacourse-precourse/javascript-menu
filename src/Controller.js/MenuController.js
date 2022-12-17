@@ -86,7 +86,7 @@ class MenuController {
         category,
         this.#samples
       );
-      Coach.setMenu(coachName, recommendMenu);
+      Coach.assignMenu(coachName, recommendMenu);
     }
     this.showResult();
   }
