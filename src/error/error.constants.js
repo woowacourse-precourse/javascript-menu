@@ -7,6 +7,8 @@ const ERROR_MESSAGE = Object.freeze({
     "한 주에 같은 카테고리는 최대 2회까지만 고를 수 있습니다.",
   INVALID_DUPLICATED_MENU:
     "각 코치에게 한 주에 중복되지 않는 메뉴를 추천해야 합니다.",
+  INVALID_NOT_WANT_MENU_NUM:
+    "먹지 못하는 메뉴는 최대 2개까지 입력할 수 있습니다.",
 });
 
 module.exports = ERROR_MESSAGE;
