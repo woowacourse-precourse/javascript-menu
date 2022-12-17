@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../../constants/Constants');
+const HateMenusValidation = require('../../utiles/HateMenusValidation');
 const NamesValidation = require('../../utiles/NamesValidation');
 const OutputView = require('../OutputView/OutputView');
 const IInputView = require('./IInputView');
@@ -9,10 +10,13 @@ const InputView = class extends IInputView {
 
   #namesValidation;
 
+  #hateMenusValidation;
+
   constructor() {
     super();
     this.#outputView = new OutputView();
     this.#namesValidation = new NamesValidation();
+    this.#hateMenusValidation = new HateMenusValidation();
   }
 
   readNames(saveNames) {
@@ -32,12 +36,22 @@ const InputView = class extends IInputView {
     }
   }
 
-  readHateMenus() {
-    throw new OverrideError();
+  readHateMenus(name, saveHateMenus) {
+    Console.readLine(`${MESSAGE.cantEat(name)}\n`, (hateMenus) => {
+      const hateMenusArr = hateMenus.split(',');
+      this.readHateMenusHandler(name, hateMenusArr, saveHateMenus);
+    });
+  }
+
+  readHateMenusHandler(name, hateMenus, saveHateMenus) {
+    try {
+      this.#hateMenusValidation.check(hateMenus);
+      saveHateMenus(hateMenus);
+    } catch (error) {
+      this.#outputView.printError(error.message);
+      this.readHateMenus(name, saveHateMenus);
+    }
   }
 };
-
-// const a = new InputView();
-// a.readNames();
 
 module.exports = InputView;
