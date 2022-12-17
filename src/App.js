@@ -5,6 +5,7 @@ class App {
     controller.gameStart();
 	}
 
+	
 }
 
 const app = new App()
