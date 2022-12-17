@@ -6,4 +6,11 @@ const convertCategory = (categoryIdxArr) => {
   return category;
 };
 
-module.exports = { convertCategory };
+const combineCoachMenu = (coach, menu) => {
+  for (const idx in coach) {
+    menu[idx].unshift(coach[idx]);
+  }
+  return menu;
+};
+
+module.exports = { convertCategory, combineCoachMenu };

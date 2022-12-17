@@ -4,7 +4,7 @@ const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const { validateCoachName, validateDislikeMenu } = require('./utils/validate');
 const { Random } = require('@woowacourse/mission-utils');
-const { convertCategory } = require('./utils/menuUtil');
+const { convertCategory, combineCoachMenu } = require('./utils/menuUtil');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -41,7 +41,8 @@ class App {
     idx++;
     if (idx === this.coach.length) {
       const convertedCategory = convertCategory(this.category);
-      OutputView.printResult(this.coach, convertedCategory, this.recommendMenu);
+      const combinedCoachMenu = combineCoachMenu(this.coach, this.recommendMenu);
+      OutputView.printResult(convertedCategory, combinedCoachMenu);
       return;
     }
     InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
