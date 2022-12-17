@@ -1,3 +1,5 @@
+const { Random } = require('@woowacourse/mission-utils');
+
 class Category {
   #menus;
 
@@ -6,6 +8,8 @@ class Category {
   }
 
   getRandomMenu() {
+    const menu = Random.shuffle(this.#menus)[0];
+    return menu;
   }
 
   static #convertMenus(menus) {
