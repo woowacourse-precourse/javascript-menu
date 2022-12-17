@@ -1,7 +1,10 @@
 const Coach = require('../models/Coach');
+const Coachs = require('../models/Coachs');
 const { OutputView, InputView } = require('../views/IOView');
 
 class Controller {
+  #coachs = new Coachs();
+
   start() {
     OutputView.printStart();
     this.requestCoachNames();
@@ -14,6 +17,13 @@ class Controller {
   handleCoachNames(coachNames) {
     const isValid = Coach.validationCoachNames(coachNames);
     if (!isValid) return this.requestCoachNames();
+    this.createCoach(coachNames);
+  }
+
+  createCoach(coachNames) {
+    coachNames
+      .split(',')
+      .forEach((coachName) => this.#coachs.addCoach(coachName));
   }
 }
 
