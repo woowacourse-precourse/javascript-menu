@@ -73,7 +73,16 @@ class App {
     this.printResult(recommandedCategories, coachData);
   }
 
-  printResult(recommandedCategories, coachData) {}
+  printResult(recommandedCategories, coachData) {
+    OutputView.printResult(recommandedCategories, coachData, this.#coaches);
+    OutputView.printEmptyLine();
+
+    this.printCompleteMessage();
+  }
+
+  printCompleteMessage() {
+    OutputView.printCompleteMessage();
+  }
 }
 
 const app = new App();
