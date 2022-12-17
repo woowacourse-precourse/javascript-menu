@@ -1,6 +1,9 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
 const OutputView = {
+  printCoachNumberError() {
+    MissionUtils.Console.print("[ERROR] 코치는 최소 2명 이상 입력해야 합니다.");
+  },
   printStartText() {
     MissionUtils.Console.print("점심 메뉴 추천을 시작합니다.\n");
   },
