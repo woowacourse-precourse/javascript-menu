@@ -1,9 +1,8 @@
 const { Random } = require('@woowacourse/mission-utils');
 
 const Shuffler = Object.freeze({
-  shuffle(length) {
-    const array = Array.from({ length }, (_, index) => index);
-    return Random.shuffle(array)[0];
+  shuffle(menuList) {
+    return Random.shuffle(Array.from({ length: menuList.length }, (_, index) => index));
   },
 });
 

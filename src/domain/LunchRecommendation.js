@@ -53,7 +53,7 @@ class LunchRecommendation {
   }
 
   #setRecommendationMenu(coach, menuListSelected) {
-    const menuNumber = Shuffler.shuffle(menuListSelected.length);
+    const menuNumber = Shuffler.shuffle(menuListSelected)[0];
     if (!coach.checkCanEat(menuListSelected[menuNumber])) {
       return this.#setRecommendationMenu(coach, menuListSelected);
     }
