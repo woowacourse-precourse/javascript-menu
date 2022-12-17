@@ -127,8 +127,13 @@ class LunchMenu {
       this.#currentCoach += 1;
       this.#selectRecommendCategory();
     } else {
-
+      this.#printComplete();
     }
+  };
+
+  #printComplete = () => {
+    MissionUtils.Console.print('\n추천을 완료했습니다.');
+    MissionUtils.Console.close();
   };
 }
 
