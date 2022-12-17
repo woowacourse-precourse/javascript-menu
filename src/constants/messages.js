@@ -1,4 +1,6 @@
-const MESSAGE_SYSTEM = Object.freeze({});
+const MESSAGE_SYSTEM = Object.freeze({
+  START: '점심 메뉴 추천을 시작합니다.\n',
+});
 
 const MESSAGE_QUERY = Object.freeze({});
 
