@@ -39,8 +39,9 @@ class App {
     this.inputCoachsDislikeFood();
   }
   inputCoachsDislikeFood() {
-    if (this.dislikeIdx >= this.coachs.length - 1) {
+    if (this.dislikeIdx > this.coachs.length - 1) {
       // 메뉴 추천 결과 실행 로직
+      return;
     }
     this.input.readLine(
       this.inputDislikeFoodByCoach.bind(this),
@@ -48,14 +49,14 @@ class App {
     );
   }
   inputDislikeFoodByCoach(input) {
-    const disLikeFoods = InputProcessor.parseCommaStringsToArray(input);
+    const inputFoods = InputProcessor.parseCommaStringsToArray(input);
 
     // 개수가 올바른지 판단하기
 
     // 올바르다면
-    disLikeFoods.forEach((food) => {
+    inputFoods.forEach((food) => {
       const category = MenuUtil.findCategoryByFoodName(food);
-      this.coachs[this.dislikeIdx].push(new Food(food, category));
+      this.coachs[this.dislikeIdx].dislikeFoods.push(new Food(food, category));
     });
 
     this.dislikeIdx++;
