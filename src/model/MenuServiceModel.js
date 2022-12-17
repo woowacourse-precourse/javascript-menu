@@ -3,11 +3,12 @@ MenuServiceModel = class {
   #dislikes;
 
   constructor() {
+    this.#names;
     this.#dislikes = [];
   }
 
   setCoachName(names) {
-    this.#names = names;
+    this.#names = [...names];
   }
 
   setCoachDislike([name, menus]) {
@@ -18,7 +19,7 @@ MenuServiceModel = class {
     return this.#names;
   }
 
-  getDislike() {
+  getCoachDislike() {
     return this.#dislikes;
   }
 };

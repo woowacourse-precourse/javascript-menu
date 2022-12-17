@@ -25,12 +25,13 @@ MenuServiceController = class {
   inputCoachName() {
     this.view.readCoachName((names) => {
       names = [...new Set(names.split(","))];
-      const reversed = names.reverse();
 
       checkNameCountValid(names);
       checkNameLengthValid(names);
 
       this.model.setCoachName(names);
+
+      const reversed = names.reverse();
 
       try {
         this.inputCoachDislike(reversed);
@@ -52,7 +53,7 @@ MenuServiceController = class {
 
       this.model.setCoachDislike([name, menus]);
 
-      if (!names.length) return this.next();
+      if (!names.length) return this.pickMenu();
 
       try {
         this.inputCoachDislike(names);
@@ -63,10 +64,11 @@ MenuServiceController = class {
     });
   }
 
-  next() {
-    const dislikes = this.model.getDislike();
+  pickMenu() {
+    const names = this.model.getCoachName();
+    const dislikes = this.model.getCoachDislike();
 
-    console.log(dislikes);
+    console.log(names, dislikes);
   }
 };
 
