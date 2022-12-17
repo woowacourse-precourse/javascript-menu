@@ -1,3 +1,5 @@
+const OutputView = require("./view/OutputView");
+
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
 	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -7,8 +9,21 @@ const SAMPLE = {
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
-class App {
-  play() {}
+const categories = {
+	"1": "일식",
+	"2": "한식",
+	"3": "중식",
+	"4": "아시안",
+	"5": "양식",
 }
+class App {
+  play() {
+		OutputView.start();
+	}
+}
+
+
+const app = new App();
+app.play();
 
 module.exports = App;
