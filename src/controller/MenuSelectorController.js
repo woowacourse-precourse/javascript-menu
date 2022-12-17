@@ -21,6 +21,10 @@ class MenuSelectorController {
       })
     );
   }
+
+  #readDislikeMenuPhase(name) {
+    InputView.readDislikeMenu(name);
+  }
 }
 
 module.exports = MenuSelectorController;
