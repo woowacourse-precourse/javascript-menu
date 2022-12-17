@@ -22,8 +22,6 @@ class Coach {
     foods.split(",").map((food) => {
       this.#disabledFoods.push(food);
     })
-
-		
   }
 
   getDayFood() {
@@ -31,9 +29,7 @@ class Coach {
   }
   setDayFood(food) {
     this.#dayFood.push(food)
-
   }
-
 }
 
 module.exports = Coach;

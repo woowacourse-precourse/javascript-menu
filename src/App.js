@@ -101,11 +101,14 @@ class App {
 
 	pickCategory() {
 		const randomNumber = Random.pickNumberInRange(1, 5)
+		CATEGORIES_MAP[randomNumber].count += 1;
 
-		if (CATEGORIES_MAP[randomNumber].count < 2) {
-			CATEGORIES_MAP[randomNumber].count += 1;
-			return CATEGORIES_MAP[randomNumber].name
+		if (CATEGORIES_MAP[randomNumber].count > 2) {
+			this.pickCategory();
 		}
+
+		return CATEGORIES_MAP[randomNumber].name
+
 	}
 
 	pickFood(coach, menus) {
