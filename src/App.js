@@ -17,6 +17,7 @@ const coach = new Coach();
 const menu = new Menu();
 
 const categoryies = [];
+const menuList = [];
 
 class App {
   #coachList;
@@ -46,21 +47,19 @@ class App {
 
   settingCategories = () => {
     for (let category in SAMPLE) {
-      categoryies.push({ category, menuList: SAMPLE[category].split(",") });
+      categoryies.push(category);
+      menuList.push(SAMPLE[category].split(","));
     }
     this.inputRecommendCategories();
   };
 
   inputRecommendCategories = () => {
-    
     const categoryNum = MissionUtils.Random.pickNumberInRange(1, 5);
     if (menu.checkDuplicatedCategory(categoryNum, 2) === false) {
       return this.inputRecommendCategories();
     }
     menu.inputRecommendCategory(categoryNum);
-    
     if (menu.checkCategoryListDone() === false) {
-      
       return this.inputRecommendCategories();
     }
     return this.inputRecommendMenus();
@@ -69,8 +68,26 @@ class App {
   //코치 리스트에서 한명씩 돌아가며 추천해주기
 
   inputRecommendMenus = () => {
-    console.log(menu.getRecommendCategoryList())
-    
+    const coachList = coach.getCoachList();
+
+    const menu = MissionUtils.Random.shuffle(["na", "b"]);
+
+    console.log(menu, "er");
+
+    // coachList.forEach((coachObj) => {
+
+    // })
+  };
+
+  endRecommendSystem = () => {
+    // const recommendedCategoryList = '한식,양식,일식,중식,아시안'
+    // const recommendedCoachMenuList = [{name:구구, recommendedCoachMenuList='김치찌개,스파게티,규동,짜장면,카오 팟'},{name:'제임스',recommendedCoachMenuList:'제육볶음,라자냐,가츠동,짬뽕,파인애플 볶음밥'}]
+
+    OutputView.printRecommendedMenusResult(
+      recommendedCategoryList,
+      recommendedCoachMenuList
+    );
+    OutputView.printEndMessage();
   };
 }
 
