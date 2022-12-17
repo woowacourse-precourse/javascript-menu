@@ -1,14 +1,15 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./lib/constants');
+const Validator = require('./Validator');
 
 const InputView = {
 
   readCoachNames(callback) {
     MissionUtils.Console.readLine(
       MESSAGE.COACH_NAMES,
-      (names) => {
-        callback(names);
-      },
+      Validator.coachNames(callback, {
+        onError: this.readCoachNames.bind(this),
+      }),
     );
   },
 
