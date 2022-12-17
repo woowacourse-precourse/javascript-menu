@@ -41,7 +41,7 @@ class App {
   }
 
   #controllHates(hates) {
-    this.#menus.push(new Menu(this.#categoris, hates));
+    this.#menus.push(new Menu(hates));
     if (this.#menus.length < this.#names.length) {
       InputView.readHates(this.#handleHates.bind(this), this.#names[this.#menus.length]);
     } else {
@@ -50,7 +50,7 @@ class App {
   }
 
   #showMenus() {
-    const foods = this.#menus.map((menu) => menu.choiceFood());
+    const foods = this.#menus.map((menu) => menu.choiceFood(this.#categoris));
     OutputView.printMenus(this.#categoris, this.#names, foods);
     InputView.close();
   }
