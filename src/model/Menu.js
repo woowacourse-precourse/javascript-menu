@@ -18,6 +18,9 @@ class Menu {
     return true;
   }
 
+  inputRecommendCategory(category) {
+    this.#recommendedCategoryList.push(category);
+  }
 
 }
 
