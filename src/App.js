@@ -26,12 +26,11 @@ class App {
 
   validName() {
 	if(this.coachs.length < 2 || this.coachs.length > 5) {
-	  throw new Error("[ERROR] 코치는 최소 2명 이상, 최대 5명 이하로 입력해야 합니다.")
-	
+	  throw new Error("[ERROR] 코치는 최소 2명 이상, 최대 5명 이하로 입력해야 합니다.");
 	}    
 	this.coachs.forEach(coach => {
 	  if(coach.length > 4 || coach.length < 2) {
-		throw new Error("[ERROR] 코치의 이름은 최소 2글자, 최대 4글자 입니다.")
+		throw new Error("[ERROR] 코치의 이름은 최소 2글자, 최대 4글자 입니다.");
 	  }
 	});
   }
