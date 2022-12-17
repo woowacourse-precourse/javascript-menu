@@ -5,9 +5,10 @@ const MSG = {
 };
 
 const ERR_MSG = {
-  NAME_ERR: "[ERROR] 코치 이름은 최소 2글자에서 최대 4글자입니다.",
+  C_NAME_ERR: "[ERROR] 코치 이름은 최소 2글자에서 최대 4글자입니다.",
   C_LEN_ERR: "[ERROR] 코치는 최소 2명에서 최대 5명입니다.",
   C_DUP_ERR: "[ERROR] 코치 이름은 중복될 수 없습니다.",
+  HATE_ERR: "[ERROR] 싫어하는 음식은 0개에서 2개입니다.",
 };
 
 const HATE = (coach) => {
@@ -22,7 +23,15 @@ const RESULT = (categories) => {
 
 const DAYS = 5;
 const MIN = 1;
-const MAX = 9;
+const MAX = 5;
+
+const INFO = {
+  C_NAME_MIN: 2,
+  C_NAME_MAX: 4,
+  C_MIN: 2,
+  C_MAX: 5,
+  HATE_MAX: 2,
+};
 
 module.exports = {
   MSG,
@@ -32,4 +41,5 @@ module.exports = {
   DAYS,
   MIN,
   MAX,
+  INFO,
 };

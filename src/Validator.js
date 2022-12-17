@@ -1,4 +1,4 @@
-const { ERR_MSG } = require("./constants/constants");
+const { ERR_MSG, INFO } = require("./constants/constants");
 
 const Validator = {
   validateCoach(coaches) {
@@ -12,15 +12,19 @@ const Validator = {
   },
 
   coachesLength(coaches) {
-    if (coaches.length < 2 || coaches > 5) throw ERR_MSG.C_LEN_ERR;
+    if (coaches.length < INFO.C_MIN || coaches > INFO.C_MAX)
+      throw ERR_MSG.C_LEN_ERR;
   },
 
   coachNameLength(coaches) {
     coaches.forEach((name) => {
-      if (name.length < 2 || name.length > 4) throw ERR_MSG.NAME_ERR;
+      if (name.length < INFO.C_NAME_MIN || name.length > INFO.C_NAME_MAX)
+        throw ERR_MSG.C_NAME_ERR;
     });
   },
-  validateHates(hates) {},
+  validateHates(hates) {
+    if (hates.length > INFO.HATE_MAX) throw ERR_MSG.HATE_ERR;
+  },
 };
 
 module.exports = Validator;

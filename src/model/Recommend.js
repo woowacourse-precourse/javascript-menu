@@ -1,5 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
-const { MAX, DAYS } = require("../constants/constants");
+const { MAX, DAYS, MIN } = require("../constants/constants");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -26,7 +26,7 @@ class Recommend {
     let rcmCategory = new Array(1).fill(0);
     let i = 0;
     while (i < 5) {
-      const category = categories[Random.pickNumberInRange(1, 5) - 1];
+      const category = categories[Random.pickNumberInRange(MIN, MAX) - 1];
       if (i > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
         rcmCategory.push(category);
         i += 1;

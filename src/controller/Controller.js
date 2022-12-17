@@ -37,6 +37,7 @@ class Controller {
 
   hateHandler(hates) {
     try {
+      Validator.validateHates(hates.split(","));
       this.makeHates(hates.split(","));
     } catch (error) {
       Console.print(error);
