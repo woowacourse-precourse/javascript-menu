@@ -21,6 +21,10 @@ class Coach {
     this.#menus.push(menu);
     return true;
   }
+
+  getMenus() {
+    return this.#menus;
+  }
 }
 
 module.exports = Coach;
