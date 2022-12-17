@@ -60,4 +60,6 @@ const AllMenu = Object.freeze({
   ],
 });
 
-const Category = ["한식", "일식", "중식", "아시안", "양식"];
+const AllCategory = ["일식", "한식", "중식", "아시안", "양식"];
+
+module.exports = { AllCategory, AllMenu };

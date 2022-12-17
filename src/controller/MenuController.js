@@ -1,13 +1,19 @@
+const Category = require("../domain/Category");
 const Coach = require("../domain/Coach");
+const { AllCategory } = require("../static/Static");
+const RandomNumberGenerator = require("../utils/Utils");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 
 class MenuController {
   #coachs;
+  #category;
 
   constructor() {}
 
   startRecommendMenu() {
+    this.generateCategory();
+
     OutputView.printStart();
 
     this.inputCoachName();
@@ -33,6 +39,19 @@ class MenuController {
 
       if (index < this.#coachs.length - 1) this.inputUnLikeMenu(index + 1);
     }, this.#coachs[index].getName());
+  }
+
+  generateCategory() {
+    const category = [];
+
+    while (category.length < 5) {
+      const newCategory = AllCategory[RandomNumberGenerator.generate(1, 5) - 1];
+
+      if (category.filter((v) => v === newCategory).length < 2)
+        category.push(newCategory);
+    }
+
+    this.#category = new Category(category);
   }
 }
 
