@@ -19,6 +19,7 @@ class MenuList {
     return this.#categories[randomNumber];
   }
   getMenu(category) {
+    console.log("cate", category);
     const targetMenus = this.#menus[category].split(", ");
 
     const end = targetMenus.length;

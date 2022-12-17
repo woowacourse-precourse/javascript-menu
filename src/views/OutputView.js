@@ -6,6 +6,7 @@ const OutputView = {
     this.module.print(message);
   },
   printResult(menuRecords) {
+    console.log(menuRecords);
     this.print("메뉴 추천 결과입니다.");
     let keys = Object.keys(menuRecords);
     const days = menuRecords[keys[0]].map((record) => {
