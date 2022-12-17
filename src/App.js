@@ -48,7 +48,17 @@ class App {
 	});
   }
 
-
+  /**5. 못 먹는 음식 코치마다 받기 */
+  inputNoFoods() {
+	Console.readLine(`\n(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (noFoods) => {
+	  this.noFoodArr.push(noFoods);
+	  this.indexCount += 1;
+	  console.log("###현재 인덱스", this.indexCount);
+	  console.log("###노음식 배열", this.noFoodArr);
+	  this.replay();
+	});
+	}
+	
 	/**4. 코치 인원 만큼 입력값 반복하는 기능 */
   replay() {
 	if(this.indexCount !== this.coachs.length) {
