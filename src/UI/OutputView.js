@@ -19,7 +19,7 @@ const OutputView = {
   },
 
   printCoachResult(foodList) {
-    Console.print(`[ ${foodList}] `);
+    Console.print(`[ ${foodList} ]`);
   },
 
   quitGame() {

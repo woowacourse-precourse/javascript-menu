@@ -3,8 +3,8 @@ const { Random } = require('@woowacourse/mission-utils');
 const getCategory = (verifyData) => {
   const result = [];
   while (result.length < 5) {
-    const input = Random.pickNumberInRange(0, 4);
-    if (!verifyData(input, result)) result.push(input);
+    const input = Random.pickNumberInRange(1, 5);
+    if (!verifyData(input - 1, result)) result.push(input - 1);
   }
   return result;
 };

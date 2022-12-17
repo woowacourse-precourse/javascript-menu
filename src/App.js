@@ -56,7 +56,8 @@ class App {
         this.#coaches[coachLength].setUnableFood(findFoodLocation(input));
         if (coachLength < this.#coaches.length - 1)
           return this.unableEatCheckStart(coachLength + 1);
-        return this.mondaySuggest();
+        // return this.mondaySuggest();
+        return this.suggestMenu(0);
       } catch (error) {
         console.error(error);
         if (error.message === 'No Food') OutputView.ErrorNoMenu();
@@ -66,38 +67,13 @@ class App {
     });
   }
 
-  mondaySuggest() {
-    this.#coaches.forEach((coach) => {
-      coach.suggestMenu(this.#foodCategory[0]);
+  suggestMenu(coachLength) {
+    if (coachLength === this.#coaches.length) return;
+    this.#foodCategory.forEach((category) => {
+      console.log(category);
+      this.#coaches[coachLength].suggestMenu(category);
     });
-    return this.tuesdaySuggest();
-  }
-
-  tuesdaySuggest() {
-    this.#coaches.forEach((coach) => {
-      coach.suggestMenu(this.#foodCategory[1]);
-    });
-    return this.wednesdaySuggest();
-  }
-
-  wednesdaySuggest() {
-    this.#coaches.forEach((coach) => {
-      coach.suggestMenu(this.#foodCategory[2]);
-    });
-    return this.thursdaySuggest();
-  }
-
-  thursdaySuggest() {
-    this.#coaches.forEach((coach) => {
-      coach.suggestMenu(this.#foodCategory[3]);
-    });
-    return this.fridaySuggest();
-  }
-
-  fridaySuggest() {
-    this.#coaches.forEach((coach) => {
-      coach.suggestMenu(this.#foodCategory[4]);
-    });
+    if (coachLength < this.#coaches.length - 1) return this.suggestMenu(coachLength + 1);
     return this.printResult();
   }
 

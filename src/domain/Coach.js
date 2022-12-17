@@ -36,15 +36,15 @@ class Coach {
   suggestMenu(category) {
     const addCheck = this.#eatenFoods.length;
     while (addCheck === this.#eatenFoods.length) {
-      const menu = getSuggestMenu(category);
-      if (this.#unableEatList.includes(menu)) continue;
+      let menu = getSuggestMenu(category);
       if (verify.eatenTwice(this.#eatenFoods, menu)) continue;
+      if (this.#unableEatList.includes(menu)) menu = '';
       this.#eatenFoods.push(menu);
     }
   }
 
   getResultData() {
-    return this.#eatenFoods.join(' | ');
+    return `${this.#name} | ${this.#eatenFoods.join(' | ')}`;
   }
 }
 
