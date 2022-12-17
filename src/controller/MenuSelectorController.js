@@ -39,10 +39,10 @@ class MenuSelectorController {
   }
 
   #readDislikeMenuPhase(name) {
-    InputView.readDislikeMenu(name, this.#registerDislikeMenuPhase.bind(this));
+    InputView.readDislikeMenu(name, this.#validateDislikeMenuPhase.bind(this));
   }
 
-  #registerDislikeMenuPhase(menu) {
+  #validateDislikeMenuPhase(menu) {
     try {
       Validator.checkDislikeMenu(menu);
     } catch (error) {
@@ -51,6 +51,10 @@ class MenuSelectorController {
         this.#menuSelector.getCoachs()[this.personNumber].getName()
       );
     }
+    this.#registerDislikeMenuPhase(menu);
+  }
+
+  #registerDislikeMenuPhase(menu) {
     this.#tempDislikeMenu.push(menu);
     this.personNumber += 1;
     if (this.personNumber !== this.#menuSelector.getCoachs().length) {
