@@ -1,6 +1,11 @@
 MenuServiceView = class {
-  constructor(outputView) {
+  constructor(inputView, outputView) {
+    this.inputView = inputView;
     this.outputView = outputView;
+  }
+
+  readCoachName(callback) {
+    this.inputView.readCoachName(callback);
   }
 
   printStartMessage() {
