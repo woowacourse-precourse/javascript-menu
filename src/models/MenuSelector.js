@@ -71,6 +71,12 @@ class MenuSelector {
     return this.#coachs;
   }
 
+  selectCategory() {
+    const category = CATEGORY_NUMBER[CategoryRandomNumberGenerator.generate()];
+
+    return category;
+  }
+
   selectMenu(category) {
     const menu =
       categories[category][
