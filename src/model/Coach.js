@@ -6,6 +6,7 @@ class Coach {
   setNames(input) {
     this.#coaches = input.split(SPLITTER).map((name) => ({
       name,
+      recommendedMenu: [],
     }));
 
     return this.#coaches;
@@ -16,6 +17,13 @@ class Coach {
     this.#coaches.find(({ name }) => name === coachName).inedibleMenu = inedibleMenu;
 
     return this.#coaches;
+  }
+
+  decideMenu(recommendMenu, category, shuffle) {
+    this.#coaches.forEach((coach) => {
+      const recommendedMenu = recommendMenu(category, shuffle);
+      coach.recommendedMenu.push(recommendedMenu);
+    });
   }
 }
 

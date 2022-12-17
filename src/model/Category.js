@@ -1,13 +1,13 @@
 const { FOOD, DAYS, MAX_SAME_CATEGORY_RECOMMENDATION } = require('../settings');
 
-const CATEGORYS = Object.keys(FOOD);
+const CATEGORIES = Object.keys(FOOD);
 
 class Category {
-  #categorys = [];
+  #categories = [];
 
   static getRandomNumber(pickNumberInRange) {
     const MIN_NUMBER = 1;
-    const MAX_NUMBER = CATEGORYS.length;
+    const MAX_NUMBER = CATEGORIES.length;
 
     return pickNumberInRange(MIN_NUMBER, MAX_NUMBER);
   }
@@ -15,23 +15,23 @@ class Category {
   static recommendOneDay(pickNumberInRange) {
     const randomNumber = Category.getRandomNumber(pickNumberInRange);
 
-    return CATEGORYS[randomNumber - 1];
+    return CATEGORIES[randomNumber - 1];
   }
 
   recommendAllDays(pickNumberInRange) {
-    while (this.#categorys.length < DAYS.length) {
+    while (this.#categories.length < DAYS.length) {
       const recommendedCategory = Category.recommendOneDay(pickNumberInRange);
-      const sameCategorysRecommended = this.#categorys.filter(
+      const sameCategorysRecommended = this.#categories.filter(
         (category) => category === recommendedCategory,
       );
       const IsRecommendable = sameCategorysRecommended.length < MAX_SAME_CATEGORY_RECOMMENDATION;
 
       if (IsRecommendable) {
-        this.#categorys.push(recommendedCategory);
+        this.#categories.push(recommendedCategory);
       }
     }
 
-    return this.#categorys;
+    return this.#categories;
   }
 }
 
