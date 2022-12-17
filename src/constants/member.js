@@ -3,6 +3,7 @@ const MEMBER = Object.freeze({
   maxCount: 5,
   minNameLength: 2,
   maxNameLength: 4,
+  maxUnableToEatMenuLength: 2,
 });
 
 module.exports = {
