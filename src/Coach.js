@@ -6,6 +6,10 @@ class Coach {
     this.#name = name;
   }
 
+  getName() {
+    return this.#name;
+  }
+
   setPickyFoods(foods) {
     this.#pickyFoods = foods;
   }

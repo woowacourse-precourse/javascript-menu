@@ -4,7 +4,7 @@ const { print } = require("./OutputView");
 const {
   validateCoachNumber,
   validateNameLength,
-  validatePickyFood,
+  validatePickyFoods,
 } = require("./Validation");
 
 const SAMPLE = {
@@ -28,6 +28,7 @@ class App {
     try {
       validateCoachNumber(names);
       this.makeEachCoachField(names);
+      askPickyFoods();
     } catch (e) {
       print(e);
       this.getCoachName();
@@ -46,17 +47,25 @@ class App {
     });
   }
 
-  getPickyFoods(name) {
-    readCoachPickyFoods(name, actWithPickyFood.bind(this));
+  askPickyFoods() {
+    this.#coaches.forEach((coach) => {
+      const name = coach.getName();
+      this.getPickyFoods(name);
+    });
   }
 
-  actWithPickyFoods(name, foods) {
+  getPickyFoods(coach) {
+    readCoachPickyFoods(coach, actWithPickyFood.bind(this));
+  }
+
+  actWithPickyFoods(coach, foods) {
     const pikcyFoods = foods.split(",");
     try {
       validatePickyFoods(pikcyFoods);
+      coach.setPickyFoods(pikcyFoods);
     } catch (e) {
       print(e);
-      this.getPickFoods(name);
+      this.getPickFoods(coach);
     }
   }
 
