@@ -2,19 +2,18 @@ const { Random } = require('@woowacourse/mission-utils');
 const { MenuMap } = require('./MenuMap');
 
 class RecommandMenu {
-  #menu = MenuMap;
-  constructor() {}
+  constructor() {
+    this.menu = MenuMap;
+  }
 
   pickCategory() {
     const index = Random.pickNumberInRange(1, 5) - 1;
-    return [...this.#menu.keys()][index];
+    return [...this.menu.keys()][index];
   }
 
-  choiceComplete(category, hateFood) {
-    let menu = this.#menu.get(category).split(', ');
-    let shuffledMenu = Random.shuffle(menu);
-    let exceptHateFoodMenu = shuffledMenu.filter((food) => !hateFood.includes(food));
-    return exceptHateFoodMenu;
+  createRandomMenu(category) {
+    const recommandMenu = this.shuffleMenu(this.convertArray(this.menu.get(category)));
+    return recommandMenu;
   }
 
   convertArray(ovject) {
@@ -27,6 +26,10 @@ class RecommandMenu {
 
   exceptHateFoodOfMenu(menu, hateFood) {
     return menu.filter((food) => !hateFood.includes(food));
+  }
+
+  getMenuOfCategory(category) {
+    return this.convertArray([...this.menu.get(category)]);
   }
 }
 
