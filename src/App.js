@@ -9,6 +9,14 @@ const SAMPLE = {
   양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
 };
 
+const categoryKey = {
+  1: "일식",
+  2: "한식",
+  3: "중식",
+  4: "아시안",
+  5: "양식",
+};
+
 const getCategories = (categories) => {
   while (true) {
     const curCategory = Random.pickNumberInRange(1, 5);
@@ -27,9 +35,16 @@ class App {
   #categories; // 요일별로 카테고리를 저장하는 배열. 0,1,2,3,4 -> 월화수목금 으로 보면 된다.
 
   play() {
-    this.#coaches = [];
+    this.#coaches = new Map();
     this.#categories = [];
     Console.print("점심 메뉴 추천을 시작합니다.");
+
+    for (let i = 0; i < 5; i++) {
+      const curNum = getCategories(this.#categories);
+      this.#categories.push(curNum);
+    }
+
+    console.log(this.#categories);
 
     this.getCoachesName();
   }
@@ -38,14 +53,12 @@ class App {
     Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", (input) => {
       const coaches = input.split(",");
       console.log(input);
-      // 여기서 한번 검사할 것. 검사 완료되면 그 이후 계속해서 감.
+      // 여기서 한번 검사할 것. 검사 완료되면 그 이후 계속해서 감. 2-4글자, 중복 안됨.
       for (const coach of coaches) {
-        const coachObj = {
-          name: coach,
+        this.#coaches.set(coach, {
           menus: [],
           canNotEat: [],
-        };
-        this.#coaches = [...this.#coaches, coachObj];
+        });
       }
 
       this.askNotEatMenu(0);
@@ -53,30 +66,51 @@ class App {
   }
 
   askNotEatMenu(i) {
-    if (i === this.#coaches.length) {
+    if (i === this.#coaches.size) {
       this.getResult();
       return;
     }
-    const coach = this.#coaches[i];
-
+    const [name, attrs] = [...this.#coaches][i];
     Console.readLine(
-      `${coach.name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
+      `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
       (input) => {
-        const notEat = input.split(","); // 여기도 한번 검증 해야함.
-        this.#coaches = this.#coaches.map((c, idx) =>
-          idx === i ? { ...c, canNotEat: notEat } : c,
-        );
+        const notEat = input.split(","); // 여기도 한번 검증 해야함. 여기서 SAMPLEDATA에 있지 않는 음식이라면 다시 입력하라고 해줘야 함.
+        this.#coaches.set(name, { ...attrs, canNotEat: notEat });
         this.askNotEatMenu(i + 1);
       },
     );
   }
 
   getResult() {
-    for (let i = 0; i < 5; i++) {
-      const curNum = getCategories(this.#categories);
-      this.#categories.push(curNum);
-    }
+    // const menu = Random.shuffle(menus)[0];
     console.log(this.#coaches, "코치들 못먹는 음식");
+    for (let i = 0; i < 5; i++) {
+      // 각 요일별 메뉴 선정
+      const category = this.#categories[i];
+      const menus = SAMPLE[categoryKey[category]]
+        .split(", ")
+        .map((menu) => menu.trim());
+
+      for (const [name, attrs] of this.#coaches) {
+        const canMenu = menus.filter((menu) => !attrs.canNotEat.includes(menu));
+        const numMenus = Array.from(
+          { length: canMenu.length },
+          (_, idx) => idx,
+        );
+        console.log(canMenu, numMenus);
+        while (true) {
+          const menuIdx = Random.shuffle(numMenus)[0]; // 이제 같은 음식이 안나오게끔 해야 함.
+          console.log(canMenu[menuIdx], attrs, "가능한 음식");
+          if (attrs.menus.includes(canMenu[menuIdx])) continue;
+          this.#coaches.set(name, {
+            ...attrs,
+            menus: [...attrs.menus, canMenu[menuIdx]],
+          });
+          break; // 겹치는 음식이 없게끔 설정
+        }
+      }
+    }
+    console.log(this.#coaches);
   }
 }
 
