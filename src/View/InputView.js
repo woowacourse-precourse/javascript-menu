@@ -13,10 +13,11 @@ const InputView = {
 
   readPickyMenu(name, callback) {
     MissionUtils.Console.readLine(
-      name + "(이)가 못 먹는 메뉴를 입력해 주세요.\n",
+      "\n" + name + "(이)가 못 먹는 메뉴를 입력해 주세요.\n",
       (input) => {
-        const menuArray = input.split(",");
-        callback(menuArray);
+        let menuArray = input.split(",");
+        if (menuArray[0] == "") menuArray = [];
+        callback(name, menuArray);
       }
     );
   },
