@@ -21,9 +21,26 @@ class Coach {
 
   decideMenu(recommendMenu, category, shuffle) {
     this.#coaches.forEach((coach) => {
-      const recommendedMenu = recommendMenu(category, shuffle);
+      let recommendedMenu = recommendMenu(category, shuffle);
+      let isToExcluded = Coach.judgeIsMenuToExcluded(coach, recommendedMenu);
+
+      while (isToExcluded) {
+        recommendedMenu = recommendMenu(category, shuffle);
+        isToExcluded = Coach.judgeIsMenuToExcluded(coach, recommendedMenu);
+      }
+
       coach.recommendedMenu.push(recommendedMenu);
     });
+
+    return this.#coaches;
+  }
+
+  static judgeIsMenuToExcluded(coach, recommendedMenu) {
+    const isInedibleMenu = coach.inedibleMenu.includes(recommendedMenu);
+    const isAlreadyRecommended = coach.recommendedMenu.includes(recommendedMenu);
+
+    const isToExcluded = isInedibleMenu || isAlreadyRecommended;
+    return isToExcluded;
   }
 }
 
