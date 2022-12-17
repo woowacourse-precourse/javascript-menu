@@ -24,10 +24,15 @@ function printCategories() {
   Console.print(Categories)
 }
 
+function pushCategory(category) {
+  const categoryCnt = Categories.filter(element => element === category).length
+  if(categoryCnt < 2) Categories.push(category)
+}
+
 function chooseCategory() {
   while(Categories.length < 5) {
     const category = CATEGORIES.get(Random.pickNumberInRange(1, 5))
-    Categories.push(category)
+    pushCategory(category)
   }
   return printCategories()
 }
