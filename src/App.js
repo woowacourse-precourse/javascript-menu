@@ -18,6 +18,7 @@ class App {
     this.index = 0;
     this.foodList = [];
     this.category = [];
+    this.selectedCategory = [];
   }
 
   play() {
@@ -77,6 +78,17 @@ class App {
       this.category.push(category);
     }
     console.log(this.category);
+    this.getCategoryMenu();
+  }
+
+  getCategoryMenu() {
+    const MenuCategory = Object.keys(SAMPLE);
+    for (let index = 0; index < this.category.length; index++) {
+      const categoryNumber = this.category[index];
+      const selectedCategory = MenuCategory[categoryNumber - 1];
+      this.selectedCategory.push(selectedCategory);
+    }
+    console.log(this.selectedCategory);
   }
 }
 
