@@ -81,6 +81,7 @@ class App {
       checkMenu(menus);
     } catch (error) {
       Console.print(error);
+      this.step -= 1;
       this.moveName();
     }
   }
