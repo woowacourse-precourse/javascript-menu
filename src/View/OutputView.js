@@ -12,13 +12,13 @@ const OutputView = {
     const coaches = menuService.getCoaches();
 
     MissionUtils.Console.print("\n메뉴 추천 결과입니다.");
-    MissionUtils.Console.print("\n[ 구분 | " + DAY_OF_WEEK.join(" | ") + " ]");
+    MissionUtils.Console.print("[ 구분 | " + DAY_OF_WEEK.join(" | ") + " ]");
     MissionUtils.Console.print(
-      "\n[ 카테고리 | " + categoryName.join(" | ") + " ]"
+      "[ 카테고리 | " + categoryName.join(" | ") + " ]"
     );
     coaches.forEach((coach) => {
       MissionUtils.Console.print(
-        "\n[ " +
+        "[ " +
           coach.getName() +
           " | " +
           coach.getMenuOfWeek().join(" | ") +
