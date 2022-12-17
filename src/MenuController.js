@@ -16,7 +16,7 @@ class MenuController {
     this.#coachs = [];
     this.#categories = [];
   }
-  startRecommend() {
+  startRecommendService() {
     OutputView.printStartMessage();
     InputView.readCoachsName(this.getCoachsName.bind(this));
   }
