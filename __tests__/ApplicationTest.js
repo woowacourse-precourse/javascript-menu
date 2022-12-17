@@ -52,7 +52,6 @@ describe('점심 메뉴 테스트', () => {
     test('카테고리 메뉴 중복 없는 추천', () => {
       const logSpy = getLogSpy();
 
-      // 이것은 카테고리 번호인가
       mockRandoms([2, 5, 1, 3, 4]);
       mockQuestions(['구구,제임스', '김밥', '떡볶이']);
 
@@ -64,7 +63,6 @@ describe('점심 메뉴 테스트', () => {
         [1, Array.from({ length: 9 }, sequenced)],
         [4, Array.from({ length: 9 }, sequenced)],
         [2, Array.from({ length: 9 }, sequenced)],
-        // 메뉴 번호인데
 
         //제임스
         [9, Array.from({ length: 9 }, sequenced)],

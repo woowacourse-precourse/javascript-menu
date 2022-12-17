@@ -27,15 +27,15 @@ class Category {
 
   // 카테고리 선택
   static pickCategory() {
-    let count = 0;
+    let pickCount = 0;
 
-    while (count < 5) {
+    while (pickCount < 5) {
       const number = this.generateRandom(); // 1 ~ 5
       const hasTwoCategory = this.hasTwoCategory(number) || 0;
 
       if (!hasTwoCategory) {
         this.categories.push(number);
-        count++;
+        pickCount += 1;
       }
     }
   }

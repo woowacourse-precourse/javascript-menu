@@ -41,10 +41,6 @@ class Coach {
     this.#coaches.set(name, foodSet);
   }
 
-  // static showCoach() {
-  //   console.log(this.#coaches);
-  // }
-
   static people() {
     return this.#coaches;
   }
