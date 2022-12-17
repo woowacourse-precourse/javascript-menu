@@ -22,6 +22,13 @@ class Coach {
     console.log(this.#disabledFoods)
   }
 
+  getDayFood() {
+    return this.#dayFood;
+  }
+  setDayFood(food) {
+    this.#dayFood.push(food)
+  }
+
 }
 
 module.exports = Coach;

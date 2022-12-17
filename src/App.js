@@ -65,11 +65,32 @@ class App {
 	}
 
 	recommend() {
-		for (let i = 0; i < 5; i++) {
+		// 월화수목금
+		for (let day = 0; day < 5; day++) {
+			// 카테고리
 			const categoryOfDay = CATEGORIES_MAP[Random.pickNumberInRange(1, 5)]
-			this.#categoriesOfWeek.push(categoryOfDay)
+			this.#categoriesOfWeek.push(categoryOfDay);
+
+			// 메뉴
+			const menus = SAMPLE[categoryOfDay].split(",")
+			const menusIndex = []
+
+			for (let i = 0; i < menus.length; i++) {
+				menusIndex.push(i);
+			}
+
+			this.#coaches.map((coach) => {
+				// console.log(menus[Random.shuffle(menusIndex)[0]])
+
+				coach.setDayFood(menus[Random.shuffle(menusIndex)[0]])
+			})
+			
+			
+
 		}
-		OutputView.result(this.#categoriesOfWeek)
+		OutputView.result(this.#categoriesOfWeek, this.#coaches);
+		OutputView.food(this.#coaches[0].getName(), this.#coaches[0].getDayFood().join(" | "))
+
 	}
 
 
