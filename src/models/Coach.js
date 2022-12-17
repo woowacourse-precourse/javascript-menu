@@ -6,7 +6,6 @@ class Coach {
 
   constructor(inputNames) {
     const names = inputNames;
-    console.log(names);
   }
 }
 

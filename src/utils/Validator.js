@@ -13,8 +13,14 @@ const Validator = {
     }
   },
 
-  checkTypeOfArray(array) {
-    if (!Array.isArray(array)) {
+  checkNameLength(name) {
+    if (name.length < 2 || name > 4) {
+      throw new Error(MESSAGE_ERROR.VALUE);
+    }
+  },
+
+  checkHeadCount(heads) {
+    if (heads.length < 2 || heads.length > 5) {
       throw new Error(MESSAGE_ERROR.VALUE);
     }
   },
