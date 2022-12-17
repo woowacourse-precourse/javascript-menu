@@ -37,6 +37,18 @@ class MenuController {
   #onInputCoachesName(names) {
     const coaches = names.replace(REGEX.SPACE, '').split(',');
     this.#menuService.addCoaches(coaches);
+
+    this.#inputNonEdibleMenus();
+  }
+
+  #inputNonEdibleMenus() {
+    const coaches = this.#menuService.getCoachesName();
+
+    InputView.askNonEdibleMenus(coaches, this.#validateNonEdibleMenus.bind(this));
+  }
+
+  #validateNonEdibleMenus(menus) {
+    console.log(menus);
   }
 }
 
