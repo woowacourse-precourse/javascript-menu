@@ -1,7 +1,7 @@
 const OutputView = require('../views/OutputView');
 const Validator = require('./Validator');
 
-const CoachNameChecker = {
+const CoachNamesChecker = {
   checkInput(names) {
     try {
       this.validateInput(names);
@@ -32,7 +32,8 @@ const CoachNameChecker = {
   validate(names) {
     names.forEach(coach => Validator.checkNameLength(coach));
     Validator.checkHeadCount(names);
+    Validator.checkDuplicateName(names);
   },
 };
 
-module.exports = CoachNameChecker;
+module.exports = CoachNamesChecker;

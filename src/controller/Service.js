@@ -1,6 +1,6 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
-const CoachNamesChecker = require('../utils/CoachNameChecker');
+const CoachNamesChecker = require('../utils/CoachNamesChecker');
 const Coach = require('../models/Coach');
 
 class Service {
@@ -21,7 +21,13 @@ class Service {
       this.start();
       return;
     }
+
     this.#instance.coach = new Coach(names);
+
+    if (!CoachNamesChecker.check(this.#instance.coach.get().names)) {
+      this.start();
+      return;
+    }
 
     this.#enterHateMenus();
   }

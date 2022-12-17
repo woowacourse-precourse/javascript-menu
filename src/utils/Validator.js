@@ -24,6 +24,15 @@ const Validator = {
       throw new Error(MESSAGE_ERROR.VALUE);
     }
   },
+
+  checkDuplicateName(names) {
+    const set = new Set(names);
+    const newNames = [...set];
+
+    if (names.length !== newNames.length) {
+      throw new Error(MESSAGE_ERROR.VALUE);
+    }
+  },
 };
 
 module.exports = Validator;
