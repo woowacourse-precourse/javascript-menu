@@ -32,6 +32,7 @@ const GAME_NUMBER = Object.freeze({
   maxName: 4,
   minMenu: 0,
   maxMenu: 2,
+  maxMenuLength: 10,
 });
 
 const GAME_MESSAGE = Object.freeze({
@@ -48,8 +49,11 @@ const ERROR_SUBJECT = '[ERROR]';
 
 const ERROR_MESSAGE = Object.freeze({
   nameRange: `${ERROR_SUBJECT} 코치의 이름은 ${GAME_NUMBER.minName} 글자 이상 ${GAME_NUMBER.maxName} 글자 이하만 입력이 가능합니다.`,
+  nameOverlap: `${ERROR_SUBJECT} 코치들의 이름 중 중복된 이름이 있습니다.`,
   coachRange: `${ERROR_SUBJECT} 코치는 ${GAME_NUMBER.minCoach} 명 이상 ${GAME_NUMBER.maxCoach} 명 이하만 입력이 가능합니다.`,
   menuRange: `${ERROR_SUBJECT} 못 먹는 메뉴는 ${GAME_NUMBER.minMenu} 개 이상 ${GAME_NUMBER.maxMenu} 개 이하만 입력이 가능합니다.`,
+  menuNotKorean: `${ERROR_SUBJECT} 못 먹는 메뉴는 한글만 입력이 가능합니다.`,
+  menuLength: `${ERROR_SUBJECT} 못 먹는 메뉴는 ${GAME_NUMBER.maxMenuLength} 글자 이하만 입력이 가능합니다.`,
 });
 
 module.exports = {

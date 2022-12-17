@@ -5,6 +5,7 @@ const Validation = {
   coachAndName(names) {
     const nameArray = SplitAndTrim(names);
     Validation.coach(nameArray);
+    Validation.nameOverlap(nameArray);
     nameArray.forEach((coachName) => {
       Validation.nameRange(coachName);
     });
@@ -17,6 +18,12 @@ const Validation = {
       throw new Error(ERROR_MESSAGE.nameRange);
     }
   },
+  nameOverlap(nameArray) {
+    const set = new Set(nameArray);
+    if (nameArray.length !== set.size) {
+      throw new Error(ERROR_MESSAGE.nameOverlap);
+    }
+  },
   coach(coaches) {
     if (
       coaches.length < GAME_NUMBER.minCoach ||
@@ -27,11 +34,29 @@ const Validation = {
   },
   menu(menus) {
     const menuArray = SplitAndTrim(menus);
+    Validation.menuRange(menuArray);
+    menuArray.forEach((menu) => {
+      Validation.menuNotKorean(menu);
+      Validation.menuLength(menu);
+    });
+  },
+  menuRange(menuArray) {
     if (
       menuArray.length < GAME_NUMBER.minMenu ||
       menuArray.length > GAME_NUMBER.maxMenu
     ) {
       throw new Error(ERROR_MESSAGE.menuRange);
+    }
+  },
+  menuNotKorean(menu) {
+    const regExp = /[ㄱ-ㅎㅏ-ㅣ가-힣]/g;
+    if (!regExp.test(menu)) {
+      throw new Error(ERROR_MESSAGE.menuNotKorean);
+    }
+  },
+  menuLength(menu) {
+    if (menu.length > GAME_NUMBER.maxMenuLength) {
+      throw new Error(ERROR_MESSAGE.menuLength);
     }
   },
 };

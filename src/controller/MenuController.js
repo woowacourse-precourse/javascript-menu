@@ -9,7 +9,6 @@ class MenuController {
   #randomMenu = new RandomMenu();
 
   start() {
-    this.#randomMenu.checkCategory();
     printStart();
     this.#randomMenu.setCategoryDays();
     readCoachesName(this.checkCoachesName.bind(this));
@@ -18,7 +17,6 @@ class MenuController {
   checkCoachesName(names) {
     const startNumber = 0;
     this.#coachData = new CoachData(names);
-    this.#coachData.checkCoach();
     this.checkDontLikeMenu(startNumber);
   }
 
