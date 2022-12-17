@@ -11,6 +11,7 @@ class Coach {
 
   checkMenu(menu) {
     if (this.hateMenu.includes(menu)) return false;
+    if (this.recommendedMenu.includes(menu)) return false;
     return true;
   }
 }
