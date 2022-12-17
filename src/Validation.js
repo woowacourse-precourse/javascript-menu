@@ -14,16 +14,26 @@ const Validation = {
   },
 
   validateCoachNumber(coaches) {
-    if (Validation.isCoachesTwoToFive(coaches)) {
+    if (Validation.isCoachesInRange(coaches)) {
       throw new Error(ERROR_MESSAGE.notValidCoachNumber);
     }
   },
 
-  isCoachesTwoToFive(coaches) {
+  isCoachesInRange(coaches) {
     return (
       coaches.length >= NUMBER.minCoachNumber &&
       coaches.length <= NUMBER.maxCoachNumber
     );
+  },
+
+  validatePickyFood(foods) {
+    if (Validation.isFoodNumberInRange(foods)) {
+      throw new Error(ERROR_MESSAGE.notValidPickyFoodNumber);
+    }
+  },
+
+  isFoodNumberInRange(foods) {
+    return foods.length <= 2;
   },
 };
 
