@@ -41,6 +41,16 @@ const ExceptionController = {
         }
         return true;
     },
+
+    checkFoods(foods) {
+        try {
+            if(foods.split(',').length < 1 || foods.split(',').length > 2) throw '[ERROR] 못먹는 음식은 최소 0개, 최대 2개여야 합니다.';
+        } catch(e) {
+            OutputView.printException(e);
+            return false;
+        }
+        return true;
+    },
 };
 
 module.exports = ExceptionController;
