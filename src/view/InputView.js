@@ -14,6 +14,11 @@ const InputView = {
       if (check) return callback(names);
     });
   },
+  readDontLikeMenu(name, callback) {
+    Console.readLine(GAME_MESSAGE.showDontLikeMenu(name), (menus) => {
+      return callback(menus);
+    });
+  },
 };
 
 module.exports = InputView;
