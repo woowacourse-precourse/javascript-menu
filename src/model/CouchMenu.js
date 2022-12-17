@@ -46,6 +46,23 @@ class CouchMenu {
     }
   }
 
+  updateMenu(category) {
+    const categoryMenus = this.#filterCategory(category);
+    const splitedMenus = MENU_LIST[categoryMenus].split(", ");
+    const menuNumArr = Array.from({ length: 9 }, (_, idx) => idx + 1);
+    while (1) {
+      const idx = getRandomMenu(menuNumArr)[0];
+      const curMenu = splitedMenus[idx];
+      if (
+        this.#menuList.includes(curMenu) ||
+        this.#notWantMenu.includes(curMenu)
+      )
+        continue;
+      this.#menuList.push(curMenu);
+      break;
+    }
+  }
+
   getNotWantMenu() {
     return this.#notWantMenu;
   }
