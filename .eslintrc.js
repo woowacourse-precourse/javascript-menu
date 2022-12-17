@@ -7,7 +7,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2022,
   },
-  extends: ['airbnb', 'plugin:jsdoc/recommended'],
+  extends: ['airbnb-base', 'plugin:jsdoc/recommended'],
   rules: {
     'linebreak-style': ['error', 'windows'],
     'no-process-exit': 'error',
