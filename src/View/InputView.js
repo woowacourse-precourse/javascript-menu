@@ -28,7 +28,9 @@ const InputView = {
       coachNames.length < INPUT.MIN_COACH_COUNT ||
       coachNames.length > INPUT.MAX_COACH_COUNT
     ) {
-      throw new Error('코치는 최소 2명부터 최대 5명 입력 가능합니다.');
+      throw new Error(
+        `코치는 최소 ${INPUT.MIN_COACH_COUNT}명부터 최대 ${INPUT.MAX_COACH_COUNT}명 입력 가능합니다.`,
+      );
     }
   },
 
@@ -37,7 +39,9 @@ const InputView = {
       coachName.length < INPUT.MIN_COACH_NAME ||
       coachName.length > INPUT.MAX_COACH_NAME
     ) {
-      throw new Error('코치 이름은 2글자부터 4글자까지 입력 가능합니다.');
+      throw new Error(
+        `코치 이름은 ${INPUT.MIN_COACH_NAME}글자부터 ${INPUT.MAX_COACH_NAME}글자까지 입력 가능합니다.`,
+      );
     }
   },
 
@@ -52,7 +56,9 @@ const InputView = {
 
   validateHateMenus(hateMenus) {
     if (hateMenus.length > INPUT.MAX_HATE_MENU) {
-      throw new Error('최대 2개의 못 먹는 메뉴를 선택할 수 있습니다.');
+      throw new Error(
+        `최대 ${INPUT.MAX_HATE_MENU}개의 못 먹는 메뉴를 선택할 수 있습니다.`,
+      );
     }
 
     if (new Set(hateMenus).size !== hateMenus.length) {
