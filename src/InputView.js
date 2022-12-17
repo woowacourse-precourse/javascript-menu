@@ -16,9 +16,10 @@ const InputView = {
   readHateFood(name, callback) {
     MissionUtils.Console.readLine(
       `${name}${MESSAGE.HATES_FOOD}`,
-      (foodList) => {
-        callback(foodList);
-      },
+      Validator.hateFood(callback, {
+        onError: this.readHateFood.bind(this, name),
+      }),
+
     );
   },
 };
