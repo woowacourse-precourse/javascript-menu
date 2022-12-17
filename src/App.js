@@ -41,7 +41,37 @@ class App {
     throw new Error(Message.ERROR_TOO_MANY);
   }
 
-  play() {}
+  play() {
+    try {
+      this.#play();
+    } catch (error) {
+      OutputView.printError(error);
+    }
+  }
+
+  #play() {
+    const names = this.#setup();
+    const categories = this.#coaches.selectCategories(AppConfig.DAYS);
+    OutputView.printResultHeader(categories);
+    names.forEach((name) => {
+      const selectedMenus = this.#coaches.getMenu(name, SAMPLE);
+      OutputView.printResultMenu(name, selectedMenus);
+    });
+    OutputView.printFinished();
+  }
+
+  #setup() {
+    this.#coaches = new CoachList();
+
+    OutputView.printStart();
+    const coachNames = App.#fetchNames();
+
+    coachNames.forEach((name) => {
+      this.#coaches.add(name, App.#fetchCannotEatMenus(name));
+    });
+
+    return coachNames;
+  }
 }
 
 module.exports = App;
