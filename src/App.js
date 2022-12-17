@@ -30,19 +30,22 @@ class App {
     const dislikeMenu = menu.split(',');
     validateDislikeMenu(dislikeMenu);
     this.getMenuRecommendation(dislikeMenu);
+  }
 
-    this.#index++;
-    if (this.#index === this.coach.length) {
-      this.getResult();
-      return;
-    }
-    InputView.readDislikeMenu(this.coach[this.#index], this.getDislikeMenuInput.bind(this));
+  isEnd() {
+    return this.#index === this.coach.length;
   }
 
   getMenuRecommendation(dislikeMenu) {
     const menuMaker = new MenuMaker(this.category, dislikeMenu);
     const weekMenu = menuMaker.createMenu();
     this.recommendMenu.push(weekMenu);
+    this.#index++;
+    if (this.isEnd()) {
+      this.getResult();
+      return;
+    }
+    InputView.readDislikeMenu(this.coach[this.#index], this.getDislikeMenuInput.bind(this));
   }
 
   getResult() {
