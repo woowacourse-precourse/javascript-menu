@@ -53,6 +53,15 @@ class App {
       }
     });
   }
+
+  #showResultPhase() {
+    this.#chooseSystem.shuffleCategory();
+    this.#chooseSystem.chooseAllMenus();
+    const result = this.#chooseSystem.getResults();
+    OutputView.printResult(result);
+    OutputView.printMessage(ANNOUNCE.END);
+    OutputView.close();
+  }
 }
 
 module.exports = App;
