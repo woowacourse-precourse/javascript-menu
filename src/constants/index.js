@@ -33,9 +33,7 @@ const VALIDATION_MESSAGE = deepFreeze({
   },
   menus: {
     range: '각 코치가 먹을 수 없는 음식은 0개에서 2개 사이입니다.',
-  },
-  replay: {
-    command: '게임 재시작 또는 종료를 하기 위해서는 각각 대문자 R, Q를 입력해주셔야 합니다.',
+    exist: '입력하신 메뉴들 중 존재하지 않는 메뉴가 있습니다.',
   },
 });
 

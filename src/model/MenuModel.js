@@ -47,7 +47,17 @@ class MenuModel extends GameModel {
   makeDailyRecommendedMenus(dailyRecommendedCategory) {
     // 1. 각 유저의 음식들 만들기 -> dailyRecommendedCategory.map
     // 2.
-    // const userMenus =
+
+    const initRecommendedMenus = [Array(this.#coachesList.length)].fill(Array(5));
+    this.#dailyRecommendedMenus = initRecommendedMenus.map((coachMenus, day) => {
+      // day ->
+      const coachRecommendedMenus = coachMenus.map(() => {
+        // const
+        while (true) {
+          const menu = Random.shuffle(menus)[0];
+        }
+      });
+    }, []);
   }
 }
 

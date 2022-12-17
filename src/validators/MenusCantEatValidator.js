@@ -1,14 +1,11 @@
-const { VALIDATION_MESSAGE } = require('../constants');
+const { VALIDATION_MESSAGE, MENUS } = require('../constants');
 const { GameError } = require('../errors');
-
-// 각 코치가 못 먹는 음식은 0~2개 이며,
-// 해당 경계에 포함되지 않는 케이스가 있다면 에러 throw
-// TODO: 음식 메뉴에 존재하지 않는 메뉴를 입력 시 에러 throw
 
 class MenusCantEatValidator {
   static validateList(menus) {
     const validations = {
       range: MenusCantEatValidator.#isRangeValid,
+      exist: MenusCantEatValidator.#isExist,
     };
 
     Object.entries(validations).forEach(([key, validateFunc]) => {
@@ -24,6 +21,15 @@ class MenusCantEatValidator {
 
   static #isRangeValid({ length }) {
     return length >= 0 && length <= 2;
+  }
+
+  static #isExist(menus) {
+    const allMenus = Object.values(MENUS)
+      .map(menuCategory => menuCategory.split(', '))
+      .flat();
+
+    const hasNotExistMenu = menus.some(menu => !allMenus.includes(menu));
+    return !hasNotExistMenu;
   }
 }
 
