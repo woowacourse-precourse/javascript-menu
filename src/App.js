@@ -6,10 +6,7 @@ const controller = require('./GameController');
 const { GAME_TEXT } = require('./utils/constants');
 const { errorCheckFor } = require('./utils/errorCheckFor');
 const InputException = require('./utils/InputException');
-const {
-  makeRandomCategory,
-  makeRandomFoods,
-} = require('./utils/makeRandomMenu');
+const { makeRandomCategory } = require('./utils/makeRandomMenu');
 
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
