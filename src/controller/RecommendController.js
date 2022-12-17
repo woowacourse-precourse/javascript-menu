@@ -33,7 +33,7 @@ class RecommendController {
   inputCoachCantEatMenus(coachIndex) {
     InputView.inputCantEatMenu(this.#coaches[coachIndex].getName(), (menus) => {
       Validator.handleException(
-        () => null,
+        () => Validator.coachCantEatMenuValidate(menus),
         () => this.repeatCoachCantEatMenus(menus, coachIndex),
         () => this.inputCoachCantEatMenus(coachIndex),
       );

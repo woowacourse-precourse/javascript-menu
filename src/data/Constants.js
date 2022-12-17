@@ -12,9 +12,9 @@ const MESSAGE = Object.freeze({
 });
 
 const ERROR = Object.freeze({
-  COACH_NUMBER: '[ERROR] 코치는 최소 2명, 최대 5명 입력해야 합니다.\n',
-  COACH_NAME: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자 이어야 합니다.\n',
-  COACH_CANT_EAT: '[ERROR] 먹지 못하는 메뉴는 최대 2개 이어야 합니다.\n',
+  COACH_NUMBER: '[ERROR] 코치는 최소 2명, 최대 5명 입력해야 합니다.',
+  COACH_NAME: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자 이어야 합니다.',
+  COACH_CANT_EAT: '[ERROR] 먹지 못하는 메뉴는 최대 2개 이어야 합니다.',
 });
 
 module.exports = { MESSAGE, ERROR };

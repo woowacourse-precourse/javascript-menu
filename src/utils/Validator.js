@@ -27,6 +27,13 @@ class Validator {
     this.coachesNameValidate(coaches);
   }
 
+  static coachCantEatMenuValidate(menus) {
+    const cantEatMenuArr = Utils.divideString(menus);
+    if (cantEatMenuArr.length > 2) {
+      throw ERROR.COACH_CANT_EAT;
+    }
+  }
+
   static handleException(validateFunction, innerFunction, errorFunction) {
     try {
       validateFunction();
