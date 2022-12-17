@@ -19,7 +19,7 @@ const InputView = {
         if(list.length < constants.COACHNUMS.MINIMUM || list.length > constants.COACHNUMS.MAXIMUM) {
             throw `[ERROR] 코치는 최소 ${constants.COACHNUMS.MINIMUM}명, 최대 ${constants.COACHNUMS.MAXIMUM}명까지 식사를 함께합니다.`;
         }
-        list.arrayforEach(name => {
+        list.forEach(name => {
             this.invaildate_coachName(name)
         });
     },

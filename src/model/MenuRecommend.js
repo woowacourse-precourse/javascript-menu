@@ -8,12 +8,15 @@ class MenuRecommend {
     }
 
     recommendCategory() {
-        const categorys = this.#menu.keys();
-        return categorys.get(MissionUtils.Random.pickNumberInRange(0, 4));
+        const categorys = Object.keys(this.#menu);
+        return categorys[MissionUtils.Random.pickNumberInRange(1, 5)-1];
     }
     recommendFood(category) {
-        const foods = this.#menu[category];
-        return MissionUtils.Randoms.shuffle(foods)[0];
+        const obj = this.#menu[category].split(', ');
+        const foods = Object.keys(obj).map(item => obj[item]);
+        let random_food = MissionUtils.Random.shuffle(foods);
+
+        return random_food;
     }
 }
 

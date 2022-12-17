@@ -1,6 +1,6 @@
 const Category = require("../model/Category");
 
-const MenuRecommendEndController = require("./controller/MenuRecommendEndController");
+const MenuRecommendEndController = require("./MenuRecommendEndController");
 
 class MenuRecommendController {
     #menuRecommend;
@@ -14,24 +14,24 @@ class MenuRecommendController {
     }
 
     exetute() {
-        RecommendRandomCategorys();
+        this.recommendRandomCategorys();
 
         const controller = new MenuRecommendEndController(this.#categorys, this.#coachs);
         controller.exetute();
     }
 
-    RecommendRandomCategorys() {
+    recommendRandomCategorys() {
         let random_category = this.#menuRecommend.recommendCategory();
        
         while(!this.#categorys.addRecommendCategory(random_category)) {
             random_category = this.#menuRecommend.recommendCategory();
         }
-        RecommendRandomFoods(category);
+        this.recommendRandomFoods(random_category);
     }
-    RecommendRandomFoods(category) {
-        this.#coachs.array.forEach(coach => {
+    recommendRandomFoods(category) {
+        this.#coachs.forEach(coach => {
             let random_food = this.#menuRecommend.recommendFood(category);
-            while(!coach.addRecommendFood(food)) {
+            while(!coach.addRecommendFood(random_food)) {
                 random_food = this.#menuRecommend.recommendFood(category);
             }
         });

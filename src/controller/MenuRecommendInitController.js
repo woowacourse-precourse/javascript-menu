@@ -3,7 +3,7 @@ const OutputView = require("../view/OutputView");
 const MenuRecommend = require("../model/MenuRecommend");
 const Coach = require("../model/Coach");
 
-const MenuRecommendController = require("./controller/MenuRecommendController");
+const MenuRecommendController = require("./MenuRecommendController");
 
 class MenuRecommendInitController {
     #menuRecommend;
@@ -11,7 +11,6 @@ class MenuRecommendInitController {
 
     constructor(menu) {
         this.#menuRecommend = new MenuRecommend(menu);
-        this.#categorys = [];
         this.#coachs = [];
     }
 
@@ -24,15 +23,16 @@ class MenuRecommendInitController {
     }
     createCoachs(callback) {
         InputView.readCoachsName((result) => {
-            result.array.forEach(name => {
-                this.readHateFoodByName(name);
-            });
-            callback();
+            for(let i = 0; i < result.length-1; i++) {
+                this.readHateFoodByName(result[i]);
+            }
+            this.readHateFoodByName(result[result.length-1], callback);
         });
     }
-    readHateFoodByName(name) {
+    readHateFoodByName(name, callback) {
         InputView.readHateFood(name, (result) => {
-            this.#coachs.add(new Coach(name, result));
+            this.#coachs.push(new Coach(name, result));
+            if(callback != null) callback();
         });
     }
 }
