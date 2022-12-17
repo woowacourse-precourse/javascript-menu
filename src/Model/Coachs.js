@@ -19,6 +19,10 @@ class Coachs {
   isAteMenu(coachName, ateMenu) {
     return new Set(this.#coachs[coachName].ateMenu).has(ateMenu);
   }
+
+  setAteMenu(coachName, ateMenu) {
+    this.#coachs[coachName].ateMenu.push(ateMenu);
+  }
 }
 
 module.exports = Coachs;

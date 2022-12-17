@@ -54,7 +54,11 @@ class App {
 
   recommendMenu(categoryName) {
     this.coachs.getCoachName().forEach((coachName) => {
-      const ateMenu = this.getEatMenu(categoryName);
+      let ateMenu = this.getEatMenu(categoryName);
+      while (this.coachs.isAteMenu(coachName, ateMenu)) {
+        ateMenu = this.getEatMenu(categoryName);
+      }
+      this.coachs.setAteMenu(ateMenu);
     });
   }
 
