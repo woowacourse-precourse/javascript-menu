@@ -5,9 +5,9 @@ const Validator = require('./Validator');
  * 사용자로부터 입력을 받는 역할을 한다.
  */
 const InputView = {
-  reEnter(error, readMethod, callback) {
+  reEnter(error, readMethod, callback, Argument) {
     Console.print(error.message);
-    readMethod(callback);
+    readMethod(callback, Argument);
   },
 
   readName(callback) {
@@ -24,8 +24,11 @@ const InputView = {
   readDislikeFood(callback, coach) {
     Console.readLine(`\n${coach}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (food) => {
       try {
+        Validator.dislikeFood(food);
         callback(food);
-      } catch (error) {}
+      } catch (error) {
+        InputView.reEnter(error, InputView.readDislikeFood, callback, coach);
+      }
     });
   },
 };

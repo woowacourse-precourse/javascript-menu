@@ -14,6 +14,16 @@ const Validator = {
       if (wrongInput) break;
     }
   },
+
+  dislikeFood(foods) {
+    let foodsArr;
+    if (foods.includes(',')) {
+      foodsArr = foods.split(',');
+      if (!(foodsArr.length >= 0 && foodsArr.length <= 2)) {
+        throw Error('[ERROR] 못 먹는 메뉴는 최소 0개, 최대 2개여야 합니다.');
+      }
+    }
+  },
 };
 
 module.exports = Validator;
