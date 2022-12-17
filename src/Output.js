@@ -11,7 +11,7 @@ const Output = {
         Console.print(`[ 카테고리 | ${category.join(" | ")} ]`)
     },
 
-    endBody(coachName, menu) {
+    endBody([coachName, menu]) {
         menu.shift(coachName);
         const printMenu = coachMenu.join(" | ")
         Console.print(`[ ${printMenu.join(" | ")} ]`)

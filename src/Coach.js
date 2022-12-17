@@ -9,6 +9,10 @@ class Coach {
         this.#weekMenu = [];
     }
 
+    get name() {
+        return this.#name;
+    }
+
     isNotEat(foods) { //arr
         this.#notEat = foods;
     }
@@ -23,6 +27,10 @@ class Coach {
 
     menuValidate(menu) { //못먹거나 이미 있는 음식이면 false, 먹을 수 있으면 true
         return ((!this.#weekMenu.includes(menu)) && (!this.#notEat.includes(menu)))
+    }
+
+    printMenu() {
+        return [this.#name, this.#weekMenu];
     }
 
 }
