@@ -17,7 +17,8 @@ const InputView = class extends IInputView {
 
   readNames(saveNames) {
     Console.readLine(`${MESSAGE.getNames}\n`, (names) => {
-      this.#readNamesHandler(names, saveNames);
+      const namesArr = names.split(',');
+      this.#readNamesHandler(namesArr, saveNames);
     });
   }
 
@@ -35,5 +36,8 @@ const InputView = class extends IInputView {
     throw new OverrideError();
   }
 };
+
+// const a = new InputView();
+// a.readNames();
 
 module.exports = InputView;
