@@ -23,11 +23,13 @@ const Input = {
     },
 
     requestNotEat(callback) {
-        Console.readLine(MESSAGE.INPUT_NOTEAT, () => {
+        Console.readLine(MESSAGE.INPUT_NOTEAT, (foods) => {
             try {
-
+                this.NotEatValidate(foods.split(","))
+                callback(foods.split(","));
             } catch (error) {
                 Output.Error(error.message);
+                this.requestNotEat(callback);
             }
         })
     },
