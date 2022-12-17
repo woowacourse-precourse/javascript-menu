@@ -16,7 +16,7 @@ const MARK = Object.freeze({
 
 const MESSAGE = Object.freeze({
   opening: '점심 메뉴 추천을 시작합니다.',
-  getName: `코치의 이름을 입력해 주세요. (${MARK.rest} 로 구분)`,
+  getNames: `코치의 이름을 입력해 주세요. (${MARK.rest} 로 구분)`,
   cantEat: (name) => `${name}(이)가 못 먹는 메뉴를 입력해 주세요.`,
   result: '메뉴 추천 결과입니다.',
   category: '카테고리',
@@ -43,6 +43,7 @@ const CATEGORY = Object.freeze({
 
 const ERROR = Object.freeze({
   prefix: '[ERROR]',
+  nameLength: `코치의 이름은 최소 ${COACH.minNameSize}자에서 ${COACH.maxNameSize}자 사이여야 합니다.`,
 });
 
 const MENU = Object.freeze({
