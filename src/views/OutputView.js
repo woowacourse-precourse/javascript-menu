@@ -1,7 +1,7 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const OutputView = {
-  DAYS: ['월', '화', '수', '목', '금'],
+  DAYS: ['월요일', '화요일', '수요일', '목요일', '금요일'],
 
   printStart() {
     Console.print('점심 메뉴 추천을 시작합니다.');
@@ -14,6 +14,7 @@ const OutputView = {
     for (let i = 0; i < names.length; i += 1) {
       Console.print(`[ ${[names[i], ...foods[i]].join(' | ')} ]`);
     }
+    Console.print('\n추천을 완료했습니다.');
   },
 };
 
