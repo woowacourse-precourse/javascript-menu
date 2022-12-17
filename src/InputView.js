@@ -22,6 +22,7 @@ const InputView = {
   readInedibleMenus(coaches, index) {
     if (index === coaches.length) {
       this.game.setWeeklyMenu();
+      return;
     }
 
     MissionUtils.Console.readLine(CONSOLE_MESSAGE.inedibleMenuInput(coaches[index]), (input) => {

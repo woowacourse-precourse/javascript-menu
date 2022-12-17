@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const OutputView = require('./OutputView');
 const { PARAMETERS } = require('./utils/constants');
 const Validation = require('./Validation');
 
@@ -14,6 +15,8 @@ class MenuGame {
     for (let day = 0; day < PARAMETERS.dayCount; day += 1) {
       this.setDailyMenu();
     }
+
+    OutputView.printResult(this.categories, this.coaches, this.menus);
   }
 
   setDailyMenu() {
