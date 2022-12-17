@@ -4,14 +4,18 @@ const { Random } = require("@woowacourse/mission-utils");
 class Category {
   #name;
   #menus;
-
+  #numbers;
   constructor(name, menus) {
     this.#name = name;
     this.#menus = menus;
+    this.#numbers = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   }
-
+  getName() {
+    return this.#name;
+  }
   recommend() {
-    return Random.shuffle(this.#menus)[0];
+    const number = Random.shuffle(this.#numbers)[0];
+    return this.#menus[number];
   }
 }
 

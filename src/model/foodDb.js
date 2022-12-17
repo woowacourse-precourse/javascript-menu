@@ -13,8 +13,8 @@ class FoodDB {
   }
   getFood() {
     const food = {};
-    const foodKeys = Object.keys(food);
-    const foodValues = Object.values(food);
+    const foodKeys = Object.keys(rawFood);
+    const foodValues = Object.values(rawFood);
     const length = foodKeys.length;
 
     for (let i = 0; i < length; i++) {

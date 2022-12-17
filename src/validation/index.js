@@ -23,6 +23,8 @@ const validation = {
     return false;
   },
   isHatesNotIncluded(splitHates) {
+    if (splitHates.length === 1 && splitHates[0] === "") return;
+
     const foodDb = new FoodDB();
     const allMenus = foodDb.getAllMenus();
 
@@ -44,6 +46,15 @@ const validation = {
     if (this.isHatesNotIncluded(splitHates)) {
       throw new Error(error.HATE_NOT_INCLUDED_ERROR);
     }
+  },
+  isCategoryRepatedOver(category, schedule) {
+    let count = 0;
+    for (let i = 0; i < schedule.length; i++) {
+      if (category === schedule) count++;
+    }
+
+    if (count > 2) return true;
+    return false;
   },
 };
 
