@@ -22,6 +22,8 @@ class App {
     MissionUtils.Console.print(PRINT_STRING.OUTPUT_GAME_START);
   }
 
+  
+
   readCoachName(callback) {
     MissionUtils.Console.readLine(PRINT_STRING.INPUT_COACH_NAME, callback);
   }
@@ -120,7 +122,25 @@ class App {
     this.printResult();
   }
 
-  printResult() {}
+  printResult() {
+	const dayNames = ["구분", "월요일", "화요일", "수요일", "목요일", "금요일"];
+    const categories = ["카테고리", …this.categories];
+
+    MissionUtils.Console.print("메뉴 추천 결과입니다.\n");
+    MissionUtils.Console.print(`[ ${dayNames.join(" | ")} ]`);
+    MissionUtils.Console.print(`[ ${categories.join(" | ")} ]`);
+
+    for (let i = 0; i < this.#coaches.length; i++) {
+      const name = this.#coaches.getName();
+      const menus = this.#coaches.getMenus();
+      const printArray = [name, …menus];
+
+      MissionUtils.Console.print(`[ ${printArray.join(" | ")} ]`);
+    }
+    MissionUtils.Console.print("\n추천을 완료했습니다.\n");
+
+    MissionUtils.Console.close();
+  }
 
   play() {
     this.printRecommendedStart();
