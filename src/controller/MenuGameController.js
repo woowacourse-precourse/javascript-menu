@@ -15,6 +15,16 @@ class menuGameController {
     InputView.readCoachNames(names => {
       this.#menuGame.setCoaches(names);
     });
+
+    this.inputHateMenu();
+  }
+
+  inputHateMenu() {
+    Object.keys(this.#menuGame.getCoaches()).forEach(coachName => {
+      InputView.readHateMenus(menus => {
+        this.#menuGame.addCoachesHateMenus(coachName, menus.split(','));
+      }, coachName);
+    });
   }
 }
 

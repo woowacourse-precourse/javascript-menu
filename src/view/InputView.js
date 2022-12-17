@@ -12,6 +12,15 @@ const InputView = Object.freeze({
     }
   },
 
+  readHateMenus(callback, coachName) {
+    try {
+      this.getUserInput(callback, coachName + QUERY.HATE_MENU, InputValidator.hateMenu);
+    } catch (err) {
+      Console.print(err.message);
+      this.readHateMenus(callback, coachName);
+    }
+  },
+
   getUserInput(callback, query, validator) {
     Console.readLine(query, input => {
       validator(input);

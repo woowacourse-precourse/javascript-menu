@@ -12,6 +12,18 @@ class MenuGame {
       this.#coaches[name] = [];
     });
   }
+
+  getCoaches() {
+    return this.#coaches;
+  }
+
+  addCoachesHateMenus(name, menus) {
+    menus.forEach(menu => {
+      if (menu !== '') {
+        this.#coaches[name].push(menu);
+      }
+    });
+  }
 }
 
 module.exports = MenuGame;
