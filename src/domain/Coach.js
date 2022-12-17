@@ -12,14 +12,16 @@ class Coach {
     this.#bannedMenu = bannedMenu;
   }
 
-  getName() {
-    return this.#name;
-  }
-
   addMenu(menu) {
-    if (this.#menus.includes(menu) || this.#bannedMenu.includes(menu)) return false;
+    if (this.#menus.includes(menu) || this.#bannedMenu.includes(menu)) {
+      return false;
+    }
     this.#menus.push(menu);
     return true;
+  }
+
+  getName() {
+    return this.#name;
   }
 
   getMenus() {
