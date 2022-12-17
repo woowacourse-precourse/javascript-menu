@@ -16,6 +16,7 @@ class App {
 	#dayCategory;
 	#categoryRepeatCheck;
 	#menusNumber;
+	#result;
 
 	constructor(){
 		this.#coachNames=[]
@@ -24,6 +25,7 @@ class App {
 		this.#dayCategory = []
 		this.#categoryRepeatCheck = []
 		this.#menusNumber=[]
+		this.#result=[]
 	}
   play() {
 		MissionUtils.Console.print("점심 메뉴 추천을 시작합니다.\n")
@@ -68,18 +70,24 @@ class App {
 			if(number===4) this.#dayCategory.push('아시안')
 			if(number===5) this.#dayCategory.push('양식')
 		})
-		this.insertMenu()
+		for(let coach=0; coach<this.#coachNames.length;coach++) this.insertMenu(coach)
+		console.log(this.#result)
 	}
 
-	insertMenu(){
-		this.#dayCategory.map((category)=>{
-			const menus = SAMPLE[category].split(', ')
+	insertMenu(coach){
+		const array = []
+		array.push(this.#coachNames[coach])
+		for(let menuNumber=0; menuNumber<this.#dayCategory.length; menuNumber++){
+			const menus = SAMPLE[this.#dayCategory[menuNumber]].split(', ')
 			for(let number=0; number<menus.length; number++) this.#menusNumber.push(number)
 			const menu =  MissionUtils.Random.shuffle(this.#menusNumber)[0];
-			console.log(menus)
-			console.log(menus[menu])
-			console.log(menu)
-		})
+			if(array.includes(menus[menu])){
+				menuNumber--;
+				continue;
+			}
+			array.push(menus[menu])
+		}
+		this.#result.push(array);
 	}
 }
 
