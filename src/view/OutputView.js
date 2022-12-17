@@ -16,6 +16,10 @@ const OutputView = {
   printError(error) {
     print(error);
   },
+
+  quit() {
+    close();
+  },
 };
 
 module.exports = OutputView;
