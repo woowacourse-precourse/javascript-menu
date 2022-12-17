@@ -8,8 +8,8 @@ const RandomUtil = {
     },
 
     randomMenu(menus) {
-        const menu = Random.shuffle(menus)[0];
-        return menu;
+        const menu = Random.shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8])[1];
+        return menus[menu];
     }
 };
 

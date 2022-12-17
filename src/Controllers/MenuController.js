@@ -13,6 +13,7 @@ class MenuController extends MenuModel {
             const category = this.setCategory();
             this.setMenu(coaches, category);
         }
+        this.setResult();
     }
 
     setCategory() {
@@ -51,7 +52,6 @@ class MenuController extends MenuModel {
                 continue;
             }
             this.addMenu(i, menu);
-            this.setResult();
         }
     }
 
