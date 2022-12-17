@@ -8,7 +8,7 @@ class Coachs {
   }
 
   addDislikeFoods(coachName, dislikeFoods) {
-    if (dislikeFoods === '') return console.log('다 잘 먹어요!');
+    if (dislikeFoods === '') return;
 
     const coach = this.#list.filter((coach) => coach.isMe(coachName))[0];
     coach.addDislikeFoods(dislikeFoods);
@@ -20,6 +20,10 @@ class Coachs {
 
   decideMenu(categoryMenus) {
     this.#list.forEach((coach) => coach.decideMenu(categoryMenus));
+  }
+
+  getCoachsRecommendedMenu() {
+    return this.#list.map((coach) => coach.getRecommendedMenus());
   }
 }
 

@@ -69,7 +69,9 @@ class Controller {
     return this.setRecommendedMenu();
   }
 
-  printRecommendedMenu() {}
+  printRecommendedMenu() {
+    OutputView.printRecommendedMenu(this.#coachs.getCoachsRecommendedMenu());
+  }
 }
 
 module.exports = Controller;

@@ -37,6 +37,10 @@ class Coach {
     this.#recommendedMenus.push(recommendedMenu);
   }
 
+  getRecommendedMenus() {
+    return [this.#name, ...this.#recommendedMenus];
+  }
+
   static validationCoachNames(coachNames) {
     try {
       CoachNameValidator.validation(coachNames);
