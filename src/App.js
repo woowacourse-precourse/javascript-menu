@@ -1,5 +1,6 @@
 const InputView = require('./InputView');
 const MenuMachine = require('./MenuMachine');
+const { printResult } = require('./OutputView');
 const OutputView = require('./OutputView');
 const { validateReadCoachName, validateReadAllergy } = require('./Validate');
 
@@ -27,7 +28,8 @@ class App {
 
   readAllergies(input, i) {
     if (i === input.length) {
-      console.log('FINSIHED');
+      this.#menuMachine.recommendMenu();
+      printResult(this.#menuMachine.resultCategory);
       return;
     }
     InputView.readCoachesAllergies(this.onReadAllergies.bind(this), i, input);

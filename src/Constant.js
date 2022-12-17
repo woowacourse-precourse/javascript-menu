@@ -17,6 +17,10 @@ const INPUT_MSG = Object.freeze({
 const OUTPUT_MSG = Object.freeze({
   START: '점심 메뉴 추천을 시작합니다.\n',
   RESULT: '\n메뉴 추천 결과입니다.',
+  DAY: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+  CATEGORY(arr) {
+    return `[ 카테고리 | ${arr[0]} | ${arr[1]} | ${arr[2]} | ${arr[3]} | ${arr[4]} ]`;
+  },
   FINISH: '\n추천을 완료했습니다.',
 });
 
