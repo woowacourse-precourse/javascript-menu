@@ -1,4 +1,4 @@
-const { Randoms } = require("@woowacourse/mission-utils");
+const { Random } = require("@woowacourse/mission-utils");
 const CATEGORY = require("./data");
 
 const RandomMachine = {
@@ -6,15 +6,18 @@ const RandomMachine = {
   CATEGORY_END_NUMBER: 5,
 
   getMenu() {
-    const number = Randoms.pickNumberInRage(
-      RandomMachine.CATEGORY_START_NUMBER,
-      RandomMachine.CATEGORY_END_NUMBER
-    );
-    return CATEGORY[number];
+    const category =
+      CATEGORY.CATEGORY_MATCH[
+        Random.pickNumberInRage(
+          RandomMachine.CATEGORY_START_NUMBER,
+          RandomMachine.CATEGORY_END_NUMBER
+        )
+      ];
+    return category;
   },
 
   getFood(menu) {
-    return Randoms.shuffle(menu)[0];
+    return Random.shuffle(menu)[0];
   },
 };
 
