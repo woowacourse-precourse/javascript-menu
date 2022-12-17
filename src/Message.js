@@ -5,6 +5,7 @@ const START_MESSAGE = {
 const INPUT_MESSAGE = {
     INPUT_MEMBER: '코치의 이름을 입력해 주세요. (, 로 구분)',
     INPUT_NOT_EAT: '(이)가 못 먹는 메뉴를 입력해 주세요.',
+    CATEGORIE: "카테고리",
 }
 
 const OUTPUT_MESSAGE = {
@@ -13,4 +14,10 @@ const OUTPUT_MESSAGE = {
     DAY_LIST: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
 }
 
-module.exports = {START_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE};
+const ERROR_MESSAGE = {
+    COACH_RANGE: '[ERROR] 코치는 최소 2명 이상 5명이하 입력해야 합니다.',
+    NAME_RANGE: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자로 입력해야 합니다.',
+    MENU_NAME_FAULT: '[ERROR] 입력하신 메뉴는 없습니다. 정확하게 입력해주세요 (띄어쓰지말고 ,뒤에 바로 써주세요)',
+}
+
+module.exports = {START_MESSAGE, INPUT_MESSAGE, OUTPUT_MESSAGE, ERROR_MESSAGE};

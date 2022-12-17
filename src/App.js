@@ -1,5 +1,6 @@
 const { Console , Random } = require("@woowacourse/mission-utils");
 const Message = require('./Message');
+const ErrorHandler = require('./ErrorHandler');
 
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -19,66 +20,89 @@ const dayCategories = [];
 class App {
   play() {
 	Console.print(`${Message.START_MESSAGE.START}\n`);
-	this.recommandStart();
+	this.menuRecommand();
   }
 
-  recommandStart() {
+  menuRecommand() {
 	  Console.readLine(`${Message.INPUT_MESSAGE.INPUT_MEMBER}\n`, (members) => {
 		  let coachList = members.split(',');
-		  let idx = 0;
-		  this.makeNotEatList(coachList, idx);
+		  if (ErrorHandler.isNumberOfCoahOverTwo(coachList)) {
+			let idx = 0;
+			this.makeNotEatList(coachList, idx);
+		  }
 	  })
   }
 
   makeNotEatList(coachList, idx) {
-	Console.readLine(`\n${coachList[idx]}${Message.INPUT_MESSAGE.INPUT_NOT_EAT}\n`, (food) => {
-		coachNotEatObject[coachList[idx]] = food.split(',');
-		coachEatObject[coachList[idx]] = [];
-		coachNameList.push(coachList[idx]);
-
-		idx++;
-		if (idx<coachList.length) {
-			this.makeNotEatList(coachList, idx);
+	const name = coachList[idx];
+	Console.readLine(`\n${name}${Message.INPUT_MESSAGE.INPUT_NOT_EAT}\n`, (hateFood) => {
+		if(ErrorHandler.isHateMenuIsAvailable(hateFood)) {
+			coachNotEatObject[name] = hateFood.split(',');
+			coachEatObject[name] = [];
+			coachNameList.push(name);
+			idx++;
+		
+			if (idx<coachList.length) {
+				this.makeNotEatList(coachList, idx);
+			}
+			else {
+				this.makeCategory();
+				this.recommandCoachEat(coachList);
+				this.printResult(coachEatObject);
+				Console.close();
+			}
 		}
-		else {
-			for(let i=0 ; i<5 ; i++) {
-				let selected = this.makeCategory();
-				if (selected[1] >= 2) {
-					i--;
-					continue;
-				}
-				selected[1]++;
-				dayCategories.push(selected[0]);
-			} //카데고리 완성.
-
-			//음식 추천 시작.
-			dayCategories.forEach(dayCatg => {
-				for(let s=0 ; s<coachList.length ; s++) {
-					const selectedFood = this.recommandFood(dayCatg);
-					if (!coachNotEatObject[coachList[s]].includes(selectedFood) && !coachEatObject[coachList[s]].includes(selectedFood)) {
-						coachEatObject[coachList[s]].push(selectedFood);
-					}
-					else {
-						s--;
-					}
-				}
-			});
-			this.printResult(coachEatObject);
-			Console.close();
-		}
+		// coachNotEatObject[name] = hateFood.split(',');
+		// coachEatObject[name] = [];
+		// coachNameList.push(name);
+		// idx++;
+		
+		// if (idx<coachList.length) {
+		// 	this.makeNotEatList(coachList, idx);
+		// }
+		// else {
+		// 	this.makeCategory();
+		// 	this.recommandCoachEat(coachList);
+		// 	this.printResult(coachEatObject);
+		// 	Console.close();
+		// }
 	})
   }
 
   makeCategory() {
-	const select = categories[Random.pickNumberInRange(1,5)];
-	return select; 
+	for(let i=0 ; i<5 ; i++) {
+		let selected = categories[Random.pickNumberInRange(1,5)];
+		if (selected[1] >= 2) {
+			i--;
+			continue;
+		}
+		selected[1]++;
+		dayCategories.push(selected[0]);	
+	}
   }
 
-  recommandFood(dayCatg) {
+  recommandCoachEat(coachList) {
+	coachList.forEach(coachName => {
+		this.makeEatObject(coachName);
+	})
+  }
+
+  makeEatObject(coachName) {
+	for(let day=0 ; day<dayCategories.length ; day++) {
+		const selectedFood = this.pickRandomMenu(dayCategories[day]);
+		if (coachNotEatObject[coachName].includes(selectedFood) || coachEatObject[coachName].includes(selectedFood)) {
+			day--;
+			continue;
+		}
+		coachEatObject[coachName].push(selectedFood);
+	}
+  }
+
+  pickRandomMenu(dayCatg) {
 	  const menuNumber = [1,2,3,4,5,6,7,8,9];
 	  const menus = SAMPLE[dayCatg].split(', ');
 	  const menuIdx = Random.shuffle(menuNumber);
-	  return menus[menuIdx[0]-1];
+	  return menus[menuIdx[0] - 1];
   }
 
   printResult() {
@@ -99,24 +123,22 @@ class App {
 	  coachFood.forEach(fd => {
 		  eatString += " | ";
 		  eatString += fd;
-		  eatString += " ";
 	  })
 
-	  eatString += "]";
+	  eatString += " ]";
 
 	  Console.print(eatString);
   }
 
   printCategories() {
 	  let stringCategories = "";
-	  stringCategories += "[ 카테고리";
+	  stringCategories += `[ ${Message.INPUT_MESSAGE.CATEGORIE}`;
 
 	  for(let day=0 ; day<5 ; day++) {
 		  stringCategories += " | "
 		  stringCategories += dayCategories[day];
-		  stringCategories += " ";
 	  }
-	  stringCategories += "]";
+	  stringCategories += " ]";
 
 	  Console.print(stringCategories);
   }
