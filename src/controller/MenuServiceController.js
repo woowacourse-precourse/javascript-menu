@@ -1,3 +1,8 @@
+const {
+  checkNameCountValid,
+  checkNameLengthValid,
+} = require("../validator/index");
+
 MenuServiceController = class {
   constructor(view, model) {
     this.view = view;
@@ -12,7 +17,10 @@ MenuServiceController = class {
 
   #setCoachName() {
     this.view.readCoachName((names) => {
-      console.log(names);
+      names = [...new Set(names.split(","))];
+
+      checkNameCountValid(names);
+      checkNameLengthValid(names);
     });
   }
 };

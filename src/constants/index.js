@@ -12,4 +12,11 @@ const MESSAGE = Object.freeze({
   COACH_NAME: "코치의 이름을 입력해 주세요. (, 로 구분)",
 });
 
-module.exports = { MESSAGE };
+const PREFIX = "[ERROR]";
+
+const ERROR = Object.freeze({
+  NAME_COUNT: `${PREFIX} 코치는 중복 없이 최소 2명, 최대 5명을 입력해야 합니다.`,
+  NAME_LENGTH: `${PREFIX} 코치의 이름은 최소 2글자, 최대 4글자를 입력해야 합니다.`,
+});
+
+module.exports = { MESSAGE, ERROR };
