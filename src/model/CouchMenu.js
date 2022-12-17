@@ -52,7 +52,7 @@ class CouchMenu {
     const menuNumArr = Array.from({ length: 9 }, (_, idx) => idx + 1);
     while (1) {
       const idx = getRandomMenu(menuNumArr)[0];
-      const curMenu = splitedMenus[idx];
+      const curMenu = splitedMenus[idx - 1];
       if (
         this.#menuList.includes(curMenu) ||
         this.#notWantMenu.includes(curMenu)
@@ -61,6 +61,10 @@ class CouchMenu {
       this.#menuList.push(curMenu);
       break;
     }
+  }
+
+  getCoachName() {
+    return this.#coachName;
   }
 
   getNotWantMenu() {
