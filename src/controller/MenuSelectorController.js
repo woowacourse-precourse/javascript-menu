@@ -58,10 +58,10 @@ class MenuSelectorController {
         this.#menuSelector.getCoachs()[this.personNumber].getName()
       );
     }
-    return this.#resultphase();
+    return this.#setDislikeMenuPhase();
   }
 
-  #resultphase() {
+  #setDislikeMenuPhase() {
     this.#menuSelector
       .getCoachs()
       .forEach((coach, index) =>
