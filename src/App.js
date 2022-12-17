@@ -91,18 +91,27 @@ class App {
   }
 
   test() {
-    console.log(this.coachNotEatMenu);
-    console.log(Object.values(this.coachNotEatMenu));
+    this.getCategories();
+    // const randomNumber = Random.pickUniqueNumbersInRange(1, 8, 8);
+    // const randomMenu = Random.shuffle(randomNumber)[0];
+    // console.log(SAMPLE[0][randomMenu]);
+    // console.log(this.coachNotEatMenu);
+    // console.log(Object.values(this.coachNotEatMenu));
   }
 
   getCategories() {
-    const categoriesNumber = Random.pickNumberInRange(1, 5);
-    this.categories = Object.keys(SAMPLE)[categoriesNumber];
+    this.categoriesNumber = Random.pickNumberInRange(1, 5);
+    this.category = Object.keys(SAMPLE)[this.categoriesNumber];
+    this.getMenu();
   }
 
   getMenu() {
-    const randomNumber = Random.pickUniqueNumbersInRange(1, 9, 9);
-    const randomMenu = Random.shuffle(randomNumber)[0];
+    const randomNumber = Random.pickUniqueNumbersInRange(1, 8, 8);
+    const menuNumber = Random.shuffle(randomNumber)[0];
+
+    const real = Object.values(SAMPLE)[this.categoriesNumber];
+
+    console.log(real.split(',')[menuNumber]);
   }
 
   getResult() {
