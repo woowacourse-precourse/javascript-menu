@@ -29,7 +29,14 @@ const coachCount = function checkCoachTotalCount(coaches, callack) {
   }
 };
 
+const checkCoach = function checkCoachValidation(coaches, callback) {
+  const checkCoachesName = coachNameLength(coaches, () => callback());
+  if (!checkCoachesName) return;
+
+  const checkCoachCount = coachCount(coaches, () => callback());
+  if (!checkCoachCount) return;
+};
+
 module.exports = {
-  coachNameLength,
-  coachCount,
+  checkCoach,
 };

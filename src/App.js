@@ -1,7 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
 const { splitString } = require("./utils/UtilityFunctions");
-const { coachNameLength, coachCount } = require("./Validate");
+const { checkCoach } = require("./Validate");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -36,11 +36,7 @@ class App {
   getCoachesName() {
     Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", (input) => {
       const coaches = splitString(input, ",").map((name) => name.trim()); // 이름 깔끔하게 정리
-      const checkCoachesName = coachNameLength(coaches, () =>
-        this.getCoachesName(),
-      );
-      const checkCoachCount = coachCount(coaches, () => this.getCoachesName());
-      if (!checkCoachesName || !checkCoachCount) return;
+      checkCoach(coaches, () => this.getCoachesName());
       this.setCoachesToMap(coaches);
 
       this.askNotEatMenu(0);
