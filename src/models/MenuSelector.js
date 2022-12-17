@@ -127,6 +127,12 @@ class MenuSelector {
       this.decideWeekMenu(coach);
     });
   }
+
+  countSameCategory(category) {
+    return this.#weekCategories.filter(
+      (dayCategory) => dayCategory === category
+    ).length;
+  }
 }
 
 module.exports = MenuSelector;
