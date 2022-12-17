@@ -16,7 +16,7 @@ CATEGORIES.set(3, '중식')
 CATEGORIES.set(4, '아시안')
 CATEGORIES.set(5, '양식')
 
-const RANDOM_ARRAY = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+const RANDOM_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
 const BannedMenu = {}
 const Names = []
@@ -67,7 +67,7 @@ function printResult() {
 }
 
 function getMenu(idx, date) {
-  const menu = SAMPLE[Categories[date]].split(', ')[Random.shuffle(RANDOM_ARRAY)[0]]
+  const menu = SAMPLE[Categories[date]].split(', ')[Random.shuffle(RANDOM_ARRAY)[0]-1]
   if(Recommended[idx].includes(menu)) return getMenu(idx, date)
   if(BannedMenu[Names[idx].includes(menu)]) return getMenu(idx, date)
   Recommended[idx].push(menu)
@@ -203,7 +203,7 @@ function inputCoachNames() {
 }
 
 function startService() {
-  Console.print('점심 메뉴를 추천합니다.\n')
+  Console.print('점심 메뉴 추천을 시작합니다.\n')
   return inputCoachNames()
 }
 
