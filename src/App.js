@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 
 const SAMPLE = {
@@ -17,7 +18,15 @@ class App {
 
   printStartMessage() {
     OutputView.printStartMessage();
+
+    this.readCoachesName();
   }
+
+  readCoachesName() {
+    InputView.readCoachesName(this.divideEachCoach.bind(this));
+  }
+
+  divideEachCoach(names) {}
 }
 
 const app = new App();
