@@ -17,4 +17,12 @@ const ERROR = Object.freeze({
   COACH_CANT_EAT: '[ERROR] 먹지 못하는 메뉴는 최대 2개 이어야 합니다.',
 });
 
-module.exports = { MESSAGE, ERROR };
+const CATEGORY = Object.freeze({
+  JAPANESE: '일식',
+  KOREAN: '한식',
+  CHINESE: '중식',
+  ASIAN: '아시안',
+  WESTERN: '양식',
+});
+
+module.exports = { MESSAGE, ERROR, CATEGORY };
