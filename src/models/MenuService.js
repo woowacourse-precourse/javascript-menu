@@ -17,10 +17,21 @@ class MenuService {
   }
 
   recommend() {
+    const DAY = { min: 0, max: 4 }; //월~금
+    for (let day = DAY.min; day <= DAY.max; day++) {
+      this.recommendDay();
+    }
+  }
+
+  recommendDay() {
     this.#coaches.forEach((coach, index) => {
       const category = this.pickCategory(index);
       coach.addCategory(category);
-      // const menu = this.pickMenu(category);
+      let menu = this.pickMenu(category);
+      while (!coach.isValidMenu(menu)) {
+        menu = this.pickMenu(category);
+      }
+      coach.addMenu(menu);
     });
   }
 

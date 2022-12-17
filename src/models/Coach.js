@@ -20,6 +20,10 @@ class Coach {
     return Object.freeze(this.#categories);
   }
 
+  getMenus() {
+    return Object.freeze(this.#menus);
+  }
+
   setHateFoods(foods) {
     this.#hateFoods = foods;
   }
@@ -35,6 +39,16 @@ class Coach {
 
   addCategory(category) {
     this.#categories.push(category);
+  }
+
+  isValidMenu(menu) {
+    if (this.#hateFoods.includes(menu)) return false;
+    if (this.#menus.includes(menu)) return false;
+    return true;
+  }
+
+  addMenu(menu) {
+    this.#menus.push(menu);
   }
 }
 
