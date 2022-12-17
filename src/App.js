@@ -43,8 +43,14 @@ class App {
   inputCoachsDislikeFood() {
     if (this.dislikeIdx > this.coachs.length - 1) {
       for (let i = 0; i < 5; i++) {
-        this.selectMenuByDay();
+        this.calcRecommendedList();
       }
+      this.coachs.forEach((coach) => {
+        this.recommendCategory.forEach((category) => {
+          this.selectMenuByCategory(category, coach);
+        });
+      });
+
       this.showResult();
       return;
     }
@@ -66,17 +72,11 @@ class App {
     this.inputCoachsDislikeFood();
   }
 
-  selectMenuByDay() {
-    const categoryNumber = this.selectCategory();
-    const category = categoryTable[categoryNumber];
+  selectMenuByCategory(category, coach) {
     // 카테고리 음식 전체 구해오기
     const [...foodList] = MENUS[category];
-    this.recommendCategory.push(category);
-    this.coachs.forEach((coach) => {
-      const recommendedMenu = this.recommendByCoach(foodList, coach);
-      coach.ateFoods.push(new Food(recommendedMenu, category));
-    });
-    return;
+    const recommendedMenu = this.recommendByCoach(foodList, coach);
+    coach.ateFoods.push(new Food(recommendedMenu, category));
   }
 
   selectCategory() {
@@ -88,11 +88,15 @@ class App {
       }
     }
   }
+  calcRecommendedList() {
+    const categoryNumber = this.selectCategory();
+    const category = categoryTable[categoryNumber];
+    this.recommendCategory.push(category);
+  }
 
   recommendByCoach(foodList, coach) {
     let selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
     selectFoodIdx -= 1;
-
     while (true) {
       if (
         coach.dislikeFoods.some((food) => food.name === foodList[selectFoodIdx])
