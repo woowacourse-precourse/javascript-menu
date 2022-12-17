@@ -29,6 +29,10 @@ class CategoryModel {
 
     this.#categories = categories;
   }
+
+  getCategories() {
+    return this.#categories;
+  }
 }
 
 module.exports = CategoryModel;

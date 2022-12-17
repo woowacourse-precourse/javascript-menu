@@ -24,6 +24,10 @@ class CategoryController {
   getCoachNames() {
     return this.#categoryModel.getCoachNames();
   }
+
+  getCategories() {
+    return this.#categoryModel.getCategories();
+  }
 }
 
 module.exports = CategoryController;
