@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const constants = require("../Constants");
 
 const InputView = {
     readCoachsName(callback) {
@@ -15,16 +16,16 @@ const InputView = {
         });
     },
     invaildate_coachNameList(list) {
-        if(list.length < 2 || list.length > 5) {
-            throw "[ERROR] 코치는 최소 2명, 최대 5명까지 식사를 함께합니다.";
+        if(list.length < constants.COACHNUMS.MINIMUM || list.length > constants.COACHNUMS.MAXIMUM) {
+            throw `[ERROR] 코치는 최소 ${constants.COACHNUMS.MINIMUM}명, 최대 ${constants.COACHNUMS.MAXIMUM}명까지 식사를 함께합니다.`;
         }
         list.arrayforEach(name => {
             this.invaildate_coachName(name)
         });
     },
     invaildate_coachName(name) {
-        if(name.length < 2 || name.length > 4) {
-            throw "[ERROR] 코치의 이름은 최소 2글자 최대 4글자입니다.";
+        if(name.length < constants.COACHNAME.MINIMUM  || name.length > constants.COACHNAME.MAXIMUM) {
+            throw `[ERROR] 코치의 이름은 최소 ${constants.COACHNAME.MINIMUM}글자 최대 ${constants.COACHNAME.MAXIMUM}글자입니다.`;
         }
     }
 }
