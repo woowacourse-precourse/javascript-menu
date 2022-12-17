@@ -116,32 +116,18 @@ class RecommendationService {
 
   checkNotDuplicateMenu(coachIndex, menu) {
     const menus = this.#menus[coachIndex];
+
     if (menus.length === 0) {
       return true;
     }
 
-    const count = this.calculateCountSameMenu(menu, menus);
-    if (count < 2) {
-      return true;
-    }
-
-    return false;
-  }
-
-  calculateCountSameMenu(compareMenu, menus) {
-    let count = 0;
-    menus.forEach((menu) => {
-      if (menu === compareMenu) {
-        count += 1;
-      }
-    });
-    return count;
+    return !menus.includes(menu);
   }
 
   randomChoiceMenuInCategory(category) {
-    const menus = MENUS_FOR_EACH_CATEGORIES[category].split(', ');
-    const menusIndex = Array.from({ length: menus.length }).map((value, index) => index);
-    const choiceIndex = Random.shuffle(menusIndex)[0];
+    const menus = MENUS_FOR_EACH_CATEGORIES[category];
+    const menuNumebrs = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+    const choiceIndex = Random.shuffle(menuNumebrs)[0];
     return menus[choiceIndex];
   }
 }
