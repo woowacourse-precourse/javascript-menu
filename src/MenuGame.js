@@ -10,6 +10,16 @@ class MenuGame {
     this.menus = {};
   }
 
+  // set weekly menu
+
+  setDailyMenu() {
+    const CATEGORY = this.setCategory();
+
+    this.coaches.forEach((coach) => {
+      this.setMenu(CATEGORY, coach);
+    });
+  }
+
   // 각 요일별 메뉴 생성하기
   setCategory() {
     const CATEGORY = PARAMETERS.category[this.getCategory() - 1];
