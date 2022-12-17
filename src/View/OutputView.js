@@ -7,15 +7,21 @@ const OutputView = {
   },
 
   printResultRecommendMenu(categroys, coach) {
-    Console.print("메뉴 추천 결과입니다.");
-    Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
-    Console.print(`[ 카테고리 | ${categroys.join(" | ")} ]`);
+    Console.print(OUTPUT_MESSAGE.resultRecommandMenuAlert);
+    Console.print(OUTPUT_MESSAGE.weekdaysClassification);
+    Console.print(
+      `[ ${OUTPUT_MESSAGE.category}${
+        OUTPUT_MESSAGE.divisionLine
+      }${categroys.join(OUTPUT_MESSAGE.divisionLine)} ]`
+    );
     Object.keys(coach).forEach((coachName) => {
       Console.print(
-        `[ ${coachName} | ${coach[coachName].ateMenu.join(" | ")} ]`
+        `[ ${coachName}${OUTPUT_MESSAGE.divisionLine}${coach[
+          coachName
+        ].ateMenu.join(OUTPUT_MESSAGE.divisionLine)} ]`
       );
     });
-    Console.print("추천을 완료했습니다.");
+    Console.print(OUTPUT_MESSAGE.recommandFinishAlert);
   },
 };
 
