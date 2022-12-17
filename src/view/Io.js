@@ -28,11 +28,11 @@ const Io = class {
   }
 
   printClosing() {
-    throw new OverrideError();
+    this.#outputView.printClosing();
   }
 
   close() {
-    throw new OverrideError();
+    this.#outputView.close();
   }
 };
 
