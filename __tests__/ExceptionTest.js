@@ -1,6 +1,6 @@
 const Exception = require('../src/Exception');
 
-describe('사용자 입력 값에 대한 예외 클래스 테스트', () => {
+describe('사용자 입력 값에 대한 예외 테스트', () => {
   test('코치 이름이 최소 2글자, 최대 4글자가 아닌 값을 포함하면 입력하면 예외가 발생한다', () => {
     expect(() => {
       Exception.checkCoachesInput('로이,엘리,네이마르 주니오르');
