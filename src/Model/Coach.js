@@ -1,9 +1,11 @@
 class Coach {
   #name;
   #hateFoods;
+  #menus;
 
   constructor(name) {
     this.#name = name;
+    this.#menus = [];
   }
 
   getName() {
@@ -12,6 +14,22 @@ class Coach {
 
   setHateFoods(hateFoods) {
     this.#hateFoods = [...hateFoods];
+  }
+
+  hasHateFoods(menu) {
+    return this.#hateFoods.includes(menu);
+  }
+
+  selectMenu(menu) {
+    this.#menus.push(menu);
+  }
+
+  hasMenu(menu) {
+    return this.#menus.includes(menu);
+  }
+
+  getMenus() {
+    return this.#menus;
   }
 }
 

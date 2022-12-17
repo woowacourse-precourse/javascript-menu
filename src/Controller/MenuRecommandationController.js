@@ -1,13 +1,14 @@
 const Menus = require('../Model/Menus');
-const CoachService = require('../Service/CoachService');
+const MenuService = require('../Service/MenuService');
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
+const ViewController = require('./ViewController');
 
 class MenuRecommandationController {
-  #coachService;
+  #menuService;
 
   constructor() {
-    this.#coachService = new CoachService();
+    this.#menuService = new MenuService();
   }
 
   run() {
@@ -15,8 +16,9 @@ class MenuRecommandationController {
   }
 
   startService() {
-    OutputView.printServiceStart();
+    this.#menuService.pickCategories();
 
+    OutputView.printServiceStart();
     this.readCoachNames();
   }
 
@@ -27,15 +29,16 @@ class MenuRecommandationController {
   }
 
   createCoaches(coachNames) {
-    this.#coachService.createCoaches(coachNames);
-    const coaches = this.#coachService.getCoaches();
-    this.readHateFoods(coaches, 0);
+    this.#menuService.createCoaches(coachNames);
+
+    this.readHateFoods(this.#menuService.getCoaches(), 0);
   }
 
   readHateFoods(coaches, index) {
-    if (coaches.length === index) return;
+    if (coaches.length === index) return this.recommand();
 
     const coach = coaches[index];
+
     InputView.readHateFoods(coach.getName(), (hateFoods) => {
       this.checkHateFoodsInMenus(hateFoods);
 
@@ -47,10 +50,22 @@ class MenuRecommandationController {
 
   checkHateFoodsInMenus(hateFoods) {
     hateFoods.forEach((hateFood) => {
-      if (!Menus.hasMenu(hateFood)) {
+      if (hateFood !== '' && !Menus.hasMenu(hateFood)) {
         throw new Error('존재하지 않는 메뉴입니다.');
       }
     });
+  }
+
+  recommand() {
+    this.#menuService.recommand();
+    this.endService();
+  }
+
+  endService() {
+    OutputView.printMenuResult(
+      ViewController.buildMenuResult(this.#menuService.getResult()),
+    );
+    OutputView.printServiceEnd();
   }
 }
 
