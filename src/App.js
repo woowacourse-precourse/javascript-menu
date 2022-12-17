@@ -14,6 +14,8 @@ const SAMPLE = {
 };
 
 class App {
+  #coaches;
+  #sequence = 0;
   #coachesManager;
 
   play() {
@@ -32,6 +34,26 @@ class App {
 
   divideEachCoach(names) {
     this.#coachesManager = new Coach(names);
+    this.#coaches = this.#coachesManager.getCoaches();
+
+    OutputView.printEmptyLine();
+
+    this.readUneatableMenu();
+  }
+
+  readUneatableMenu() {
+    if (this.#sequence < this.#coaches.length)
+      InputView.readUneatableMenu(
+        this.#coaches[this.#sequence],
+        this.saveUneatableMenu.bind(this)
+      );
+  }
+
+  saveUneatableMenu(menus) {
+    OutputView.printEmptyLine();
+
+    this.#sequence += 1;
+    this.readUneatableMenu();
   }
 }
 

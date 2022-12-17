@@ -5,8 +5,12 @@ class Coach {
     this.validate(names);
   }
 
+  getCoaches() {
+    return this.#coaches;
+  }
+
   validate(names) {
-    const coaches = names.split(",");
+    const coaches = names.split(", ");
 
     this.isValidPersonnel(coaches);
     this.isValidNameLength(coaches);

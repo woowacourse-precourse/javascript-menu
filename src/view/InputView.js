@@ -9,6 +9,15 @@ const InputView = {
       }
     );
   },
+
+  readUneatableMenu(coach, fn) {
+    MissionUtils.Console.readLine(
+      `${coach}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
+      (menus) => {
+        fn(menus);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
