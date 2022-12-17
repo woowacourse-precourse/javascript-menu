@@ -4,7 +4,7 @@ const shuffleArray = (array) => {
   const numberArray = Array.from({ length: array.length }, (_, idx) => idx);
   const shffledNumberArray = MissionUtils.Random.shuffle(numberArray);
 
-  return shffledNumberArray.map((index) => array[index]);
+  return shffledNumberArray.map((index) => array[index - 1]);
 };
 
 module.exports = shuffleArray;
