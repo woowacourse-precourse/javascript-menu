@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const Coach = require('./models/Coach');
 const Coaches = require('./models/Coaches');
 const { readCoaches, readMenu } = require('./views/InputView');
@@ -14,6 +16,8 @@ const SAMPLE = {
 class App {
   #coaches;
 
+  #index = 0;
+
   play() {
     printStart();
     readCoaches(this.#onCoachesSubmit.bind(this));
@@ -22,6 +26,19 @@ class App {
   #onCoachesSubmit(names) {
     const coaches = names.split(',').map((coach) => new Coach(coach));
     this.#coaches = new Coaches(coaches);
+    return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+  }
+
+  #onMenuSubmit(menu) {
+    const menus = menu.split(',');
+    this.#coaches.setCoachMenu(this.#index, menus);
+    this.#index += 1;
+
+    if (this.#index === this.#coaches.count()) {
+      return Console.close();
+    }
+
+    return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
   }
 }
 

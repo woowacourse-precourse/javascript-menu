@@ -1,6 +1,8 @@
 class Coach {
   #name;
 
+  #menus;
+
   constructor(name) {
     Coach.#validate(name);
     this.#name = name;
@@ -14,6 +16,14 @@ class Coach {
 
   static #isOutOfRange(name) {
     return name.length < 2 || name.length > 4;
+  }
+
+  getName() {
+    return this.#name;
+  }
+
+  setMenus(menus) {
+    this.#menus = menus;
   }
 }
 

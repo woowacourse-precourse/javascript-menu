@@ -16,8 +16,20 @@ class Coaches {
     return coaches.length < 2 || coaches.length > 5;
   }
 
-  getState() {
-    return this.#state;
+  getCoach(index) {
+    return this.#state[index];
+  }
+
+  setCoachMenu(index, menus) {
+    this.#state[index].setMenus(menus);
+  }
+
+  count() {
+    return this.#state.length;
+  }
+
+  getCoachName(index) {
+    return this.#state[index].getName();
   }
 }
 

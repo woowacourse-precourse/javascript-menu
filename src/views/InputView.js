@@ -6,8 +6,9 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.COACH, callback);
   },
 
-  readMenu(coach, callback) {
-    Console.readLine(INPUT_MESSAGE.MENU(coach), callback);
+  readMenu(coaches, index, callback) {
+    const coachName = coaches.getCoachName(index);
+    Console.readLine(INPUT_MESSAGE.MENU(coachName), callback);
   },
 };
 
