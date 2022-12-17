@@ -1,10 +1,7 @@
 const { ERROR } = require('../constants/constants');
+const { FOODLIST } = require('../constants/FoodList');
 
 const verify = {
-  // inputTypeNumber(input) {
-  //   // if (Number.isNaN(Number(input))) throw new Error(ERROR.EXAMPLE);
-  //   if (Number.isNaN(Number(input))) throw new Error();
-  // },
   moreThanTwoData(data, arr) {
     let count = 0;
     arr.forEach((value) => {
@@ -28,7 +25,17 @@ const verify = {
     });
   },
 
-  //
+  existMenu(input) {
+    const data = input.split(',');
+    data.forEach((food) => {
+      if (!FOODLIST.includes(food)) throw new Error('No Food');
+    });
+  },
+
+  unableMenuLength(input) {
+    const data = input.split(',');
+    if (data.length > 2) throw new Error('OverFlow Foods');
+  },
 };
 
 module.exports = verify;
