@@ -53,6 +53,23 @@ class App {
     });
   }
 
+  #filterCategory(category) {
+    switch (category) {
+      case 1:
+        return "일식";
+      case 2:
+        return "한식";
+      case 3:
+        return "중식";
+      case 4:
+        return "아시안";
+      case 5:
+        return "양식";
+      default:
+        throw new Error("없는 카테고리입니다.");
+    }
+  }
+
   #controlMenus() {
     for (let i = 0; i < 5; i++) {
       this.#updateCategory();
@@ -62,19 +79,30 @@ class App {
       }
     }
     const strWithSideSpace = (str) => " " + str + " ";
+    const categoryStr =
+      "[ 카테고리 " +
+      this.#categories
+        .getData()
+        .map(
+          (category) => "|" + strWithSideSpace(this.#filterCategory(category))
+        )
+        .join("") +
+      "]\n";
 
-    const result = this.#coachMenus
-      .map(
-        (coachMenu) =>
-          "[" +
-          strWithSideSpace(coachMenu.getCoachName()) +
-          coachMenu
-            .getMenus()
-            .map((menu) => "|" + strWithSideSpace(menu))
-            .join("") +
-          "]"
-      )
-      .join("\n");
+    const result =
+      categoryStr +
+      this.#coachMenus
+        .map(
+          (coachMenu) =>
+            "[" +
+            strWithSideSpace(coachMenu.getCoachName()) +
+            coachMenu
+              .getMenus()
+              .map((menu) => "|" + strWithSideSpace(menu))
+              .join("") +
+            "]"
+        )
+        .join("\n");
 
     OutputView.printResult(result);
     InputView.close();
