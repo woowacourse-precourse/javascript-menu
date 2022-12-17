@@ -1,5 +1,5 @@
-const { Console } = require('@woowacourse/mission-utils');
-const { START_MESSAGE } = require('./Constants');
+const { Console, Random } = require('@woowacourse/mission-utils');
+const { START_MESSAGE, NOT_EAT_MENU } = require('./Constants');
 const { checkValidateCoach, checkValidateCoachNames } = require('./Validate');
 const { readCoachName, readNotEatMenu } = require('./InputView');
 const SAMPLE = {
@@ -34,6 +34,7 @@ class App {
     try {
       checkValidateCoach(nameArray);
       checkValidateCoachNames(nameArray);
+
       this.getNotEatMenu();
     } catch (error) {
       Console.print(error);
@@ -41,11 +42,17 @@ class App {
     }
   }
 
-  getNotEatMenu() {
-    readNotEatMenu(menu => {
-      console.log(menu);
-    });
-  }
+  getNotEatMenu() {}
+
+  // getCategories() {
+  //   const categoriesNumber = Random.pickNumberInRange(1, 5);
+  //   this.categories = Object.keys(SAMPLE)[categoriesNumber];
+  // }
+
+  // getMenu() {
+  //   const randomNumber = Random.pickUniqueNumbersInRange(1, 9, 9);
+  // const menu = Random.shuffle(randomNumber)[0];
+  // }
 }
 
 const app = new App();
