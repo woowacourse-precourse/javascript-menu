@@ -1,4 +1,4 @@
-const MENU_MAP = require('../constants');
+const { MENU_MAP } = require('../constants');
 const { Random } = require('@woowacourse/mission-utils');
 
 class Coach {

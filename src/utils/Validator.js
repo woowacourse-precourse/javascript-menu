@@ -1,4 +1,4 @@
-const MENU_MAP = require('../constants');
+const { MENU_MAP } = require('../constants');
 
 const Validator = {
   checkInput(input) {
@@ -6,7 +6,6 @@ const Validator = {
   },
 
   checkNames(input) {
-    Validator.checkInput(input);
     const names = input.split(',');
     const isUnable = (coach) => coach.length < 2 || coach.length > 4;
     if (names.some(isUnable)) throw new Error('이름은 2~4자만 가능합니다.');
@@ -15,7 +14,6 @@ const Validator = {
   },
 
   checkHates(input) {
-    Validator.checkInput(input);
     if (input === '') return;
     const hates = input.split(',');
     if (hates.every(Validator.isInMenu) === false) throw new Error('메뉴에 없는 음식입니다.');
