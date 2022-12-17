@@ -11,22 +11,19 @@ const OutputView = {
     const categories = result.categories.map((category) => CATEGORY_NAME[category]);
     Console.print(
       Trimmer.templateTrim(`
+      메뉴 추천 결과입니다.
       [ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]
-      [ 카테고리 | ${categories.join(' | ')}]`)
+      [ 카테고리 | ${categories.join(' | ')} ]`)
     );
 
     result.pickResult.forEach((currentData) => {
       Console.print(`[ ${currentData.join(' | ')} ]`);
     });
   },
+
+  close() {
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
-
-/*OutputView.printResult({
-  categories: [1, 2, 3, 4, 5],
-  pickResult: [
-    ['포비', '규동', '우동', '물', '음료', '사이다'],
-    ['몰루', '1', '2', '3', '4', '5'],
-  ],
-});*/
