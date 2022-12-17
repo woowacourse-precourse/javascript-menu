@@ -10,6 +10,11 @@ const Validation = {
       throw new Error('[ERROR] 코치는 2~5명과 같이 식사할 수 있습니다.');
     }
   },
+
+  notEat(input) {
+    const foods = input.split(',');
+    if (foods.length > 2) throw new Error('[ERROR] 먹지 못하는 메뉴는 2개만 입력할 수 있습니다.');
+  },
 };
 
 module.exports = Validation;

@@ -47,6 +47,7 @@ class Controller {
 
   #checkNotEat(coachName, input) {
     try {
+      Validation.notEat(input);
       this.#notEatList.push([coachName, input]);
     } catch (error) {}
   }
