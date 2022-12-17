@@ -17,13 +17,17 @@ class App {
 	
   }
 
+  /** 2. 코치 이름 생성 */
   inputCreatCoach() {
 	Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분).\n", (names) => {
 	  this.coachs = names.split(",");
 	  this.validName();
+	  this.repeatInputNoFoods();
+
 	  });
   }
 
+  /** 3. 코치 이름 생성 값 유효성 검토  */
   validName() {
 	if(this.coachs.length < 2 || this.coachs.length > 5) {
 	  throw new Error("[ERROR] 코치는 최소 2명 이상, 최대 5명 이하로 입력해야 합니다.");
@@ -34,6 +38,20 @@ class App {
 	  }
 	});
   }
+
+  /** 4. 코치 인원 만큼 입력값 반복하는 기능 */
+  repeatInputNoFoods() {
+	let crrentName = 0;
+	while(crrentName < this.coachs.length) {
+	  //입력값 받는 기능 구현해서 넣기
+	  break;
+	}
+
+  
+
+
+  }
+
 
 
 }
