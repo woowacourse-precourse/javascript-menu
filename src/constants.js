@@ -19,6 +19,7 @@ const ERROR_MESSAGE = Object.freeze({
   NAME_LENGTH: `${SYMBOL.ERROR}코치의 이름은 최소 2글자, 최대 4글자 입니다.`,
   NAME_COUNT: `${SYMBOL.ERROR}코치는 최소 2명, 최대 5명까지 식사를 함께 합니다.`,
   NAME_DUPLICATION: `${SYMBOL.ERROR}코치의 이름이 중복되어 작성되었습니다.`,
+  NAME_SPECIAL_CHARS: `${SYMBOL.ERROR}코치의 이름에 특수문자가 들어갈 수 없습니다.`,
 });
 
 const DAY = Object.freeze({
@@ -46,6 +47,10 @@ const NAME_VALIDITY = Object.freeze({
   MIN_NAMES_COUNT: 2,
 });
 
+const REG_EXP = Object.freeze({
+  SPECIAL_CHARS_CHECK: /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g,
+});
+
 module.exports = {
   MESSAGE,
   ERROR_MESSAGE,
@@ -53,4 +58,5 @@ module.exports = {
   DAY,
   CATEGORY,
   NAME_VALIDITY,
+  REG_EXP,
 };
