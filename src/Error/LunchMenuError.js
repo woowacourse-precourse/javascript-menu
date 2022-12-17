@@ -8,7 +8,7 @@ const LunchMenuError = {
       throw new Error();
     }
     if (!this.isValidName(names)) {
-      MissionUtils.Console.print('\n[ERROR] 코치의 이름은 최소 2글자, 최대 4글자여야 합니다.');
+      MissionUtils.Console.print('\n[ERROR] 코치의 이름은 최소 2글자, 최대 4글자여야 합니다.\n');
       throw new Error();
     }
   },
@@ -22,6 +22,29 @@ const LunchMenuError = {
       }
     });
     return flag;
+  },
+
+  isValidImpossibleMenu(impossibleMenu, totalMenu) {
+    if (impossibleMenu.length > 3) {
+      MissionUtils.Console.print('\n[ERROR] 최소 0개, 최대 2개의 메뉴를 선택해야 합니다.\n');
+      throw new Error();
+    }
+    impossibleMenu.forEach((food) => {
+      LunchMenuError.isValidImpossibleMenuName(food, totalMenu);
+    });
+  },
+
+  isValidImpossibleMenuName(food, totalMenu) {
+    let flag = false;
+    for (const category in totalMenu) {
+      if (totalMenu[category].includes(food)) {
+        flag = true;
+      }
+    }
+    if (!flag) {
+      MissionUtils.Console.print('\n[ERROR] 유효하지 않은 메뉴를 입력하였습니다.\n');
+      throw new Error();
+    }
   },
 };
 

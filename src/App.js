@@ -11,7 +11,7 @@ const SAMPLE = {
 class App {
   play() {
     const LUNCH = new LunchMenu();
-    LUNCH.start();
+    LUNCH.start(SAMPLE);
   }
 }
 const app = new App();
