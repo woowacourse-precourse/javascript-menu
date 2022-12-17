@@ -1,9 +1,9 @@
 const { Console } = require("@woowacourse/mission-utils");
 
-const OutputView = {
+const StaticView = {
   print(message) {
     Console.print(message);
   },
 };
 
-module.exports = OutputView;
+module.exports = StaticView;
