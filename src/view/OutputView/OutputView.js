@@ -27,7 +27,7 @@ const OutputView = class extends IOutputView {
     const title = obj.name;
     const objArr = Object.entries(obj)
       .slice(-5)
-      .map(([key, value]) => value);
+      .map(([_, value]) => value);
 
     objArr.unshift(title);
 
