@@ -1,4 +1,4 @@
-const FOODS = {
+const MENUS = {
   일식: [
     '규동',
     '우동',
@@ -56,4 +56,4 @@ const FOODS = {
   ],
 };
 
-module.exports = FOODS;
+module.exports = MENUS;
