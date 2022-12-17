@@ -24,11 +24,6 @@ class Gategory {
   increaseRecommendedCount() {
     this.#recommendedCount += 1;
   }
-
-  canRecommend() {
-    if (this.#recommendedCount === 2) return false;
-    return true;
-  }
 }
 
 module.exports = Gategory;

@@ -22,13 +22,6 @@ class Gategorys {
     );
   }
 
-  canRecommend(categoryNumber) {
-    const category = this.#list.filter((category) =>
-      category.isMe(categoryNumber)
-    )[0];
-    return category.canRecommend();
-  }
-
   getCategoryMenus(recommendedCategory) {
     const menus = [];
 
@@ -36,7 +29,6 @@ class Gategorys {
       const category = this.#list.filter((category) =>
         category.isMe(categoryNumber)
       )[0];
-      category.increaseRecommendedCount();
       menus.push(category.getMenu());
     });
 
