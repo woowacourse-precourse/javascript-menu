@@ -97,7 +97,7 @@ class App {
       throw Error(PRINT_ERROR_STRING.COACH_NAME_NUMBER);
   }
 
-  validateBanMenus(notFoodArray) {}
+  validateBanMenus(banMenusArray) {}
 
   play() {
     this.printRecommendedStart();
