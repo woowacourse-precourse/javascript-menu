@@ -65,7 +65,15 @@ class App {
 
   makeRecommandResult() {
     this.#menuManager.makeRecommandResult();
+    const recommandedCategories = this.#menuManager.getRecommandedCategories();
+
+    this.#menuManager.recommandCoachesMenu(this.#coaches);
+    const coachData = this.#menuManager.getCoachData();
+
+    this.printResult(recommandedCategories, coachData);
   }
+
+  printResult(recommandedCategories, coachData) {}
 }
 
 const app = new App();
