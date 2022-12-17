@@ -47,6 +47,10 @@ class MenuService {
         throw new Error("[ERROR] 코치의 이름은 2~4글자여야 합니다.");
     });
   }
+
+  passName() {
+    this.#names.shift();
+  }
 }
 
 module.exports = MenuService;
