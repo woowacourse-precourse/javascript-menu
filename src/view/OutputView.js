@@ -11,9 +11,10 @@ const OutputView = Object.freeze({
     if (!(result instanceof Result)) {
       throw new Error(`[개발자] Result 객체를 받아야합니다.`);
     }
+
     Console.print(MESSAGES.result);
-    Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
-    Console.print(`[ 카테고리 | ${result.getCategories().join(' | ')} ]`);
+    Console.print(MESSAGES.resultDays);
+    Console.print(`[ ${MESSAGES.category} | ${result.getCategories().join(' | ')} ]`);
     result.coaches.forEach((coach) => {
       Console.print(`[ ${coach.getName()} | ${coach.getMenuList().join(' | ')} ]`);
     });
