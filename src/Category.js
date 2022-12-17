@@ -17,14 +17,14 @@ class Category {
 
   pickValidCategory(randomCategoryMaker) {
     const category = randomCategoryMaker();
-    if (this.isValidCategory(this.#menuList[category])) {
+    if (Category.isValidCategory(this.#menuList[category])) {
       this.#menuList[category].count += 1;
       return category;
     }
     this.pickVaildCategory(randomCategoryMaker);
   }
 
-  isValidCategory(category) {
+  static isValidCategory(category) {
     if (category.count < 3) return true;
     return false;
   }
