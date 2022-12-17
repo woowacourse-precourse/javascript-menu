@@ -1,3 +1,5 @@
+const { Random } = require('@woowacourse/mission-utils');
+
 const OutputUI = require('./view/OutputUI');
 const InputUI = require('./view/InputUI');
 const Vaildator = require('./util/vaildator');
@@ -7,7 +9,6 @@ const Food = require('./Food');
 const MenuUtil = require('./util/menuUtil');
 const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
-const { Random } = require('@woowacourse/mission-utils');
 const { checkValid } = require('./util/ErrorChecker');
 const {
   isVaildCoachNumber,
