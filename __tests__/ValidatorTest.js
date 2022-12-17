@@ -24,7 +24,7 @@ describe('코치 이름 검사', () => {
   });
 
   test.each([
-    '세종대왕,연산군,단종,김수한무거북이와두루미,김규'
+    '세종대왕,연산군,단종,김수한무거북이와두루미,김규',
   ])('예외: 이름 길이', (input) => {
     expect(() => Validator.validateCoachNames(input.split(','))).toThrow('[ERROR]');
   });
