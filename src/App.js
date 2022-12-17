@@ -25,6 +25,13 @@ class App {
     MissionUtils.Console.readLine(PRINT_STRING.INPUT_COACH_NAME, callback);
   }
 
+  readBanMenus(coachName, callback) {
+    MissionUtils.Console.readLine(
+      PRINT_STRING.INPUT_NOT_FOOD(coachName),
+      callback
+    );
+  }
+
   namesCallback(coachName) {
     const coachArray = coachName.split(',');
     try {
@@ -40,7 +47,13 @@ class App {
     this.#coaches = [];
     this.#coaches.push(new Coach(coachName));
     this.#currentBanCoachIndex = 0;
+    this.readBanMenus(
+      this.#coaches[this.#currentBanCoachIndex].getName(),
+      this.banMenusCallback
+    );
   }
+
+  banMenusCallback(notFood) {}
 
   validateNames(coachArray) {
     for (let i = 0; i < coachArray.length; i++) {
