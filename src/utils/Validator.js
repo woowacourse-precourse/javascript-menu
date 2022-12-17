@@ -1,13 +1,15 @@
 class Validator {
   static checkCoachNames(coachNames) {
+    if (this.#isLessThanMinimumCoachNumber(coachNames)) {
+      throw new Error('[ERROR] 코치는 최소 2명 이상 입력해야 합니다.');
+    }
+
     if (!this.#isValidInputFormat(coachNames)) {
       throw new Error(
         '[ERROR] 코치 이름은 한글을 ,(쉼표)로 구분하여 입력해주세요.'
       );
     }
-    if (this.#isLessThanMinimumCoachNumber(coachNames)) {
-      throw new Error('[ERROR] 코치는 최소 2명 이상 입력해야 합니다.');
-    }
+
     if (this.#isMoreThanMaximumCoachNumber(coachNames)) {
       throw new Error('[ERROR] 코치는 최대 5명 까지만 입력해야 합니다.');
     }
@@ -26,7 +28,7 @@ class Validator {
       throw new Error('[ERROR] 메뉴를 ,(쉼표)로 구분하여 입력해주세요.');
     }
     if (!this.#isMoreThanMaximumDislikeMenuNumber(dislikeMenu)) {
-      throw new Error('[ERROR] 메뉴를 ,(쉼표)로 구분하여 입력해주세요.');
+      throw new Error('[ERROR] 메뉴는 최대 2개까지만 입력가능합니다.');
     }
   }
 
