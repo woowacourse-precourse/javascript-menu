@@ -1,3 +1,4 @@
+const Category = require("./model/Category.js");
 const Coach = require("./model/Coach.js");
 const CouchMenu = require("./model/CouchMenu.js");
 const { makeCategory } = require("./utils/CategoryMaker.js");
@@ -9,6 +10,10 @@ class App {
   #coachMenus = [];
   #categories;
 
+  constructor() {
+    this.#categories = new Category();
+  }
+
   play() {
     // this.#categories = makeCategory();
     OutputView.printStart();
@@ -18,7 +23,6 @@ class App {
   #readCoachNames() {
     InputView.readCoachNames(this.#readCoachNamesCallback);
   }
-
   #readCoachNamesCallback = (names) => {
     try {
       this.#coachNames = new Coach(names).getData();
@@ -33,7 +37,6 @@ class App {
   #readAllCouchNotWantMenu() {
     this.#readCoachNotWantMenu(this.#coachNames[0], 0);
   }
-
   #readCoachNotWantMenu(coachName, idx) {
     InputView.readCoachNotWantMenu(coachName, (notWantMenu) => {
       try {
@@ -43,11 +46,26 @@ class App {
         const coachNamesLen = this.#coachNames.length;
         const isValidIdx = newIdx < coachNamesLen;
         if (isValidIdx) this.#readCoachNotWantMenu(newCoachName, newIdx);
+        if (!isValidIdx) this.#controlMenus();
       } catch (err) {
         OutputView.printError(err.message);
         this.#readCoachNotWantMenu(coachName, idx);
       }
     });
+  }
+
+  #controlMenus() {
+    for (let i = 0; i < 5; i++) {
+      this.#updateCategory();
+      const category = this.#categories.getData()[i];
+      for (let j = 0; j < this.#coachNames.length; j++) {
+        this.#coachMenus[j].updateMenu(category);
+      }
+    }
+  }
+
+  #updateCategory() {
+    this.#categories.generateCategory();
   }
 }
 
