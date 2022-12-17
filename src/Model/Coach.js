@@ -1,5 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
-const { MENU_SAMPLE } = require("../constant/value");
+const { MENU_SAMPLE, MENU_CATEGORY } = require("../constant/value");
 
 class Coach {
   #name;
@@ -36,13 +36,16 @@ class Coach {
   }
 
   randomMenu(categoryNumber) {
-    const category = Object.keys(MENU_SAMPLE)[categoryNumber - 1];
+    const category = MENU_CATEGORY[categoryNumber - 1];
     const menuArray = MENU_SAMPLE[category].split(", ");
     const numberArray = menuArray.map((menu, index) => (menu = index));
     const menuNumber = MissionUtils.Random.shuffle(numberArray)[0];
     const menu = menuArray[menuNumber];
-    if (this.isPickyMenu(menu) || this.isDuplicatedMenu(menu)) {
-      this.randomMenu(categoryNumber);
+    if (this.isPickyMenu(menu)) {
+      return this.randomMenu(categoryNumber);
+    }
+    if (this.isDuplicatedMenu(menu)) {
+      return this.randomMenu(categoryNumber);
     }
     return menu;
   }
@@ -52,11 +55,7 @@ class Coach {
   }
 
   isDuplicatedMenu(newMenu) {
-    let repeat = 0;
-    this.#menuOfWeek.forEach((menu) => {
-      if (newMenu == menu) repeat++;
-    });
-    return repeat < 1;
+    return this.#menuOfWeek.includes(newMenu);
   }
 }
 

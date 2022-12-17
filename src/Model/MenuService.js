@@ -69,7 +69,7 @@ class MenuService {
   randomCategory() {
     const category = MissionUtils.Random.pickNumberInRange(1, 5);
     if (!this.isAvailableCategory(category)) {
-      this.randomCategory();
+      return this.randomCategory();
     }
     return category;
   }
