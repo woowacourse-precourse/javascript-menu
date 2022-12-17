@@ -1,6 +1,12 @@
 const ExceptionController = require('./ExceptionController');
+const { menu , key } = require('../const/menu');
+const { Random } = require("@woowacourse/mission-utils");
 
 class MenuController {
+    #checkedCoach = [];
+    #coachList;
+    #foodList = {};
+
     constructor({inputView, outputView}) {
         this.inputView = inputView;
         this.outputView = outputView;
@@ -13,21 +19,48 @@ class MenuController {
     }
 
     requestCoach() {
-        this.inputView.readCoach(this.makeCoachList.bind(this));
+        this.inputView.readCoach(this.handleCoachList.bind(this));
     }
 
-    makeCoachList(coachList) {
-        if(!ExceptionController.isValidCoach(this.processCoachList(coachList))) {
+    handleCoachList(coachList) {
+        const processedCoachList = this.processList(coachList);
+        if(!ExceptionController.isValidCoach(processedCoachList)) {
             // 비정상 로직
             this.requestCoach();
         } 
         // 정상 로직
-        // -> 코치 리스트를 저장하고 각각의 코치 리스트에 대해서 못먹는 메뉴 입력받기
+        this.#coachList = processedCoachList;
+        this.requestNoEatFood();
     }
 
-    processCoachList(coachList) {
-        const newList = coachList.split(',');
-        return newList.map((coach) => coach.trim());
+    processList(input) {
+        const newList = input.split(',');
+        return newList.map((item) => item.trim());
+    }
+
+    requestNoEatFood() {
+        this.#coachList.forEach((coach) => {
+            if(!this.#checkedCoach.includes(coach)){
+                this.inputView.readNoEatFood(this.handleFoodList.bind(this), coach);
+            }
+        })
+    }
+
+    handleFoodList(foodList, coach) {
+        const processedFoodList = this.processList(foodList);
+        if(!ExceptionController.isValidFoodInput(processedFoodList)) {
+            // 비정상 로직
+            this.requestNoEatFood();
+        } 
+        // 정상 로직
+        this.#foodList[`${coach}`] = processedFoodList;
+        this.#checkedCoach.push(coach);
+        this.requestNoEatFood();
+        this.menuRecommand();
+    }
+
+    menuRecommand() {
+        const result = menu[key[Random.pickNumberInRange(1, 5)]];
     }
 }
 
