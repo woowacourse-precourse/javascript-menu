@@ -5,6 +5,8 @@ const Validation = {
     if (!stringOfCoaches.includes(',')) throw new Error(ERROR.GROUP_SIZE);
     const coaches = stringOfCoaches.split(',');
     if (coaches.length > 5) throw new Error(ERROR.GROUP_SIZE);
+    const arrToSet = new Set(coaches);
+    if (coaches.length !== arrToSet.size) throw new Error(ERROR.DUPLICATE_NAME);
     return;
   },
 
