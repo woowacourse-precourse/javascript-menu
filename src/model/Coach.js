@@ -1,7 +1,7 @@
 class Coach {
   #name;
 
-  #excludeFood;
+  #excludeFood = null;
 
   constructor(name) {
     this.#name = name;
