@@ -51,8 +51,9 @@ class InputException {
   static checkNotEat(input, SAMPLE) {
     if (
       !(
-        InputException.isNotEatLimit(input) &&
-        InputException.isInMenu(input, SAMPLE)
+        (InputException.isNotEatLimit(input) &&
+          InputException.isInMenu(input, SAMPLE)) ||
+        input === ''
       )
     ) {
       throw new Error(ERROR_MESSAGE.notEat);

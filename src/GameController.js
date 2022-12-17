@@ -23,6 +23,10 @@ class GameController {
   outputCoach() {
     return this.#service.outputCoach();
   }
+
+  inputNotEat(input, coach) {
+    this.#service.inputNotEat(input, coach);
+  }
 }
 
 module.exports = Object.freeze(new GameController());

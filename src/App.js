@@ -48,24 +48,30 @@ class App {
         break;
       }
     }
+
+    return true;
   }
 
-  #successNotReadEvent(input) {
+  #successNotReadEvent(input, coach) {
     InputException.checkNotEat(input, SAMPLE);
+    controller.inputNotEat(input, coach);
+    if (this.#questionNotEat()) {
+      // 메뉴 추천 결과 출력
+    }
 
     return this;
   }
 
-  #readNotEatEvent(input) {
+  #readNotEatEvent(input, coach) {
     errorCheckFor(
-      () => this.#successNotReadEvent(input),
+      () => this.#successNotReadEvent(input, coach),
       () => this.readNotEat()
     );
   }
 
   readNotEat(coach) {
     Console.readLine(`${coach}GAME_TEXT.notEat`, (input) => {
-      this.#readNotEatEvent(input);
+      this.#readNotEatEvent(input, coach);
     });
   }
 
