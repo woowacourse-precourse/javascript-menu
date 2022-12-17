@@ -13,10 +13,17 @@ const Validator = {
     });
   },
 
+  validateCoachNameDuplicate(names) {
+    if (names.length !== new Set(names).size) {
+      throw new Error("[ERROR] 코치의 이름은 중복되지 않아야 합니다.");
+    }
+  },
+
   validateCoachNames(nameString) {
     const names = nameString.split(",");
     this.validateCoachsLength(names);
     this.validateCoachNamesLength(names);
+    this.validateCoachNameDuplicate(names);
   },
 
   validateMenusLength(menus) {
@@ -25,9 +32,16 @@ const Validator = {
     }
   },
 
+  validateMenuNameDuplicate(menus) {
+    if (menus.length !== new Set(menus).size) {
+      throw new Error("[ERROR] 메뉴의 이름은 중복되지 않아야 합니다.");
+    }
+  },
+
   validateBannedMenu(menuString) {
     const menus = menuString.split(",");
     this.validateMenusLength(menus);
+    this.validateMenuNameDuplicate(menus);
   },
 };
 
