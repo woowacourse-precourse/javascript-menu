@@ -1,10 +1,13 @@
 class Coach {
-  #name;
   #nonEdibleMenu;
+  #menus;
+
+  constructor() {
+    this.#menus = [];
+  }
 
   setNonEdibleMenus(menus) {
     this.#nonEdibleMenu = menus;
-    console.log(this.#nonEdibleMenu);
   }
 }
 

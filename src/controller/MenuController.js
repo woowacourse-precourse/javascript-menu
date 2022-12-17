@@ -68,7 +68,9 @@ class MenuController {
     this.#menuService.addNonEdibleMenus(coachName, menus);
   }
 
-  #printResult() {}
+  #printResult() {
+    const result = this.#menuService.getRecommendMenuResult();
+  }
 }
 
 module.exports = MenuController;

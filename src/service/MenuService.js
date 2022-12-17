@@ -1,10 +1,13 @@
 const Coach = require('../models/Coach');
+const Recommend = require('../models/Recommend');
 
 class MenuService {
   #coaches;
+  #recommend;
 
   constructor() {
     this.#coaches = {};
+    this.#recommend = new Recommend();
   }
 
   addCoaches(names) {
@@ -15,9 +18,15 @@ class MenuService {
     this.#coaches[coachName].setNonEdibleMenus(menus);
   }
 
-  getCoachesName() {
-    return Object.keys(this.#coaches);
+  getRecommendMenuResult() {
+    this.#recommendMenu();
   }
+
+  #recommendMenu() {
+    const randomCategory = this.#recommend.getRandomCategory();
+  }
+
+  #getRandomCategory() {}
 }
 
 module.exports = MenuService;
