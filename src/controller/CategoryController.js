@@ -20,6 +20,10 @@ class CategoryController {
       this.#mainController.readCoachNameInput();
     }
   }
+
+  getCoachNames() {
+    return this.#categoryModel.getCoachNames();
+  }
 }
 
 module.exports = CategoryController;
