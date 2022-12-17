@@ -3,6 +3,7 @@ const ERROR_CODE = Object.freeze({
   WRONG_FORMAT: 'WRONG_FORMAT',
   WRONG_COUNT: 'WRONG_COUNT',
   WRONG_NAME_LENGTH: 'WRONG_NAME_LENGTH',
+  WRONG_FOOD_LENGTH: 'WRONG_FOOD_LENGTH',
 });
 
 const ERROR_MESSAGE = Object.freeze({
@@ -10,6 +11,7 @@ const ERROR_MESSAGE = Object.freeze({
   WRONG_FORMAT: '[ERROR] 잘못된 형식입니다.',
   WRONG_COUNT: '[ERROR] 2명 이상 5명 이하의 코치 수를 입력해주세요.',
   WRONG_NAME_LENGTH: '[ERROR] 코치 이름은 2글자 이상 4글자 이하로 입력해주세요.',
+  WRONG_FOOD_LENGTH: '[ERROR] 음식은 최대 2개만 입력해주세요.',
 
 });
 
