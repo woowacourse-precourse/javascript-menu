@@ -12,8 +12,8 @@ class MainController {
     this.#recommendationController = new RecommendationController(this);
   }
 
-  processCoachNameInput() {
-    this.#categoryController.processCoachNameInput();
+  processCoachNameInput(coachNameInput) {
+    this.#categoryController.processCoachNameInput(coachNameInput);
     this.readHateFoodInput();
   }
 
