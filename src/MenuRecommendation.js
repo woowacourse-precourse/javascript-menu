@@ -93,14 +93,6 @@ class MenuRecommendation {
 
     OutputView.printCoachLunch(this.coachs);
 
-    // for (let i = 0; i < this.coachs.length; i++) {
-    //   console.log(
-    //     `[ ${this.coachs[i].getName()} | ${this.coachs[i]
-    //       .getLunch()
-    //       .join(" | ")}]`
-    //   );
-    // }
-
     OutputView.printExit();
   }
 
@@ -109,24 +101,22 @@ class MenuRecommendation {
       let todayCat = category[i];
 
       let numArr = [];
-      for (let j = 0; j < menus[todayCat].length; j++) {
+      for (let j = 1; j < menus[todayCat].length + 1; j++) {
         numArr.push(j);
       }
 
       const menu = MissionUtils.Random.shuffle(numArr)[0];
 
-      this.coachs[Number(coach)].setLunch(menus[todayCat][menu]);
-
-      // console.log(menus[todayCat][menu]);
+      this.coachs[Number(coach)].setLunch(menus[todayCat][menu - 1]);
     }
   }
 
   chooseMenu() {
     for (let i = 0; i < this.coachs.length; i++) {
       this.chooseMenuForCoach(i);
-      console.log(this.coachs[i].getLunch());
-      console.log(new Set(this.coachs[i].getLunch()).size);
-      console.log(this.coachs[i].getLunch().length);
+      // console.log(this.coachs[i].getLunch());
+      // console.log(new Set(this.coachs[i].getLunch()).size);
+      // console.log(this.coachs[i].getLunch().length);
       if (
         !new Set(this.coachs[i].getLunch()).size ===
         this.coachs[i].getLunch().length
@@ -135,7 +125,6 @@ class MenuRecommendation {
       }
     }
 
-    console.log(this.coachs);
     this.receiveResult();
   }
 
@@ -151,10 +140,9 @@ class MenuRecommendation {
         }
       } else if (!category.includes(random)) {
         category.push(random);
-        // scatList.push(randomNum);
       }
     }
-    // console.log(catList);
+
     this.chooseMenu();
   }
 
@@ -165,7 +153,6 @@ class MenuRecommendation {
     this.count++;
 
     if (this.count === this.coachs.length) {
-      // console.log(this.coachs);
       this.chooseCat();
     } else {
       InputView.readDislikeMenu(
