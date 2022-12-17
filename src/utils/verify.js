@@ -38,7 +38,7 @@ const verify = {
 
   eatenTwice(eatenList, menu) {
     const result = eatenList.filter((value) => value === menu);
-    if (result.length > 2) return true;
+    if (result.length >= 2) return true;
     return false;
   },
 };
