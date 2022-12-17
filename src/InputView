@@ -3,6 +3,31 @@ const InputView = {
       Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", callback);
     },
 
+    validateName(name){
+        if (name.length < 2 || name.length > 4){
+            this.errorHandling("[ERROR] 이름은 2~4글자여야 합니다.\n");
+            return false;
+        }
+
+        return true;
+    },
+
+    validateNames(names){
+        const names = names.split(',');
+        if (names.length < 2 || names.length > 5){
+            this.errorHandling("[ERROR] 인원은 2~5이여야 합니다.\n");
+            return false;
+        }
+
+    },
+
+    errorHandling(message){
+        try{
+          throw new Error(message);
+        }catch(error){
+          Console.print(error);
+        }
+    }
   };
   
   module.exports = InputView;
