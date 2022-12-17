@@ -13,6 +13,10 @@ class Coach {
     }
   }
 
+  addMenu(menu) {
+    this.#menus.push(menu);
+  }
+
   getCoachLog() {
     return {
       nonEdibleMenu: this.#nonEdibleMenu,
