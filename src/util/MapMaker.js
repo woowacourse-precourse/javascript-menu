@@ -1,10 +1,16 @@
 const { SYMBOL, DAYS } = require("../constants");
 
 const MapMaker = {
+  getMap(array) {
+    return (
+      SYMBOL.RESULT_OPEN + array.join(SYMBOL.SEPARATOR) + SYMBOL.RESULT_CLOSE
+    );
+  },
+
   getDivision() {
-    let division =
-      SYMBOL.RESULT_OPEN + DAYS.join(SYMBOL.SEPARATOR) + SYMBOL.RESULT_CLOSE;
-    return division;
+    return (
+      SYMBOL.RESULT_OPEN + DAYS.join(SYMBOL.SEPARATOR) + SYMBOL.RESULT_CLOSE
+    );
   },
 };
 

@@ -1,11 +1,12 @@
-const { MESSAGE } = require("./constants");
+const { MESSAGE, CATEGORY } = require("./constants");
 const MenuRecommender = require("./MenuRecommender");
 const { makeArray } = require("./util/ArrayMaker");
-const { getDivision } = require("./util/MapMaker");
+const { getDivision, getMap } = require("./util/MapMaker");
 const MenuValidator = require("./validation/MenuValidator");
 const NameValidator = require("./validation/NameValidator");
 const InputView = require("./views/InputView");
 const OutputView = require("./views/OutputView");
+const { Random } = require("@woowacourse/mission-utils");
 
 class Controller {
   #namesArr;
@@ -63,8 +64,15 @@ class Controller {
     }
   }
 
+  selectCategory() {
+    const category = CATEGORY[Random.pickNumberInRange(1, 5)];
+    return category;
+  }
+
   returnResult() {
     const division = getDivision();
+    const categories = this.selectCategory();
+    // const categoryLine = getMap(categories);
     const result = [MESSAGE.RESULT_START, division];
     OutputView.printResult(result);
   }
