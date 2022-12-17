@@ -4,4 +4,6 @@ class CoachList {
   constructor(coachs) {
     this.#coachs = coachs;
   }
+
+  addVannedMenu(name, vannedMenu) {}
 }

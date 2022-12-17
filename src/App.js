@@ -1,3 +1,4 @@
+const Validator = require("./Validator");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 
@@ -10,12 +11,23 @@ const SAMPLE = {
 };
 
 class App {
+  #coachList;
+
   play() {
     OutputView.printOpening();
   }
 
   requestCoachName() {
-    InputView.readCoachName((names) => {});
+    InputView.readCoachName((names) => {
+      this.handleError(this.registCoachs.bind(this, names), this.requestCoachName.bind(this));
+    });
+  }
+
+  registCoachs(names) {
+    Validator.validateCoachNames(names);
+    const coachNameList = names.split(",");
+    const coachs = coachNameList.map((name) => new Coach(name));
+    this.#coachList = new CoachList(coachs);
   }
 
   handleError(callback, request) {

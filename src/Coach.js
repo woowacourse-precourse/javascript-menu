@@ -1,8 +1,12 @@
 class Coach {
   #name;
-  #menu;
+  #vannedMenu;
 
   constructor(name) {
     this.#name = name;
+  }
+
+  addVannedMenu(vannedMenu) {
+    this.#vannedMenu = vannedMenu;
   }
 }
