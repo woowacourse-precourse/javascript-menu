@@ -1,3 +1,5 @@
+const InputView = require('./UI/InputView');
+const OutputView = require('./UI/OutputView');
 const getCategory = require('./utils/getCategory');
 const verify = require('./utils/verify');
 
@@ -13,12 +15,26 @@ class App {
   #foodCategory;
 
   play() {
-    return this.gameSetting();
+    OutputView.gameStart();
+    return this.setFoodCategories();
   }
 
-  gameSetting() {
+  setFoodCategories() {
     this.#foodCategory = getCategory(verify.moreThanTwoData);
-    console.log(this.#foodCategory);
+    return this.inputCoaches();
+  }
+
+  inputCoaches() {
+    InputView.inputCoachNames((input) => {
+      try {
+        verify.nameCount(input);
+        verify.nameLengthCount(input);
+      } catch (error) {
+        if (error.message === 'Invalid Coach Count') OutputView.ErrorCoachCount();
+        if (error.message === 'Invalid Name Length') OutputView.ErrorCoachName();
+        return this.inputCoaches();
+      }
+    });
   }
 }
 
