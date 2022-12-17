@@ -21,4 +21,17 @@ describe('Vaildator 객체 테스트', () => {
       false
     );
   });
+
+  test('코치의 수가 유효범위 이내인지 검사', () => {
+    expect(isValidCoachNumber(['한명'])).toEqual(false);
+    expect(isValidCoachNumber(['한명', '두명'])).toEqual(true);
+    expect(isValidCoachNumber(['한명', '두명', '세명'])).toEqual(true);
+    expect(isValidCoachNumber(['한명', '두명', '세명', '네명'])).toEqual(true);
+    expect(
+      isValidCoachNumber(['한명', '두명', '세명', '네명', '다섯명'])
+    ).toEqual(true);
+    expect(
+      isValidCoachNumber(['한명', '두명', '세명', '네명', '다섯명', '여섯명'])
+    ).toEqual(false);
+  });
 });
