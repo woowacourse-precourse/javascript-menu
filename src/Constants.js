@@ -72,6 +72,7 @@ const Constants = Object.freeze({
     pipeSeperator: ' | ',
     leftBracket: '[ ',
     rightBracket: ' ]',
+    complete: '추천을 완료했습니다.',
   }),
 
   GAME_MSG: Object.freeze({
