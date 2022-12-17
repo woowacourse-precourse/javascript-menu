@@ -38,34 +38,41 @@ class App {
 
   #onCoachesSubmit(names) {
     try {
-      const nameList = names.split(',');
-      ListValidator.validate(nameList, 2, 5);
-      const coaches = names.split(',').map((coach) => new Coach(coach));
-      this.#coaches = new Coaches(coaches);
-      return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
+      this.#tryCoachesSubmit(names);
     } catch (error) {
       printError(error);
       readCoaches(this.#onCoachesSubmit.bind(this));
     }
   }
 
+  #tryCoachesSubmit(names) {
+    const nameList = names.split(',');
+    ListValidator.validate(nameList, 2, 5);
+    const coaches = names.split(',').map((coach) => new Coach(coach));
+    this.#coaches = new Coaches(coaches);
+    return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
+  }
+
   #onCantEatSubmit(menu) {
     try {
-      const cantEat = menu.split(',');
-      ListValidator.validate(cantEat, 0, 2);
-      this.#coaches.setCoachMenu(this.#index, cantEat);
-      this.#index += 1;
-
-      if (this.#index === this.#coaches.count()) {
-        this.#runFinish();
-        return Console.close();
-      }
-
-      return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
+      this.#tryCantEatSubmit(menu);
     } catch (error) {
       printError(error);
       readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
     }
+  }
+
+  #tryCantEatSubmit(menu) {
+    const cantEat = menu.split(',');
+    ListValidator.validate(cantEat, 0, 2);
+    this.#coaches.setCoachMenu(this.#index, cantEat);
+    this.#index += 1;
+
+    if (this.#index === this.#coaches.count()) {
+      this.#runFinish();
+      return Console.close();
+    }
+    return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
   }
 
   #runFinish() {
@@ -74,15 +81,19 @@ class App {
     const categories = CategoryMaker.makeCategories(RandomNumberGenerator.generate);
     printCategories(categories);
     this.#coaches.getState().forEach((coach) => {
-      categories.forEach((category) => {
-        const menus = SAMPLE[category].split(', ');
-        this.#addToEat(coach, menus);
-      });
+      this.#addCategoryRecommend(categories, coach);
     });
 
     this.#printCoaches();
     printEmptyLine();
     printFinish();
+  }
+
+  #addCategoryRecommend(categories, coach) {
+    categories.forEach((category) => {
+      const menus = SAMPLE[category].split(', ');
+      this.#addToEat(coach, menus);
+    });
   }
 
   #printCoaches() {
