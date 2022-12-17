@@ -1,6 +1,6 @@
 const Validation = {
   checkCategory(categories, selectedCategory) {
-    const DUPLICATES = categories.filter((ele) => ele === selectedCategory).length;
+    const DUPLICATES = categories.filter((ele) => ele === selectedCategory);
 
     if (DUPLICATES.length === 2) {
       return false;
