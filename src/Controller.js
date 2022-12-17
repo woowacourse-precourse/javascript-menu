@@ -8,6 +8,8 @@ const InputView = require("./views/InputView");
 const OutputView = require("./views/OutputView");
 const { Random } = require("@woowacourse/mission-utils");
 
+const MAX_CATEGORY_LENGTH = 5;
+
 class Controller {
   #namesArr;
   #menuAskingIndex = 0;
@@ -65,15 +67,26 @@ class Controller {
   }
 
   selectCategory() {
-    const category = CATEGORY[Random.pickNumberInRange(1, 5)];
-    return category;
+    return CATEGORY[Random.pickNumberInRange(1, 5)];
+  }
+
+  getCategories() {
+    let categories = [];
+    while (categories.length < MAX_CATEGORY_LENGTH) {
+      const category = this.selectCategory();
+      if (categories.filter((el) => el === category).length > 2) {
+        break;
+      }
+      categories.push(category);
+    }
+    return categories;
   }
 
   returnResult() {
     const division = getDivision();
-    const categories = this.selectCategory();
-    // const categoryLine = getMap(categories);
-    const result = [MESSAGE.RESULT_START, division];
+    const categories = this.getCategories();
+    const categoryLine = getMap([CATEGORY.TITLE, ...categories]);
+    const result = [MESSAGE.RESULT_START, division, categoryLine];
     OutputView.printResult(result);
   }
 }
