@@ -46,6 +46,10 @@ const InputView = {
     if (hateMenus.length > INPUT.MAX_HATE_MENU) {
       throw new Error('최대 2개의 못 먹는 메뉴를 선택할 수 있습니다.');
     }
+
+    if (new Set(hateMenus).size !== hateMenus.length) {
+      throw new Error('똑같은 메뉴를 입력할 수 없습니다.');
+    }
   },
 
   question(string, callback) {
