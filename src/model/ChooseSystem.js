@@ -24,16 +24,15 @@ class ChooseSystem {
 
   chooseAllMenus() {
     this.#coachNames.forEach((coachName) => {
-      console.log('LETS TEST', { cat: this.#categories, ba: this.#bans[coachName] });
       const chosenMenus = this.#menuChooser.choose(this.#categories, this.#bans[coachName]);
       this.#results[coachName] = chosenMenus;
     });
   }
 
   getResults() {
-    const result = [];
+    const result = { categories: this.#categories, pickResult: [] };
     this.#coachNames.forEach((coachName) => {
-      result.push([coachName].concat(this.#results[coachName]));
+      result.pickResult.push([coachName].concat(this.#results[coachName]));
     });
 
     return result;
