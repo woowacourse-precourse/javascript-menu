@@ -1,7 +1,7 @@
 const { Random } = require("@woowacourse/mission-utils");
 
 class MenuList {
-  #categories = ["일식", "한식", "중식", "아시안", "양식"];
+  #categories = ["", "일식", "한식", "중식", "아시안", "양식"];
   #menus = {
     일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
     한식: "김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음",
@@ -13,15 +13,20 @@ class MenuList {
   #categoryRandomGenerator = Random;
 
   getCategory() {
-    let randomNumber = this.#categoryRandomGenerator.pickNumberInRange(0, 4);
-    randomNumber += 1;
+    let randomNumber = this.#categoryRandomGenerator.pickNumberInRange(1, 5);
+
     return this.#categories[randomNumber];
   }
   getMenu(category) {
     const targetMenus = this.#menus[category].split(", ");
 
-    const shuffled = Random.shuffle(targetMenus);
-    return shuffled[0];
+    const end = targetMenus.length;
+    let temp = [];
+    for (let i = 0; i < end; i++) {
+      temp.push(i);
+    }
+    const shuffled = Random.shuffle(temp);
+    return targetMenus[shuffled[0]];
   }
 }
 

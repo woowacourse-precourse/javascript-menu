@@ -7,7 +7,7 @@ class CategoryRecorder {
     양식: 0,
   };
   isMoreThanTwice(category) {
-    return this.#categoryRecord[category] > 2;
+    return this.#categoryRecord[category] > 1;
   }
   writeRecord(category) {
     this.#categoryRecord[category] += 1;

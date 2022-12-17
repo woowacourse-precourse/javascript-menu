@@ -4,6 +4,7 @@ class MenuRecommend {
   #menuList;
   #menuRecommendRecorder;
   #coaches = [];
+  #day = ["월", "화", "수", "목", "금"];
   constructor(configuration) {
     const {
       categoryRecorder,
@@ -31,7 +32,7 @@ class MenuRecommend {
     let numberOfLoops = 0;
     while (numberOfLoops !== loop) {
       const category = this.#menuList.getCategory();
-
+      //   console.log("category", category);
       const moreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
       if (moreThanTwice) continue;
 
@@ -43,13 +44,25 @@ class MenuRecommend {
           const menu = this.#menuList.getMenu(category);
           if (!targetCoach.canEat(menu)) continue;
           if (targetCoach.ateBefore(menu)) continue;
-          targetCoach.writeEatingRecord(numberOfLoops, menu, category);
+          targetCoach.writeEatingRecord(
+            this.#day[numberOfLoops],
+            menu,
+            category
+          );
+          this.#menuRecommendRecorder.writeMenuRecommendRecord(
+            targetCoach.getName(),
+            {
+              day: this.#day[numberOfLoops],
+              category,
+              menu,
+            }
+          );
           i++;
         }
-        return;
       }
       numberOfLoops += 1;
     }
+    return this.#menuRecommendRecorder.getMenuRecommendRecord();
   }
 }
 
