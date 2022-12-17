@@ -11,11 +11,11 @@ const InputView = {
       return InputView.readCoachesName(callback);
     });
   },
-  readDontLikeMenu(name, callback) {
+  readDontLikeMenu(name, count, callback) {
     Console.readLine(GAME_MESSAGE.showDontLikeMenu(name), (menus) => {
       const check = InputErrorHandler(Validation.menu, menus);
-      if (check) return callback(name, menus);
-      return InputView.readDontLikeMenu(name, callback);
+      if (check) return callback(name, count, menus);
+      return InputView.readDontLikeMenu(name, count, callback);
     });
   },
 };
