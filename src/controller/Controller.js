@@ -69,6 +69,7 @@ class Controller {
     results.forEach((list) => {
       OuputView.listResult(list.coach, list.result.join(',').replace(/,/g, ' | '));
     });
+    OuputView.endMent();
   }
 }
 
