@@ -46,7 +46,10 @@ const Message = {
     return `[ ${name} | ${menu.join(' | ')} ]`;
   },
 
-  ERROR: '[ERROR]',
+  ERROR_COACH_NUMBER: '[ERROR] 코치의 수가 잘못되었거나 구분자가 틀렸습니다.',
+  ERROR_SEPARATOR: '[ERROR] 구분자 사이에 공백이 없어야 합니다.',
+  ERROR_NAME_LENGTH: '[ERROR] 이름 길이가 잘못되었습니다.',
+  ERROR_CANNOTEAT: '[ERROR] 음식의 수가 잘못되었거나 구분자가 틀렸습니다.',
 };
 
 module.exports = { MenuConfig, ValidConfig, Message };
