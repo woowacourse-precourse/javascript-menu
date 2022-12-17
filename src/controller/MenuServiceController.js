@@ -1,6 +1,8 @@
 const {
   checkNameCountValid,
   checkNameLengthValid,
+  checkDislikeCountValid,
+  checkDislikeMenuValid,
 } = require("../validator/index");
 
 MenuServiceController = class {
@@ -23,26 +25,48 @@ MenuServiceController = class {
   inputCoachName() {
     this.view.readCoachName((names) => {
       names = [...new Set(names.split(","))];
+      const reversed = names.reverse();
 
       checkNameCountValid(names);
       checkNameLengthValid(names);
 
       this.model.setCoachName(names);
 
-      this.inputCoachDislike(names.reverse());
+      try {
+        this.inputCoachDislike(reversed);
+      } catch (message) {
+        this.view.printError(message);
+        this.inputCoachDislike(reversed);
+      }
     });
   }
 
   inputCoachDislike(names) {
-    this.view.readCoachDislike(names.pop(), (menus) => {
-      if (!names.length) this.next();
+    const name = names.pop();
 
-      this.inputCoachDislike(names);
+    this.view.readCoachDislike(name, (menus) => {
+      menus = [...new Set(menus.split(","))];
+
+      checkDislikeCountValid(menus);
+      if (menus.join("") !== "") checkDislikeMenuValid(menus);
+
+      this.model.setCoachDislike([name, menus]);
+
+      if (!names.length) return this.next();
+
+      try {
+        this.inputCoachDislike(names);
+      } catch (message) {
+        this.view.printError(message);
+        this.inputCoachDislike(names);
+      }
     });
   }
 
   next() {
-    console.log("done");
+    const dislikes = this.model.getDislike();
+
+    console.log(dislikes);
   }
 };
 

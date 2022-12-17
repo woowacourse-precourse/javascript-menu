@@ -1,4 +1,4 @@
-const { ERROR } = require("../constants/index");
+const { MENU, ERROR } = require("../constants/index");
 
 const Validator = {
   checkNameCountValid(names) {
@@ -8,13 +8,27 @@ const Validator = {
   },
 
   checkNameLengthValid(names) {
-    const nameLengthValid = names.every((name) => {
-      nameLength = name.length;
-
-      return 2 <= nameLength && nameLength <= 4;
-    });
+    const nameLengthValid = names.every(
+      (name) => 2 <= name.length && name.length <= 4
+    );
 
     if (!nameLengthValid) throw new Error(ERROR.NAME_LENGTH);
+  },
+
+  checkDislikeCountValid(menus) {
+    const dislikeCountValid = 0 <= menus.length && menus.length <= 2;
+
+    if (!dislikeCountValid) throw new Error(ERROR.DISLIKE_COUNT);
+  },
+
+  checkDislikeMenuValid(menus) {
+    const total = Object.values(MENU)
+      .map((string) => string.split(", "))
+      .flat();
+
+    const dislikeMenuValid = menus.every((menu) => total.includes(menu));
+
+    if (!dislikeMenuValid) throw new Error(ERROR.DISLIKE_MENU);
   },
 };
 

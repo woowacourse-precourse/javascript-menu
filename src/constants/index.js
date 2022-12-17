@@ -18,6 +18,8 @@ const PREFIX = "[ERROR]";
 const ERROR = Object.freeze({
   NAME_COUNT: `${PREFIX} 코치는 중복 없이 최소 2명, 최대 5명을 입력해야 합니다.`,
   NAME_LENGTH: `${PREFIX} 코치의 이름은 최소 2글자, 최대 4글자를 입력해야 합니다.`,
+  DISLIKE_COUNT: `${PREFIX} 코치가 못 먹는 메뉴는 중복 없이 최소 0개, 최대 2개를 입력해야 합니다.`,
+  DISLIKE_MENU: `${PREFIX} 코치가 못 먹는 메뉴는 점심 메뉴에 존재해야 합니다.`,
 });
 
-module.exports = { MESSAGE, ERROR };
+module.exports = { MENU, MESSAGE, ERROR };
