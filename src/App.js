@@ -104,7 +104,7 @@ function getMenu(idx, date) {
   const menus = SAMPLE[Categories[date]].split(', ')
   const menu = menus[Random.shuffle(RANDOM_ARRAY)[0]-1]
   if(Recommended[idx].includes(menu)) return getMenu(idx, date)
-  if(BannedMenu[Names[idx].includes(menu)]) return getMenu(idx, date)
+  if(BannedMenu[Names[idx]].includes(menu)) return getMenu(idx, date)
   Recommended[idx].push(menu)
 }
 
