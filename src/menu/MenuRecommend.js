@@ -27,25 +27,29 @@ class MenuRecommend {
     const targetCoach = this.#coaches.find((coach) => coach.getName() === name);
     targetCoach.registerHateFood(foods.split(","));
   }
-  recommendMenus() {
-    const category = this.#menuList.getCategory();
+  recommendMenus(loop) {
+    let numberOfLoops = 0;
+    while (numberOfLoops !== loop) {
+      const category = this.#menuList.getCategory();
 
-    const moreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
+      const moreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
+      if (moreThanTwice) continue;
 
-    if (!moreThanTwice) {
-      this.#categoryRecorder.writeRecord(category);
-      let i = 0;
-      while (i !== this.#coaches.length) {
-        const targetCoach = this.#coaches[i];
-        const menu = this.#menuList.getMenu(category);
-        if (!targetCoach.canEat(menu)) continue;
-        if (targetCoach.ateBefore(menu)) continue;
-        targetCoach.writeEatingRecord(menu);
-        i++;
+      if (!moreThanTwice) {
+        this.#categoryRecorder.writeRecord(category);
+        let i = 0;
+        while (i !== this.#coaches.length) {
+          const targetCoach = this.#coaches[i];
+          const menu = this.#menuList.getMenu(category);
+          if (!targetCoach.canEat(menu)) continue;
+          if (targetCoach.ateBefore(menu)) continue;
+          targetCoach.writeEatingRecord(numberOfLoops, menu, category);
+          i++;
+        }
+        return;
       }
-      return;
+      numberOfLoops += 1;
     }
-    this.recommendMenus();
   }
 }
 

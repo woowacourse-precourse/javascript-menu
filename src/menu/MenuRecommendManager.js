@@ -31,7 +31,7 @@ class MenuRecommendManager {
         this.onReadHateFood(coachesNames[this.#counter], coachesNames);
       }
       if (this.#counter === coachesNames.length) {
-        this.#menuRecommend.recommendMenus();
+        this.#menuRecommend.recommendMenus(5);
       }
     });
   }
