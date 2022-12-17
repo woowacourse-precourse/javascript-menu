@@ -24,14 +24,7 @@ const ERROR_MESSAGE = Object.freeze({
   MENU_COUNT: `${SYMBOL.ERROR}못 먹는 메뉴는 최소 0개, 최대 2개 입력 가능합니다.`,
 });
 
-const DAY = Object.freeze({
-  TITLE: "구분",
-  MON: "월요일",
-  TUE: "화요일",
-  WED: "수요일",
-  THU: "목요일",
-  FRI: "금요일",
-});
+const DAYS = ["구분", "월요일", "화요일", "수요일", "목요일", "금요일"];
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
