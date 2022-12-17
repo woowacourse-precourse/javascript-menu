@@ -1,3 +1,3 @@
-const menuDB = Object.freeze({});
+const menuDB = {};
 
 module.exports = menuDB;
