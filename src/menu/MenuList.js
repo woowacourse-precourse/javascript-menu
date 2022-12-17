@@ -10,10 +10,10 @@ class MenuList {
       "팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜",
     양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
   };
-  #categoryRandomGenerator = Random;
+  #randomGenerator = Random;
 
   getCategory() {
-    let randomNumber = this.#categoryRandomGenerator.pickNumberInRange(1, 5);
+    let randomNumber = this.#randomGenerator.pickNumberInRange(1, 5);
 
     return this.#categories[randomNumber];
   }
@@ -25,7 +25,9 @@ class MenuList {
     for (let i = 0; i < end; i++) {
       temp.push(i);
     }
-    const shuffled = Random.shuffle(temp);
+    const shuffled = this.#randomGenerator.shuffle(temp);
+    console.log(shuffled);
+
     return targetMenus[shuffled[0]];
   }
 }

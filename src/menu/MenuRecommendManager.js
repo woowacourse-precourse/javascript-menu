@@ -1,4 +1,5 @@
 const OUTPUT_MESSAGES = require("../utils/constant/OutputMessages");
+const Validator = require("../utils/validator");
 
 class MenuRecommendManager {
   #inputView;
@@ -18,6 +19,14 @@ class MenuRecommendManager {
   onReadCoachesName() {
     this.#inputView.readCoachesName((coaches) => {
       const coachesNames = coaches.split(",");
+      try {
+        Validator.isRightCoachName(2, 4, coachesNames);
+        Validator.isRightCoachesNumber(2, 5, coachesNames);
+      } catch (error) {
+        this.#outputView.print(error.message);
+        this.onReadCoachesName();
+        return;
+      }
       this.#menuRecommend.registerCoaches(coachesNames);
 
       this.onReadHateFood(coachesNames[this.#counter], coachesNames);
@@ -39,6 +48,7 @@ class MenuRecommendManager {
 
   onPrintResult(records) {
     this.#outputView.printResult(records);
+    this.#inputView.onEnd();
   }
 }
 

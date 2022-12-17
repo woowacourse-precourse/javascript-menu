@@ -9,6 +9,9 @@ const InputView = {
   readHateFood(name, callback) {
     this.module.readLine(name + INPUT_MESSAGES.readHateFoodMessage, callback);
   },
+  onEnd() {
+    this.module.close();
+  },
 };
 
 module.exports = InputView;
