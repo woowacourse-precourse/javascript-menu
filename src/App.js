@@ -35,6 +35,24 @@ class App {
       }
     });
   }
+
+  #inputBanMenuPhase(index) {
+    if (index >= this.#coaches.length) {
+      this.#showResultPhase();
+      return;
+    }
+
+    InputView.readBanMenu(this.#coaches[index], (banMenus) => {
+      try {
+        Validator.errorIfBanMenuInvalid(banMenus);
+        this.#chooseSystem.banMenu(this.#coaches[index], banMenus);
+        this.#inputBanMenuPhase(index + 1);
+      } catch (error) {
+        OutputView.printMessage(ERROR.BAN_MENU_INVALID);
+        this.#inputBanMenuPhase(index);
+      }
+    });
+  }
 }
 
 module.exports = App;
