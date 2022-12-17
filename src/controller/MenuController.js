@@ -1,15 +1,19 @@
-const Category = require('../model/Category');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
+const Category = require('../model/Category');
+const Menu = require('../model/Menu');
 
 class MenuController {
   #categoryList;
 
   #coachList;
 
+  #noMenuAllList;
+
   constructor() {
     this.#categoryList = [];
     this.#coachList = [];
+    this.#noMenuAllList = {};
   }
 
   start() {
@@ -33,6 +37,7 @@ class MenuController {
       noMenuAllList[coach] = noMenus;
     });
     console.log('no', noMenuAllList);
+    this.#noMenuAllList = noMenuAllList;
     this.recommendCategory();
   }
 
@@ -40,9 +45,23 @@ class MenuController {
     const categories = new Category();
     const categoryList = categories.recommend();
     this.#categoryList = categoryList;
+    this.recommendMenu();
   }
 
-  recommendMenu() {}
+  recommendMenu() {
+    const menuTool = new Menu(
+      this.#categoryList,
+      this.#coachList,
+      this.#noMenuAllList,
+    );
+    this.#coachList.forEach(coach => {
+      const menus = [];
+      const menu = menuTool.recommend();
+      menus.push(menu);
+      console.log('s', menus);
+    });
+    console.log(menu);
+  }
 }
 
 module.exports = MenuController;
