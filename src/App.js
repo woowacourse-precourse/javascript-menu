@@ -4,6 +4,7 @@ const OutputView = require("./view/OutputView");
 
 const Coach = require("./model/Coach");
 const Menu = require("./model/Menu");
+const { printErrorMessage } = require("./view/OutputView");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -38,13 +39,11 @@ class App {
     try {
       this.#coachesManager = new Coach(names);
       this.#coaches = this.#coachesManager.getCoaches();
-
       OutputView.printEmptyLine();
 
       this.readUneatableMenu();
     } catch (error) {
       OutputView.printErrorMessage(error);
-
       this.readCoachesName();
     }
   }
@@ -62,12 +61,16 @@ class App {
   }
 
   saveUneatableMenu(menus) {
-    this.#menuManager.validate(menus);
+    try {
+      this.#menuManager.validate(menus);
+      OutputView.printEmptyLine();
 
-    OutputView.printEmptyLine();
-
-    this.#coachIndex += 1;
-    this.readUneatableMenu();
+      this.#coachIndex += 1;
+      this.readUneatableMenu();
+    } catch (error) {
+      OutputView.printErrorMessage(error);
+      this.readUneatableMenu();
+    }
   }
 
   makeRecommandResult() {
