@@ -6,12 +6,23 @@ const MESSAGE = Object.freeze({
   FINISH: '\n추천을 완료했습니다.',
 });
 
+const ERROR = Object.freeze({
+  NUM_OF_COACH: '[ERROR] 코치는 최소 2명 이상 5명 이하로 입력해야 합니다.',
+});
+
+const COACH = Object.freeze({
+  MIN: 2,
+  MAX: 5,
+});
+
 const DAYS = Object.freeze(['월요일', '화요일', '수요일', '목요일', '금요일']);
 
 const CATEGORY = Object.freeze(['일식', '한식', '중식', '아시안', '양식']);
 
 module.exports = {
   MESSAGE,
+  ERROR,
+  COACH,
   DAYS,
   CATEGORY,
 };

@@ -18,9 +18,7 @@ const OutputView = {
     this.printMessage(MESSAGE.RESULT);
     this.printArrayForm(DAYS, '구분');
     this.printArrayForm(CATEGORY, '카테고리');
-    coaches.forEach((coach) => {
-      this.printCoachesDailyMenu(coach);
-    });
+    coaches.forEach((coach) => this.printCoachesDailyMenu(coach));
     this.printMessage(MESSAGE.FINISH);
   },
 

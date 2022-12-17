@@ -5,6 +5,7 @@ const InputView = require('./Views/InputView');
 const RandomMaker = require('./RandomMaker');
 const { MESSAGE, DAYS } = require('./Constants');
 const Category = require('./Category');
+const { validateCoaches } = require('./Validate');
 
 class MenuController {
   constructor(sampleMenu) {
@@ -21,6 +22,7 @@ class MenuController {
   }
 
   setCoaches(coaches) {
+    validateCoaches(coaches);
     this.coachList = coaches.split(',').map((coach) => new Coach(coach));
     this.setCoachCount = 0;
     this.setAvoids();
