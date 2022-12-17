@@ -1,9 +1,10 @@
-const Menu = require('./Menu');
+const { Console } = require('@woowacourse/mission-utils');
 const Coach = require('./Coach');
 const OutputView = require('./Views/OutputView');
 const InputView = require('./Views/InputView');
 const RandomMaker = require('./RandomMaker');
 const { MESSAGE, DAYS } = require('./Constants');
+const Category = require('./Category');
 
 class MenuController {
   constructor(sampleMenu) {
@@ -11,11 +12,7 @@ class MenuController {
   }
 
   setMenu(sampleMenu) {
-    this.menuCategory = ['일식', '한식', '중식', '아시안', '양식'].map((category) => new Menu(category));
-    this.menuCategory.forEach((menu) => {
-      menu.setList(sampleMenu[menu.name]);
-    });
-    // console.log('Menu list : \n', this.menuCategory);
+    this.category = new Category(sampleMenu);
   }
 
   start() {
@@ -25,29 +22,36 @@ class MenuController {
 
   setCoaches(coaches) {
     this.coachList = coaches.split(',').map((coach) => new Coach(coach));
-    this.coachCount = 0;
+    this.setCoachCount = 0;
     this.setAvoids();
   }
 
   setAvoids(avoidMenu) {
-    if (this.coachCount !== 0) {
-      this.coachList[this.coachCount - 1].setAvoidMenu(avoidMenu);
+    if (this.setCoachCount !== 0) {
+      this.coachList[this.setCoachCount - 1].setAvoidMenu(avoidMenu);
     }
-    if (this.coachCount === this.coachList.length) return this.recommandMenu();
-    InputView.readAvoidMenu(this.coachList[this.coachCount++].name, this.setAvoids.bind(this));
+    if (this.setCoachCount === this.coachList.length) return this.recommandMenu();
+    InputView.readAvoidMenu(this.coachList[this.setCoachCount++].name, this.setAvoids.bind(this));
   }
 
   recommandMenu() {
     DAYS.forEach(() => {
-      const category = RandomMaker.category();
-      this.pickMenu(this.menuCategory[category].list);
+      const menuList = this.category.getMenuList();
+      const randomCategory = this.category.pickValidCategory(RandomMaker.category);
+      this.pickMenu(menuList[randomCategory].list);
     });
+    this.result();
   }
 
   pickMenu(menuList) {
     this.coachList.forEach((coach) => {
       coach.setDailyMenu(menuList, RandomMaker.menu);
     });
+  }
+
+  result() {
+    OutputView.printResult(this.coachList);
+    Console.close();
   }
 }
 
