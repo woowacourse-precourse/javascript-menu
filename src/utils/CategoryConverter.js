@@ -1,4 +1,4 @@
-class CatergoryConverter {
+class CategoryConverter {
   static convert(koreanName) {
     if (koreanName === "일식") return "JAPANESE";
     if (koreanName === "한식") return "KOREAN";
@@ -8,4 +8,4 @@ class CatergoryConverter {
   }
 }
 
-module.exports = CatergoryConverter;
+module.exports = CategoryConverter;
