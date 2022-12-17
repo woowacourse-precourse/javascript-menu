@@ -77,17 +77,8 @@ class App {
 
   /** 7. 메뉴 추천 */
   menuRecomend() {
-    // const foodArr = Object.entries(categories);
-	// Object.entries(categories.category).filter(([ , food]) => food.length > 2);
-
-
-	// const category = categories.get(Random.pickNumberInRange(1, 5));
-	// console.log(category);
-
-
 
 	for (let key in categories) {
-		// const foodArr = categories[key].split(",");
 		const foodArr = categories[key];
 		console.log(foodArr);
 		console.log("###: ", typeof foodArr);
@@ -98,8 +89,11 @@ class App {
   }
 
   print() {
+	let coachCount = 0;
+
 	Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
 	Console.print("[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]");
+	Console.print(`${this.coachs[indexCount]}`);
 
   }
 
