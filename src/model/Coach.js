@@ -10,7 +10,7 @@ class Coach {
   }
 
   validate(names) {
-    const coaches = names.split(", ");
+    const coaches = names.split(",");
 
     this.isValidPersonnel(coaches);
     this.isValidNameLength(coaches);

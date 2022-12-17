@@ -3,6 +3,7 @@ const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 
 const Coach = require("./model/Coach");
+const Menu = require("./model/Menu");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -15,8 +16,9 @@ const SAMPLE = {
 
 class App {
   #coaches;
-  #sequence = 0;
+  #coachIndex = 0;
   #coachesManager;
+  #menuManager = new Menu();
 
   play() {
     this.printStartMessage();
@@ -42,17 +44,19 @@ class App {
   }
 
   readUneatableMenu() {
-    if (this.#sequence < this.#coaches.length)
+    if (this.#coachIndex < this.#coaches.length)
       InputView.readUneatableMenu(
-        this.#coaches[this.#sequence],
+        this.#coaches[this.#coachIndex],
         this.saveUneatableMenu.bind(this)
       );
   }
 
   saveUneatableMenu(menus) {
+    this.#menuManager.validate(menus);
+
     OutputView.printEmptyLine();
 
-    this.#sequence += 1;
+    this.#coachIndex += 1;
     this.readUneatableMenu();
   }
 }
