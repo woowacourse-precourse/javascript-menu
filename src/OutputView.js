@@ -13,8 +13,12 @@ const OutputView = {
         Console.print("추천을 완료했습니다.")
     },
 
-    printResults(results) {
-        Console.print(results)
+    printResults(categorys, menus) {
+        Console.print(categorys)
+        menus.forEach(menu => {
+            Console.print(menu)
+        });
+
     },
 
     printResultTitle() {

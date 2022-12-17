@@ -14,9 +14,12 @@ class Coachs {
         return this.#coachs
     }
 
+    getCoachMenus() {
+        return this.#coachMenu
+    }
+
     setCoachNotEat(i, foods) {
         this.#notEat[this.#coachs[i]] = foods
-        console.log(this.#notEat)
     }
 
     setCoachMenu() {
@@ -27,7 +30,6 @@ class Coachs {
 
     addCoachMenu(coach, food) {
         this.#coachMenu[coach].push(food)
-        console.log(this.#coachMenu)
     }
 
     isNotEatFood(coach, food) {
