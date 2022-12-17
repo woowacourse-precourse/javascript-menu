@@ -12,7 +12,7 @@ const CategoryMaker = {
   makeCategories(generateRandomNumber) {
     const categories = new Array(5).fill(0).map(() => {
       let number = generateRandomNumber();
-      while (CategoryMaker.initCount[number] > 2) {
+      while (CategoryMaker.initCount[number] >= 2) {
         number = generateRandomNumber();
       }
       CategoryMaker.initCount[number] += 1;
