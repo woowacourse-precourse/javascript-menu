@@ -22,11 +22,18 @@ class Gategorys {
     );
   }
 
+  canRecommend(categoryNumber) {
+    const category = this.#list.filter((category) =>
+      category.isMe(categoryNumber)
+    )[0];
+    return category.canRecommend();
+  }
+
   getCategoryMenus(categoryNumber) {
     const category = this.#list.filter((category) =>
       category.isMe(categoryNumber)
     )[0];
-
+    category.increaseRecommendedCount();
     return category.getMenu();
   }
 

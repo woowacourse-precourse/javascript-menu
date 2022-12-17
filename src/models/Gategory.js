@@ -2,6 +2,7 @@ class Gategory {
   #index;
   #category;
   #menus;
+  #recommendedCount = 0;
 
   constructor([category, menus, index]) {
     this.#index = index;
@@ -18,6 +19,16 @@ class Gategory {
 
   getMenu() {
     return this.#menus;
+  }
+
+  increaseRecommendedCount() {
+    this.#recommendedCount += 1;
+    console.log(this.#category, this.#recommendedCount);
+  }
+
+  canRecommend() {
+    if (this.#recommendedCount === 2) return false;
+    return true;
   }
 }
 

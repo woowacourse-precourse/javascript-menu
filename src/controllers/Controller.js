@@ -62,10 +62,14 @@ class Controller {
 
   setRecommendedMenu() {
     if (this.#recommendedCount === 5) return this.printRecommendedMenu();
-    this.#recommendedCount += 1;
+
     const categoryNumber = generator();
+    if (!this.#categorys.canRecommend(categoryNumber))
+      return this.setRecommendedMenu();
+
     const categoryMenus = this.#categorys.getCategoryMenus(categoryNumber);
     this.#coachs.decideMenu(categoryMenus);
+    this.#recommendedCount += 1;
     return this.setRecommendedMenu();
   }
 
