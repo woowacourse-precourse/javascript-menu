@@ -12,14 +12,13 @@ class GameController {
   constructor() {
     this.#coachName = [];
     this.#coachNotWant = [];
-    this.#inputCoachName();
     this.turn = 0;
   }
 
-  #inputCoachName() {
+  inputCoachName() {
     InputView.readCoachName((name) => {
       this.#coachName = name.split(',');
-      this.catchError('CoachName', name) ? this.#inputCoachNotEat() : this.#inputCoachName();
+      this.catchError('CoachName', name) ? this.#inputCoachNotEat() : this.inputCoachName();
     });
   }
 
