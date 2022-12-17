@@ -47,7 +47,11 @@ class MenuSelectorController {
   }
 
   #resultphase() {
-    console.log(this.#tempDislikeMenu);
+    this.#menuSelector
+      .getCoachs()
+      .forEach((coach, index) =>
+        coach.setDislikeMenu(this.#tempDislikeMenu[index])
+      );
   }
 }
 
