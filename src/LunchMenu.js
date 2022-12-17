@@ -7,9 +7,6 @@ class LunchMenu {
   // 코치의 이름
   #coach;
 
-  // 카테고리들
-  #categories = [];
-
   // 선택된 카테고리들
   #selectedCategory = [];
 
@@ -20,7 +17,6 @@ class LunchMenu {
 
   #makeMenu(sample) {
     for (const food in sample) {
-      this.#categories.push(food);
       this.#totalMenu.push(sample[food].split(', '));
     }
   }
@@ -34,10 +30,10 @@ class LunchMenu {
 
   #readCoachNames = () => {
     const INPUT_COATCH_NAMES = '코치의 이름을 입력해 주세요. (, 로 구분)\n';
-    MissionUtils.Console.readLine(INPUT_COATCH_NAMES, this.#coachNameInputHandler);
+    MissionUtils.Console.readLine(INPUT_COATCH_NAMES, this.#readCoachNameHandler);
   };
 
-  #coachNameInputHandler = (names) => {
+  #readCoachNameHandler = (names) => {
     try {
       this.#coach = names.split(',');
       LunchMenuError.isValidCoachName(this.#coach);
@@ -50,10 +46,10 @@ class LunchMenu {
 
   #readImpossibleMenu = () => {
     const name = this.#coach[this.#currentCoach];
-    this.#currentCoach += 1;
-    if (name === undefined) {
+    if (this.#currentCoach >= this.#coach.length) {
       this.#printRecommendMenu();
     } else {
+      this.#currentCoach += 1;
       const INPUT_IMPOSSIBLE_MENU = `\n${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`;
       MissionUtils.Console.readLine(INPUT_IMPOSSIBLE_MENU, this.#readImpossibleMenuHandler);
     }
@@ -73,6 +69,8 @@ class LunchMenu {
   #printRecommendMenu = () => {
     MissionUtils.Console.print('\n메뉴 추천 결과입니다.');
     MissionUtils.Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    MissionUtils.Console.print('[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]');
+
     this.#currentCoach = 0;
     this.#selectRecommendCategory();
   };
@@ -100,10 +98,12 @@ class LunchMenu {
     // [1,1,1,1,1]
     // i는 카테고리, j는 음식의 개수
     const finalRecommend = [];
+
     for (let category = 0; category < 5; category += 1) {
       for (let food = 0; food < this.#selectedCategory[category]; food += 1) {
-        const temp = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        const recommend = this.#totalMenu[category][MissionUtils.Random.shuffle(temp)[0]];
+        const temp = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        const menu = MissionUtils.Random.shuffle(temp)[0];
+        const recommend = this.#totalMenu[category][menu - 1];
         if (this.#impossibleFoods[this.#currentCoach].includes(recommend)) {
           food -= 1;
           continue;
@@ -112,6 +112,7 @@ class LunchMenu {
         finalRecommend.push(recommend);
       }
     }
+
     let answer = `[ ${this.#coach[this.#currentCoach]} |`;
     for (let i = 0; i < 5; i += 1) {
       answer += ` ${finalRecommend[i]} `;
@@ -119,15 +120,14 @@ class LunchMenu {
         answer += '|';
       }
     }
-
     answer += ']';
     MissionUtils.Console.print(answer);
+    this.#currentCoach += 1;
 
-    if (this.#currentCoach < this.#coach.length - 1) {
-      this.#currentCoach += 1;
-      this.#selectRecommendCategory();
-    } else {
+    if (this.#currentCoach >= this.#coach.length) {
       this.#printComplete();
+    } else {
+      this.#selectRecommendCategory();
     }
   };
 
