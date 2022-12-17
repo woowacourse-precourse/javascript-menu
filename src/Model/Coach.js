@@ -46,6 +46,10 @@ class Coach {
     }
     return menu;
   }
+
+  isPickyMenu(menu) {
+    return this.#pickyMenu.includes(menu);
+  }
 }
 
 module.exports = Coach;
