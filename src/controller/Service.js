@@ -17,11 +17,11 @@ class Service {
   }
 
   #enterNames(names) {
-    this.#instance.coach = new Coach(names);
-    if (!CoachNamesChecker.check(names)) {
+    if (!CoachNamesChecker.checkInput(names)) {
       this.start();
       return;
     }
+    this.#instance.coach = new Coach(names);
 
     this.#enterHateMenus();
   }

@@ -5,7 +5,11 @@ class Coach {
   };
 
   constructor(inputNames) {
-    const names = inputNames;
+    this.#data.names = inputNames.split(',');
+  }
+
+  get() {
+    return this.#data;
   }
 }
 
