@@ -5,8 +5,8 @@ const OutputView = {
   printInit() {
     Console.print(MSG.INIT);
   },
-  printResult() {
-    Console.print("hi");
+  printResult(result) {
+    Console.print(result);
     Console.close();
   },
 };
