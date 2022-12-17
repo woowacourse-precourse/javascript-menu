@@ -5,8 +5,10 @@ class InputUI {
   constructor() {
     this.output = new OutputUI();
   }
-  readCoachNames(callback) {
-    this.output.print('코치의 이름을 입력해 주세요. (, 로 구분)');
+  readLine(callback, message = '') {
+    if (message !== '') {
+      this.output.print(message);
+    }
     MissionUtils.Console.readLine('', (answer) => {
       callback(answer);
     });
