@@ -13,7 +13,7 @@ class App {
 	this.personCnt = 0;
 	this.nameList = [];
 	this.inEdible = {};
-	this.menus = [];
+	this.menuList = [];
 	this.categories = [];
   }
 
@@ -42,7 +42,9 @@ class App {
 		if(this.personCnt == this.nameList.length) { //모든 사람들의 못먹는 메뉴를 알아봤다!
 			this.categories = this.selectCategory();
 			console.log(this.categories);
-			return this.recommendMenu(); 
+			this.menuList = this.recommendMenu(); 
+			console.log(this.menuList); 
+			return this.showRecommendation();
 		} 
 		return this.askMenu(this.nameList[this.personCnt]);
 	});
@@ -79,6 +81,7 @@ class App {
   
   recommendMenu() {
 	//console.log(this.inEdible);
+	let menuList = [];
 	for(let i=0; i<this.nameList.length;i++){
 		const name = this.nameList[i];
 		let everyDayMenu = [];
@@ -93,8 +96,10 @@ class App {
 			const todayMenu = this.randomItem(everyDayMenu, menusForU); //당신을 위한 오늘의 메뉴는~~
 			everyDayMenu.push(todayMenu);	
 		}
-		console.log(everyDayMenu);
+		//console.log(everyDayMenu);
+		menuList.push(everyDayMenu);
 	}
+	return menuList;
   }
 
   // 주어진 배열에서 요소 1개를 랜덤하게 골라 반환하는 함수
@@ -106,8 +111,13 @@ class App {
   }
 
   showRecommendation() {
-	
-	console.log("hi recommend!");
+	this.categories.unshift('카테고리');
+	for(let i=0; i<this.menuList.length; i++){
+		this.menuList[i].unshift(this.nameList[i]);
+	}
+	OutputView.printRecommendation(this.categories, this.menuList);
+	//console.log("hi recommend!");
+	return this.quit();
   }
 
   quit () {
