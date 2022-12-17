@@ -69,6 +69,7 @@ class MenuController {
       const menus = this.#menus[category];
       this.recommendCoachMenu(menus);
     }
+    OutputView.printEndMessage(this.#categories, this.#coachs);
   }
 }
 
