@@ -1,3 +1,5 @@
+const { FOOD_NAMES } = require('../Constants');
+
 const Validator = {
   /**
    * 코치 이름 길이 유효성을 검사한다.
@@ -19,9 +21,21 @@ const Validator = {
     if (size > 5) throw '[ERROR] 코치는 최대 5명 이하 입력해야 합니다.';
   },
 
-  validateFoodName() {},
+  /**
+   * 음식 이름 유효성을 검사한다.
+   * @param {string} name 음식 이름
+   */
+  validateFoodName(name) {
+    const foodList = [
+      ...Object.values(FOOD_NAMES).flatMap((foods) => [...foods]),
+      '',
+    ];
+    if (!foodList.includes(name)) throw '목록에 있는 음식을 입력해주세요.';
+  },
 
-  validateFoodNameCount() {},
+  validateFoodNameCount() {
+    
+  },
 };
 
 module.exports = Validator;
