@@ -1,5 +1,5 @@
 const { Coach } = require('./models/Coach');
-const { readCoaches } = require('./views/InputView');
+const { readCoaches, readBannedFoods } = require('./views/InputView');
 const { OutputView } = require('./views/OutputView');
 
 class App {
@@ -10,12 +10,23 @@ class App {
     readCoaches(this.setCoaches.bind(this));
   }
 
+  // eslint-disable-next-line max-lines-per-function
   setCoaches(answer) {
     const coaches = answer.split(',');
     coaches.forEach((coach) => {
       this.#coaches.push(new Coach(coach));
     });
-    console.log(this.#coaches.length);
+    readBannedFoods(
+      this.setCoachesBannedFoods.bind(this),
+      this.#coaches.map((c) => c.getName()),
+      0,
+      [],
+    );
+    // console.log(`bannedFoods are ${JSON.stringify(bannedFoods)}`);
+  }
+
+  setCoachesBannedFoods(arr) {
+    console.log(JSON.stringify(arr));
   }
 }
 
