@@ -13,6 +13,18 @@ const Validation = {
     }
     return true;
   },
+
+  checkInputNameLength(nameLength) {
+    try {
+      if (!(nameLength >= 2 && nameLength <= 4)) {
+        throw new Error(ERROR.LENGTH);
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return false;
+    }
+    return true;
+  },
 };
 
 module.exports = Validation;

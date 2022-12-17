@@ -25,14 +25,25 @@ class App {
   inputCoachName() {
     Console.readLine(INPUT.NAME, (names) => {
       this.names = names.split(",");
-      this.handleInputName();
+      this.handleInputNameCount();
     });
   }
 
-  handleInputName() {
+  handleInputNameCount() {
     const checkCount = Validation.checkInputNameCount(this.names);
     if (!checkCount) {
       this.inputCoachName();
+    }
+    this.handleInputNameLength();
+  }
+
+  handleInputNameLength() {
+    for (let coach = 0; coach < this.names.length; coach++) {
+      let nameLength = this.names[coach].length;
+      let checkLength = Validation.checkInputNameLength(nameLength);
+      if (!checkLength) {
+        this.inputCoachName();
+      }
     }
   }
 }
