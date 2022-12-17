@@ -1,6 +1,7 @@
 const InputView = require("./InputView");
 const OutputView = require("./OutputView");
-const  {Console} = require("@woowacourse/mission-utils")
+const  {Console} = require("@woowacourse/mission-utils");
+const Coachs = require("./Coachs");
 
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -20,15 +21,17 @@ class App {
 		OutputView.printStartMessage()
 		InputView.inputCoachName((input) => {
 			console.log(input)
-			const coachs = input.split(",")
+			const coachsArr = input.split(",")
+			const coachs = new Coachs(coachsArr)
 			let coachIndex = 0
 			this.getCoachNotEat(coachs, coachIndex)
 		})
 	}
 
 	getCoachNotEat(coachs, coachIndex) {
-		Console.readLine(`${coachs[coachIndex]}(이)가 못 먹는 메뉴를 입력해 주세요.`, (input) => {
-			if (coachIndex < coachs.length-1) this.getCoachNotEat(coachs, coachIndex+1)
+		Console.readLine(`${coachs.getCoachs()[coachIndex]}(이)가 못 먹는 메뉴를 입력해 주세요.`, (input) => {
+			coachs.setCoachNotEat(coachIndex,input.split(","))
+			if (coachIndex < coachs.getCoachs().length-1) this.getCoachNotEat(coachs, coachIndex+1)
 			})
 	}
 
