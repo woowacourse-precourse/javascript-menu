@@ -95,8 +95,9 @@ class MenuController {
   };
 
   setMenu() {
-    let personFood = Randomgenerator.menuGenerate()[0];
-    let tmp = this.allFood[this.category[this.count]]
+    let personFood = Randomgenerator.menuGenerate();
+    let tmp = this.allFood[this.category[this.count]];
+    // Console.print(tmp[personFood])
     return this.eachPersonMenu(tmp[Number(personFood)]);
   };
 
@@ -141,7 +142,7 @@ class MenuController {
     for (let i = 0; i < this.coachNames.length; i++) {
       OutputView.printResultMenu(this.coachNames[i], this.finalFood[i])
     };
-    OutputView.astPrint()
+    OutputView.lastPrint()
   };
 };
 
