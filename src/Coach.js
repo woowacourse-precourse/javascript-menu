@@ -1,10 +1,16 @@
 class Coach {
   #name;
+  #banMenuSet;
   constructor(CoachName) {
     this.#name = CoachName;
   }
 
-  getName(answer) {
+  addBanMenus(banMenuArray) {
+    this.#banMenuSet = new Set(banMenuArray);
+    return this.#banMenuSet;
+  }
+
+  getName() {
     return this.#name;
   }
 }
