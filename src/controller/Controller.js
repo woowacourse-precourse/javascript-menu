@@ -1,5 +1,6 @@
 const InputView = require('../view/InputView');
 const OuputView = require('../view/OutputView');
+const Validation = require('../utils/Validation');
 
 class Controller {
   #index = 0;
@@ -17,13 +18,14 @@ class Controller {
   }
 
   #inputCoach() {
-    InputView.Coach((input) => {
+    InputView.coach((input) => {
       this.#checkCoach(input);
     });
   }
 
   #checkCoach(input) {
     try {
+      Validation.coachName(input);
       this.#coachs = input.split(',');
       this.#checkCoachList();
     } catch (error) {}
