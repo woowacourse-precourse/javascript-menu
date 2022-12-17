@@ -71,6 +71,7 @@ class Controller {
 
   recommendMenus() {
     this.recommendor.setCategories();
+    this.recommendor.recommendMenus(this.sample);
     // console.log(this.recommendor.setCategories());
     // this.recommendor.recommend();
   }
