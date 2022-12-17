@@ -3,7 +3,6 @@ const { Random } = require('@woowacourse/mission-utils');
 const Category = require('../domains/Category');
 const Coach = require('../domains/Coach');
 const Menu = require('../domains/Menu');
-const Suggestion = require('../domains/Suggestion');
 
 class LaunchService {
   /** @type {Category[]} */
