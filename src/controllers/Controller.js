@@ -64,7 +64,10 @@ class Controller {
     if (this.#recommendedCategory.length === 5) return this.decideMenu();
 
     const categoryNumber = generator();
-    if (!this.#categorys.canRecommend(categoryNumber))
+    if (
+      this.#recommendedCategory.filter((number) => number === categoryNumber)
+        .length === 2
+    )
       return this.setRecommendedMenu();
 
     this.#recommendedCategory.push(categoryNumber);
