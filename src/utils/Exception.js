@@ -1,6 +1,5 @@
 const Exception = {
-
-  checkInputCoachNameListLength(nameList){
+  checkInputCoachNameListLength(nameList) {
     if (nameList.length < 2 || nameList.length > 5) {
       return false;
     }
@@ -16,17 +15,23 @@ const Exception = {
     });
   },
 
-
-  checkInputInedibleMenuLength (menuList) {
+  checkInputInedibleMenuLength(menuList) {
     if (nameList.length > 2) {
       return false;
     }
     return true;
-  }
+  },
 
+  checkInputInedibleValidMenu(menu, validMenuObj) {
+    for (let i of validMenuObj) {
+      const validMenuList = i.split(",");
+      if (validMenuList.includes(menu) === false) {
+        return false;
+      }
+    }
 
-
-
+    return true;
+  },
 };
 
 module.exports = Exception;
