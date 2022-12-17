@@ -13,6 +13,7 @@ const INPUT_MESSAGES = Object.freeze({
 
 const ERROR_MESSAGES = Object.freeze({
   invalidMemberCount: '[ERROR] 코치는 최소 2명 이상, 최대 5명까지만 입력해야 합니다.\n',
+  invalidNameLength: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자 입력할 수 있습니다.\n',
 });
 
 module.exports = {
