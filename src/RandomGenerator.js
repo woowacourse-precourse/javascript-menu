@@ -9,8 +9,8 @@ const RandomCategoryGenerator = {
 };
 const RandomMenuGenerator = (category) => {
   const menus = SAMPLE[category].split(',');
-  const idxOfMenus = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-  const idxofRandomMenu = Random.shuffle(idxOfMenus)[0];
+  const idxOfMenus = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+  const idxofRandomMenu = Random.shuffle(idxOfMenus)[0] - 1;
   const menu = menus[idxofRandomMenu].trimStart();
   return menu;
 };
