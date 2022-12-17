@@ -52,7 +52,7 @@ describe('점심 메뉴 테스트', () => {
     test('카테고리 메뉴 중복 없는 추천', () => {
       const logSpy = getLogSpy();
 
-      mockRandoms([2, 5, 1, 3, 4]); //한식, 양식, 일식, 중식, 아시안
+      mockRandoms([2, 5, 1, 3, 4]);
       mockQuestions(['구구,제임스', '김밥', '떡볶이']);
 
       const sequenced = (_, idx) => idx + 1;
