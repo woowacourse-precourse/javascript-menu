@@ -13,6 +13,7 @@ class Coach {
       menu = MissionUtils.Randoms.shuffle(menus)[0];
     }
     this.#menus.push(menu);
+    return this.#menus;
   }
 
   addBanMenus(banMenuArray) {
