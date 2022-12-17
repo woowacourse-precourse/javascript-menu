@@ -27,7 +27,8 @@ class ServiceController {
       this.#service.setMenuForEachCoah(menu, index);
 
       if (index + 1 === names.length) {
-        this.nextAction();
+        const START_DAY_INDEX = 0;
+        this.choiceCategory(0);
       } else {
         this.recieveExcludeMenuForEachCoach(names, index + 1);
       }
@@ -36,7 +37,9 @@ class ServiceController {
     InputView.readExcludeMenu(name, onDeliveryMenu);
   }
 
-  nextAction() {}
+  choiceCategory(index) {
+    this.#service.choiceCategory(index);
+  }
 }
 
 module.exports = ServiceController;
