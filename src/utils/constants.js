@@ -3,4 +3,13 @@ const MESSAGE = Object.freeze({
   inputCoaches: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
 });
 
-module.exports = { MESSAGE };
+const ERROR = Object.freeze({
+  mustNotBeBlank: '[ERROR] 공백입니다. 값을 입력해주세요.',
+  mustBeStringType: '[ERROR] 숫자가 아닌 문자로 입력해주세요.',
+  mustBeValidLengthOfCoaches:
+    '[ERROR] 코치는 최소 2명 이상, 5명 이하로 입력해주세요.',
+});
+
+const ZERO = Object.freeze(0);
+
+module.exports = { MESSAGE, ERROR, ZERO };
