@@ -6,7 +6,7 @@ const {
   ERROR_COACH_LENGTH,
 } = require('./Constants');
 
-const checkCoachNameLength = name => name.length < 2 || name.length > 4;
+const checkCoachNameLength = name => name.length < TWO || name.length > FOUR;
 
 const checkValidateCoachNames = names => {
   for (let i = 0; i < names.length; i += 1) {
