@@ -3,6 +3,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const Coach = require('./models/Coach');
 const Coaches = require('./models/Coaches');
 const CategoryMaker = require('./utils/CategoryMaker');
+const ListValidator = require('./utils/ListValidator');
 const MenuPicker = require('./utils/MenuPicker');
 const RandomNumberGenerator = require('./utils/RandomNumberGenerator');
 const { readCoaches, readMenu } = require('./views/InputView');
@@ -37,6 +38,8 @@ class App {
 
   #onCoachesSubmit(names) {
     try {
+      const nameList = names.split(',');
+      ListValidator.validate(nameList);
       const coaches = names.split(',').map((coach) => new Coach(coach));
       this.#coaches = new Coaches(coaches);
       return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
@@ -49,6 +52,7 @@ class App {
   #onMenuSubmit(menu) {
     try {
       const menus = menu.split(',');
+      ListValidator.validate(menus);
       this.#coaches.setCoachMenu(this.#index, menus);
       this.#index += 1;
 
