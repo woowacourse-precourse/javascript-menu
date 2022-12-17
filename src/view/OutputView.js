@@ -8,4 +8,10 @@ const OutputView = {
   printRecommandMenuAllDone() {
     Console.print('추천을 완료했습니다.');
   },
+
+  printErrorMessage(errorMessage) {
+    Console.print(errorMessage);
+  },
 };
+
+module.exports = { OutputView };
