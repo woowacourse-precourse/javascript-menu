@@ -1,4 +1,5 @@
 const PARAMETERS = {
+  dayCount: 5,
   coachNumberRange: [2, 5],
   coachNameLengthRange: [2, 4],
   inedibleMenuRange: [0, 2],

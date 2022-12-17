@@ -21,7 +21,7 @@ const InputView = {
 
   readInedibleMenus(coaches, index) {
     if (index === coaches.length) {
-      // 각 요일별 메뉴 생성하기 
+      this.game.setWeeklyMenu();
     }
 
     MissionUtils.Console.readLine(CONSOLE_MESSAGE.inedibleMenuInput(coaches[index]), (input) => {

@@ -10,7 +10,11 @@ class MenuGame {
     this.menus = {};
   }
 
-  // set weekly menu
+  setWeeklyMenu() {
+    for (let day = 0; day < PARAMETERS.dayCount; day += 1) {
+      this.setDailyMenu();
+    }
+  }
 
   setDailyMenu() {
     const CATEGORY = this.setCategory();
