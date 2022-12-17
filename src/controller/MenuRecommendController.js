@@ -1,6 +1,7 @@
 const { MENU_CONSTANTS } = require('../constants/Setting');
 const CategoryRepository = require('../repositorys/CategoryRepository');
 const CoachRepository = require('../repositorys/CoachRepository');
+const RecommendWeeklyMenu = require('../model/RecommendWeeklyMenu');
 
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -8,6 +9,7 @@ const OutputView = require('../view/OutputView');
 class MenuRecommendController {
   #categoryRepository = new CategoryRepository;
   #coachRepository = new CoachRepository;
+  #recommendWeeklyMenu = new RecommendWeeklyMenu;
 
   constructor() {
     this.#initCategories();
@@ -44,7 +46,23 @@ class MenuRecommendController {
   }
 
   #returnRecommendMenu() {
+    this.#setRecommendCategory();
+    this.#setRecommendMenu();
     
+    OutputView.printMenu();
+  }
+
+  #setRecommendCategory() {
+    while (this.#recommendWeeklyMenu.countWeeklyCategory() < 5) {
+      const randomCategory = this.#categoryRepository.getRandomCategory();
+      this.#recommendWeeklyMenu.addCategory(randomCategory);
+    }
+  }
+
+  #setRecommendMenu() {
+    this.#recommendWeeklyMenu.getWeeklyCategory().forEach((category)=>{
+      
+    })
   }
 }
 

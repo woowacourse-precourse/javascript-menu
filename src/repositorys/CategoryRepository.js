@@ -2,11 +2,13 @@ const Category = require('../model/Category');
 const { Random } = require('@woowacourse/mission-utils');
 class CategoryRepository {
   #categoryList = new Map();
-  #categories = [];
+  #categories = new Map();
+  #categoryCount = 1;
 
   addCategory(name, menus) {
-    this.#categories.push(name);
+    this.#categories.set(this.#categoryCount, name);
     this.#categoryList.set(name, new Category(menus));
+    this.#categoryCount += 1;
   }
 
   getRandomCategory() {

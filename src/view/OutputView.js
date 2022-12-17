@@ -6,6 +6,10 @@ const OutputView = {
     Console.print(MESSAGE.process.startNotice);
   },
 
+  printMenu() {
+    Console.print(MESSAGE.process.printMenuNotice);
+  },
+
   printQuit() {
     Console.print(MESSAGE.process.quitNotice);
     Console.close();
