@@ -2,6 +2,8 @@ const { Random } = require('@woowacourse/mission-utils');
 const { MENU, WEEK, CATEGORY, MARK } = require('../constants/Constants');
 
 const MenuRecommender = class {
+  #category;
+
   recommend(names, hateMenus) {
     const weekCategory = this.#initWeekCategory();
     return names.reduce((recommendList, name, i) => {
@@ -24,7 +26,7 @@ const MenuRecommender = class {
       let menu = categoryMenus[menuNumber];
 
       while (1) {
-        if (this.#isValidMenu(menu, hateMenus, menu)) {
+        if (this.#isValidMenu(menus, hateMenus, menu)) {
           menus.push(menu);
           break;
         }
@@ -36,11 +38,14 @@ const MenuRecommender = class {
     }, []);
   }
 
+  #tryUntilFullMenu() {}
+
   #initMenuArr() {
     return Object.entries(MENU).map(([_, category]) =>
       category.split(`${MARK.rest} `)
     );
   }
+
   #isValidMenu(menus, hateMenus, menu) {
     return (
       !this.#isAlreadyEaten(menus, menu) &&
