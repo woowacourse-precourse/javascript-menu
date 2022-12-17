@@ -4,7 +4,7 @@
 
 - [x] 1 ~ 5 사이의 임의의 숫자를 생성한다. - Generator#generateRandomNumberBetween1And5()
 - [x] 1 ~ 5 각 숫자를 해당 카테고리로 변환한다. - Converter#convertNumberToCategory()
-- [ ] 입력(코치, 음식)을 구분자(,)로 구분해 문자열 배열로 변환한다. - Converter#convertToStringArray
+- [x] 입력(코치, 음식)을 구분자(,)로 구분해 문자열 배열로 변환한다. - Converter#convertToStringArray()
 
 ### 입출력 관련
 
