@@ -8,6 +8,10 @@ class MenuService {
       this.#coaches.push(new Coach(name));
     });
   }
+
+  tossHateFoods(index, foods) {
+    if (foods[0] !== '') this.#coaches[index].setHateFoods(foods);
+  }
 }
 
 module.exports = MenuService;
