@@ -32,8 +32,6 @@ class MenuRecommender {
   getRecommendation() {
     this.getRecommendationCategories();
     this.getRecommendationMenus();
-    console.log(this.#coaches);
-    console.log(this.#categories);
   }
 
   getRecommendationCategories() {
@@ -51,9 +49,6 @@ class MenuRecommender {
     const indexArray = this.#categories.map((item) => CATEGORY.indexOf(item));
     this.#coaches.forEach((coach) => {
       indexArray.forEach((index) => coach.addMenu(this.getRandomMenu(index)));
-    });
-    this.#coaches.forEach((coach) => {
-      console.log(coach.getRecommendation());
     });
   }
 }
