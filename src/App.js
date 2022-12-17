@@ -14,11 +14,26 @@ const SAMPLE = {
 
 
 const CATEGORIES_MAP = {
-	"1": "일식",
-	"2": "한식",
-	"3": "중식",
-	"4": "아시안",
-	"5": "양식",
+	"1": {
+		name: "일식",
+		count: 0
+	},
+	"2": {
+		name: "한식",
+		count: 0
+	},
+	"3": {
+		name: "중식",
+		count: 0
+	},
+	"4": {
+		name: "아시안",
+		count: 0
+	},
+	"5": {
+		name: "양식",
+		count: 0
+	},
 }
 
 class App {
@@ -67,11 +82,14 @@ class App {
 		this.requestDisableFoods();
 	}
 
+	
+
 	recommend() {
 		// 월화수목금
 		for (let day = 0; day < 5; day++) {
 			// 카테고리
-			const categoryOfDay = CATEGORIES_MAP[Random.pickNumberInRange(1, 5)]
+			
+			const categoryOfDay = this.pickCategory()
 			this.#categoriesOfWeek.push(categoryOfDay);
 
 			// 메뉴
@@ -89,6 +107,13 @@ class App {
 		})
 	}
 
+	pickCategory() {
+		const randomNumber = Random.pickNumberInRange(1, 5)
+		if (CATEGORIES_MAP[randomNumber].count === 2) {
+			this.pickCategory();
+		}
+		return CATEGORIES_MAP[randomNumber].name
+	}
 
 	pickFood(coach, menus) {
 		const menusIndex = []
@@ -97,8 +122,8 @@ class App {
 		}
 		const randomFood = menus[Random.shuffle(menusIndex)[0]]
 
-		if(coach.getDayFood().includes(randomFood)){
-			pickFood(coach)
+		if(coach.getDayFood().includes(randomFood) || coach.getDisabledFood().includes(randomFood)){
+			this.pickFood(coach)
 		}
 		return randomFood;
 	}

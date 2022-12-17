@@ -14,10 +14,16 @@ class Coach {
     return this.#name;
   }
 
+  getDisabledFood() {
+    return this.#disabledFoods
+  }
+
   setDisabledFood(foods) {
     foods.split(",").map((food) => {
       this.#disabledFoods.push(food);
     })
+
+    console.log(this.#disabledFoods)
   }
 
   getDayFood() {
