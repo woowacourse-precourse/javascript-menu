@@ -3,10 +3,7 @@ const { MenuMap } = require('./MenuMap');
 
 class RecommandMenu {
   #menu = MenuMap;
-  constructor() {
-    this.coach;
-    this.coachCharacter;
-  }
+  constructor() {}
 
   pickCategory() {
     const index = Random.pickNumberInRange(1, 5) - 1;
@@ -20,12 +17,16 @@ class RecommandMenu {
     return exceptHateFoodMenu;
   }
 
+  convertArray(ovject) {
+    return ovject.split(', ');
+  }
+
   shuffleMenu(menu) {
     return Random.shuffle(menu);
   }
 
   exceptHateFoodOfMenu(menu, hateFood) {
-    menu.filter((food) => !hateFood.includes(food));
+    return menu.filter((food) => !hateFood.includes(food));
   }
 }
 
