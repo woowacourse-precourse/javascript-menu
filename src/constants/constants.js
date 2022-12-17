@@ -19,8 +19,10 @@ const HATE = (coach) => {
 const RESULT = (categories) => {
   return `\n메뉴 추천 결과입니다.\n[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]\n[ 카테고리 | ${categories
     .slice(1)
-    .join(" | ")} ]`;
+    .join(SEPARATOR)} ]`;
 };
+
+const SEPARATOR = " | ";
 
 const DAYS = 5;
 const MIN = 1;
@@ -43,4 +45,5 @@ module.exports = {
   MIN,
   MAX,
   INFO,
+  SEPARATOR,
 };

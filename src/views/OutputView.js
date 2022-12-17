@@ -1,5 +1,5 @@
 const { Console } = require("@woowacourse/mission-utils");
-const { MSG, RESULT } = require("../constants/constants");
+const { MSG, RESULT, SEPARATOR } = require("../constants/constants");
 
 const OutputView = {
   printInit() {
@@ -8,11 +8,15 @@ const OutputView = {
 
   printResult(categories, result) {
     Console.print(RESULT(categories));
-    result.forEach((res) => {
-      Console.print(`[ ${res[0]} | ${res[1].join(" | ")} ]`);
-    });
+    this.printDishes(result);
     Console.print(MSG.END_RECOMMEND);
     Console.close();
+  },
+
+  printDishes(result) {
+    result.forEach((res) => {
+      Console.print(`[ ${res[0]} | ${res[1].join(SEPARATOR)} ]`);
+    });
   },
 };
 
