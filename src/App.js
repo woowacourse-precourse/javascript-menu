@@ -1,7 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 
 const controller = require('./GameController');
-// const OutputView = require('./OutputView');
 
 const { GAME_TEXT } = require('./utils/constants');
 const { errorCheckFor } = require('./utils/errorCheckFor');
@@ -74,9 +73,8 @@ class App {
     InputException.checkNotEat(input, SAMPLE);
     controller.inputNotEat(input, coach);
     if (this.#questionNotEat()) {
-      // this.#printFinalResult();
-
       controller.remove();
+      this.#printFinalResult();
     }
 
     return this;
