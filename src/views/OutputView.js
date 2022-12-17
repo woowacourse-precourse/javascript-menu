@@ -8,7 +8,7 @@ const OutputView = {
   },
 
   printMenus(categoris, names, foods) {
-    Console.print('메뉴 추천 결과입니다.');
+    Console.print('\n메뉴 추천 결과입니다.');
     Console.print(`[ ${['구분', ...OutputView.DAYS].join(' | ')} ]`);
     Console.print(`[ ${['카테고리', ...categoris].join(' | ')} ]`);
     for (let i = 0; i < names.length; i += 1) {
