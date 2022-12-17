@@ -1,5 +1,8 @@
 const ErrorHandler = require('../libs/ErrorHandler');
-const { CoachNameValidator } = require('../libs/Validator');
+const {
+  CoachNameValidator,
+  DislikeFoodsValidation,
+} = require('../libs/Validator');
 
 class Coach {
   #name;
@@ -16,6 +19,16 @@ class Coach {
   static validationCoachNames(coachNames) {
     try {
       CoachNameValidator.validation(coachNames);
+    } catch (error) {
+      ErrorHandler.throwError(error);
+      return false;
+    }
+    return true;
+  }
+
+  static validationDislikeFoods(dislikeFoods) {
+    try {
+      DislikeFoodsValidation.validation(dislikeFoods);
     } catch (error) {
       ErrorHandler.throwError(error);
       return false;

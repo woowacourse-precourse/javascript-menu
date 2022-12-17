@@ -42,6 +42,9 @@ class Controller {
   }
 
   handleDislikeFoods(dislikeFoods) {
+    const isValid = Coach.validationDislikeFoods(dislikeFoods);
+    if (!isValid) return this.requestDislikeFoods();
+
     const coach = this.#coachNames.shift();
     if (this.#coachNames.length > 0) return this.requestDislikeFoods();
   }
