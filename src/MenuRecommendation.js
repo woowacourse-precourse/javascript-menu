@@ -87,12 +87,10 @@ class MenuRecommendation {
     names.split(",").forEach((name) => {
       this.coachs.push(new Coach(name));
     });
-
     if (checkCoachNumber(this.coachs.length)) {
       this.coachs = [];
       return InputView.readCoachName(this.receiveCoachName.bind(this));
     }
-
     InputView.readDislikeMenu(
       this.receiveDislikeMenu.bind(this),
       this.coachs,
