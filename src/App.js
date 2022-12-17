@@ -26,9 +26,7 @@ class App {
     );
     if (!result) return;
     this.setCoachesToMap(coaches);
-    // 코치를 하나하나 넘겨주자.
-    const firstCoach = [...this.#coaches][0];
-    this.askNotEatMenu(firstCoach, 0, this.#coaches);
+    this.askNotEatMenu(this.#coaches, 0);
   }
 
   setCoachesToMap(coaches) {
@@ -40,24 +38,26 @@ class App {
     }
   }
 
-  askNotEatMenu(coach, index, coaches) {
+  askNotEatMenu(coaches, index) {
     if (index === coaches.size) {
       this.getResult();
       return;
     }
 
-    const [name, attrs] = coach;
-    Console.readLine(
-      `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
-      (input) => {
-        const foods = splitString(input, ",").map((name) => name.trim()); // 여기도 한번 검증 해야함. 여기서 SAMPLEDATA에 있지 않는 음식이라면 다시 입력하라고 해줘야 함.
-        checkFood(foods, () => this.askNotEatMenu(coach, index, coaches));
-
-        this.#coaches.set(name, { ...attrs, canNotEat: foods });
-        const nextCoach = [...this.#coaches][index + 1];
-        this.askNotEatMenu(nextCoach, index + 1, coaches);
-      },
+    const [name] = [...coaches][index];
+    InputView.askMenues(name, (menus) =>
+      this.notEatMenusCallback(menus, coaches, index),
     );
+  }
+
+  notEatMenusCallback(menus, coaches, index) {
+    const coach = [...coaches][index];
+    const [name, attrs] = coach;
+    const foods = splitString(menus, ",").map((name) => name.trim()); // 여기도 한번 검증 해야함. 여기서 SAMPLEDATA에 있지 않는 음식이라면 다시 입력하라고 해줘야 함.
+    checkFood(foods, () => this.askNotEatMenu(coaches, index));
+
+    this.#coaches.set(name, { ...attrs, canNotEat: foods });
+    this.askNotEatMenu(coaches, index + 1);
   }
 
   getResult() {
