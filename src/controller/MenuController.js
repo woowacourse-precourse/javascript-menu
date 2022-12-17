@@ -11,7 +11,7 @@ class MenuController {
 
   start() {
     printStart();
-    this.#randomMenu.setCategory();
+    this.#randomMenu.setCategoryDays();
     readCoachesName(this.checkCoachesName.bind(this));
   }
 
