@@ -72,6 +72,14 @@ class MenuService {
     }
     return category;
   }
+
+  isAvailableCategory(newCategory) {
+    let repeat = 0;
+    this.#categoryOfWeek.forEach((category) => {
+      if (newCategory == category) repeat++;
+    });
+    return repeat < 2;
+  }
 }
 
 module.exports = MenuService;
