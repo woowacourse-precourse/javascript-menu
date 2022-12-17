@@ -183,12 +183,12 @@ app.play();
 
 ```javascript
 // 예시 코드. 사용하는 자료 구조에 따라 난수를 적절하게 가공해도 된다.
-const category = categories.get(Randoms.pickNumberInRange(1, 5));
+const category = categories.get(Random.pickNumberInRange(1, 5));
 ```
 
 - 임의로 카테고리의 순서 또는 데이터를 변경하면 안 된다.
-  - `Randoms.pickNumberInRange()`의 결과가 **1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식**을 추천해야 한다.
-- 추천할 수 없는 카테고리인 경우 다시 `Randoms.pickNumberInRange()`를 통해 임의의 값을 생성해서 추천할 카테고리를 정해야 한다.
+  - `Random.pickNumberInRange()`의 결과가 **1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식**을 추천해야 한다.
+- 추천할 수 없는 카테고리인 경우 다시 `Random.pickNumberInRange()`를 통해 임의의 값을 생성해서 추천할 카테고리를 정해야 한다.
 
 #### 메뉴
 
@@ -196,11 +196,11 @@ const category = categories.get(Randoms.pickNumberInRange(1, 5));
   - 카테고리에 포함되는 메뉴 목록은 `문자열 배열` 형태로 담아 준비한다.
 
 ```javascript
-const menu = Randoms.shuffle(menus)[0];
+const menu = Random.shuffle(menus)[0];
 ```
 
 - 임의로 메뉴의 순서 또는 데이터를 변경하면 안 된다.
-  - `Randoms.shuffle()` 메서드의 인자로 전달되는 메뉴 데이터는, 최초에 제공한 목록을 그대로 전달해야 한다.
+  - `Random.shuffle()` 메서드의 인자로 전달되는 메뉴 데이터는, 최초에 제공한 목록을 그대로 전달해야 한다.
     - 코치에게 추천할 메뉴를 정할 때 이미 추천한 메뉴, 먹지 못하는 메뉴도 포함된 리스트를 전달해야 한다.
 - 추천할 수 없는 메뉴인 경우 다시 섞은 후 첫 번째 값을 사용해야 한다.
 
