@@ -36,11 +36,11 @@ class App {
     const coachArray = coachName.split(',');
     try {
       this.validateNames(coachArray);
+      this.handleNames(coachArray);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       this.readCoachName(this.namesCallback);
     }
-    this.handleNames(coachName);
   }
 
   handleNames(coachName) {
@@ -78,7 +78,7 @@ class App {
 
   validateNames(coachArray) {
     for (let i = 0; i < coachArray.length; i++) {
-      if (!(coachArray[i].length >= 2 && coachArray[i].length <= 4)) {
+      if (!(coachArray[i].length > 1 && coachArray[i].length < 5)) {
         throw Error(PRINT_ERROR_STRING.COACH_NAME_LENGTH);
       }
     }
