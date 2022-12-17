@@ -1,9 +1,8 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
-const { Console } = require('@woowacourse/mission-utils');
-
 const CoachNameValidator = require('./CoachNameValidator');
+const CoachHateMenusValidator = require('./CoachHateMenusValidator');
 
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -36,15 +35,22 @@ class App {
       return;
     }
 
-    InputView.readHateMenus(coachNameList.shift(), hateMenus => {
+    const currentCoachName = coachNameList[0];
+
+    InputView.readHateMenus(currentCoachName, hateMenus => {
       // TODO: save hate menus
-      console.log(hateMenus);
-      this.inputHateMenus([...coachNameList]);
+      if (this.isValidInputValue(CoachHateMenusValidator, hateMenus)) {
+        console.log(hateMenus);
+        this.inputHateMenus(coachNameList.slice(1));
+        return;
+      }
+
+      this.inputHateMenus(coachNameList);
     });
   }
 
   recommendMenus() {
-    console.log('메뉴 추천');
+    OutputView.printRecommendResult('메뉴 추천 결과입니다.');
   }
 
   isValidInputValue(validator, inputValue) {
