@@ -14,6 +14,7 @@ class Coach {
   getCoachInformation() {
     return {
       name: this.#name,
+      hateFood: this.#hateFood,
       recommendedFood: this.#recommendedFood,
     };
   }
