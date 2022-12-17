@@ -24,6 +24,10 @@ class Coach {
   isDislikeMenu(menu) {
     return this.#dislikeMenu.includes(menu);
   }
+
+  setMenu(menu) {
+    this.#menu.push(menu);
+  }
 }
 
 module.exports = Coach;
