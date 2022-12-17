@@ -16,9 +16,19 @@ const OutputView = {
     Console.print(MESSAGE.START_RECOMMEND);
   },
 
-  printRecommendMenuResult() {
-    Console.print('메뉴 추천 결과입니다.');
-    // Console.print(`[ 구분 | ${DAYS.join(' | ')} ]`);
+  printRecommendResult(categoriesOfDays, coachesName, menus) {
+    // console.log(categoriesOfDays);
+    // console.log(coachesName);
+    // console.log(menus);
+    Console.print(`메뉴 추천 결과입니다.
+[ 구분 | ${DAYS.join(' | ')} ]
+[ 카테고리 | ${categoriesOfDays.join(' | ')} ]`);
+
+    coachesName.map((name, index) => {
+      Console.print(`[ ${name} | ${menus[index].join(' | ')} ]`);
+    });
+
+    Console.print('\n추천을 완료했습니다.');
   },
 };
 

@@ -1,6 +1,7 @@
-const { DAYS } = require('../constants');
 const Coach = require('../models/Coach');
 const Recommend = require('../models/Recommend');
+
+const { DAYS } = require('../constants');
 
 class MenuService {
   #coaches;
@@ -11,6 +12,7 @@ class MenuService {
 
   constructor() {
     this.#coaches = {};
+    this.#categoriesOfDays = [];
     this.#recommend = new Recommend();
   }
 
@@ -22,21 +24,23 @@ class MenuService {
     this.#coaches[coachName].setNonEdibleMenus(menus);
   }
 
-  getRecommendMenuResult() {
+  recommend() {
     for (let i = 0; i < DAYS.length; i++) {
       const recommendCategory = this.#getRecommendCategory();
       this.#categoriesOfDays.push(recommendCategory);
 
-      this.#recommendMenu(randomCategory);
+      this.#recommendMenu(recommendCategory);
     }
   }
 
   #getRecommendCategory() {
     const randomCategory = this.#recommend.getRandomCategory();
-    const sameCategoriesCount = this.#categoriesOfDays.filter(
+    const sameCategoriesCount = this.#categoriesOfDays?.filter(
       (category) => category === randomCategory
     ).length;
-    if (sameCategoriesCount >= 2) return this.#getRecommendCategory();
+    if (sameCategoriesCount >= 2) {
+      return this.#getRecommendCategory();
+    }
 
     return randomCategory;
   }
@@ -46,7 +50,7 @@ class MenuService {
       const { nonEdibleMenu, menus } = this.#coaches[coachName].getCoachLog();
       const menu = this.#getRecommendMenu(category, nonEdibleMenu, menus);
 
-      this.#coaches[coachName].setMenus(menu);
+      this.#coaches[coachName].addMenu(menu);
     });
   }
 
@@ -57,6 +61,21 @@ class MenuService {
     }
 
     return randomMenu;
+  }
+
+  getResult() {
+    const coachesName = Object.keys(this.#coaches);
+    const recommendMenus = coachesName.map((name) => {
+      const { menus } = this.#coaches[name].getCoachLog();
+
+      return menus;
+    });
+
+    return {
+      categoriesOfDays: this.#categoriesOfDays,
+      coachesName,
+      menus: recommendMenus,
+    };
   }
 }
 

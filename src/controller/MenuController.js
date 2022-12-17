@@ -1,3 +1,5 @@
+const { Console } = require('@woowacourse/mission-utils');
+
 const MenuService = require('../service/MenuService');
 
 const InputView = require('../views/InputView');
@@ -5,8 +7,6 @@ const OutputView = require('../views/OutputView');
 
 const Validator = require('../utils/Validator');
 const toArray = require('../utils/toArray');
-
-const { REGEX } = require('../constants');
 
 class MenuController {
   #menuService;
@@ -37,7 +37,7 @@ class MenuController {
   }
 
   #onInputCoachesName(names) {
-    const coaches = names.replace(REGEX.SPACE, '').split(',');
+    const coaches = toArray(names);
     this.#menuService.addCoaches(coaches);
 
     this.#inputNonEdibleMenus(coaches);
@@ -55,7 +55,7 @@ class MenuController {
       this.#onInputNonEdibleMenus(coaches[0], toArray(menus));
       if (coaches[0] !== lastCoachName) return this.#inputNonEdibleMenus(coaches.slice(1));
 
-      this.#printResult(coaches[0], toArray(menus));
+      this.#recommend();
     });
   }
 
@@ -69,8 +69,22 @@ class MenuController {
     }
   }
 
+  #recommend() {
+    this.#menuService.recommend();
+
+    this.#printResult();
+  }
+
   #printResult() {
-    const result = this.#menuService.getRecommendMenuResult();
+    const { categoriesOfDays, coachesName, menus } = this.#menuService.getResult();
+
+    OutputView.printRecommendResult(categoriesOfDays, coachesName, menus);
+
+    this.#exit();
+  }
+
+  #exit() {
+    Console.close();
   }
 }
 
