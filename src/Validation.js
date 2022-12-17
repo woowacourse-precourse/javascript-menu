@@ -20,6 +20,16 @@ const isCorrectCoachNameLength = (coachNames) => {
   });
 };
 
+const isCorrectNotEatMenuLength = (notEatMenus) => {
+  const length = notEatMenus.length;
+  if (0 > length) {
+    throw new Error("[ERROR] 못먹는 음식은 최소 0개");
+  }
+  if (2 < length) {
+    throw new Error("[ERROR] 못먹는 음식은 최대 2개");
+  }
+};
+
 const Validation = {
   coachNames: (inputCoachNames) => {
     const coachNames = inputCoachNames.split(",");
@@ -27,7 +37,8 @@ const Validation = {
     isCorrectCoachNameLength(coachNames);
   },
   notEatMenu: (inputNotEatMenu) => {
-    const notEatMenu = inputNotEatMenu.split(",");
+    const notEatMenus = inputNotEatMenu.split(",");
+    isCorrectNotEatMenuLength(notEatMenus);
   },
 };
 
