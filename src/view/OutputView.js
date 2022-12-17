@@ -17,6 +17,10 @@ const OutputView = {
     Console.print(`[ ${coach} | ${foodList} ]`);
   },
 
+  errorMessage(error) {
+    Console.print(error);
+  },
+
   endMent() {
     Console.print('\n추천을 완료했습니다.');
     Console.close();
