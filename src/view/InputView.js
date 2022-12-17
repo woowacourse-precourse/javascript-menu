@@ -15,7 +15,10 @@ const InputView = {
    * 코치가 원하지 않는 메뉴를 입력받는다.
    */
   readCoachNotWantMenu(coachName, callback) {
-    Console.readLine(coachName + MESSAGE.REQUEST_NOT_WANT_MENU, callback);
+    Console.readLine(
+      "\n" + coachName + MESSAGE.REQUEST_NOT_WANT_MENU,
+      callback
+    );
   },
 
   /**
