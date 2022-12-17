@@ -80,4 +80,5 @@ const MENUS = {
 module.exports = {
   CATEGORIES,
   REGEX,
+  MENUS,
 };
