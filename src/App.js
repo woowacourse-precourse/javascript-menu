@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
-const { getRandomMenues } = require("./RecommandMenus");
+const { getRandomMenues } = require("./RecommendMenus");
 const { categoryKey } = require("./utils/constant");
 const { splitString, trim } = require("./utils/UtilityFunctions");
 const { checkCoach, checkFood } = require("./Validate");
@@ -78,10 +78,10 @@ class App {
     Console.print(`[ 카테고리 ${categories}]`);
 
     for (const [name, { menus }] of this.#coaches) {
-      const recommandMenus = menus.reduce((acc, cur) => {
+      const recommendMenus = menus.reduce((acc, cur) => {
         return acc + `| ${cur} `;
       }, "");
-      Console.print(`[ ${name} ${recommandMenus}]`);
+      Console.print(`[ ${name} ${recommendMenus}]`);
     }
 
     Console.print("추천을 완료했습니다.");
