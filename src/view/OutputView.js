@@ -32,12 +32,12 @@ const OutputView = {
   },
 
   printRecommandedMenus(menusEachCoach) {
-    for (const coachName in menusEachCoach) {
+    Object.keys(menusEachCoach).forEach((coachName) => {
       const { recommandedMenus } = menusEachCoach[coachName];
       Console.print(
         convertArrayToPrintFormat([coachName, ...recommandedMenus]),
       );
-    }
+    });
   },
 };
 
