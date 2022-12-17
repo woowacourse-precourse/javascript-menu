@@ -1,3 +1,3 @@
 const splitString = (string, char) => string.split(char);
-
-module.exports = { splitString };
+const trim = (str) => str.trim();
+module.exports = { splitString, trim };

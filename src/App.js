@@ -1,24 +1,9 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
+const { getRandomMenues } = require("./RecommandMenus");
+const { categoryKey } = require("./utils/constant");
 const { splitString } = require("./utils/UtilityFunctions");
 const { checkCoach, checkFood } = require("./Validate");
-
-const SAMPLE = {
-  일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
-  한식: "김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음",
-  중식: "깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채",
-  아시안:
-    "팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜",
-  양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
-};
-
-const categoryKey = {
-  1: "일식",
-  2: "한식",
-  3: "중식",
-  4: "아시안",
-  5: "양식",
-};
 
 class App {
   #coaches; // 코치들이 저장되는 배열. 코치의 이름과(string), 요일별 먹을 메뉴(string), 그리고 먹지 못하는 메뉴(string[])가 저장
@@ -75,27 +60,7 @@ class App {
 
   getResult() {
     for (const [name, attrs] of this.#coaches) {
-      const coachMenus = [];
-      for (const category of this.#categories) {
-        // 월화수목금 메뉴 추천 해야함
-        const menus = SAMPLE[categoryKey[category]]
-          .split(", ")
-          .map((menu) => menu.trim());
-
-        const numMenus = Array.from(
-          { length: menus.length },
-          (_, idx) => idx + 1,
-        );
-
-        while (true) {
-          const menuIdx = Random.shuffle([...numMenus])[0]; // 이제 같은 음식이 안나오게끔 해야 함.
-          const menu = menus[menuIdx - 1];
-          if (coachMenus.includes(menu) || attrs.canNotEat.includes(menu))
-            continue;
-          coachMenus.push(menu);
-          break; // 겹치는 음식이 없게끔 설정
-        }
-      }
+      const coachMenus = getRandomMenues(this.#categories, attrs.canNotEat);
       this.#coaches.set(name, { ...attrs, menus: [...coachMenus] });
     }
 
