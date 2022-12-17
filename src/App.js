@@ -1,6 +1,8 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
+const { Console } = require('@woowacourse/mission-utils');
+
 const CoachNameValidator = require('./CoachNameValidator');
 
 const SAMPLE = {
@@ -29,9 +31,20 @@ class App {
   }
 
   inputHateMenus(coachNameList) {
-    for (const coachName of coachNameList) {
-      InputView.readHateMenus(coachName);
+    if (!coachNameList.length) {
+      this.recommendMenus();
+      return;
     }
+
+    InputView.readHateMenus(coachNameList.shift(), hateMenus => {
+      // TODO: save hate menus
+      console.log(hateMenus);
+      this.inputHateMenus([...coachNameList]);
+    });
+  }
+
+  recommendMenus() {
+    console.log('메뉴 추천');
   }
 
   isValidInputValue(validator, inputValue) {
