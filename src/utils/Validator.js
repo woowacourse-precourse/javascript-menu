@@ -1,13 +1,13 @@
 class Validator {
   static checkCoachNames(coachNames) {
-    if (this.#isLessThanMinimumCoachNumber(coachNames)) {
-      throw new Error('[ERROR] 코치는 최소 2명 이상 입력해야 합니다.');
-    }
-
     if (!this.#isValidInputFormat(coachNames)) {
       throw new Error(
         '[ERROR] 코치 이름은 한글을 ,(쉼표)로 구분하여 입력해주세요.'
       );
+    }
+
+    if (this.#isLessThanMinimumCoachNumber(coachNames)) {
+      throw new Error('[ERROR] 코치는 최소 2명 이상 입력해야 합니다.');
     }
 
     if (this.#isMoreThanMaximumCoachNumber(coachNames)) {
@@ -33,7 +33,7 @@ class Validator {
   }
 
   static #isValidInputFormat(Input) {
-    const check = /^[가-힣]+(,[가-힣]+)+$/;
+    const check = /^[가-힣]+(,[가-힣]+)*$/;
     return check.test(Input);
   }
 
