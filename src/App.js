@@ -2,6 +2,7 @@ const Coach = require("./model/Coach");
 const Menu = require("./model/Menu");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -15,12 +16,13 @@ const SAMPLE = {
 const coach = new Coach();
 const menu = new Menu();
 
+const categoryies = [];
+
 class App {
+  #coachList;
 
-  #coachList
-
-  constructor(){
-    this.#coachList
+  constructor() {
+    this.#coachList;
   }
 
   play = () => {
@@ -30,25 +32,50 @@ class App {
 
   inputCoachNames = (coachNames) => {
     coach.createCoachList(coachNames);
-    this.#coachList = coach.getCoachList()
-    this.#coachList.forEach((coachObj) => {
-      this.createCoachInedibleMenus(coachObj.name)
-      return;
+    this.inputInedibleMenusToCoach();
+  };
+
+  inputInedibleMenusToCoach = () => {
+    const coachList = coach.getCoachList();
+    coachList.forEach((coachObj) => {
+      InputView.readInedibleMenus(this.readMenu, coachObj.name);
     });
   };
 
-  createCoachInedibleMenus = (coachName) => {
-      
+  //카테고리 선정
+
+  settingCategories = () => {
+    for (let category in SAMPLE) {
+      categoryies.push({ category, menuList: SAMPLE[category].split(",") });
+    }
+    this.inputRecommendCategories();
   };
 
-  inputCoachInedibles = (ena) => {
+  inputRecommendCategories = () => {
     
-  }
+    const categoryNum = MissionUtils.Random.pickNumberInRange(1, 5);
+    if (menu.checkDuplicatedCategory(categoryNum, 2) === false) {
+      return this.inputRecommendCategories();
+    }
+    menu.inputRecommendCategory(categoryNum);
+    
+    if (menu.checkCategoryListDone() === false) {
+      
+      return this.inputRecommendCategories();
+    }
+    return this.inputRecommendMenus();
+  };
 
+  //코치 리스트에서 한명씩 돌아가며 추천해주기
 
+  inputRecommendMenus = () => {
+    console.log(menu.getRecommendCategoryList())
+    
+  };
 }
 
 const app = new App();
-app.play();
+app.settingCategories();
+// app.play();
 
 module.exports = App;

@@ -1,3 +1,5 @@
+const Exception = require('../utils/Exception');
+
 class Coach {
   #coachList;
 

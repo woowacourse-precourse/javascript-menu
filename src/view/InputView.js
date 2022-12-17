@@ -13,7 +13,8 @@ const InputView = {
    * 사용자에게 코치의 이름에 따라 못 먹는 메뉴를 입력받는다.
    */
      readInedibleMenus(callback,coachName) {
-      MissionUtils.Console.readLine(`${coachName}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback);
+      MissionUtils.Console.readLine(`${coachName}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback
+      );
     },
 };
 

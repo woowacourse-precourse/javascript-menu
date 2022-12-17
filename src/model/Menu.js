@@ -6,7 +6,7 @@ class Menu {
   }
 
   checkDuplicatedCategory(category, count) {
-    const checkedCount = 0;
+    let checkedCount = 0;
     this.#recommendedCategoryList.forEach((recommendedCategory) => {
       if (recommendedCategory === category) {
         checkedCount += 1;
@@ -18,11 +18,21 @@ class Menu {
     return true;
   }
 
+  checkCategoryListDone(){
+    if(this.#recommendedCategoryList.length === 5){
+      return true;
+    }
+    return false;
+  }
+
   inputRecommendCategory(category) {
+
     this.#recommendedCategoryList.push(category);
   }
 
-  
+  getRecommendCategoryList(){
+    return this.#recommendedCategoryList;
+  }
 
 }
 
