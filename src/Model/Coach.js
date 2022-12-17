@@ -15,7 +15,7 @@ class Coach {
   getName() {}
 
   validatePickyMenu(pickyMenu) {
-    if (pickyMenu.length > 3)
+    if (pickyMenu.length > 2)
       throw new Error("[ERROR] 못 먹는 메뉴는 최대 2개까지만 입력 가능합니다.");
   }
 }
