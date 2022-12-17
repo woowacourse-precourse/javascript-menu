@@ -34,7 +34,6 @@ class MenuCtrl extends GameCtrl {
     });
   }
 
-  // TODO: 코치 이름을 메세지에 추가해서 에러 바운더리에서 처리할 수 있게끔 리팩터링
   #inputMenusCoachesCantEat() {
     const coachesList = this.model.getCoachesName();
 
@@ -47,13 +46,15 @@ class MenuCtrl extends GameCtrl {
         MenusCantEatValidator.validateList(splittedMenusCoachCantEat);
 
         this.model.setMenusCoachesCantEat(splittedMenusCoachCantEat);
-
         this.#currentCoachflag += 1;
+
+        if (!coachesList[this.#currentCoachflag]) {
+          return this.#makeCoachesRecommendedMenus();
+        }
+
         if (coachesList.length > this.#currentCoachflag) {
           return this.#inputMenusCoachesCantEat();
         }
-
-        return this.#makeRecommendedMenus();
       } catch (error) {
         this.view.output(error.message);
         this.#inputMenusCoachesCantEat();
@@ -61,9 +62,11 @@ class MenuCtrl extends GameCtrl {
     });
   }
 
-  #makeRecommendedMenus() {
-    // this.model.makeRecommendedMenus();
-    console.log('hi');
+  #makeCoachesRecommendedMenus() {
+    const dailyRecommendedCategory = this.model.makeDailyRecommendedCategory();
+    const dailyRecommendedMenus = this.model.makeDailyRecommendedMenus(dailyRecommendedCategory);
+
+    this.view.output(dailyRecommendedCategory);
   }
 
   end() {}
