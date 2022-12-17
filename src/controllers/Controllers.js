@@ -1,3 +1,4 @@
+const Coach = require('../models/Coach');
 const { Output, Input } = require('../views/View');
 
 class Controller {
@@ -7,7 +8,14 @@ class Controller {
   }
 
   getCoachNameList() {
-    Input.readCoachNameList((coachNameList) => {});
+    Input.readCoachNameList((coachNameList) => {
+      this.checkCoachNameList(coachNameList);
+    });
+  }
+
+  checkCoachNameList(coachNameList) {
+    const validation = Coach.validateCoachNameList(coachNameList);
+    if (validation === false) return this.getCoachNameList();
   }
 }
 
