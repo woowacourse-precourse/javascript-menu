@@ -14,6 +14,10 @@ class Coach {
     return this.#name;
   }
 
+  getBannedFoods() {
+    return this.#bannedFoods;
+  }
+
   makeBannedFoods() {
     return new Promise((resolve) => {
       resolve(readBannedFoods(this.#name, this.setBannedFoods.bind(this)));
@@ -21,8 +25,7 @@ class Coach {
   }
 
   setBannedFoods(food) {
-    this.#bannedFoods.push(food);
-    console.log(`${this.#name}push 완료`);
+    this.#bannedFoods = food.split(',');
   }
 }
 module.exports = { Coach };
