@@ -1,6 +1,7 @@
 const { MESSAGE } = require("./constants");
 const MenuRecommender = require("./MenuRecommender");
 const { makeArray } = require("./util/ArrayMaker");
+const MenuValidator = require("./validation/MenuValidator");
 const NameValidator = require("./validation/NameValidator");
 const InputView = require("./views/InputView");
 const OutputView = require("./views/OutputView");
@@ -50,9 +51,15 @@ class Controller {
   askMenuCallback(input) {
     const coachName = this.#namesArr[this.#menuAskingIndex];
     const menuArr = input === "" ? [] : makeArray(input);
-    this.#menuRecommender.setNoNoMenus(coachName, menuArr);
-    this.#menuAskingIndex++;
-    this.askMenu();
+    try {
+      new MenuValidator(menuArr);
+      this.#menuRecommender.setNoNoMenus(coachName, menuArr);
+      this.#menuAskingIndex++;
+    } catch (error) {
+      OutputView.printMessage(error);
+    } finally {
+      this.askMenu();
+    }
   }
 
   returnResult() {

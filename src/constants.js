@@ -20,6 +20,8 @@ const ERROR_MESSAGE = Object.freeze({
   NAME_COUNT: `${SYMBOL.ERROR}코치는 최소 2명, 최대 5명까지 식사를 함께 합니다.`,
   NAME_DUPLICATION: `${SYMBOL.ERROR}코치의 이름이 중복되어 작성되었습니다.`,
   NAME_SPECIAL_CHARS: `${SYMBOL.ERROR}코치의 이름에 특수문자가 들어갈 수 없습니다.`,
+  MENU_NOT_INCLUDED: `${SYMBOL.ERROR}유효하지 않은 메뉴가 포함되었습니다.`,
+  MENU_COUNT: `${SYMBOL.ERROR}못 먹는 메뉴는 최소 0개, 최대 2개 입력 가능합니다.`,
 });
 
 const DAY = Object.freeze({
@@ -56,6 +58,11 @@ const NAME_VALIDITY = Object.freeze({
   MIN_NAMES_COUNT: 2,
 });
 
+const MENU_VALIDITY = Object.freeze({
+  MAX_MENU_COUNT: 2,
+  MIN_MENU_COUNT: 0,
+});
+
 const REG_EXP = Object.freeze({
   SPECIAL_CHARS_CHECK: /[\{\}\[\]\/?.,;:|\)*~`!^\-_+<>@\#$%&\\\=\(\'\"]/g,
 });
@@ -67,6 +74,7 @@ module.exports = {
   DAY,
   CATEGORY,
   NAME_VALIDITY,
+  MENU_VALIDITY,
   REG_EXP,
   SAMPLE,
 };
