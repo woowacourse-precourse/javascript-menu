@@ -39,18 +39,18 @@ class MenuRecommandationController {
 
     const coach = coaches[index];
 
-    InputView.readHateMenus(coach.getName(), (hateFoods) => {
-      this.checkHateFoodsInMenus(hateFoods);
+    InputView.readHateMenus(coach.getName(), (hateMenus) => {
+      this.checkHateMenusInMenus(hateMenus);
 
-      coach.setHateFoods(hateFoods);
+      coach.setHateMenus(hateMenus);
 
       this.readHateMenus(coaches, index + 1);
     });
   }
 
-  checkHateFoodsInMenus(hateFoods) {
-    hateFoods.forEach((hateFood) => {
-      if (hateFood !== '' && !Menus.hasMenu(hateFood)) {
+  checkHateMenusInMenus(hateMenus) {
+    hateMenus.forEach((hateMenu) => {
+      if (hateMenu !== '' && !Menus.hasMenu(hateMenu)) {
         throw new Error('존재하지 않는 메뉴입니다.');
       }
     });

@@ -1,6 +1,6 @@
 class Coach {
   #name;
-  #hateFoods;
+  #hateMenus;
   #menus;
 
   constructor(name) {
@@ -12,12 +12,12 @@ class Coach {
     return this.#name;
   }
 
-  setHateFoods(hateFoods) {
-    this.#hateFoods = [...hateFoods];
+  setHateMenus(hateMenus) {
+    this.#hateMenus = [...hateMenus];
   }
 
   hasHateMenu(menu) {
-    return this.#hateFoods.includes(menu);
+    return this.#hateMenus.includes(menu);
   }
 
   selectMenu(menu) {

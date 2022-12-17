@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { INPUT } = require('./constants');
 const OutputView = require('./OutputView');
 
 const InputView = {
@@ -15,12 +16,18 @@ const InputView = {
   },
 
   validateCoachNames(coachNames) {
-    if (coachNames.length < 2 || coachNames.length > 5) {
+    if (
+      coachNames.length < INPUT.MIN_COACH_COUNT ||
+      coachNames.length > INPUT.MAX_COACH_COUNT
+    ) {
       throw new Error('코치는 최소 2명부터 최대 5명 입력 가능합니다.');
     }
 
     coachNames.forEach((name) => {
-      if (name.length < 2 || name.length > 4) {
+      if (
+        name.length < INPUT.MIN_COACH_NAME ||
+        name.length > INPUT.MAX_COACH_NAME
+      ) {
         throw new Error('코치 이름은 2글자부터 4글자까지 입력 가능합니다.');
       }
     });
@@ -28,15 +35,15 @@ const InputView = {
 
   readHateMenus(coachName, callback) {
     InputView.question(`${coachName} ${InputView.HATE_FOODS}`, (input) => {
-      const hateFoods = input.split(',');
+      const hateMenus = input.split(',');
 
-      InputView.validateHateFoods(hateFoods);
-      callback(hateFoods);
+      InputView.validateHateMenus(hateMenus);
+      callback(hateMenus);
     });
   },
 
-  validateHateFoods(hateFoods) {
-    if (hateFoods.length > 2) {
+  validateHateMenus(hateMenus) {
+    if (hateMenus.length > INPUT.MAX_HATE_MENU) {
       throw new Error('최대 2개의 못 먹는 메뉴를 선택할 수 있습니다.');
     }
   },

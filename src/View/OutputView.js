@@ -4,13 +4,14 @@ const OutputView = {
   SERVICE_START: '점심 메뉴 추천을 시작합니다.',
   MENU_RESULT: '메뉴 추천 결과입니다.',
   SERVICE_END: '\n추천을 완료했습니다.',
+  ERROR_HEADER: '[ERROR]',
 
   printServiceStart() {
     Console.print(OutputView.SERVICE_START);
   },
 
   printError(error) {
-    Console.print(`[ERROR] ${error.message}`);
+    Console.print(`${OutputView.ERROR_HEADER} ${error.message}`);
   },
 
   printMenuResult(menuResultView) {

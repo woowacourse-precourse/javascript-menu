@@ -2,6 +2,7 @@ const { Random } = require('@woowacourse/mission-utils');
 const Categories = require('../Model/Categories');
 const Menus = require('../Model/Menus');
 const Coach = require('../Model/Coach');
+const { SERVICE } = require('./constants');
 
 class MenuService {
   #days = ['월요일', '화요일', '수요일', '목요일', '금요일'];
@@ -26,8 +27,9 @@ class MenuService {
 
   pickCategory(categories) {
     const category = categories.get(Random.pickNumberInRange(1, 5));
+    const duplicates = this.#categories.filter((name) => name === category);
 
-    if (this.#categories.filter((name) => name === category).length === 2) {
+    if (duplicates.length === SERVICE.MAX_DUPLICATES) {
       this.pickCategory(categories);
     } else {
       this.#categories.push(category);
