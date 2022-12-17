@@ -15,7 +15,7 @@ const SAMPLE = {
 const categorysArray = Object.keys(SAMPLE);
 
 class App {
-  categorys = {};
+  categorysCount = {};
   play() {
     OutputView.printServiceStart();
 
@@ -37,9 +37,17 @@ class App {
   }
 
   decideCategory() {
-    const category =
-      categorysArray[CategoryRandomNumberGenerator.generate() - 1];
-    this.categorys[category] = this.categorys[category] + 1 || 1;
+    const categoryName = this.getCategoryName();
+
+    if (this.categorysCount[categoryName] || 0 <= 2) {
+      this.categorysCount[category] = this.categorysCount[category] + 1 || 1;
+      return;
+    }
+    this.decideCategory();
+  }
+
+  getCategoryName() {
+    return categorysArray[CategoryRandomNumberGenerator.generate() - 1];
   }
 }
 
