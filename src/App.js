@@ -4,7 +4,11 @@ const {
   NOT_EAT_MENU,
   COMPLETE_MESSAGE,
 } = require('./Constants');
-const { checkValidateCoach, checkValidateCoachNames } = require('./Validate');
+const {
+  checkValidateCoach,
+  checkValidateCoachNames,
+  checkMenu,
+} = require('./Validate');
 const { readCoachName } = require('./InputView');
 const { printResult } = require('./OutputView');
 const SAMPLE = {
@@ -63,19 +67,23 @@ class App {
   getInputNotEatMenu(name) {
     Console.readLine(NOT_EAT_MENU(name), menus => {
       this.step += 1;
+      const menuSplit = menus.split(',');
+      this.menuArray = Array.from(menuSplit);
       this.menu = menus.split(',').join();
       this.makeNotEatMenuObject(name, this.menu);
+      this.validateMenu(this.menuArray);
       this.moveName();
     });
   }
 
-  // validateMenu(){
-  // 	try{
-
-  // 	}catch(error){
-  // 		Console.print(error)
-  // 	}
-  // }
+  validateMenu(menus) {
+    try {
+      checkMenu(menus);
+    } catch (error) {
+      Console.print(error);
+      this.moveName();
+    }
+  }
 
   makeNotEatMenuObject(name, menu) {
     this.coachNotEatMenu[name] = menu;
@@ -83,7 +91,7 @@ class App {
 
   test() {
     console.log(this.coachNotEatMenu);
-    console.log(Object.values(this.coachNotEatMenu)[0][0]);
+    console.log(Object.values(this.coachNotEatMenu));
   }
 
   // getCategories() {
