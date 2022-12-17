@@ -1,8 +1,9 @@
 const { MenuController } = require('./MenuController');
+const { RecommendMachine } = require('./RecommendMachine');
 
 class App {
   play() {
-    new MenuController().start();
+    new MenuController({ machine: new RecommendMachine() }).start();
   }
 }
 
