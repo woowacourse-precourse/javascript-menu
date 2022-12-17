@@ -25,7 +25,7 @@ const Validator = {
     }
   },
 
-  validateVannedMenu(menuString) {
+  validateBannedMenu(menuString) {
     const menus = menuString.split(",");
     this.validateMenusLength(menus);
   },

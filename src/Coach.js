@@ -1,13 +1,13 @@
 class Coach {
   #name;
-  #vannedMenu;
+  #bannedMenu;
 
   constructor(name) {
     this.#name = name;
   }
 
-  addVannedMenu(vannedMenu) {
-    this.#vannedMenu = vannedMenu;
+  addBannedMenu(bannedMenu) {
+    this.#bannedMenu = bannedMenu;
   }
 
   getName() {
