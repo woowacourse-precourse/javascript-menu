@@ -9,27 +9,48 @@ const SAMPLE = {
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
+const BannedMenu = {}
+
+function cantEat(names) {
+  names.forEach((name) => {
+    BannedMenu[name] = ''
+  })
+}
+
 function nameIsValid(name) {
-  if(name.length < 2 || name.length > 4) return false
+  if(name.length < 2 || name.length > 4) {
+    throw new Error('[ERROR] 코치 이름이 유효하지 않음');
+  }
+}
+
+function namesCntValid(names) {
+  if(names.length < 2 || names.length > 5) {
+    throw new Error('[ERROR] 코치 숫자가 안맞음')
+  }
+}
+
+function nameIsDup(names) {
+  const nameSet = new Set(names)
+  if(nameSet.size !== names.length) {
+    throw new Error('[ERROR] 중복된 코치 이름 존재')
+  }
 }
 
 function namesAreValid(answer) {
   const names = answer.split(',')
-  if(names.length < 2 || names.length > 5) {
-    throw new Error('[ERROR] 코치 숫자가 안맞음')
-  }
-  for(let i=0; i<names.length; i++) {
-    if(nameIsValid(names[i]) === false) {
-      throw new Error('[ERROR] 코치 이름이 유효하지 않음');
-    }
-  }
+  namesCntValid(names)
+  names.forEach((name) => {
+    nameIsValid(name)
+  })
+  nameIsDup(names)
   return names
 }
 
 function inputCoachNames() {
   Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)\n', (answer => {
     try {
-      names = namesAreValid(answer)
+      const names = namesAreValid(answer)
+      return bannedMenu(names)
     } catch(error) {
       Console.print(error.message)
       return inputCoachNames()
