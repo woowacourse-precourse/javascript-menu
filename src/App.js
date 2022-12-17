@@ -1,3 +1,4 @@
+const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
 
 const SAMPLE = {
@@ -12,7 +13,15 @@ const SAMPLE = {
 class App {
   play() {
     OutputView.printServiceStart();
+
+    this.inputCoachNames();
   }
+
+  inputCoachNames() {
+    InputView.readBridgeSize(this.actionCoachNames.bind(this));
+  }
+
+  actionCoachNames(coachNames) {}
 }
 
 const app = new App();
