@@ -1,10 +1,9 @@
-const { Console } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
 const { getRandomMenues } = require("./RecommendMenus");
-const { categoryKey } = require("./utils/constant");
 const { splitString, trim } = require("./utils/UtilityFunctions");
 const { checkCoach, checkFood } = require("./Validate");
 const { InputView } = require("./View/InputView");
+const { OutputView } = require("./View/OutputView");
 
 class App {
   #coaches; // 코치들이 저장되는 배열. 코치의 이름과(string), 요일별 먹을 메뉴(string), 그리고 먹지 못하는 메뉴(string[])가 저장
@@ -13,7 +12,7 @@ class App {
   play() {
     this.#coaches = new Map();
     this.#categories = [];
-    Console.print("점심 메뉴 추천을 시작합니다.");
+    OutputView.startRecommend();
     this.#categories = randomCategory(this.#categories);
 
     InputView.inputCoachNames((names) => this.getCoachesNameCallBack(names));
@@ -69,23 +68,14 @@ class App {
 
   getResult() {
     this.appendRandomMenus();
-    Console.print("메뉴 추천 결과입니다.");
-    Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
 
-    const categories = this.#categories.reduce((acc, cur) => {
-      return acc + `| ${categoryKey[cur]} `;
-    }, "");
-    Console.print(`[ 카테고리 ${categories}]`);
-
+    OutputView.printRecommendMenuResult();
+    OutputView.printDayRow();
+    OutputView.printCategoryRow(this.#categories);
     for (const [name, { menus }] of this.#coaches) {
-      const recommendMenus = menus.reduce((acc, cur) => {
-        return acc + `| ${cur} `;
-      }, "");
-      Console.print(`[ ${name} ${recommendMenus}]`);
+      OutputView.printCoachRecommendMenus(name, menus);
     }
-
-    Console.print("추천을 완료했습니다.");
-    Console.close();
+    OutputView.printRecommendEnd();
   }
 }
 
