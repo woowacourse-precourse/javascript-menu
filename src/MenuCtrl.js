@@ -30,22 +30,46 @@ class MenuCtrl {
       if (error) return this.readUnableToEat();
 
       const divideMenusCoachCantEat = menusCoachCantEat.split(',');
-
-      if (coachesList.length > this.currentCoachFlag) {
+      // todo 먹지 못하는 음식 할당해야함
+      if (coachesList.length !== this.currentCoachFlag) {
         this.currentCoachFlag += 1;
         return this.readUnableToEat();
       } else {
-        Console.print('메뉴 추천 결과입니다.');
+        Console.print('\n메뉴 추천 결과입니다.');
+        Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+        this.makeRandomMenus();
       }
     });
   }
 
-  makeRandomCategories() {
-    const category = Random.pickNumberInRange(1, 5); // ex. 1
-    const selectedCategory = CATEGORY[category];
+  makeRandomMenus() {
+    // const category = Random.pickNumberInRange(1, 5); // ex. 1
+    // const selectedCategory = CATEGORY[category];
+    const map = new Map();
+    let flag = true;
+    let answer = ['카테고리'];
 
-    const menus = MENUS[selectedCategory];
-    const selectedMenu = Random.shuffle(menus);
+    while (flag) {
+      const category = Random.pickNumberInRange(1, 5);
+      const selectedCategory = CATEGORY[category]; //양식
+      if (!map.has(selectedCategory)) {
+        map.set(selectedCategory, 1);
+      } else if (map.get(selectedCategory) > 2) {
+        continue;
+      }
+
+      if (map.size === 5) flag = false;
+    }
+
+    for (const [key, value] of map) {
+      answer.push(key);
+    }
+
+    let categories = answer.join(' | ');
+    Console.print(`[ ${categories} ]`);
+
+    // const menus = MENUS[selectedCategory];
+    // const selectedMenu = Random.shuffle(menus);
   }
 }
 
