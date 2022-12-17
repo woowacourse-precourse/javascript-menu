@@ -91,7 +91,7 @@ class App {
   }
 
   test() {
-    this.getCategories();
+    this.getResult();
     // console.log(this.coachNotEatMenu);
     // console.log(Object.values(this.coachNotEatMenu));
   }
@@ -108,14 +108,12 @@ class App {
 
     const real = Object.values(SAMPLE)[this.categoriesNumber];
     const pickMenu = real.split(',')[menuNumber];
-
-    console.log(pickMenu);
   }
 
   getResult() {
     printDay();
-    printCategories();
-    printMenus();
+    // printCategories();
+    // printMenus();
     this.finish();
   }
 
