@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { READ_MESSAGE } = require('../utils/constants');
-const { isValidCoaches } = require('../utils/validations');
+const { isValidCoaches } = require('../utils/coachValidation');
 
 const InputView = {
   readCoaches(setCoaches) {
