@@ -11,30 +11,28 @@ const InputView = {
             try {
                 const COACH = nameString.split(',');
                 ErrorHandler.coachNameError(COACH);
-                this.coachsHate(COACH);
+                let hateMenu = this.readHateMenu(COACH,[],0);
+                
             } catch(e) {
                 OutputView.printError(e);
                 this.readCoachName();
             }
         });
     },
-
-    coachsHate(COACH) {
-        let hateMenu = [];
-        for(let i = 0; i < COACH.length; i++) {
-           hateMenu[i] = this.readHateMenu(COACH[i]);
-        }
-        return hateMenu;
-    },
     /**
      * 싫어하는 음식을 입력받는다
      */
-    readHateMenu(name) {
-        MU.Console.readLine(`${name} (이)가 못 먹는 메뉴를 입력해 주세요.\n`,(menu) => {
+    readHateMenu(COACH,hateMenu,i) {
+        MU.Console.readLine(`${COACH[i]} (이)가 못 먹는 메뉴를 입력해 주세요.\n`,(menu) => {
             try {
-                const HATE_MENU = menu.split(',');
+                hateMenu[i] = menu.split(',');
+                ErrorHandler.hateMenuError(hateMenu[i]);
+                if(i == COACH.length - 1)
+                    return hateMenu
+                else this.readHateMenu(COACH,hateMenu,++i);
             } catch(e) {
-
+                OutputView.printError(e);
+                this.readHateMenu(COACH,hateMenu,i);
             }
         });
 
