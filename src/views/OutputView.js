@@ -14,11 +14,14 @@ const OutputView = {
     Console.print(errorMessage);
   },
 
-  printResult() {
+  printResult(coaches) {
     Console.print(OUTPUT_MESSAGE.result);
     Console.print(OUTPUT_MESSAGE.day);
     Console.print(OUTPUT_MESSAGE.category);
-
+    coaches.forEach((coach) => {
+      const name = coach.getName();
+      Console.print(`[ ${name} | ${coach.getMenus().join(' | ')} ]`);
+    });
     Console.print(OUTPUT_MESSAGE.end);
     Console.close();
   },

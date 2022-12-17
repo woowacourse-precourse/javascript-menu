@@ -32,6 +32,7 @@ class MenuController {
   }
 
   onReadHateFoods(index, hateFoodsInput) {
+    pirntNewLine();
     index = parseInt(index, 10);
     try {
       validateHateFoodsInput(hateFoodsInput);
@@ -52,7 +53,7 @@ class MenuController {
 
   startRealService() {
     this.#menuService.recommend();
-    printResult();
+    printResult(this.#menuService.getCoaches());
   }
 }
 

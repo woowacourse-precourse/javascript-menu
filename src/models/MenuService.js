@@ -49,6 +49,10 @@ class MenuService {
     const menu = menus[Random.shuffle(menusIndex)[0]];
     return menu;
   }
+
+  getCoaches() {
+    return Object.freeze(this.#coaches);
+  }
 }
 
 module.exports = MenuService;
