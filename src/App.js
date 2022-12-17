@@ -95,15 +95,15 @@ class App {
     console.log(Object.values(this.coachNotEatMenu));
   }
 
-  // getCategories() {
-  //   const categoriesNumber = Random.pickNumberInRange(1, 5);
-  //   this.categories = Object.keys(SAMPLE)[categoriesNumber];
-  // }
+  getCategories() {
+    const categoriesNumber = Random.pickNumberInRange(1, 5);
+    this.categories = Object.keys(SAMPLE)[categoriesNumber];
+  }
 
-  // getMenu() {
-  //   const randomNumber = Random.pickUniqueNumbersInRange(1, 9, 9);
-  // const menu = Random.shuffle(randomNumber)[0];
-  // }
+  getMenu() {
+    const randomNumber = Random.pickUniqueNumbersInRange(1, 9, 9);
+    const randomMenu = Random.shuffle(randomNumber)[0];
+  }
 
   getResult() {
     printResult();
