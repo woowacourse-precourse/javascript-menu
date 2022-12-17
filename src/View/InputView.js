@@ -16,21 +16,29 @@ const InputView = {
   },
 
   validateCoachNames(coachNames) {
+    InputView.validateCoachLength(coachNames);
+
+    coachNames.forEach((coachName) => {
+      InputView.validateCoachNameLength(coachName);
+    });
+  },
+
+  validateCoachLength(coachNames) {
     if (
       coachNames.length < INPUT.MIN_COACH_COUNT ||
       coachNames.length > INPUT.MAX_COACH_COUNT
     ) {
       throw new Error('코치는 최소 2명부터 최대 5명 입력 가능합니다.');
     }
+  },
 
-    coachNames.forEach((name) => {
-      if (
-        name.length < INPUT.MIN_COACH_NAME ||
-        name.length > INPUT.MAX_COACH_NAME
-      ) {
-        throw new Error('코치 이름은 2글자부터 4글자까지 입력 가능합니다.');
-      }
-    });
+  validateCoachNameLength(coachName) {
+    if (
+      coachName.length < INPUT.MIN_COACH_NAME ||
+      coachName.length > INPUT.MAX_COACH_NAME
+    ) {
+      throw new Error('코치 이름은 2글자부터 4글자까지 입력 가능합니다.');
+    }
   },
 
   readHateMenus(coachName, callback) {
