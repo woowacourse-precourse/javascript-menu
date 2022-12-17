@@ -1,3 +1,4 @@
+const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
 const SAMPLE = {
@@ -11,6 +12,11 @@ const SAMPLE = {
 class App {
   play() {
     OutputView.printStart();
+    InputView.readCoachName(this.getCoachNameInput.bind(this));
+  }
+
+  getCoachNameInput(name) {
+    const coach = name.split(',');
   }
 }
 
