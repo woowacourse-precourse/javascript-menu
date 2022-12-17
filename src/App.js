@@ -1,3 +1,4 @@
+const Coach = require('./domain/Coach');
 const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
 const getCategory = require('./utils/getCategory');
@@ -13,8 +14,10 @@ const SAMPLE = {
 
 class App {
   #foodCategory;
+  #coaches;
 
   play() {
+    this.#coaches = [];
     OutputView.gameStart();
     return this.setFoodCategories();
   }
@@ -29,6 +32,10 @@ class App {
       try {
         verify.nameCount(input);
         verify.nameLengthCount(input);
+        const names = input.split(',');
+        names.forEach((name) => {
+          this.#coaches.push(new Coach(name));
+        });
       } catch (error) {
         if (error.message === 'Invalid Coach Count') OutputView.ErrorCoachCount();
         if (error.message === 'Invalid Name Length') OutputView.ErrorCoachName();
