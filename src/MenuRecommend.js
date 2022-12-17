@@ -2,6 +2,8 @@ const { Random } = require('@woowacourse/mission-utils');
 
 class MenuRecommend {
   #category = [];
+  #coustomRecommend = new Map();
+
   MENU = {
     일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
     한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -28,7 +30,33 @@ class MenuRecommend {
     return this.#category;
   }
 
-  createMenu() {}
+  createMenu(dislickFood) {
+    const excludeMenu = dislickFood;
+    const customMenu = [];
+
+    this.#category.map((category) => {
+      const menuArr = this.MENU[category].split(',');
+      const menuNumberArr = [];
+      for (let i = 0; i < menuArr.length; i++) {
+        menuNumberArr.push(i);
+      }
+      let randomMenuNumber = Random.shuffle(menuNumberArr)[0];
+      if (excludeMenu.includes(menuArr[randomMenuNumber])) {
+        while (true) {
+          randomMenuNumber = Random.shuffle(menuNumberArr)[0];
+          if (!excludeMenu.includes(menuArr[randomMenuNumber])) {
+            customMenu.push(menuArr[randomMenuNumber]);
+            excludeMenu.push(menuArr[randomMenuNumber]);
+            break;
+          }
+        }
+      } else {
+        customMenu.push(menuArr[randomMenuNumber]);
+        excludeMenu.push(menuArr[randomMenuNumber]);
+      }
+    });
+    return customMenu;
+  }
 }
 
 module.exports = MenuRecommend;
