@@ -29,7 +29,7 @@ const ValidConfig = {
 };
 
 const AppConfig = {
-  WRONG_INPUT_PATIENCE: 10,
+  WRONG_INPUT_PATIENCE: 1000,
   DAYS: 5,
 };
 
