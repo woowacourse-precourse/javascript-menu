@@ -1,10 +1,6 @@
 class Menu {
   #uneatableMenu = [];
 
-  getUneatableMenus() {
-    return this.#uneatableMenus;
-  }
-
   validate(menus) {
     const uneatableMenus = menus.split(",");
 
@@ -17,6 +13,8 @@ class Menu {
       throw new Error("[ERROR] 못 먹는 메뉴는 최소 0개, 최대 2개이어야 합니다");
     }
   }
+
+  makeRecommandResult() {}
 }
 
 module.exports = Menu;

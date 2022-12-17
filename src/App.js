@@ -44,11 +44,15 @@ class App {
   }
 
   readUneatableMenu() {
-    if (this.#coachIndex < this.#coaches.length)
+    if (this.#coachIndex < this.#coaches.length) {
       InputView.readUneatableMenu(
         this.#coaches[this.#coachIndex],
         this.saveUneatableMenu.bind(this)
       );
+    }
+    if (this.#coachIndex === this.#coaches.length) {
+      this.makeRecommandResult();
+    }
   }
 
   saveUneatableMenu(menus) {
@@ -58,6 +62,10 @@ class App {
 
     this.#coachIndex += 1;
     this.readUneatableMenu();
+  }
+
+  makeRecommandResult() {
+    this.#menuManager.makeRecommandResult();
   }
 }
 
