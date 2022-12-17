@@ -13,3 +13,5 @@ class Menu {
     return this.#name;
   }
 }
+
+module.exports = Menu;
