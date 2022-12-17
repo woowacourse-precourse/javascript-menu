@@ -1,6 +1,8 @@
 const Coach = require("./Coach");
+const { CATEGORY } = require("./data");
 const { readCoachName, readCoachPickyFoods } = require("./InputView");
 const { print } = require("./OutputView");
+const { getMenu, getFood } = require("./RandomMachine");
 const {
   validateCoachNumber,
   validateNameLength,
@@ -18,6 +20,7 @@ const SAMPLE = {
 
 class App {
   #coaches = [];
+  #days = ["월요일", "화요일", "수요일", "목요일", "금요일"];
 
   getCoachName() {
     readCoachName(this.actWithCoachName.bind(this));
@@ -30,6 +33,7 @@ class App {
       validateCoachNumber(names);
       this.makeEachCoachField(names);
       this.askPickyFoods();
+      this.recommandFoods();
     } catch (e) {
       print(e);
       this.getCoachName();
@@ -48,9 +52,7 @@ class App {
     });
   }
 
-  askPickyFoods() {
-    this.getPickyFoods(this.#coaches[0]);
-  }
+  askPickyFoods() {}
 
   getPickyFoods(coach) {
     readCoachPickyFoods(coach, this.actWithPickyFoods.bind(this));
@@ -65,6 +67,16 @@ class App {
     } catch (e) {
       print(e);
       this.getPickyFoods(coach);
+    }
+  }
+
+  recommandFoods(coach) {
+    const category = getMenu();
+    if (coach.compareCateogry(category)) {
+      const food = getFood(CATEGORY[category]);
+      if (coach.compareFood(food)) {
+        coach.setFoodtoMenu(food);
+      }
     }
   }
 
