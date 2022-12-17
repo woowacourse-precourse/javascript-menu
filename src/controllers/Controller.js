@@ -61,17 +61,24 @@ class Controller {
   }
 
   setRecommendedMenu() {
-    if (this.#recommendedCategory.length === 5)
-      return this.printRecommendedMenu();
+    if (this.#recommendedCategory.length === 5) return this.decideMenu();
 
     const categoryNumber = generator();
     if (!this.#categorys.canRecommend(categoryNumber))
       return this.setRecommendedMenu();
 
-    const categoryMenus = this.#categorys.getCategoryMenus(categoryNumber);
-    this.#coachs.decideMenu(categoryMenus);
     this.#recommendedCategory.push(categoryNumber);
+
     return this.setRecommendedMenu();
+  }
+
+  decideMenu() {
+    const categoryMenus = this.#categorys.getCategoryMenus(
+      this.#recommendedCategory
+    );
+    this.#coachs.decideMenu(categoryMenus);
+
+    this.printRecommendedMenu();
   }
 
   printRecommendedMenu() {

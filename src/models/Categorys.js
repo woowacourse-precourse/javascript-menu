@@ -29,12 +29,18 @@ class Gategorys {
     return category.canRecommend();
   }
 
-  getCategoryMenus(categoryNumber) {
-    const category = this.#list.filter((category) =>
-      category.isMe(categoryNumber)
-    )[0];
-    category.increaseRecommendedCount();
-    return category.getMenu();
+  getCategoryMenus(recommendedCategory) {
+    const menus = [];
+
+    recommendedCategory.forEach((categoryNumber) => {
+      const category = this.#list.filter((category) =>
+        category.isMe(categoryNumber)
+      )[0];
+      category.increaseRecommendedCount();
+      menus.push(category.getMenu());
+    });
+
+    return menus;
   }
 
   #addAllMenus(menus) {
