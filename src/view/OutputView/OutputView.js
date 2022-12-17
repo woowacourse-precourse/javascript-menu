@@ -1,5 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MESSAGE } = require('../../constants/Constants');
+const { MESSAGE, WEEK, CATEGORY, MARK } = require('../../constants/Constants');
 const IOutputView = require('./IOutputView');
 
 const OutputView = class extends IOutputView {
@@ -11,17 +11,39 @@ const OutputView = class extends IOutputView {
     Console.print(MESSAGE.opening);
   }
 
-  // printRecommendMenu() {
-  //   throw new OverrideError();
-  // }
+  printRecommendMenu(category) {
+    const week = this.#generateArr(WEEK);
+    const menu = this.#generateArr(CATEGORY);
+    Console.print(this.#generateTable(week));
+    Console.print(this.#generateTable(menu));
+  }
 
-  // printClosing() {
-  //   throw new OverrideError();
-  // }
+  #generateTable(arr) {
+    const { openBracket, closeBracket, divider } = MARK;
+    return `${openBracket} ${arr.join(` ${divider} `)} ${closeBracket}`;
+  }
+
+  #generateArr(obj) {
+    const title = obj.name;
+    const objArr = Object.entries(obj)
+      .slice(-5)
+      .map(([key, value]) => value);
+
+    objArr.unshift(title);
+
+    return objArr;
+  }
+
+  printClosing() {
+    Console.print(MESSAGE.finish);
+  }
 
   close() {
     Console.close();
   }
 };
+
+const a = new OutputView();
+a.printRecommendMenu();
 
 module.exports = OutputView;
