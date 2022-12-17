@@ -52,7 +52,7 @@ class App {
 
 	survey() {
 		if(this.index !== this.#coaches.length) {
-			Console.readLine(`${this.#coaches[this.index].getName()}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (input) => {
+			Console.readLine(`\n${this.#coaches[this.index].getName()}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (input) => {
 				this.#coaches[this.index].setDisabledFood(input);
 				this.index += 1;
 				this.survey();
@@ -80,8 +80,6 @@ class App {
 			}
 
 			this.#coaches.map((coach) => {
-				// console.log(menus[Random.shuffle(menusIndex)[0]])
-
 				coach.setDayFood(menus[Random.shuffle(menusIndex)[0]])
 			})
 			
@@ -89,7 +87,9 @@ class App {
 
 		}
 		OutputView.result(this.#categoriesOfWeek, this.#coaches);
-		OutputView.food(this.#coaches[0].getName(), this.#coaches[0].getDayFood().join(" | "))
+		this.#coaches.map((coach) => {
+			OutputView.food(coach.getName(), coach.getDayFood().join(" | "))
+		})
 
 	}
 

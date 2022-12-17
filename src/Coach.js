@@ -18,8 +18,6 @@ class Coach {
     foods.split(",").map((food) => {
       this.#disabledFoods.push(food);
     })
-
-    console.log(this.#disabledFoods)
   }
 
   getDayFood() {
