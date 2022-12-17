@@ -10,8 +10,22 @@ class Controller {
   }
 
   play() {
-    
+    OutputView.printStart();
+    this.requestUser();
   }
+
+  requestUser() {
+    InputView.readName(this.tryBuildUser.bind(this));
+  }
+
+  tryBuildUser(name) {
+    try {
+
+    } catch(error) {
+
+    }
+  }
+
   
 }
 
