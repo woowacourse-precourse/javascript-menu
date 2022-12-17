@@ -19,7 +19,9 @@ const OutputView = {
   printResult(category, result, name) {
     print(RESULT);
     print(`[ 카테고리 | ${category} ]`);
-    print(`[ ${name[0]} | ${result} ]`);
+    for (let index = 0; index < name.length; index++) {
+      print(`[ ${name[index]} | ${result} ]`);
+    }
     print(END);
     close();
   },
