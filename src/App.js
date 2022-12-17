@@ -52,7 +52,7 @@ class App {
   }
 
   moveName() {
-    if (this.nameArray[this.step] === undefined) {
+    if (this.step === this.nameArrayLength) {
       console.log('끝');
     } else {
       this.getNotEatMenu(this.nameArray[this.step]);
