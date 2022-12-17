@@ -71,6 +71,19 @@ class MenuSelector {
     return this.#coachs;
   }
 
+  selectMenu(category) {
+    const menu =
+      categories[category][
+        Random.shuffle(
+          categories[category].map((_, i) => {
+            return i;
+          })
+        )[0] - 1
+      ];
+
+    return menu;
+  }
+
   //한 코치의 하루 메뉴정하기
   decideDayMenu(dayCategory, coach) {
     let menu;
