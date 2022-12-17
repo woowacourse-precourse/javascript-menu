@@ -5,8 +5,11 @@ class Coach {
   /** @type {string} */
   #name;
 
-  /** @type {Menu} */
+  /** @type {Menu[]} */
   #dislikeMenus = [];
+
+  /** @type {Menu[]} */
+  #suggestedMenus = [];
 
   /**
    * @param {string} name
@@ -38,6 +41,27 @@ class Coach {
 
   getDislikeMenus() {
     return this.#dislikeMenus;
+  }
+
+  /**
+   * @param {Menu} menu
+   */
+  isDislikeMenu(menu) {
+    return this.#dislikeMenus.includes(menu);
+  }
+
+  /**
+   * @param {Menu} menu
+   */
+  addSuggestedMenu(menu) {
+    this.#suggestedMenus.push(menu);
+  }
+
+  /**
+   * @param {Menu} menu
+   */
+  isSuggestedMenu(menu) {
+    return this.#suggestedMenus.includes(menu);
   }
 }
 
