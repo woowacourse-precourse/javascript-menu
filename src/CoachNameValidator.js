@@ -6,27 +6,32 @@ const CoachNameValidator = {
   MAX_NAME_LENGTH: 4,
 
   validate(coachNamesInput) {
-    if (this.isInvalidCoachCount(coachNamesInput)) {
-      throw new Error('[ERROR]');
+    const coachNameList = coachNamesInput.split(',');
+    if (this.isInvalidCoachCount(coachNameList)) {
+      throw new Error(`[ERROR] 코치는 2명 이상, 5명 이하로 입력해야 합니다.`);
     }
 
-    if (this.isInvalidCoachNameLength(coachNamesInput)) {
-      throw new Error('[ERROR]');
+    if (this.isInvalidCoachNameLength(coachNameList)) {
+      throw new Error(`[ERROR] 코치의 이름은 2글자 이상, 4글자 이하여야 합니다.`);
+    }
+
+    if (this.hasDuplicateCoach(coachNameList)) {
+      throw new Error(`[ERROR] 중복된 코치 이름이 존재합니다.`);
     }
   },
 
-  isInvalidCoachCount(coachNamesInput) {
-    const coachNameList = coachNamesInput.split(',');
-
+  isInvalidCoachCount(coachNameList) {
     return coachNameList.length < this.MIN_COACH_COUNT || coachNameList.length > this.MAX_COACH_COUNT;
   },
 
-  isInvalidCoachNameLength(coachNamesInput) {
-    const coachNameList = coachNamesInput.split(',');
-
+  isInvalidCoachNameLength(coachNameList) {
     return coachNameList.some(
       coachName => coachName.length < this.MIN_NAME_LENGTH || coachName.length > this.MAX_NAME_LENGTH,
     );
+  },
+
+  hasDuplicateCoach(coachNameList) {
+    return coachNameList.length !== new Set(coachNameList).size;
   },
 };
 
