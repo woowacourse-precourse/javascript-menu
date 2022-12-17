@@ -22,15 +22,17 @@ class Coach {
   }
 
   inputInedibleMenu(coachName, inedibleMenus) {
-    
-    if (inedibleMenus === "") { return; }
+    if (inedibleMenus === "") {
+      return;
+    }
     const inedibleMenuList = inedibleMenus.split(",");
     this.#coachList.filter((coach) => {
       if (coach.name === coachName) {
         coach.inedibleMenuList = inedibleMenuList;
       }
     });
-
+    console.log(coachName, inedibleMenus, "here");
+    return;
   }
 
   inputRecommendedMenu(coachName, recommendedMenu) {
@@ -41,11 +43,9 @@ class Coach {
     });
   }
 
-
   getCoachList() {
     return this.#coachList;
   }
 }
-
 
 module.exports = Coach;

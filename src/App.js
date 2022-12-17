@@ -1,5 +1,7 @@
 const Coach = require("./model/Coach");
 const Menu = require("./model/Menu");
+const InputView = require("./view/InputView");
+const OutputView = require("./view/OutputView");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -11,13 +13,38 @@ const SAMPLE = {
 };
 
 const coach = new Coach();
-const menu = new Menu()
+const menu = new Menu();
 
 class App {
 
-  play() {
-	
+  #coachList
+
+  constructor(){
+    this.#coachList
   }
+
+  play = () => {
+    OutputView.printStartMessage();
+    InputView.readCoachNames(this.inputCoachNames);
+  };
+
+  inputCoachNames = (coachNames) => {
+    coach.createCoachList(coachNames);
+    this.#coachList = coach.getCoachList()
+    this.#coachList.forEach((coachObj) => {
+      this.createCoachInedibleMenus(coachObj.name)
+      return;
+    });
+  };
+
+  createCoachInedibleMenus = (coachName) => {
+      
+  };
+
+  inputCoachInedibles = (ena) => {
+    
+  }
+
 
 }
 
