@@ -41,10 +41,8 @@ const Validator = {
     }
   },
 
-  checkExistMenu(menu) {
-    if (
-      !menu.every(food => FOOD.data.some(category => category.includes(food)))
-    ) {
+  checkExistMenu(food) {
+    if (!FOOD.data.some(category => category.includes(food))) {
       throw new Error(MESSAGE_ERROR.VALUE);
     }
   },

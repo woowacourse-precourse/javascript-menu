@@ -4,6 +4,7 @@ const CoachNamesChecker = require('../utils/CoachNamesChecker');
 const HateMenusChecker = require('../utils/HateMenusChecker');
 const CoachNames = require('../models/CoachNames');
 const CoachHateMenus = require('../models/CoachHateMenus');
+const Category = require('../models/Category');
 
 class Service {
   #index;
@@ -58,7 +59,14 @@ class Service {
     this.#index += 1;
     if (this.#index < length) {
       this.#enterHateMenus();
+      return;
     }
+
+    this.#recommendMenu();
+  }
+
+  #recommendMenu() {
+    this.#instance.category = new Category();
   }
 }
 

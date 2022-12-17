@@ -30,8 +30,12 @@ const HateMenusChecker = {
 
   validate(hateMenus) {
     Validator.checkMenuCount(hateMenus);
-    Validator.checkExistMenu(hateMenus);
     Validator.checkDuplicateMenu(hateMenus);
+    hateMenus.forEach(menu => {
+      if (menu !== '') {
+        Validator.checkExistMenu(menu);
+      }
+    });
   },
 };
 
