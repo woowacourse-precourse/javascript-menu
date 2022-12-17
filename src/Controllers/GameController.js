@@ -1,8 +1,8 @@
-const OutputView = require("../Views/OutputView");
+const ViewController = require("./ViewController");
 
 const GameController = {
     startGame() {
-        OutputView.printOpening();
+        ViewController.printOpening();
     }
 };
 
