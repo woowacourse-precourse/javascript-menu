@@ -5,9 +5,12 @@ const MenuController = class {
 
   #io;
 
-  constructor(members, io) {
+  #menuRecommender;
+
+  constructor(members, io, menuRecommender) {
     this.#members = members;
     this.#io = io;
+    this.#menuRecommender = menuRecommender;
   }
 
   start() {
@@ -25,6 +28,7 @@ const MenuController = class {
   }
 
   #readHateMenus(names) {
+    // TODO: 여러번 입력받지 못하는 오류를 수정해야 한다.
     names.forEach((name) =>
       this.#io.readHateMenus(name, this.#saveHateMenus.bind(this))
     );
@@ -36,7 +40,9 @@ const MenuController = class {
   }
 
   #printResult() {
-    this.#io.printRecommendMenu();
+    const recommendList = this.#menuRecommender(names, hateMenus);
+
+    this.#io.printRecommendMenu(recommendList);
     this.#quit();
   }
 

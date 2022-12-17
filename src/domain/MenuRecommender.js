@@ -38,8 +38,6 @@ const MenuRecommender = class {
     }, []);
   }
 
-  #tryUntilFullMenu() {}
-
   #initMenuArr() {
     return Object.entries(MENU).map(([_, category]) =>
       category.split(`${MARK.rest} `)
@@ -88,7 +86,7 @@ const MenuRecommender = class {
 // const a = new MenuRecommender();
 // console.log(
 //   a.recommend(
-//     ['세현', '상준'],
+//     ['세현', '곰지'],
 //     [
 //       ['김치찌개', '제육볶음'],
 //       ['스파게티', '라자냐'],

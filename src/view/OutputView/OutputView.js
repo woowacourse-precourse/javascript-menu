@@ -16,6 +16,8 @@ const OutputView = class extends IOutputView {
     const menu = this.#generateArr(CATEGORY);
     Console.print(this.#generateTable(week));
     Console.print(this.#generateTable(menu));
+
+    // TODO: 이름과 메뉴들을 받아 테이블로 출력해야한다.
   }
 
   #generateTable(arr) {
