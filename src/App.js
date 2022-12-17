@@ -49,7 +49,6 @@ class App {
   }
 
   recommendFoodsToCoaches() {
-    console.log('추천 시작한다');
     this.#coaches.forEach((coach) => {
       coach.recommendFoods(this.#categories);
     });
