@@ -15,7 +15,11 @@ class MenuController {
   }
 
   progressUserName() {
-    InputView.readUserName(name => {});
+    InputView.readUserName(name => {
+      if (!CatchError.UserName(name)) {
+        return this.progressUserName();
+      }
+    });
   }
 
   progressSelectMenu() {
