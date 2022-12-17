@@ -13,7 +13,6 @@ class Recommendation {
   #coaches;
   #coachIdx;
   #schedule;
-  #served;
 
   constructor() {
     this.#output = outputView;

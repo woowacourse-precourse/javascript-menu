@@ -9,7 +9,6 @@ const inputView = {
     this.read(message.NAME, next);
   },
   askHates(name, next) {
-    console.log(name, next);
     this.read(message.hates(name), next);
   },
 };

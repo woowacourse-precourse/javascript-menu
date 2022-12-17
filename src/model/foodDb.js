@@ -32,8 +32,12 @@ class FoodDB {
       const trimmed = value.split(",").map((v) => v.trim());
       allMenus.push(...trimmed);
     });
-    console.log(allMenus);
+
     return allMenus;
+  }
+  getCategoryByNumber(number) {
+    const arr = ["일식", "한식", "중식", "아시안", "양식"];
+    return arr[number];
   }
 }
 

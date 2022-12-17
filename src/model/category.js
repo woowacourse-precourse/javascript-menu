@@ -15,6 +15,8 @@ class Category {
   }
   recommend() {
     const number = Random.shuffle(this.#numbers)[0];
+    console.log(number);
+    console.log(this.#menus[number]);
     return this.#menus[number];
   }
 }
