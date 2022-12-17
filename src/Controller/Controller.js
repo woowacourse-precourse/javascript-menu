@@ -1,13 +1,18 @@
 const InputView = require("../View/InputView");
 const OutputView = require("../View/Outputview");
 const { Console } = require("@woowacourse/mission-utils");
+const Menu = require("../Model/Menu");
+const {generate} = require("../util/RandomGenerator");
 
 class Controller {
   constructor(){
     this.coachesName = {}
     this.coachHateMenu = {}
     this.startCount = 0
-    this.count = this.coachesName.length - 1//2
+    this.count = this.coachesName.length - 1
+    this.menu = new Menu()
+    this.days = ['월요일','화요일','수요일','목요일','금요일']
+    // this.categoryOfday = [];
   }
   showgameStartGuide() {
     OutputView.printGameStartMessage()
@@ -24,28 +29,31 @@ class Controller {
   askCoachesHateMenu() {
     if(this.coachesName[this.startCount]){
       InputView.readCoachHateMenu(this.coachesName[this.startCount], this.saveCoachHateMenu.bind(this));
-    } else this.result()
+    } else this.ShowResultMessage()
   }
   saveCoachHateMenu(coachHateMenu) {
     this.coachHateMenu[this.coachesName[this.startCount]] = coachHateMenu
-    Console.print(this.coachHateMenu)
+    // Console.print(this.coachHateMenu)
     this.startCount++
     this.askCoachesHateMenu()
   }
-  result()
-  
+  ShowResultMessage() {
+    OutputView.printResultStartMessage()
+    this.showResultCategory()
+  }
+  userCategory() {
+      this.categoryOfday = this.days.reduce((acc,curr) => {
+        return {...acc, [curr]:this.menu.getCategory(generate)}
+      },{});
 
+      return Object.values(this.categoryOfday).join(' | ')
+  }
 
-  /*
-  saveInput(넘겨받는인풋값){
-    try{
-      validation.input(넘겨받는인풋값);
-      this.저장할인풋 = 넘겨받는인풋값;
-      this.그다음단계호출
-    } catch {
-      // 다시 인풋값 받기
-    }
-  } */
+  showResultCategory() {
+    OutputView.printResult(this.userCategory())
+  }
+
 }
+
 
 module.exports = Controller;
