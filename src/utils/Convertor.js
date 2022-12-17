@@ -1,20 +1,9 @@
-const { FOOD } = require('../constants/values');
+const { STYLE } = require('../constants/values');
 
 const Convertor = {
   convertCategoryToPrintable(category) {
     const categoryList = category.map(v => {
-      switch (v + 1) {
-        case FOOD.japan:
-          return '일식';
-        case FOOD.korea:
-          return '한식';
-        case FOOD.china:
-          return '중식';
-        case FOOD.asian:
-          return '아시안';
-        case FOOD.western:
-          return '양식';
-      }
+      return STYLE[v];
     });
 
     return `[ 카테고리 | ${categoryList.join(' | ')} ]`;
