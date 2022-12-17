@@ -13,6 +13,9 @@ class Crew {
   constructor(name) {
     this.name = name;
   }
+  getCategory() {
+    return this.menu.category.join(' | ');
+  }
 
   getName() {
     return this.name;
@@ -54,6 +57,11 @@ class Crew {
     const temp = [];
     menus.forEach((menu, idx) => temp.push(+idx));
     return temp;
+  }
+
+  printMenu(printer) {
+    const menu = this.menu.dayMenu.join(` | `);
+    printer(`[ ${this.name} | ${menu} ]`);
   }
 }
 

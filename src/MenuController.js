@@ -16,7 +16,7 @@ class MenuController {
 
   start() {
     const callback = names => this.makingCrews(names);
-    this.outputView.initialMessage('이니샬');
+    this.outputView.initialMessage('점심 메뉴 추천을 시작합니다.');
     this.inputView.readCrewNames(callback);
   }
 
@@ -48,11 +48,20 @@ class MenuController {
     const crews = this.crews;
     crews.forEach(crew => crew.setDetailMenu());
 
-    this.print()
+    this.print();
   }
 
-  print(){
-    this.outputView.
+  print() {
+    this.outputView.print('메뉴 추천 결과입니다.');
+    this.outputView.print(
+      '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+    );
+    const category = this.crews[0].getCategory();
+    this.outputView.print(`[ 카테고리 | ${category} ]`);
+
+    this.crews.forEach(crew => crew.printMenu(this.outputView.print));
+    this.outputView.printEnd('추천을 완료했습니다.');
+    MissionUtils.Console.close();
   }
 }
 
