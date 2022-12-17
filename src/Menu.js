@@ -41,13 +41,14 @@ const Menu ={
 
     helpPickMenu(pickMenu, category, hateMenu ,i) {
         let j = 0;
-            while(j < 5) {
-                const pick = MU.Random.shuffle([1,2,3,4,5,6,7,8,9])[0];
-                const menu = SAMPLE[category[j] - 1][pick-1];
-                if(pickMenu[i].includes(menu) ||hateMenu[i].includes(menu)) continue;
-                pickMenu[i][j] = menu;
-                j++;
-            }
+        while(j < 5) {
+            const pick = MU.Random.shuffle([1,2,3,4,5,6,7,8,9])[0];
+            const menu = SAMPLE[category[j] - 1][pick-1];
+            if(pickMenu[i].includes(menu) ||hateMenu[i].includes(menu)) 
+                continue;
+            pickMenu[i][j] = menu;
+            j++;
+        }
         return pickMenu[i];
     }
 };
