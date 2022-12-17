@@ -14,6 +14,16 @@ const InputView = {
     return nameList;
   },
 
+  readNoMenu(coach) {
+    const noMenuList = [];
+    Console.readLine(`${coach}${Message.INPUT_NO_MENU}`, answer => {
+      Console.print(answer);
+      noMenuList.push(answer);
+      // this.validateNoMenuList(noMenuList);
+    });
+    return noMenuList;
+  },
+
   validateNameList(nameList) {
     try {
       const inputNameList = new CoachNameList(nameList);
