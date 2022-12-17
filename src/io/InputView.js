@@ -7,7 +7,15 @@ const InputView = {
   },
 
   readFoodNames(cb) {
-    Console.readLine(GAME_MSG.enterCantEat + COMMON_MSG.newLine, cb);
+    const msg = (name) =>
+      COMMON_MSG.newLine + name + GAME_MSG.enterCantEat + COMMON_MSG.newLine;
+    return function (name, names) {
+      Console.readLine(msg(name), cb(name, names));
+    };
+  },
+
+  readClose() {
+    Console.close();
   },
 };
 
