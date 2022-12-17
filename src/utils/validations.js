@@ -7,6 +7,7 @@ const isCoachesNumberGreaterThanOrEqualTwo = (coaches) => {
   }
   return true;
 };
+
 const isCoachesNumberLessThanOrEqualFive = (coaches) => {
   if (coaches.length > 5) {
     return false;
@@ -14,8 +15,7 @@ const isCoachesNumberLessThanOrEqualFive = (coaches) => {
   return true;
 };
 
-const isValidCoaches = (answer) => {
-  const coaches = answer.split(',');
+const isCoachesNumberValid = (coaches) => {
   if (!isCoachesNumberGreaterThanOrEqualTwo(coaches)) {
     OutputView.print(ERROR_MESSAGE.coachesNumberGreaterThanOrEqualTwo);
     throw new Error(ERROR_MESSAGE.coachesNumberGreaterThanOrEqualTwo);
@@ -25,6 +25,29 @@ const isValidCoaches = (answer) => {
     throw new Error(ERROR_MESSAGE.coachesNumberLessThanOrEqualFive);
   }
 };
+
+const isNameValid = (name) => {
+  if (name.length < 2 || name.length > 4) {
+    return false;
+  }
+  return true;
+};
+
+const isCoachesNameValid = (coaches) => {
+  coaches.forEach((name) => {
+    if (!isNameValid(name)) {
+      OutputView.print(ERROR_MESSAGE.coachNameIsWeird);
+      throw new Error(ERROR_MESSAGE.coachNameIsWeird);
+    }
+  });
+};
+
+const isValidCoaches = (answer) => {
+  const coaches = answer.split(',');
+  isCoachesNumberValid(coaches);
+  isCoachesNameValid(coaches);
+};
+
 module.exports = {
   isValidCoaches,
 };
