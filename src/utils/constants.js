@@ -36,9 +36,8 @@ const RESULT_MESSAGE = {
 
 const ERROR_MESSAGE = {
   invalidCoachNameLength: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자를 입력해 주세요',
-  invalidCoachLength: '[ERROR] 코치는 최소 2명, 최대 5명까지 입력해 주세요',
-  invalidInedibleMenuLength: '[ERROR] 못 먹는 메뉴는 최소 0개, 최대 2개를 입력해 주세요',
-  inValidSeperation: '[ERROR] 쉼표(,)를 사용해서 구분해 주세요',
+  invalidCoachLength: '[ERROR] 코치는 최소 2명, 최대 5명까지 입력하고 쉼표(,)를 사용해서 구분해 주세요',
+  invalidInedibleMenuLength: '[ERROR] 못 먹는 메뉴는 최소 0개, 최대 2개를 입력하고 쉼표(,)를 사용해서 구분해 주세요',
 };
 
 module.exports = {
