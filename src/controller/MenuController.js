@@ -21,16 +21,17 @@ const MenuController = class {
 
   #saveNames(names) {
     this.#members.saveNames(names);
-    names.forEach((name) => this.#readHateMenus(name));
+    this.#readHateMenus(names);
   }
 
-  #readHateMenus(name) {
-    this.#io.readHateMenus(name, this.#saveHateMenus.bind(this));
+  #readHateMenus(names) {
+    names.forEach((name) =>
+      this.#io.readHateMenus(name, this.#saveHateMenus.bind(this))
+    );
   }
 
   #saveHateMenus(hateMenus) {
     this.#members.pushHateMenus(hateMenus);
-    return;
   }
 };
 
