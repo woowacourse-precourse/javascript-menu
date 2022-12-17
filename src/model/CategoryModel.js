@@ -22,8 +22,9 @@ class CategoryModel {
   generateCategories() {
     const categories = [];
     while (categories.length < 5) {
-      const randomCategory = GIVEN_DATA.CATEGORIES[Randoms.pickNumberInRange(1, 5) - 1];
-      if (GetOccurrence.get(randomCategory) < 2) categories.push(randomCategory);
+      const randomCategory = GIVEN_DATA.CATEGORIES[Random.pickNumberInRange(1, 5) - 1];
+      if (GetOccurrence.get(categories, randomCategory) < 2)
+        categories.push(randomCategory);
     }
 
     this.#categories = categories;
