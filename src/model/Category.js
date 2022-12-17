@@ -8,8 +8,13 @@ class Category {
   }
 
   getRandomMenu() {
-    const menu = Random.shuffle(this.#menus)[0];
-    return this.#menus[menu - 1];
+    const index = Random.shuffle(
+      Array.from(
+        { length: this.#menus.length },
+        (value, index) => index + 1,
+      ),
+    )[0];
+    return this.#menus[index - 1];
   }
 
   static #convertMenus(menus) {
