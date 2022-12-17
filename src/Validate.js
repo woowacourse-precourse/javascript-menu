@@ -51,9 +51,11 @@ const foodCount = function checkFoodCharCount(foods, callback) {
   }
 };
 
-const checkFood = function checkCanNotEatValidation(foods, callback, index) {
+const checkFood = function checkCanNotEatValidation(foods, callback) {
   const checkFoodCount = foodCount(foods, callback);
-  if (!checkFoodCount) return;
+  if (!checkFoodCount) return false;
+
+  return true;
 };
 
 module.exports = {
