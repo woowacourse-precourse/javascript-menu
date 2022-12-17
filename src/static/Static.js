@@ -66,7 +66,7 @@ const AllMenu = Object.freeze({
   ],
 });
 
-const AllCategory = ["일식", "한식", "중식", "아시안", "양식"];
+const AllCategory = Object.freeze(["일식", "한식", "중식", "아시안", "양식"]);
 
 const StaticValues = Object.freeze({
   EAT_TOGETHER_COUNT_MIN: 2,
