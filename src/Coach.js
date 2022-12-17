@@ -24,17 +24,22 @@ class Coach {
    * @param {number} category 카테고리 번호
    */
   recommendFood(category) {
-    const newFoodNo =
+    let newFoodNo =
       generateNewRecommendedFood(
-        [...Array(foodNames[category])].map((_, i) => i + 1)
+        [...Array(foodNames[category].length)].map((_, i) => i + 1)
       ) - 1;
-    const newFood = convertNumberToFoodName(category, newFoodNo);
-    if (
-      checkDuplicateFood(this.#recommendedFoods, newFood) ||
-      this.#cantFoods.includes(newFood)
-    )
-      return this.recommendFood.call(this, category);
-    this.#recommendedFoods.push(newFood);
+    let idx = 0;
+    while (idx < 9) {
+      const newFood = convertNumberToFoodName(category, newFoodNo);
+      if (
+        !checkDuplicateFood(this.#recommendedFoods, newFood) &&
+        !this.#cantFoods.includes(newFood)
+      )
+        break;
+      newFoodNo += 1;
+      idx += 1;
+    }
+    this.#recommendedFoods.push(convertNumberToFoodName(category, newFoodNo));
   }
 }
 

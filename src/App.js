@@ -3,7 +3,10 @@ const { COMMON_MSG } = require('./Constants');
 const { readCoachNames, readFoodNames, readClose } = require('./io/InputView');
 const { printStartMessage, printRecommendResult } = require('./io/OutputView');
 const { checkCategoryTwice } = require('./utils/Checker');
-const { convertNumberToCategory } = require('./utils/Converter');
+const {
+  convertNumberToCategory,
+  convertCategoryToNumber,
+} = require('./utils/Converter');
 const { generateRandomNumberBetween1And5 } = require('./utils/Generator');
 const {
   validateCoachNameLength,
@@ -72,8 +75,12 @@ class App {
         i--;
         continue;
       }
-      this.#coaches.forEach((coach) => coach.recommendFood(category));
       this.#categories.push(convertNumberToCategory(category));
+    }
+    for (const coach of this.#coaches) {
+      this.#categories.forEach((category) =>
+        coach.recommendFood(convertCategoryToNumber(category))
+      );
     }
     this.handleResult.call(this);
   }
