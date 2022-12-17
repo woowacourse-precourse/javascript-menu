@@ -2,7 +2,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const { INPUT_MESSAGE } = require('../constants');
 
 const InputView = {
-  readCoach(callback) {
+  readCoaches(callback) {
     Console.readLine(INPUT_MESSAGE.COACH, callback);
   },
 
