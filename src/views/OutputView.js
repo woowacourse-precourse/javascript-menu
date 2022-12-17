@@ -9,6 +9,10 @@ const OutputView = {
   printError(error) {
     Console.print(error);
   },
+
+  printRecommendedMenu(menu) {
+    // Console.print();
+  },
 };
 
 module.exports = OutputView;

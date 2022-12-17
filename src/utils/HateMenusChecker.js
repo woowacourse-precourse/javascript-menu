@@ -29,12 +29,14 @@ const HateMenusChecker = {
   },
 
   validate(hateMenus) {
-    Validator.checkMenuCount(hateMenus);
-    Validator.checkDuplicateMenu(hateMenus);
-    hateMenus.forEach(menu => {
-      if (menu !== '') {
-        Validator.checkExistMenu(menu);
-      }
+    hateMenus.forEach(menus => {
+      Validator.checkMenuCount(menus);
+      Validator.checkDuplicateMenu(menus);
+      menus.forEach(menu => {
+        if (menu !== '') {
+          Validator.checkExistMenu(menu);
+        }
+      });
     });
   },
 };

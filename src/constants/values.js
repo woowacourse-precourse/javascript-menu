@@ -1,14 +1,4 @@
-const REG_EXP = Object.freeze({
-  onlyNumbers: /^[0-9]+$/,
-  onlyAlphabets: /^[a-zA-Z]+$/,
-});
-
 const FOOD = Object.freeze({
-  japan: 1,
-  korea: 2,
-  china: 3,
-  asian: 4,
-  western: 5,
   data: [
     [
       '규동',
@@ -66,9 +56,13 @@ const FOOD = Object.freeze({
       '파니니',
     ],
   ],
+  japan: 1,
+  korea: 2,
+  china: 3,
+  asian: 4,
+  western: 5,
 });
 
 module.exports = {
-  REG_EXP,
   FOOD,
 };

@@ -9,7 +9,9 @@ class Category {
 
   constructor() {
     this.#init();
-    this.#generate();
+    for (let i = 0; i < 5; i++) {
+      this.#generate(i);
+    }
   }
 
   #init() {
@@ -19,11 +21,12 @@ class Category {
     };
   }
 
-  #generate() {
-    const number = Random.pickNumberInRange(1, 5);
+  #generate(i) {
+    let number = 0;
 
     while (true) {
-      switch (Random.pickNumberInRange(1, 5)) {
+      number = Random.pickNumberInRange(1, 5);
+      switch (number) {
         case FOOD.japan:
           this.#data.selected = '일식';
           break;
@@ -40,19 +43,24 @@ class Category {
           this.#data.selected = '양식';
           break;
       }
-      if (this.#checkHistory(number)) {
+      if (this.#checkHistory(number, i)) {
         break;
       }
     }
   }
 
-  #checkHistory(number) {
-    if (this.#data.history[number - 1] === 2) {
+  #checkHistory(number, i) {
+    this.#data.history[i] = number;
+    const sorted = this.#data.history.sort((a, b) => a - b);
+    if (sorted[0] > 2) {
       return false;
     }
 
-    this.#data.history[number - 1] += 1;
     return true;
+  }
+
+  get() {
+    return this.#data.history;
   }
 }
 

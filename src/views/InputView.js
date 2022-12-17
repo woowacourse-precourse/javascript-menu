@@ -9,6 +9,10 @@ const InputView = {
   readHateMenus(coach, setHateMenus) {
     Console.readLine(`${coach}${MESSAGE_QUERY.MENUS}`, setHateMenus);
   },
+
+  close() {
+    Console.close();
+  },
 };
 
 module.exports = InputView;

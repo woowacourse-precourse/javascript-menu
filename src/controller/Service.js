@@ -5,6 +5,7 @@ const HateMenusChecker = require('../utils/HateMenusChecker');
 const CoachNames = require('../models/CoachNames');
 const CoachHateMenus = require('../models/CoachHateMenus');
 const Category = require('../models/Category');
+const Menu = require('../models/Menu');
 
 class Service {
   #index;
@@ -53,6 +54,7 @@ class Service {
     }
     this.#instance.coachHateMenus.set(hateMenus);
     if (!HateMenusChecker.check(this.#instance.coachHateMenus.get())) {
+      this.#instance.coachHateMenus.pop();
       this.#enterHateMenus();
       return;
     }
@@ -67,6 +69,20 @@ class Service {
 
   #recommendMenu() {
     this.#instance.category = new Category();
+    this.#instance.menu = new Menu();
+
+    const result = this.#instance.menu.generate(
+      this.#instance.coachNames.get(),
+      this.#instance.coachHateMenus.get(),
+      this.#instance.category.get()
+    );
+
+    this.#endService(result);
+  }
+
+  #endService(result) {
+    OutputView.printRecommendedMenu(result, this.#instance.category.get());
+    InputView.close();
   }
 }
 
