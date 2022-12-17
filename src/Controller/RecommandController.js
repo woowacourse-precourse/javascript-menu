@@ -69,10 +69,10 @@ class RecommandController {
   recommandMenuPhase() {
     for (let i = 0; i < 5; i += 1) {
       this.selectCategory();
-      this.selectMenuEachCoach();
       // console.log("this.categories: ", this.categories);
-      // console.log("this.menusEachCoach: ", this.menusEachCoach);
     }
+    this.selectMenuEachCoach();
+    // console.log("this.menusEachCoach: ", this.menusEachCoach);
     OutputView.printResult(this.categories, this.menusEachCoach);
   }
 
@@ -92,18 +92,18 @@ class RecommandController {
   selectMenuEachCoach() {
     const allCoachs = Object.keys(this.menusEachCoach);
     allCoachs.forEach((coach) => {
-      this.selectMenu(coach);
+      for (let i = 0; i < 5; i += 1) {
+        this.selectMenu(coach, i);
+      }
     });
   }
 
-  selectMenu(coach) {
-    const tmpMenu = Recommand.selectMenu(
-      this.categories[this.categories.length - 1],
-    );
+  selectMenu(coach, i) {
+    const tmpMenu = Recommand.selectMenu(this.categories[i]);
 
     const { noEatMenus, recommandedMenus } = this.menusEachCoach[coach];
     if (recommandedMenus.includes(tmpMenu) || noEatMenus.includes(tmpMenu)) {
-      this.selectMenu(coach);
+      this.selectMenu(coach, i);
       return;
     }
 
