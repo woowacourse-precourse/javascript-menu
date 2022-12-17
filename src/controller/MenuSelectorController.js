@@ -44,7 +44,14 @@ class MenuSelectorController {
   }
 
   #registerDislikeMenuPhase(menu) {
-    Validator.checkDislikeMenu(menu);
+    try {
+      Validator.checkDislikeMenu(menu);
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      return this.#readDislikeMenuPhase(
+        this.#menuSelector.getCoachs()[this.personNumber].getName()
+      );
+    }
     this.#tempDislikeMenu.push(menu);
     this.personNumber += 1;
     if (this.personNumber !== this.#menuSelector.getCoachs().length) {
