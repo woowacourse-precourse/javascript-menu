@@ -6,8 +6,15 @@ const { MESSAGE } = require('./Constants');
 
 class MenuController {
   constructor(sampleMenu) {
-    this.menu = ['일식', '한식', '중식', '아시안', '양식'].map((category) => new Menu(category));
-    console.log('Menu list : \n', this.menu);
+    this.setMenu(sampleMenu);
+  }
+
+  setMenu(sampleMenu) {
+    this.menuCategory = ['일식', '한식', '중식', '아시안', '양식'].map((category) => new Menu(category));
+    this.menuCategory.forEach((menu) => {
+      menu.setList(sampleMenu[menu.name]);
+    });
+    // console.log('Menu list : \n', this.menuCategory);
   }
 
   start() {
