@@ -11,6 +11,10 @@ const Members = class {
   pushHateMenus(hateMenus) {
     this.#hateMenus.push(hateMenus);
   }
+
+  getNames() {
+    return this.#names;
+  }
 };
 
 module.exports = Members;
