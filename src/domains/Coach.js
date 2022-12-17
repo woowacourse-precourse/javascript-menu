@@ -1,4 +1,4 @@
-export default class Coach {
+class Coach {
   /** @type {string} */
   #name;
 
@@ -9,3 +9,5 @@ export default class Coach {
     this.#name = name;
   }
 }
+
+module.exports = Coach;
