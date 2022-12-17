@@ -12,5 +12,9 @@ const Validate = {
       .isArrayElementInRange(2, 4)
       .getMessages();
   },
+
+  CoachNotEat(value) {
+    new Validation(value.split(',')).getArrayValidator().isRepeated().isLength(0, 2).getMessages();
+  },
 };
 module.exports = { UTIL, Validate };

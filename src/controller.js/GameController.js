@@ -4,13 +4,17 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class GameController {
+  #coachName;
   constructor() {
+    this.#coachName = [];
     this.#inputCoachName();
+    this.turn = 0;
   }
 
   #inputCoachName() {
     InputView.readCoachName((name) => {
-      this.catchError('CoachName', name) ? console.log('굿') : this.#inputCoachName();
+      this.#coachName = name.split(',');
+      this.catchError('CoachName', name) ? this.#inputCoachNotEat() : this.#inputCoachName();
     });
   }
 
@@ -22,6 +26,17 @@ class GameController {
       OutputView.printError(error);
       return false;
     }
+  }
+
+  #inputCoachNotEat() {
+    InputView.readCoachNotEat(this.#coachName[this.turn], (notEat) => {
+      this.catchError('CoachNotEat', notEat) && (this.turn += 1);
+      this.turn >= this.#coachName.length ? this.move() : this.#inputCoachNotEat();
+    });
+  }
+
+  move() {
+    console.log('끝');
   }
 }
 
