@@ -29,22 +29,6 @@ const makeRandomCategory = () => {
   });
 };
 
-// 못먹는 음식을 뺀 메뉴
-const makeRandomFoods = (menu) => {
-  const result = [];
-  const menuList = menu.split(', ');
-
-  while (result.length < 5) {
-    const food = Random.shuffle(menuList)[0];
-    if (!result.includes(food)) {
-      result.push(food);
-    }
-  }
-
-  return result;
-};
-
 module.exports = {
-  makeRandomFoods,
   makeRandomCategory,
 };
