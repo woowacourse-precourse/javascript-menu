@@ -5,7 +5,7 @@ const {
   COMPLETE_MESSAGE,
 } = require('./Constants');
 const { checkValidateCoach, checkValidateCoachNames } = require('./Validate');
-const { readCoachName, readNotEatMenu } = require('./InputView');
+const { readCoachName } = require('./InputView');
 const { printResult } = require('./OutputView');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -19,6 +19,7 @@ const SAMPLE = {
 class App {
   constructor() {
     this.step = 0;
+    this.coachNotEatMenu = {};
   }
 
   play() {
@@ -53,17 +54,26 @@ class App {
 
   moveName() {
     if (this.step === this.nameArrayLength) {
-      console.log('끝');
+      this.test();
     } else {
-      this.getNotEatMenu(this.nameArray[this.step]);
+      this.getInputNotEatMenu(this.nameArray[this.step]);
     }
   }
 
-  getNotEatMenu(name) {
+  getInputNotEatMenu(name) {
     Console.readLine(NOT_EAT_MENU(name), menu => {
       this.step += 1;
+      this.makeNotEatMenuObject(name, menu);
       this.moveName();
     });
+  }
+
+  makeNotEatMenuObject(name, menu) {
+    this.coachNotEatMenu[name] = menu;
+  }
+
+  test() {
+    console.log(this.coachNotEatMenu);
   }
 
   // getCategories() {
