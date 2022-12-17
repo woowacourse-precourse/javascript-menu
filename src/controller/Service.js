@@ -2,6 +2,7 @@ const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
 const CoachNamesChecker = require('../utils/CoachNamesChecker');
 const HateMenusChecker = require('../utils/HateMenusChecker');
+const Convertor = require('../utils/Convertor');
 const CoachNames = require('../models/CoachNames');
 const CoachHateMenus = require('../models/CoachHateMenus');
 const Category = require('../models/Category');
@@ -81,7 +82,14 @@ class Service {
   }
 
   #endService(result) {
-    OutputView.printRecommendedMenu(result, this.#instance.category.get());
+    const printableResult = Convertor.convertResultToPrintable(
+      this.#instance.coachNames.get(),
+      result
+    );
+    const printableCategory = Convertor.convertCategoryToPrintable(
+      this.#instance.category.get()
+    );
+    OutputView.printRecommendedMenu(printableCategory, printableResult);
     InputView.close();
   }
 }

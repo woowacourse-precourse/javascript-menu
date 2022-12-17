@@ -10,8 +10,13 @@ const OutputView = {
     Console.print(error);
   },
 
-  printRecommendedMenu(menu) {
-    // Console.print();
+  printRecommendedMenu(category, coach) {
+    Console.print(MESSAGE_SYSTEM.RESULT);
+    Console.print(MESSAGE_SYSTEM.WEEK);
+    Console.print(category);
+    Console.print(coach);
+    Console.print('');
+    Console.print(MESSAGE_SYSTEM.FINISH);
   },
 };
 

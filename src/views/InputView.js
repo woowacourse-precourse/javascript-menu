@@ -7,7 +7,7 @@ const InputView = {
   },
 
   readHateMenus(coach, setHateMenus) {
-    Console.readLine(`${coach}${MESSAGE_QUERY.MENUS}`, setHateMenus);
+    Console.readLine(`\n${coach}${MESSAGE_QUERY.MENUS}`, setHateMenus);
   },
 
   close() {
