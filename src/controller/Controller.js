@@ -1,6 +1,7 @@
 const Coach = require("../model/Coach")
 const OutputView = require("../views/OutputView.js")
-const InputView = require("../views/InputView")
+const InputView = require("../views/InputView");
+const MissionUtils = require("@woowacourse/mission-utils");
 
 class Controller{
 
@@ -36,6 +37,7 @@ class Controller{
   inputCategory(){
     this.model.insertCategory()
     OutputView.printResult(this.model.dayCategoryTo, this.model.resultTo)
+    MissionUtils.Console.close();
   }
 }
 
