@@ -21,7 +21,9 @@ const OutputView = {
   printResultMenu(name, menu) {
     let dd = '';
     dd += `[ ${name} | ${menu.join(' | ')} ]\n`;
-    Console.print(dd);
+  },
+
+  lastPrint() {
     Console.print(`추천을 완료했습니다.`);
   }
 
