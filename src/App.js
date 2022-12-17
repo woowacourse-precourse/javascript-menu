@@ -9,7 +9,6 @@ class App {
   constructor() {
     this.coach = null;
     this.category = null;
-    this.dislikeMenu = {};
     this.recommendMenu = [];
   }
 
@@ -32,9 +31,7 @@ class App {
 
     idx++;
     if (idx === this.coach.length) {
-      const convertedCategory = convertCategory(this.category);
-      const combinedCoachMenu = combineCoachMenu(this.coach, this.recommendMenu);
-      OutputView.printResult(convertedCategory, combinedCoachMenu);
+      this.getResult();
       return;
     }
     InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
@@ -44,6 +41,12 @@ class App {
     const menuMaker = new MenuMaker(this.category, dislikeMenu);
     const weekMenu = menuMaker.createMenu();
     this.recommendMenu.push(weekMenu);
+  }
+
+  getResult() {
+    const convertedCategory = convertCategory(this.category);
+    const combinedCoachMenu = combineCoachMenu(this.coach, this.recommendMenu);
+    OutputView.printResult(convertedCategory, combinedCoachMenu);
   }
 }
 
