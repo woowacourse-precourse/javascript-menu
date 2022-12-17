@@ -25,6 +25,10 @@ class MainController {
     OutputView.printFirstMessage();
   }
 
+  printError(errorLog) {
+    OutputView.printError(errorLog);
+  }
+
   initializeRecommendation() {
     this.printFirstMessage();
     this.readCoachNameInput();

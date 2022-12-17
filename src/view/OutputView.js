@@ -5,6 +5,10 @@ const OutputVIew = {
   printFirstMessage() {
     Console.print(COACH_NAME.OPENING);
   },
+
+  printError(errorLog) {
+    Console.print(errorLog.message);
+  },
 };
 
 module.exports = OutputVIew;
