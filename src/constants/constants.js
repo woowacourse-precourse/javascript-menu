@@ -9,6 +9,7 @@ const ERR_MSG = {
   C_LEN_ERR: "[ERROR] 코치는 최소 2명에서 최대 5명입니다.",
   C_DUP_ERR: "[ERROR] 코치 이름은 중복될 수 없습니다.",
   HATE_ERR: "[ERROR] 싫어하는 음식은 0개에서 2개입니다.",
+  HATE_NUM_ERR: "[ERROR] 음식 이름이나 빈칸을 입력하세요.",
 };
 
 const HATE = (coach) => {

@@ -2,6 +2,7 @@ const { ERR_MSG, INFO } = require("./constants/constants");
 
 const Validator = {
   validateCoach(coaches) {
+    console.log(coaches);
     this.coachesLength(coaches);
     this.coachNameLength(coaches);
     this.coachDuplicated(coaches);
@@ -23,7 +24,18 @@ const Validator = {
     });
   },
   validateHates(hates) {
+    this.hatesValidLength(hates);
+    this.hatesIsNaN(hates);
+  },
+
+  hatesValidLength(hates) {
     if (hates.length > INFO.HATE_MAX) throw ERR_MSG.HATE_ERR;
+  },
+
+  hatesIsNaN(hates) {
+    hates.forEach((hate) => {
+      if (!isNaN(hate)) throw ERR_MSG.HATE_NUM_ERR;
+    });
   },
 };
 
