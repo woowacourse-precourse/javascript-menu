@@ -1,8 +1,9 @@
-const { ERROR_MESSAGE, GAME_STRING, GAME_NUMBER } = require('./Constant');
+const { ERROR_MESSAGE, GAME_NUMBER } = require('./Constant');
+const SplitAndTrim = require('./utils/SplitAndTrim');
 
 const Validation = {
   coachAndName(names) {
-    const nameArray = names.split(GAME_STRING.splitString);
+    const nameArray = SplitAndTrim(names);
     Validation.coach(nameArray);
     nameArray.forEach((coachName) => {
       Validation.nameRange(coachName);
@@ -25,7 +26,7 @@ const Validation = {
     }
   },
   menu(menus) {
-    const menuArray = menus.split(GAME_STRING.splitString);
+    const menuArray = SplitAndTrim(menus);
     if (
       menuArray.length < GAME_NUMBER.minMenu ||
       menuArray.length > GAME_NUMBER.maxMenu

@@ -27,7 +27,14 @@ class CoachData {
     return this.#coaches.length;
   }
 
-  setHateMenus(name, menus) {}
+  setHateMenus(name, menus) {
+    const menuArray = SplitAndTrim(menus);
+    this.#hateMenus[name] = menuArray;
+  }
+
+  checkHateMenus() {
+    console.log(this.#hateMenus);
+  }
 }
 
 module.exports = CoachData;

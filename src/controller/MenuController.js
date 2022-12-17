@@ -25,6 +25,7 @@ class MenuController {
   }
 
   checkHateMenu(name, count, menu) {
+    this.#coachData.setHateMenus(name, menu);
     const coachesLength = this.#coachData.getCoachLength() - 1;
     if (count === coachesLength) {
       return this.showResult();
@@ -32,7 +33,9 @@ class MenuController {
     this.checkDontLikeMenu(count + 1);
   }
 
-  showResult() {}
+  showResult() {
+    this.#coachData.checkHateMenus();
+  }
 }
 
 module.exports = MenuController;
