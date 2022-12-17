@@ -1,11 +1,18 @@
+//library
+const { Random } = require("@woowacourse/mission-utils");
+//View
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
+//utils
+const { CATEGORY, SAMPLE } = require("./utils/Menu");
 
 class App {
 
   constructor() {
 	this.personCnt = 0;
 	this.nameList = [];
+	this.inEdible = {};
+	this.categories = [];
   }
 
   play() {
@@ -25,15 +32,43 @@ class App {
   askMenu(name) {
 	InputView.readMenu(name, (menus)=> {
 		const menuList = menus.split(',');
-		console.log(name,menuList);	
-		
+		//console.log(name,menuList);	
+		this.inEdible[name] = menuList; //딕셔너리에 사람마다 못먹는 메뉴 저장
+		console.log(this.inEdible); 
 		this.personCnt += 1;
 		
 		if(this.personCnt == this.nameList.length) { //모든 사람들의 못먹는 메뉴를 알아봤다!
-			return this.showRecommendation(); 
+			return this.selectCategory(); 
 		} 
 		return this.askMenu(this.nameList[this.personCnt]);
 	});
+  }
+
+  //요일별 메뉴 카테고리 설정하기
+  selectCategory() {
+	const numberArr = [];
+
+	while(numberArr.length < 5) {
+		const randomNum = this.pickRandomNum();
+		console.log(randomNum);
+		if(this.checkAboveTwice(randomNum, numberArr)) continue;
+		else numberArr.push(randomNum);
+	}
+
+	this.categories = numberArr.map((element) => {
+		return CATEGORY[element];
+	})
+	console.log('카테고리는:', this.categories);
+  }
+
+  pickRandomNum() {
+	return Random.pickNumberInRange(1, 5);
+  }
+
+  checkAboveTwice(number, arr) {
+	let count = arr.filter(element => number === element).length;
+	if(count == 2) return true;
+	return false;
   }
 
   recommend() {
