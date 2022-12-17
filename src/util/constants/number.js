@@ -5,8 +5,10 @@ const NUMBER = {
   maxMember: 5,
   minInedible: 0,
   maxInedible: 2,
-  minRandom: 0,
-  maxRandom: 9,
+  minRandomMenu: 0,
+  maxRandomMenu: 8,
+  minRandomCategory: 0,
+  maxRandomCategory: 4,
 };
 
 module.exports = { NUMBER };
