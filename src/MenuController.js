@@ -3,7 +3,7 @@ const OutputView = require('./OutputView');
 const Crew = require('./Crew');
 const Utils = require('./Utils');
 const MissionUtils = require('@woowacourse/mission-utils');
-const { CATEGORY } = require('./Sample');
+const { CATEGORY, DAY } = require('./Sample');
 
 class MenuController {
   crews = [];
@@ -28,17 +28,31 @@ class MenuController {
     // this.recomandMenu();
   }
 
-  recomandMenu() {
-    const category = CATEGORY[MissionUtils.Random.pickNumberInRange(1, 5)];
-    
-    
-    // console.log(category);
+  setMenuCategory() {
+    const crews = this.crews;
+    DAY.forEach(day => {
+      const category = CATEGORY[MissionUtils.Random.pickNumberInRange(1, 5)];
+      crews.forEach(crew => crew.setMenu(category));
+    });
+
+    this.setDetailMenu();
   }
 
   canNotEat() {
     const crews = this.crews;
-    const callback = this.recomandMenu.bind(this);
+    const callback = this.setMenuCategory.bind(this);
     this.inputView.readCanNotEat(crews, 0, callback);
+  }
+
+  setDetailMenu() {
+    const crews = this.crews;
+    crews.forEach(crew => crew.setDetailMenu());
+
+    this.print()
+  }
+
+  print(){
+    this.outputView.
   }
 }
 
