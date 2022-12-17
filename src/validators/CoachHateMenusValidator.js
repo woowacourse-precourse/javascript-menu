@@ -23,13 +23,17 @@ const CoachHateMenusValidator = {
   },
 
   isInvalidHateMenu(hateMenus) {
-    if (hateMenus[0] === '') return false;
+    if (this.isNoHateMenus(hateMenus)) return false;
 
     const allMenus = Object.values(MENU_INFO)
       .map(value => value.split(', '))
       .flat(1);
 
     return hateMenus.some(hateMenu => !allMenus.includes(hateMenu));
+  },
+
+  isNoHateMenus(hateMenus) {
+    return hateMenus.length === 1 && hateMenus[0] === '';
   },
 
   hasDuplicateMenu(hateMenus) {
