@@ -80,10 +80,11 @@ class RandomMenu {
 
   setCoachRandomMenu(name, index, hateMenus) {
     const menu = this.setRandomMenu(this.#days[index]);
-    if (hateMenus.includes(menu)) {
-      this.setCoachLikeMenu(name, index, hateMenus);
+    if (hateMenus.includes(menu) || this.#result[name].includes(menu)) {
+      this.setCoachRandomMenu(name, index, hateMenus);
       return;
     }
+
     this.#result[name].push(menu);
   }
 
