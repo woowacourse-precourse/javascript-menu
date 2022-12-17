@@ -6,7 +6,7 @@ class Coach {
   constructor() {}
 
   /**
-   * 다리 건너기 게임을 관리하는 클래스
+   * 입력받은 이름을 통해 코치 리스트를 만드는 매서드
    * @param {string} coachNames ',로 구분된 코치 이름 문자'
    * @return {{name,inedibleMenuList,recommendedMenuList}[]}
    */
