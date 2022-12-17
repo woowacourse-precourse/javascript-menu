@@ -1,7 +1,9 @@
 const MainController = require("./controller/MainController");
 
 class App {
-  play() {}
+  play() {
+    new MainController().initializeRecommendation();
+  }
 }
 
 module.exports = App;
