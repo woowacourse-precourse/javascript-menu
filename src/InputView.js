@@ -21,7 +21,7 @@ const InputView = {
 
   readInedibleMenus(coaches, index) {
     if (index === coaches.length) {
-      this.game.setWeeklyMenu();
+      this.game.setCoachesMenu();
       return;
     }
 

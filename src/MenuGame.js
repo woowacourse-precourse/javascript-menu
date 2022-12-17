@@ -1,6 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const OutputView = require('./OutputView');
-const { PARAMETERS } = require('./utils/constants');
+const { PARAMETERS, SAMPLE } = require('./utils/constants');
 const Validation = require('./Validation');
 
 class MenuGame {
@@ -11,23 +11,20 @@ class MenuGame {
     this.menus = {};
   }
 
-  setWeeklyMenu() {
+  setCoachesMenu() {
+    // first set weekly category 
     for (let day = 0; day < PARAMETERS.dayCount; day += 1) {
-      this.setDailyMenu();
+      this.setCategory();
     }
+
+    // forEachCoaches set weekly menus
+    this.coaches.forEach((coach) => {
+      this.setWeeklyMenu(coach);
+    });
 
     OutputView.printResult(this.categories, this.coaches, this.menus);
   }
 
-  setDailyMenu() {
-    const CATEGORY = this.setCategory();
-
-    this.coaches.forEach((coach) => {
-      this.setMenu(CATEGORY, coach);
-    });
-  }
-
-  // 각 요일별 메뉴 생성하기
   setCategory() {
     const CATEGORY = PARAMETERS.category[this.getCategory() - 1];
     const DUPLICATES = this.categories.filter((ele) => ele === CATEGORY).length;
@@ -36,11 +33,16 @@ class MenuGame {
     }
 
     this.categories.push(CATEGORY);
-    return CATEGORY;
   }
 
   getCategory() {
     return MissionUtils.Random.pickNumberInRange(1, 5);
+  }
+
+  setWeeklyMenu(coach) {
+    for (let day = 0; day < PARAMETERS.dayCount; day += 1) {
+      this.setMenu(this.categories[day], coach); 
+    }
   }
 
   setMenu(category, coach) {
@@ -58,10 +60,8 @@ class MenuGame {
   }
 
   getMenu(category) {
-    const INDICES = [...Array(PARAMETERS.menu[category].length).keys()];
-    const MENU_INDEX =  MissionUtils.Random.shuffle(INDICES)[0];
-    
-    return PARAMETERS.menu[category][MENU_INDEX];
+    const MENU_INDEX = MissionUtils.Random.shuffle(PARAMETERS.menu[category])[0];
+    return PARAMETERS.menu[category][MENU_INDEX - 1];
   }
 }
 
