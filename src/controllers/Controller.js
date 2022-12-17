@@ -8,7 +8,7 @@ class Controller {
   #categorys = new Categorys();
   #coachs = new Coachs();
   #coachNames;
-  #recommendedCount = 0;
+  #recommendedCategory = [];
 
   constructor(categorys) {
     this.#categorys.addGategorys(categorys);
@@ -61,7 +61,8 @@ class Controller {
   }
 
   setRecommendedMenu() {
-    if (this.#recommendedCount === 5) return this.printRecommendedMenu();
+    if (this.#recommendedCategory.length === 5)
+      return this.printRecommendedMenu();
 
     const categoryNumber = generator();
     if (!this.#categorys.canRecommend(categoryNumber))
@@ -69,12 +70,15 @@ class Controller {
 
     const categoryMenus = this.#categorys.getCategoryMenus(categoryNumber);
     this.#coachs.decideMenu(categoryMenus);
-    this.#recommendedCount += 1;
+    this.#recommendedCategory.push(categoryNumber);
     return this.setRecommendedMenu();
   }
 
   printRecommendedMenu() {
-    OutputView.printRecommendedMenu(this.#coachs.getCoachsRecommendedMenu());
+    OutputView.printRecommendedMenu(
+      this.#coachs.getCoachsRecommendedMenu(),
+      this.#recommendedCategory
+    );
   }
 }
 

@@ -11,7 +11,8 @@ const Shuffle = {
   },
 
   shuffledMenuIndex(categoryMenus) {
-    return Random.shuffle(categoryMenus.map((_, idx) => idx + 1));
+    const categoryMenusNumbers = categoryMenus.map((_, idx) => idx + 1);
+    return Random.shuffle(categoryMenusNumbers);
   },
 };
 

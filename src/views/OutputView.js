@@ -5,10 +5,10 @@ const OutputView = {
     Console.print('점심 메뉴 추천을 시작합니다.');
   },
 
-  printRecommendedMenu(coachsMenu) {
+  printRecommendedMenu(coachsMenu, categorys) {
     Console.print('\n메뉴 추천 결과입니다.');
     OutputView.printDay();
-    OutputView.printCategory();
+    OutputView.printCategory(categorys);
     coachsMenu.forEach((coachMenu) => {
       OutputView.printCoachMenu(coachMenu);
     });
@@ -19,9 +19,10 @@ const OutputView = {
     Console.print(`[ ${days.join(' | ')} ]`);
   },
 
-  printCategory() {
-    const categorys = ['카테고리', '한식', '한식', '일식', '중식', '아시안'];
-    Console.print(`[ ${categorys.join(' | ')} ]`);
+  printCategory(categorys) {
+    const arr = ['_', '일식', '한식', '중식', '아시안', '양식'];
+    categorys = categorys.map((category) => arr[category]);
+    Console.print(`[ ${['카테고리', ...categorys].join(' | ')} ]`);
   },
 
   printCoachMenu(coachMenu) {
