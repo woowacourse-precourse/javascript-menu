@@ -29,7 +29,7 @@ class SetFood {
   }
 
   #recommendFood() {
-    const recommend = this.#foodList[this.#shuffleNumber()];
+    const recommend = this.#foodList[this.#shuffleNumber() - 1];
     if (this.#isNotEatFood(recommend)) this.#recommendFood();
     else this.#checkDuplicateMenu(recommend);
   }
@@ -45,7 +45,7 @@ class SetFood {
   }
 
   #shuffleNumber() {
-    const shuffleList = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+    const shuffleList = [1, 2, 3, 4, 5, 6, 7, 8, 9];
     return Random.shuffle(shuffleList)[0];
   }
 
