@@ -33,13 +33,9 @@ class LunchRecommendation {
     let daysLeft = 5;
 
     while (daysLeft > 0) {
-      console.log('daysLeft', daysLeft);
       this.#getRecommendationByCoaches();
       daysLeft -= 1;
     }
-    this.coachList.forEach((coach) => {
-      console.log('coach.getMenuList()', coach.getMenuList());
-    });
 
     return new Result([...this.coachList], [...this.categoryList]);
   }
@@ -50,7 +46,6 @@ class LunchRecommendation {
 
   #getRecommendationByCoaches() {
     const menuListSelected = this.getCategoryMenu(this.#pickCategory());
-    console.log('menuListSelected', menuListSelected);
 
     this.coachList.forEach((coach) => {
       this.#setRecommendationMenu(coach, menuListSelected);
@@ -59,7 +54,6 @@ class LunchRecommendation {
 
   #setRecommendationMenu(coach, menuListSelected) {
     const menuNumber = Shuffler.shuffle(menuListSelected.length);
-    console.log('menu', menuListSelected[menuNumber]);
     if (!coach.checkCanEat(menuListSelected[menuNumber])) {
       return this.#setRecommendationMenu(coach, menuListSelected);
     }
@@ -69,7 +63,6 @@ class LunchRecommendation {
 
   #pickCategory() {
     const category = RandomNumberGenerator.generate();
-    console.log('categoryNumber', category);
     if (!this.#validateCategory(category)) {
       return this.#pickCategory();
     }

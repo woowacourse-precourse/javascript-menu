@@ -10,8 +10,6 @@ const SAMPLE = {
 
 class App {
   #controller;
-  #outputView;
-  #inputView;
 
   constructor() {
     this.#controller = new Controller(SAMPLE);

@@ -30,7 +30,6 @@ class Coach {
 
   setMenu(menu) {
     this.#menuList.push(menu);
-    console.log('this.#menuList', this.#menuList);
   }
 
   getMenuList() {
