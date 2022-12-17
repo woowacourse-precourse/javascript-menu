@@ -1,4 +1,4 @@
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -9,6 +9,19 @@ const SAMPLE = {
   양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
 };
 
+const getCategories = (categories) => {
+  while (true) {
+    const curCategory = Random.pickNumberInRange(1, 5);
+    const count = categories.filter(
+      (category) => category === curCategory,
+    ).length;
+
+    if (count > 1) continue;
+
+    return curCategory;
+  }
+};
+
 class App {
   #coaches; // 코치들이 저장되는 배열. 코치의 이름과(string), 요일별 먹을 메뉴(string), 그리고 먹지 못하는 메뉴(string[])가 저장
   #categories; // 요일별로 카테고리를 저장하는 배열. 0,1,2,3,4 -> 월화수목금 으로 보면 된다.
@@ -17,6 +30,7 @@ class App {
     this.#coaches = [];
     this.#categories = [];
     Console.print("점심 메뉴 추천을 시작합니다.");
+
     this.getCoachesName();
   }
 
@@ -58,6 +72,10 @@ class App {
   }
 
   getResult() {
+    for (let i = 0; i < 5; i++) {
+      const curNum = getCategories(this.#categories);
+      this.#categories.push(curNum);
+    }
     console.log(this.#coaches, "코치들 못먹는 음식");
   }
 }
