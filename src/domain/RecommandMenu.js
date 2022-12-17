@@ -28,7 +28,7 @@ class RecommandMenu {
     return menu.filter((food) => !hateFood.includes(food));
   }
 
-  getMenuOfCategory(category) {
+  getFoodOfCategory(category) {
     return this.convertArray([...this.menu.get(category)]);
   }
 }
