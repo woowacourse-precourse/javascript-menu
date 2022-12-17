@@ -14,7 +14,10 @@ class Coachs {
     notEatMenus.split(",").forEach((notEatMenu) => {
       this.#coachs[coachName].notEatMenu.push(notEatMenu);
     });
-    console.log(this.#coachs);
+  }
+
+  isAteMenu(coachName, ateMenu) {
+    return new Set(this.#coachs[coachName].ateMenu).has(ateMenu);
   }
 }
 

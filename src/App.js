@@ -53,7 +53,9 @@ class App {
   }
 
   recommendMenu(categoryName) {
-    this.coachs.getCoachName().forEach((element) => {});
+    this.coachs.getCoachName().forEach((coachName) => {
+      const ateMenu = this.getEatMenu(categoryName);
+    });
   }
 
   getEatMenu(categoryName) {
@@ -65,7 +67,6 @@ class App {
 }
 
 const app = new App();
-app.getEatMenu("한식");
 app.play();
 
 module.exports = App;
