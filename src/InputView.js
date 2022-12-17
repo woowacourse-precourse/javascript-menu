@@ -16,10 +16,20 @@ const InputView = {
     Console.readLine(
       `${coachs[coachIndex]}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
       (answer) => {
-        callback(coachs[coachIndex], answer);
-        coachIndex++;
-        if (coachIndex === coachs.length) return secondCallback();
-        return this.readHateMenu(callback, secondCallback, coachIndex, coachs);
+        try {
+          callback(coachs[coachIndex], answer);
+          coachIndex++;
+          if (coachIndex === coachs.length) return secondCallback();
+          return this.readHateMenu(
+            callback,
+            secondCallback,
+            coachIndex,
+            coachs
+          );
+        } catch (e) {
+          Console.print(e);
+          this.readHateMenu(callback, secondCallback, coachIndex, coachs);
+        }
       }
     );
   },

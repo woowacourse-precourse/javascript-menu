@@ -41,8 +41,10 @@ class MenuController {
     );
   }
 
-  makeCoach(coachName, hateMenu) {
-    this.#coachs.push(new Coach(coachName, hateMenu.split(',')));
+  makeCoach(coachName, menus) {
+    const hateMenu = menus.split(',');
+    Validation.checkHateMenu(hateMenu);
+    this.#coachs.push(new Coach(coachName, hateMenu));
   }
 
   getRandomCategory() {
