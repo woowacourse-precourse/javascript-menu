@@ -4,6 +4,18 @@ const OutputView = {
   startMent() {
     Console.print('점심 메뉴 추천을 시작합니다.\n');
   },
+
+  resultMent() {
+    Console.print('메뉴 추천 결과입니다.\n[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+  },
+
+  category(category) {
+    Console.print(`[ 카테고리 | ${category} ]`);
+  },
+
+  listResult(coach, foodList) {
+    Console.print(`[ ${coach} | ${foodList} ]`);
+  },
 };
 
 module.exports = OutputView;

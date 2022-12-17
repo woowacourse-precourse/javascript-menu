@@ -5,6 +5,11 @@ class Controller {
   #index = 0;
   #coachs;
   #notEatList = [];
+  #service;
+
+  constructor(service) {
+    this.#service = service;
+  }
 
   startService() {
     OuputView.startMent();
@@ -33,7 +38,7 @@ class Controller {
     InputView.notEat(coachName, (input) => {
       this.#checkNotEat(coachName, input);
       this.#index += 1;
-      if (this.#index === this.#coachs.length) this.#newMethod();
+      if (this.#index === this.#coachs.length) this.#deliverNotEatList();
       else this.#checkCoachList();
     });
   }
@@ -45,7 +50,29 @@ class Controller {
     } catch (error) {}
   }
 
-  #newMethod() {}
+  #deliverNotEatList() {
+    this.#service.defineCoachNotEatList(this.#notEatList);
+    this.#outputResultMent();
+  }
+
+  #outputResultMent() {
+    OuputView.resultMent();
+    this.#outputCategory();
+  }
+
+  #outputCategory() {
+    const category = this.#service.defineCategoryList().join(',').replace(/,/g, ' | ');
+    OuputView.category(category);
+    this.#outputResult();
+  }
+
+  #outputResult() {
+    const results = this.#service.defineCoachFoodOfWeak();
+    console.log(results);
+    results.forEach((list) => {
+      OuputView.listResult(list.coach, list.result.join(',').replace(/,/g, ' | '));
+    });
+  }
 }
 
 module.exports = Controller;
