@@ -1,8 +1,11 @@
+const MenuMaker = require('./MenuMaker');
+
 /**
  * menu 게임을 관리하는 클래스
  */
 class MenuGame {
   constructor(SAMPLE, progressSelectMenu) {
+    this.menuMakernew = MenuMaker();
     this.SAMPLE = SAMPLE;
     this.progressSelectMenu = progressSelectMenu;
 
@@ -23,7 +26,7 @@ class MenuGame {
   }
 
   setMenu(menu) {
-    return (this.menu = menu);
+    return this.menu.push(menu);
   }
 
   increseUserCount() {
