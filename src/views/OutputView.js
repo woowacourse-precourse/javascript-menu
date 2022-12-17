@@ -1,8 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
-const { MENUS, DAYS } = require('../constants');
+const { DAYS } = require('../constants');
 
 const MESSAGE = {
   START_RECOMMEND: '점심 메뉴 추천을 시작합니다.',
+  // result: (categoriesOfDays, coachesName, menus) => `\n메뉴 추천 결과입니다.
+  // [ 구분 | ${DAYS.join(' | ')} ]
+  // [ 카테고리 | ${categoriesOfDays.join(' | ')} ]`,
 };
 
 const ERROR_FORM = '[ERROR] ';
@@ -17,10 +20,7 @@ const OutputView = {
   },
 
   printRecommendResult(categoriesOfDays, coachesName, menus) {
-    // console.log(categoriesOfDays);
-    // console.log(coachesName);
-    // console.log(menus);
-    Console.print(`메뉴 추천 결과입니다.
+    Console.print(`\n메뉴 추천 결과입니다.
 [ 구분 | ${DAYS.join(' | ')} ]
 [ 카테고리 | ${categoriesOfDays.join(' | ')} ]`);
 

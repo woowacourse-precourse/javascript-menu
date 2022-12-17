@@ -1,6 +1,6 @@
 const Coach = require('../models/Coach');
-const Recommend = require('../models/Recommend');
 
+const Recommender = require('../utils/Recommender');
 const { DAYS } = require('../constants');
 
 class MenuService {
@@ -8,12 +8,9 @@ class MenuService {
 
   #categoriesOfDays;
 
-  #recommend;
-
   constructor() {
     this.#coaches = {};
     this.#categoriesOfDays = [];
-    this.#recommend = new Recommend();
   }
 
   addCoaches(names) {
@@ -34,7 +31,7 @@ class MenuService {
   }
 
   #getRecommendCategory() {
-    const randomCategory = this.#recommend.getRandomCategory();
+    const randomCategory = Recommender.getRandomCategory();
     const sameCategoriesCount = this.#categoriesOfDays?.filter(
       (category) => category === randomCategory
     ).length;
@@ -55,7 +52,7 @@ class MenuService {
   }
 
   #getRecommendMenu(category, nonEdibleMenu, menus) {
-    const randomMenu = this.#recommend.getRandomMenu(category);
+    const randomMenu = Recommender.getRandomMenu(category);
     if (nonEdibleMenu.includes(randomMenu) || menus.includes(randomMenu)) {
       return this.#getRecommendMenu(category, nonEdibleMenu, menus);
     }
