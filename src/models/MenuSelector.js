@@ -71,6 +71,10 @@ class MenuSelector {
     return this.#coachs;
   }
 
+  registerDislikeMenu() {
+    this.#coachs.setDislikeMenu();
+  }
+
   selectCategory() {
     const category = CATEGORY_NUMBER[CategoryRandomNumberGenerator.generate()];
 
