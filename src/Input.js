@@ -18,7 +18,7 @@ const Input = {
     },
 
     NotEatValidate(menus) {
-
+        if (menus.length > COACH.NOTEAT_MAX) throw new Error(MESSAGE.ERROR_NOTEAT);
     },
 
 }
