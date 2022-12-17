@@ -21,4 +21,12 @@ const CONTROLL = {
   
 }
 
-module.exports = { SAMPLE, RESULT_ITEMS, CONTROLL };
+const CONDITION = {
+  MIN_LENGHTH : 2,
+  MAX_LENGHTH : 4,
+  MIN_CRUW: 2,
+  MAX_CRUW: 5,
+
+}
+
+module.exports = { SAMPLE, RESULT_ITEMS, CONTROLL, CONDITION };
