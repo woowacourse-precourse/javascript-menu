@@ -1,6 +1,8 @@
 const { ANNOUNCEMENT_MESSAGE } = require("../Constant/Constant");
 const MenuModel = require("../Model/MenuModel");
+const ShuffleMenu = require("../Utils/ShuffleMenu");
 const InputView = require("../View/Inputview");
+const OutputView = require("../View/OutputView");
 const StaticView = require("../View/StaticView");
 
 class MenuController {
@@ -33,19 +35,22 @@ class MenuController {
       },
       0
     );
-
-    // console.log(coaches);
-    // coaches.forEach((coach, index) => {
-    //   console.log(index);
-    //   InputView.readCantEat(coach, (cantEat) => {
-    //     this.menuModel.setCantEat(cantEat);
-    //     if (coaches.length - 1 === index) this.getRecommends();
-    //   });
-    // });
   };
 
   getRecommends = () => {
-    console.log("hi");
+    this.printResultAnnounce();
+    const recommendResults = this.menuModel.getCoachesRecommends();
+    const coaches = this.menuModel.getCoaches();
+    OutputView.printResult(recommendResults, coaches);
+    this.printFinish();
+  };
+
+  printResultAnnounce = () => {
+    StaticView.print(ANNOUNCEMENT_MESSAGE.RESULT);
+  };
+
+  printFinish = () => {
+    StaticView.print(ANNOUNCEMENT_MESSAGE.FINISH);
   };
 }
 

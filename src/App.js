@@ -14,7 +14,7 @@ class App {
     this.menuController = new MenuController();
   }
   play() {
-    this.menuController.printStart();
+    this.menuController.start();
   }
 }
 
@@ -22,3 +22,5 @@ const app = new App();
 app.play();
 
 module.exports = App;
+
+const a = [{ food: "a", category: "b" }];
