@@ -21,10 +21,20 @@ class Coach {
     this.#coachList = coachList;
   }
 
-  getCoachList () {
-    return this.#coachList;
+  inputInedibleMenu(coachName, inedibleMenus) {
+    if (inedibleMenus === "") { return; }
+    const inedibleMenuList = inedibleMenus.split(",");
+    this.#coachList.filter((coach) => {
+      if (coach.name === coachName) {
+        coach.inedibleMenuList = inedibleMenuList;
+      }
+    });
   }
 
+  getCoachList() {
+    return this.#coachList;
+  }
 }
+
 
 module.exports = Coach;
