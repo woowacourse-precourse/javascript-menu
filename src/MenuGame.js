@@ -34,7 +34,9 @@ class MenuGame {
   }
 
   getCategory() {
-    return MissionUtils.Random.pickNumberInRange(1, 5);
+    const [MIN_INDEX, MAX_INDEX] = PARAMETERS.categoryRange;
+
+    return MissionUtils.Random.pickNumberInRange(MIN_INDEX, MAX_INDEX);
   }
 
   setWeeklyMenu(coach) {
