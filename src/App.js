@@ -99,6 +99,29 @@ class App {
 
   validateBanMenus(banMenusArray) {}
 
+  decideCategories() {
+    const categoryNames = ['일식', '한식', '중식', '아시안', '양식'];
+    while (this.categories.length < 5) {
+      let category;
+      let countCategory = 5;
+      while (countCategory > 1) {
+        countCategory = 0;
+        category = categoryNames[MissionUtils.Random.pickNumberInRange(0, 4)];
+        for (let i = 0; i < this.categories.length; i++) {
+          if (this.categories[i] === category) {
+            countCategory += 1;
+          }
+        }
+      }
+      for (let i = 0; i < this.#coaches.length; i++) {
+        this.#coaches[i].addMenus(SAMPLE[category]);
+      }
+    }
+    this.printResult();
+  }
+
+  printResult() {}
+
   play() {
     this.printRecommendedStart();
     this.readCoachName(this.namesCallback);
