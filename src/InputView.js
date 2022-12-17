@@ -24,11 +24,10 @@ const InputView = {
                 // coaches[0].setMenus();
                 // console.log(coaches[0].menus);
                 coaches[0].setDislikes(menuNames);
-                console.log(coaches[0].dislikes);
+                // console.log(coaches[0].dislikes);
                 coaches[0].setLikes();
 
-                console.log(coaches[0].likes);
-
+                OutputView.print(coaches[0].likes);
                 let randomArray = [];
                 for (let i = 0; i < 5; i++) {
                     let randomNumber = Random.pickNumberInRange(1, 5);
@@ -55,17 +54,12 @@ const InputView = {
             }
             console.log(randomArray)
 
-            console.log(recommend.coaches)
-
-
             randomArray.forEach(num => {
                 console.log(Random.shuffle(recommend.coaches[0].likes[num - 1])[0])
             })
 
-
             OutputView.print('메뉴 추천 결과입니다.');
-
-
+            OutputView.print('추천을 완료했습니다.');
         }
 
     },
