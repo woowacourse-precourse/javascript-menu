@@ -32,6 +32,10 @@ class CoachData {
     this.#hateMenus[name] = menuArray;
   }
 
+  getHateMenus() {
+    return this.#hateMenus;
+  }
+
   checkHateMenus() {
     console.log(this.#hateMenus);
   }

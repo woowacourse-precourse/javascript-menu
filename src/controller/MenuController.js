@@ -12,11 +12,11 @@ class MenuController {
   start() {
     printStart();
     this.#randomMenu.setCategoryDays();
+    this.#randomMenu.setRandomMenu('일식');
     readCoachesName(this.checkCoachesName.bind(this));
   }
 
   checkCoachesName(names) {
-    console.log(names);
     const startNumber = 0;
     this.#coachData = new CoachData(names);
     this.#coachData.checkCoach();
@@ -38,7 +38,8 @@ class MenuController {
   }
 
   showResult() {
-    this.#coachData.checkHateMenus();
+    const result = this.#coachData.getHateMenus();
+    this.#randomMenu.setResult(result);
   }
 }
 
