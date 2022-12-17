@@ -5,6 +5,8 @@ const NUMBER = {
   maxMember: 5,
   minInedible: 0,
   maxInedible: 2,
+  minRandom: 0,
+  maxRandom: 9,
 };
 
 module.exports = { NUMBER };
