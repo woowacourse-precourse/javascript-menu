@@ -2,7 +2,7 @@ const OutputView = require("./UI/OutView");
 const { MENU, REPLACEMENT, FOOD_CATEGORY } = require("./Utils/Constants");
 const { COMMA, LINE } = REPLACEMENT;
 
-const { print, close, pickNumber, shuffle } = require("./Utils/MissionUtils");
+const { pickNumber, shuffle } = require("./Utils/MissionUtils");
 
 class RecommendationMenuMaker {
   #menu = {};
@@ -41,7 +41,7 @@ class RecommendationMenuMaker {
     let result = [];
     for (let index = 0; index < 5; index++) {
       const menus = MENU[this.#category[index]];
-      const pickOne = shuffle()[index];
+      const pickOne = shuffle()[0];
       result.push(menus[pickOne]);
     }
 
