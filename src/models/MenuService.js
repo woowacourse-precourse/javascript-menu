@@ -1,5 +1,5 @@
 const Coach = require('./Coach');
-const { CATEGORY } = require('../utils/constants');
+const { CATEGORY, MENUS } = require('../utils/constants');
 const { Random } = require('@woowacourse/mission-utils');
 const { validateCoachNames } = require('../utils/InputValidator');
 
@@ -18,7 +18,9 @@ class MenuService {
 
   recommend() {
     this.#coaches.forEach((coach, index) => {
-      coach.addCategory(this.pickCategory(index));
+      const category = this.pickCategory(index);
+      coach.addCategory(category);
+      // const menu = this.pickMenu(category);
     });
   }
 
@@ -28,6 +30,13 @@ class MenuService {
       category = CATEGORY[Random.pickNumberInRange(CATEGORY.min, CATEGORY.max)];
     }
     return category;
+  }
+
+  pickMenu(category) {
+    const menus = MENUS[category];
+    const menusIndex = Array.from({ length: menus.length }, (v, i) => i);
+    const menu = menus[Random.shuffle(menusIndex)[0]];
+    return menu;
   }
 }
 
