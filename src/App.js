@@ -1,14 +1,121 @@
-const SAMPLE = {
-	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
-	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
-	중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
-	아시안:
-		'팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
-	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-};
+const Category = require("./model/Category.js");
+const Coach = require("./model/Coach.js");
+const CouchMenu = require("./model/CouchMenu.js");
+const InputView = require("./view/InputView.js");
+const OutputView = require("./view/OutputView.js");
 
 class App {
-  play() {}
+  #coachNames = [];
+  #coachMenus = [];
+  #categories;
+
+  constructor() {
+    this.#categories = new Category();
+  }
+
+  play() {
+    // this.#categories = makeCategory();
+    OutputView.printStart();
+    this.#readCoachNames();
+  }
+
+  #readCoachNames() {
+    InputView.readCoachNames(this.#readCoachNamesCallback);
+  }
+  #readCoachNamesCallback = (names) => {
+    try {
+      this.#coachNames = new Coach(names).getData();
+      this.#coachMenus = new Array(names.length);
+      this.#readAllCouchNotWantMenu();
+    } catch (err) {
+      OutputView.printError(err.message);
+      this.#readCoachNames();
+    }
+  };
+
+  #readAllCouchNotWantMenu() {
+    this.#readCoachNotWantMenu(this.#coachNames[0], 0);
+  }
+  #readCoachNotWantMenu(coachName, idx) {
+    InputView.readCoachNotWantMenu(coachName, (notWantMenu) => {
+      try {
+        this.#coachMenus[idx] = new CouchMenu(coachName, notWantMenu);
+        const newIdx = idx + 1;
+        const newCoachName = this.#coachNames[newIdx];
+        const coachNamesLen = this.#coachNames.length;
+        const isValidIdx = newIdx < coachNamesLen;
+        if (isValidIdx) this.#readCoachNotWantMenu(newCoachName, newIdx);
+        if (!isValidIdx) this.#controlMenus();
+      } catch (err) {
+        OutputView.printError(err.message);
+        this.#readCoachNotWantMenu(coachName, idx);
+      }
+    });
+  }
+
+  #filterCategory(category) {
+    switch (category) {
+      case 1:
+        return "일식";
+      case 2:
+        return "한식";
+      case 3:
+        return "중식";
+      case 4:
+        return "아시안";
+      case 5:
+        return "양식";
+      default:
+        throw new Error("없는 카테고리입니다.");
+    }
+  }
+
+  #controlMenus() {
+    for (let i = 0; i < 5; i++) {
+      this.#updateCategory();
+      const category = this.#categories.getData()[i];
+      for (let j = 0; j < this.#coachNames.length; j++) {
+        this.#coachMenus[j].updateMenu(category);
+      }
+    }
+    const strWithSideSpace = (str) => " " + str + " ";
+    const categoryStr =
+      "[ 카테고리 " +
+      this.#categories
+        .getData()
+        .map(
+          (category) => "|" + strWithSideSpace(this.#filterCategory(category))
+        )
+        .join("") +
+      "]\n";
+    const getCoachMenu = (arr) =>
+      arr
+        .getMenus()
+        .map((x) => "|" + strWithSideSpace(x))
+        .join("") + "]";
+
+    const result =
+      categoryStr +
+      this.#coachMenus
+        .map(
+          (coachMenu) =>
+            "[" +
+            strWithSideSpace(coachMenu.getCoachName()) +
+            coachMenu
+              .getMenus()
+              .map((menu) => "|" + strWithSideSpace(menu))
+              .join("") +
+            "]"
+        )
+        .join("\n");
+
+    OutputView.printResult(result);
+    InputView.close();
+  }
+
+  #updateCategory() {
+    this.#categories.generateCategory();
+  }
 }
 
 module.exports = App;
