@@ -1,3 +1,4 @@
+const CategoryList = require('../models/CategoryList');
 const Coach = require('../models/Coach');
 const CoachList = require('../models/CoachList');
 const { Output, Input } = require('../views/View');
@@ -5,6 +6,11 @@ const { Output, Input } = require('../views/View');
 class Controller {
   #coachList = new CoachList();
   #coachNameList;
+  #categoryList = new CategoryList();
+
+  constructor(categoryList) {
+    this.#categoryList.addCategoryList(categoryList);
+  }
 
   init() {
     Output.printInit();
