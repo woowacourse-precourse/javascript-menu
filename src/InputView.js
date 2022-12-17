@@ -10,16 +10,15 @@ class InputView {
   inputCoach() {
     Console.readLine(INPUT_MESSAGE.COACH_NAME, input => {
       const names = input.split(',');
+      const temp = [...names];
 
       Validation.coach(names);
 
-      this.inputUnlikeMenu(names, []);
+      this.inputUnlikeMenu(temp, names, []);
     });
   }
 
-  inputUnlikeMenu(names, unlikeMenus) {
-    const temp = names;
-
+  inputUnlikeMenu(temp, names, unlikeMenus) {
     Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), input => {
       const foods = input.split(',');
 
@@ -27,7 +26,7 @@ class InputView {
       unlikeMenus.push(foods);
 
       if (temp.length) {
-        this.inputUnlikeMenu(temp, unlikeMenus);
+        this.inputUnlikeMenu(temp, names, unlikeMenus);
         return;
       }
 
