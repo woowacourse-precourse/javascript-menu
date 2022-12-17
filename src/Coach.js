@@ -57,7 +57,7 @@ class Coach {
 
   getResult() {
     const foods = this.#menus.map(([_, food]) => food);
-    return `[ ${this.name} | ${foods.join(RESULT.divider)} ]`;
+    return `[ ${this.#name} | ${foods.join(RESULT.divider)} ]`;
   }
 }
 

@@ -11,8 +11,8 @@ const MESSAGE = Object.freeze({
 });
 
 const RESULT = Object.freeze({
-  days: `[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]${NEW_LINE}`,
-  category: `[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]${NEW_LINE}`,
+  days: `[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]`,
+  category: `[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]`,
   divider: " | ",
 });
 

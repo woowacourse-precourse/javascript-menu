@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Coach = require("./Coach");
-const { NEW_LINE } = require("./Constant");
+const { NEW_LINE, MESSAGE } = require("./Constant");
 const { CATEGORY } = require("./data");
 const { readCoachName, readCoachPickyFoods } = require("./InputView");
 const { print, printResult } = require("./OutputView");
@@ -10,15 +10,6 @@ const {
   validateNameLength,
   validatePickyFoods,
 } = require("./Validation");
-
-const SAMPLE = {
-  일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
-  한식: "김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음",
-  중식: "깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채",
-  아시안:
-    "팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜",
-  양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
-};
 
 class App {
   #coaches = [];
@@ -54,6 +45,8 @@ class App {
 
   getPickyFoods(i) {
     if (i === this.#coaches.length) {
+      this.endGame();
+      return;
     }
 
     readCoachPickyFoods(this.#coaches[i], this.actWithPickyFoods.bind(this));
@@ -76,11 +69,10 @@ class App {
 
   recommandFoods(coach) {
     const category = getMenu();
-    console.log(coach);
-    if (coach.compareCateogry(category)) {
+    if (coach.compareCategory(category)) {
       const food = getFood(category);
       if (coach.compareFood(food)) {
-        coach.setFoodtoMenu(category, food);
+        coach.addFoodtoMenu(category, food);
       }
     }
   }
@@ -96,6 +88,7 @@ class App {
   }
 
   play() {
+    print(MESSAGE.start);
     this.getCoachName();
   }
 }

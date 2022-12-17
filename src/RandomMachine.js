@@ -24,6 +24,5 @@ const RandomMachine = {
     return menus[random];
   },
 };
-console.log(RandomMachine.getMenu());
-console.log(RandomMachine.getFood("한식"));
+
 module.exports = RandomMachine;
