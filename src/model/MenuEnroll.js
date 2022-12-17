@@ -12,7 +12,6 @@ class MenuEnroll {
   }
 
   canEatAll() {
-    console.log(!this.pickFood[0], !this.pickFood[0] ? true : false, !this.pickFood[0]);
     return !this.pickFood[0] ? true : false;
   }
 

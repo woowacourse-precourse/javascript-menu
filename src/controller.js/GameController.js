@@ -44,7 +44,6 @@ class GameController {
   #checkInMenu(value) {
     try {
       const judge = new MenuEnroll(value);
-
       this.#coachNotWant.push(judge.getNotWantMenu());
       return true;
     } catch (error) {
