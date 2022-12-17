@@ -11,6 +11,12 @@ const ErrorHandler = {
         }
         console.log('coachNameError 무사통과^-^');
     },
-
+    /**
+     * @param {String[]} menu : 싫은 음식 배열
+     */
+    hateMenuError(menu) {
+        if(menu.length > 2) throw '\n[ERROR] 못먹는 음식은 최대 2개 까지 입력 가능합니다.';
+        console.log('hateMenuError 무사통과^-^');
+    }
 };
 module.exports = ErrorHandler;

@@ -64,6 +64,8 @@ InputView - 사용자 입력을 받는 곳
 
 - readHateMenu() - 못먹는 메뉴 입력 받음
 
+- coachsHat() - 개인별 못먹는거 받아서 문자열로 return
+
 -------------------------------------------------
 OutputView() - 결과물 출력하는곳
 
@@ -85,3 +87,4 @@ const menu = Randoms.shuffle(menus)[0];//Menu는 무작위 배열 > 못먹거나
 -----------------------------------------------------
 ErrorHandler - 에러 처리
 coachNameError() -  이름 입력시 발생 가능한 에러 처리
+hateMenuError() - 싫어하는 메뉴 입력시 발생 가능한 에러 처리
