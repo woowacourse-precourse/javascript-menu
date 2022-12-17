@@ -65,11 +65,6 @@ class App {
       const category = RecommendedMenuGenerator.getRandomCategory();
       if (this.isValidCategory(category)) {
         this.#recommendedMenuInfo.categories.push(category);
-
-        for (let j = 0; j < coachList.length; j++) {
-          const menu = RecommendedMenuGenerator.getRandomMenu(category);
-          console.log(menu);
-        }
       }
     }
 
@@ -83,12 +78,7 @@ class App {
 
     if (!categories.includes(category)) return true;
 
-    const matchCount = categories.filter(c => c === category).length;
-    if (matchCount > 1) {
-      return false;
-    }
-
-    return true;
+    categories.filter(c => c === category).length < 2;
   }
 
   isValidInputValue(validator, inputValue) {
