@@ -12,7 +12,8 @@ const SAMPLE = {
 class App {
   constructor() {
     this.recommandMenuModel = new RecommandMenu();
-    this.recommandMenuController = new RecommandMenuSystem(this.recommandMenuModel);
+    this.coach = new Coach();
+    this.recommandMenuController = new RecommandMenuSystem(this.recommandMenuModel, this.coach);
   }
   play() {
     this.recommandMenuController.start();
