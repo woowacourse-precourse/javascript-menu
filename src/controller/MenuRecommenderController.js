@@ -28,7 +28,7 @@ class MenuRecommenderController {
 
   readUserInputInedible(name, coach) {
     this.#inputView.readInedible((input) => {
-      this.handleInedibleInput(input, coach);
+      this.handleInedibleInput(input, coach, name);
     }, name);
   }
 
@@ -49,7 +49,7 @@ class MenuRecommenderController {
     }
   }
 
-  handleInedibleInput(input, coach) {
+  handleInedibleInput(input, coach, name) {
     try {
       const inedible = input.split(',');
       validate.inedible(inedible);
@@ -68,6 +68,7 @@ class MenuRecommenderController {
       this.#outputView.printRecommendationResult(this.#menuRecommender);
     } catch (error) {
       this.#outputView.printError(ERROR.invalidInedible);
+      this.readUserInputInedible(coach, name);
     }
   }
 }
