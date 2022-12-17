@@ -69,6 +69,11 @@ class App {
   getCategory() {
     for (let day = 0; day < 5; day++) {
       const category = Random.pickNumberInRange(1, 5);
+      const overlap = this.category.filter((data) => data === category);
+      if (overlap.length >= 2) {
+        day--;
+        continue;
+      }
       this.category.push(category);
     }
     console.log(this.category);
