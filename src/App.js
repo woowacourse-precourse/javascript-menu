@@ -58,6 +58,8 @@ class App {
   }
 
   #recommend() {
+    this.#menuService.makeCategoryOfWeek();
+    this.#menuService.recommendMenu();
     this.#menuService.setStatus("result");
     this.#controller();
   }
