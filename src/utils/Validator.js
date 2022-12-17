@@ -29,7 +29,7 @@ class Validator {
 
   static coachCantEatMenuValidate(menus) {
     const cantEatMenuArr = Utils.divideString(menus);
-    if (cantEatMenuArr.length > 2) {
+    if (cantEatMenuArr.length >= 2) {
       throw ERROR.COACH_CANT_EAT;
     }
   }
