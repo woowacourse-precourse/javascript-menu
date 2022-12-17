@@ -1,14 +1,72 @@
-const SAMPLE = {
-	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
-	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
-	중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
-	아시안:
-		'팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
-	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-};
+const MissionUtils = require('@woowacourse/mission-utils');
+const { Coach } = require('./models/Coach');
+const { findIndexByCoachName } = require('./utils/common');
+const { SAMPLE, RESULT_MESSAGE } = require('./utils/constants');
+const { readCoaches, readBannedFoods } = require('./views/InputView');
+const { OutputView } = require('./views/OutputView');
 
 class App {
-  play() {}
+  #coaches = [];
+
+  #categories = [];
+
+  play() {
+    this.setCategories();
+    OutputView.welcome();
+    readCoaches(this.setCoaches.bind(this));
+  }
+
+  setCategories() {
+    const numbers = [];
+    while (numbers.length !== 5) {
+      const pick = MissionUtils.Random.pickNumberInRange(1, 5);
+      if (numbers.filter((number) => number === pick).length < 2) {
+        numbers.push(pick);
+      }
+    }
+    const category = Object.keys(SAMPLE);
+    this.#categories = numbers.map((number) => category[number - 1]);
+  }
+
+  setCoaches(answer) {
+    const coaches = answer.split(',');
+    coaches.forEach((coach) => {
+      this.#coaches.push(new Coach(coach));
+    });
+    readBannedFoods(
+      this.setCoachesBannedFoods.bind(this),
+      this.#coaches.map((c) => c.getName()),
+      0,
+      [],
+    );
+  }
+
+  setCoachesBannedFoods(arr) {
+    arr.forEach((el) => {
+      this.#coaches[findIndexByCoachName(this.#coaches, el.name)].setBannedFoods(el.foods);
+    });
+    this.recommendFoodsToCoaches();
+  }
+
+  recommendFoodsToCoaches() {
+    this.#coaches.forEach((coach) => {
+      coach.recommendFoods(this.#categories);
+    });
+    this.printResults();
+  }
+
+  printResults() {
+    MissionUtils.Console.print(RESULT_MESSAGE.result);
+    MissionUtils.Console.print(RESULT_MESSAGE.day);
+    const catLine = ['카테고리', ...this.#categories];
+    MissionUtils.Console.print(`[ ${catLine.join(' | ')} ]`);
+    const results = [];
+    this.#coaches.forEach((coach) => {
+      results.push([coach.getName(), ...coach.getFoods()]);
+    });
+    results.forEach((line) => MissionUtils.Console.print(`[ ${line.join(' | ')} ]`));
+    MissionUtils.Console.print(RESULT_MESSAGE.bye);
+  }
 }
 
 module.exports = App;
