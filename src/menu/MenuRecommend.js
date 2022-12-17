@@ -30,8 +30,9 @@ class MenuRecommend {
   recommendMenus() {
     const category = this.#menuList.getCategory();
 
-    const isMoreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
-    if (!isMoreThanTwice) {
+    const moreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
+
+    if (!moreThanTwice) {
       this.#categoryRecorder.writeRecord(category);
       return;
     }
