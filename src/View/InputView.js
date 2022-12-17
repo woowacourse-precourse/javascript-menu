@@ -7,7 +7,7 @@ const InputView = {
     Console.readLine(INPUT_MESSAGE.NAME, callback);
   },
   readMenu(name, callback) {
-    Console.readLine(name + INPUT_MESSAGE.MENU, callback);
+    Console.readLine('\n'+ name + INPUT_MESSAGE.MENU, callback);
   }, 
 };
 

@@ -90,27 +90,31 @@ class App {
 		let everyDayMenu = [];
 
 		for(let j=0; j<this.categories.length; j++) { //요일별로 순회
-			let menusForU = []; //오늘 요일에 먹을 수 있는 메뉴들을 저장하자
+			//let menusForU = []; //오늘 요일에 먹을 수 있는 메뉴들을 저장하자
 			const todayCategory = this.categories[j];//오늘의 카테고리는~~
 			const menuForCategory = SAMPLE[todayCategory].split(', '); //해당 카테고리의 메뉴 모음 리스트
 			//console.log("메뉴카테고리",menuForCategory);
-			menusForU = menuForCategory.filter(menu => !(this.inEdible[name].includes(menu)))
-			//console.log(menusForU);
-			const todayMenu = this.randomItem(everyDayMenu, menusForU); //당신을 위한 오늘의 메뉴는~~
-			everyDayMenu.push(todayMenu);	
+			const todayMenu = this.selectRandomMenu(everyDayMenu, menuForCategory, name); //당신을 위한 오늘의 메뉴는~~
+			everyDayMenu.push(todayMenu); //오늘 요일의 메뉴는..	
 		}
 		//console.log(everyDayMenu);
-		menuList.push(everyDayMenu);
+		menuList.push(everyDayMenu); //각 코치의 월요일-금요일 식단을 저장
 	}
 	return menuList;
   }
 
   // 주어진 배열에서 요소 1개를 랜덤하게 골라 반환하는 함수
-  randomItem(menuList, arr) {
-	const item =  arr[Math.floor(Math.random() * arr.length)]; 
-	if(menuList.includes(item)) return this.randomItem(menuList,arr); //메뉴 중복 고려해야함!!!!!!!
+  selectRandomMenu(everyDayMenu, menuForCategory, name) {
+	const stringToNum = menuForCategory.map((element, index) => {
+		return index;
+	})
+	const randomNum = Random.shuffle(stringToNum)[0];
+	//console.log(randomMenu);
+	const randomMenu = menuForCategory[randomNum];
+	if(this.inEdible[name].includes(randomMenu)) return this.selectRandomMenu(everydayMenu, menuForCategory, name); //먹을 수 없는 메뉴이면 다시 고르기!
+	if(everyDayMenu.includes(randomMenu)) return this.selectRandomMenu(everyDayMenu, menuForCategory, name); //메뉴 중복 고려해야함!!!!!!!
 
-	return item;
+	return randomMenu;
   }
 
   showRecommendation() {
