@@ -1,10 +1,16 @@
 const Coach = require('../models/Coach');
 const Coachs = require('../models/Coachs');
+const Categorys = require('../models/Categorys');
 const { OutputView, InputView } = require('../views/IOView');
 
 class Controller {
+  #categorys = new Categorys();
   #coachs = new Coachs();
   #coachNames;
+
+  constructor(categorys) {
+    this.#categorys.addGategorys(categorys);
+  }
 
   start() {
     OutputView.printStart();

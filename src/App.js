@@ -10,7 +10,7 @@ const SAMPLE = {
 };
 
 class App {
-  #controller = new Controller();
+  #controller = new Controller(SAMPLE);
 
   play() {
     this.#controller.start();
