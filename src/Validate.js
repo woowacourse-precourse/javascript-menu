@@ -20,7 +20,12 @@ const validateCoaches = (input) => {
   });
 };
 
-const validateAvoidMenu = (avoidMenu) => {
+const validateAvoidMenu = (input) => {
+  if (input === '') return;
+  const avoidMenu = input.split(',');
+  if (avoidMenu.length > 2) {
+    throw new Error(ERROR.AVOID_MENU_LENGTH);
+  }
 };
 
 module.exports = {
