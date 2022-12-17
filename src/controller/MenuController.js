@@ -16,7 +16,9 @@ class MenuController {
     const coachList = nameList.split(',');
     const noMenuAllList = {};
     coachList.forEach(coach => {
+      console.log('coco', coach);
       const noMenus = InputView.readNoMenu(coach);
+      console.log('asdf', noMenus);
       noMenuAllList[coach] = noMenus;
     });
     console.log('no', noMenuAllList);
