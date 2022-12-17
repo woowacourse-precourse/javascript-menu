@@ -1,5 +1,5 @@
 const { NAME_VALIDITY, ERROR_MESSAGE } = require("../constants");
-const StringValidator = require("./Validator");
+const StringValidator = require("./StringValidator");
 
 const { MAX_NAME_LENGTH, MIN_NAME_LENGTH, MAX_NAMES_COUNT, MIN_NAMES_COUNT } =
   NAME_VALIDITY;
