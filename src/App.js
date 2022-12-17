@@ -1,3 +1,4 @@
+const InputView = require("./InputView");
 const OutputView = require("./OutputView");
 
 const SAMPLE = {
@@ -12,6 +13,7 @@ const SAMPLE = {
 class App {
   play() {
 		OutputView.printStart();
+		InputView.readCoachNames();
 	}
 }
 
