@@ -2,8 +2,8 @@ const ErrorMsg = Object.freeze({
   COACH_NAME: "[ERROR] 코치의 이름은 2글자에서 4글자 사이입니다.",
   COACH_COUNT: "[ERROR] 함께 밥을 먹는 코치의 수는 2명에서 5명 사이입니다.",
   UNLIKE_MENU_COUNT: "[ERROR] 못 먹는 메뉴는 0개에서 2개만 가능합니다.",
-  UNLIKE_MENU_NOT_EXIST:
-    "[ERROR] 못 먹는 메뉴는 메뉴 목록에 속한 메뉴여야 합니다.",
+  MENU_NOT_EXIST: "[ERROR] 존재하지 않는 메뉴입니다.",
+  CATEGORY_NOT_EXIST: "[ERROR] 존재하지 않는 카테고리입니다.",
 });
 
 const AllMenu = Object.freeze({

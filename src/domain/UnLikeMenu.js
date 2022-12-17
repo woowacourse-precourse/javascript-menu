@@ -16,7 +16,7 @@ class UnLikeMenu {
       throw new Error(ErrorMsg.UNLIKE_MENU_COUNT);
     menus.forEach((m) => {
       if (!SearchMenu.getIsMenuExist(m))
-        throw new Error(ErrorMsg.UNLIKE_MENU_NOT_EXIST);
+        throw new Error(ErrorMsg.MENU_NOT_EXIST);
     });
   }
 
