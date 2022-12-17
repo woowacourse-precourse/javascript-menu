@@ -8,11 +8,15 @@ const CoachNameValidator = {
   validate(coachNamesInput) {
     const coachNameList = coachNamesInput.split(',');
     if (this.isInvalidCoachCount(coachNameList)) {
-      throw new Error(`[ERROR] 코치는 2명 이상, 5명 이하로 입력해야 합니다.`);
+      throw new Error(
+        `[ERROR] 코치는 ${this.MIN_COACH_COUNT}명 이상, ${this.MAX_COACH_COUNT}명 이하로 입력해야 합니다.`,
+      );
     }
 
     if (this.isInvalidCoachNameLength(coachNameList)) {
-      throw new Error(`[ERROR] 코치의 이름은 2글자 이상, 4글자 이하여야 합니다.`);
+      throw new Error(
+        `[ERROR] 코치의 이름은 ${this.MIN_NAME_LENGTH}글자 이상, ${this.MAX_NAME_LENGTH}글자 이하여야 합니다.`,
+      );
     }
 
     if (this.hasDuplicateCoach(coachNameList)) {
