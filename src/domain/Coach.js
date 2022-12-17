@@ -27,12 +27,15 @@ class Coach {
 
   suggestMenu(category, verify, suggestFunc) {
     const addCheck = this.#eatenFoods.length;
+    let result;
     while (addCheck === this.#eatenFoods.length) {
       let menu = suggestFunc(category);
       if (verify(this.#eatenFoods, menu)) continue;
       if (this.#unableEatList.includes(menu)) menu = '';
       this.#eatenFoods.push(menu);
+      result = menu;
     }
+    return result;
   }
 
   getResultData() {
