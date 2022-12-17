@@ -48,6 +48,7 @@ const ERROR = Object.freeze({
   prefix: '[ERROR]',
   nameLength: `코치의 이름은 최소 ${COACH.minNameSize}자에서 ${COACH.maxNameSize}자 사이여야 합니다.`,
   personCount: `코치는 최소 ${COACH.minPerson}명에서 ${COACH.maxPerson}명까지여야 합니다.`,
+  hateMenusLength: `못먹는 메뉴는 ${COACH.maxHateMenu}개 까지만 입력할 수 있습니다.`,
 });
 
 const MENU = Object.freeze({
