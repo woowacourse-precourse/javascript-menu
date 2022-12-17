@@ -1,6 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
 const { splitString } = require("./utils/UtilityFunctions");
+const { coachNameLength, coachCount } = require("./Validate");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -34,26 +35,33 @@ class App {
 
   getCoachesName() {
     Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", (input) => {
-      const coaches = splitString(input, ",");
-      console.log(input);
-      // 여기서 한번 검사할 것. 검사 완료되면 그 이후 계속해서 감. 2-4글자, 중복 안됨.
-      for (const coach of coaches) {
-        this.#coaches.set(coach, {
-          menus: [],
-          canNotEat: [],
-        });
-      }
+      const coaches = splitString(input, ",").map((name) => name.trim()); // 이름 깔끔하게 정리
+      const checkCoachesName = coachNameLength(coaches, () =>
+        this.getCoachesName(),
+      );
+      const checkCoachCount = coachCount(coaches, () => this.getCoachesName());
+      if (!checkCoachesName || !checkCoachCount) return;
+      this.setCoachesToMap(coaches);
 
       this.askNotEatMenu(0);
     });
   }
 
-  askNotEatMenu(i) {
-    if (i === this.#coaches.size) {
+  setCoachesToMap(coaches) {
+    for (const coach of coaches) {
+      this.#coaches.set(coach, {
+        menus: [],
+        canNotEat: [],
+      });
+    }
+  }
+
+  askNotEatMenu(index) {
+    if (index === this.#coaches.size) {
       this.getResult();
       return;
     }
-    const [name, attrs] = [...this.#coaches][i];
+    const [name, attrs] = [...this.#coaches][index];
     Console.readLine(
       `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
       (input) => {
