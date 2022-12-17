@@ -128,11 +128,33 @@ describe('점심 메뉴 테스트', () => {
     test.each([
       ['구구 제임스'],
       ['구구'],
-      ['구구,제임스,제임,임스,김규'],
+      ['구구,제임스,제임,임스,김규,규김'],
     ])('코치 이름 입력 오류', (errorName) => {
       const logSpy = getLogSpy();
       mockRandoms([2, 5, 1, 3, 4]);
       mockQuestions([errorName, '구구,제임스', '김밥', '']);
+      mockShuffles([
+        // 구구
+        ...makeFalseShuffles([2, 7, 1, 4, 2]),
+
+        // 제임스
+        ...makeFalseShuffles([9, 1, 5, 5, 4]),
+      ]);
+
+      const app = new App();
+      app.play();
+      const log = getOutput(logSpy);
+
+      expectLogContains(log, ['[ERROR]']);
+    });
+
+    test.each([
+      ['난,뭐든지,잘먹어!'],
+      ['편식하는음식의이름이긴것은, 큰문제가되지않는다'],
+    ])('안 먹는 음식 입력 오류', (errorMenu) => {
+      const logSpy = getLogSpy();
+      mockRandoms([2, 5, 1, 3, 4]);
+      mockQuestions(['구구,제임스', '김밥', errorMenu, '']);
       mockShuffles([
         // 구구
         ...makeFalseShuffles([2, 7, 1, 4, 2]),
