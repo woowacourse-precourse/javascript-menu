@@ -1,8 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Coach = require("./domain/Coach");
 const MenuManager = require("./domain/MenuManager");
-const RandomCategoryGenerator = require("./RandomCategoryGenerator");
-const Validator = require("./Validator");
+const RandomCategoryGenerator = require("./util/RandomCategoryGenerator");
+const Validator = require("./util/Validator");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 
