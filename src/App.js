@@ -1,8 +1,9 @@
+const { Console } = require("@woowacourse/mission-utils");
 const Coach = require("./Coach");
 const { NEW_LINE } = require("./Constant");
 const { CATEGORY } = require("./data");
 const { readCoachName, readCoachPickyFoods } = require("./InputView");
-const { print } = require("./OutputView");
+const { print, printResult } = require("./OutputView");
 const { getMenu, getFood } = require("./RandomMachine");
 const {
   validateCoachNumber,
@@ -33,7 +34,6 @@ class App {
       validateCoachNumber(names);
       this.makeEachCoachField(names);
       this.getPickyFoods(0);
-      console.log("here");
     } catch (e) {
       print(e);
       this.getCoachName();
@@ -54,8 +54,8 @@ class App {
 
   getPickyFoods(i) {
     if (i === this.#coaches.length) {
-      console.log("hello");
     }
+
     readCoachPickyFoods(this.#coaches[i], this.actWithPickyFoods.bind(this));
   }
 
@@ -64,6 +64,9 @@ class App {
     try {
       validatePickyFoods(pickyFoods);
       coach.setPickyFoods(pickyFoods);
+      while (coach.getMenuLength() < 5) {
+        this.recommandFoods(coach);
+      }
     } catch (e) {
       print(e);
       this.getPickyFoods(coach);
@@ -73,16 +76,23 @@ class App {
 
   recommandFoods(coach) {
     const category = getMenu();
+    console.log(coach);
     if (coach.compareCateogry(category)) {
-      const food = getFood(CATEGORY[category]);
+      const food = getFood(category);
       if (coach.compareFood(food)) {
-        coach.setFoodtoMenu(food);
+        coach.setFoodtoMenu(category, food);
       }
     }
   }
 
   getResultLines() {
     return this.#coaches.map((coach) => coach.getResult()).join(NEW_LINE);
+  }
+
+  endGame() {
+    const resultLines = this.getResultLines();
+    printResult(resultLines);
+    Console.close();
   }
 
   play() {

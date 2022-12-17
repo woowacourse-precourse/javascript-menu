@@ -19,7 +19,9 @@ class Coach {
     return this.#number;
   }
 
-  setPickyFoods() {}
+  setPickyFoods(pickyFoods) {
+    this.#pickyFoods = pickyFoods;
+  }
 
   compareCategory(categoryOfToday) {
     const sameCategory = this.#menus.filter(
@@ -45,12 +47,17 @@ class Coach {
     return true;
   }
 
-  addFoodtoMenu(food) {
-    this.#menus.push(food);
+  addFoodtoMenu(category, food) {
+    this.#menus.push([category, food]);
+  }
+
+  getMenuLength() {
+    return this.#menus.length;
   }
 
   getResult() {
-    return `[ ${this.name} | ${this.#menus.join(RESULT.divider)} ]`;
+    const foods = this.#menus.map(([_, food]) => food);
+    return `[ ${this.name} | ${foods.join(RESULT.divider)} ]`;
   }
 }
 
