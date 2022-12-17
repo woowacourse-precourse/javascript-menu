@@ -14,7 +14,7 @@ const GAME_MESSAGES = {
   CAN_NOT_EAT: "(이)가 못 먹는 메뉴를 입력해 주세요.\n",
   RESULT:
     "메뉴 추천 결과입니다.\n[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]",
-  END: "추천을 완료했습니다.",
+  END: "\n추천을 완료했습니다.",
 };
 
 const FOOD_CATEGORY = {

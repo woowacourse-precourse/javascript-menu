@@ -38,21 +38,21 @@ class RecommendationMenuMaker {
   }
 
   chooseMenu() {
-    let result;
+    let result = [];
     for (let index = 0; index < 5; index++) {
       const menus = MENU[this.#category[index]];
       const pickOne = shuffle()[index];
-      result = menus[pickOne];
+      result.push(menus[pickOne]);
     }
 
-    print(result);
+    return this.designResult(result);
   }
 
-  designResult() {
-    const design = String(this.#menu).replaceAll(COMMA, LINE);
+  designResult(result) {
     const category = String(this.#category).replaceAll(COMMA, LINE);
+    const design = String(result).replaceAll(COMMA, LINE);
 
-    return OutputView.printResult(category, design);
+    return OutputView.printResult(category, design, this.#coaches);
   }
 }
 
