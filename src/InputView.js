@@ -6,7 +6,7 @@ const { RandomCategoryGenerator, CategoriesGenerator } = require('./RandomGenera
 const OutputView = require('./OutputView');
 
 const coachDietList = [];
-const categoryListOfWeek = [];
+let categoryListOfWeek = [];
 
 const InputView = {
   readCoachesName() {
@@ -28,16 +28,13 @@ const InputView = {
   },
 
   readImpossibleFoods(name, idx) {
-    Console.readLine(MESSAGE.ASK_COACH_IMPOSSIBLE(name), (foods) => {
+    Console.readLine(MESSAGE.ASK_COACH_IMPOSSIBLE(name), (impossibles) => {
       try {
-        coachDietList[idx].setImpossibles(foods);
+        const impossibleList = impossibles.split(',');
+        Validation.validateImpossibleSize(impossibleList);
+        coachDietList[idx].setImpossibles(impossibleList);
         if (idx === coachDietList.length - 1) {
-          const categoryListOfWeek = CategoriesGenerator();
-          for (const category of categoryListOfWeek) {
-            for (const coach of coachDietList) {
-              coach.recommendMenu(category);
-            }
-          }
+          makeRandomCategoryList();
           OutputView.printResult(categoryListOfWeek, coachDietList);
           return;
         }
@@ -48,6 +45,19 @@ const InputView = {
       }
     });
   },
+};
+
+const makeRandomCategoryList = () => {
+  categoryListOfWeek = CategoriesGenerator();
+  makeRecommendMenuList();
+};
+
+const makeRecommendMenuList = () => {
+  for (const category of categoryListOfWeek) {
+    for (const coach of coachDietList) {
+      coach.recommendMenu(category);
+    }
+  }
 };
 
 module.exports = InputView;
