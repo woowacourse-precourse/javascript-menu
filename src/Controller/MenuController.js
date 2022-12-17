@@ -13,6 +13,8 @@ class MenuController {
       this.NameCheck.validate(name);
     });
   };
+
+  
 };
 
 module.exports = MenuController;

@@ -11,7 +11,14 @@ const MESSAGE = {
   names: `코치의 이름을 입력해 주세요. (, 로 구분)\n`,
 };
 
+const ERROR = {
+  coachCountError: `[ERROR] 코치의 수는 2~5명 입니다.`,
+  coachNameLength: `[ERROR] 각 코치의 이름은 2~4글자입니다.`,
+  coachWord: `[ERROR] 공백을 입력하면 안됩니다.`
+};
+
 module.exports = {
   SAMPLE,
   MESSAGE,
+  ERROR,
 };
