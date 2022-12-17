@@ -21,7 +21,6 @@ const SAMPLE = {
 
 class App {
   #coaches = [];
-  #days = ["월요일", "화요일", "수요일", "목요일", "금요일"];
 
   getCoachName() {
     readCoachName(this.actWithCoachName.bind(this));
@@ -33,8 +32,8 @@ class App {
     try {
       validateCoachNumber(names);
       this.makeEachCoachField(names);
-      this.askPickyFoods();
-      this.recommandFoods();
+      this.getPickyFoods(0);
+      console.log("here");
     } catch (e) {
       print(e);
       this.getCoachName();
@@ -42,10 +41,10 @@ class App {
   }
 
   makeEachCoachField(names) {
-    names.forEach((name) => {
+    names.forEach((name, ind) => {
       try {
         validateNameLength(name);
-        this.#coaches.push(new Coach(name));
+        this.#coaches.push(new Coach(name, ind));
       } catch (e) {
         print(e);
         this.getCoachName();
@@ -53,15 +52,15 @@ class App {
     });
   }
 
-  askPickyFoods() {}
-
-  getPickyFoods(coach) {
-    readCoachPickyFoods(coach, this.actWithPickyFoods.bind(this));
+  getPickyFoods(i) {
+    if (i === this.#coaches.length) {
+      console.log("hello");
+    }
+    readCoachPickyFoods(this.#coaches[i], this.actWithPickyFoods.bind(this));
   }
 
   actWithPickyFoods(coach, foods) {
-    const pickyFoods = foods.split(",");
-    console.log(pickyFoods);
+    const pickyFoods = foods.split(",").map((food) => food.trim());
     try {
       validatePickyFoods(pickyFoods);
       coach.setPickyFoods(pickyFoods);
@@ -69,6 +68,7 @@ class App {
       print(e);
       this.getPickyFoods(coach);
     }
+    this.getPickyFoods(coach.getNumber() + 1);
   }
 
   recommandFoods(coach) {

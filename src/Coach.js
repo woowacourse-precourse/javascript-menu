@@ -4,18 +4,22 @@ class Coach {
   #name;
   #pickyFoods;
   #menus = [];
+  #number;
 
-  constructor(name) {
+  constructor(name, number) {
     this.#name = name;
+    this.#number = number;
   }
 
   getName() {
     return this.#name;
   }
 
-  setPickyFoods(foods) {
-    this.#pickyFoods = foods;
+  getNumber() {
+    return this.#number;
   }
+
+  setPickyFoods() {}
 
   compareCategory(categoryOfToday) {
     const sameCategory = this.#menus.filter(
