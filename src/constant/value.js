@@ -8,5 +8,6 @@ const MENU_SAMPLE = {
 };
 
 const DAY_OF_WEEK = ["월요일", "화요일", "수요일", "목요일", "금요일"];
+const MENU_CATEGORY = ["일식", "한식", "중식", "아시안", "양식"];
 
-module.exports = { MENU_SAMPLE, DAY_OF_WEEK };
+module.exports = { MENU_SAMPLE, DAY_OF_WEEK, MENU_CATEGORY };
