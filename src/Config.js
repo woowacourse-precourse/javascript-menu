@@ -28,6 +28,11 @@ const ValidConfig = {
   MAX_CANNOTEAT_LENGTH: 2,
 };
 
+const AppConfig = {
+  WRONG_INPUT_PATIENCE: 10,
+  DAYS: 5,
+};
+
 const Message = {
   START: '점심 메뉴 추천을 시작합니다.',
   RESULT: '\n메뉴 추천 결과입니다.',
@@ -50,6 +55,9 @@ const Message = {
   ERROR_SEPARATOR: '[ERROR] 구분자 사이에 공백이 없어야 합니다.',
   ERROR_NAME_LENGTH: '[ERROR] 이름 길이가 잘못되었습니다.',
   ERROR_CANNOTEAT: '[ERROR] 음식의 수가 잘못되었거나 구분자가 틀렸습니다.',
+  ERROR_TOO_MANY: `[ERROR] ${AppConfig.WRONG_INPUT_PATIENCE}번 연속 잘못된 입력입니다. 프로그램을 강제 종료합니다.`,
 };
 
-module.exports = { MenuConfig, ValidConfig, Message };
+module.exports = {
+  MenuConfig, ValidConfig, Message, AppConfig,
+};
