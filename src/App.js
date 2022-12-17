@@ -41,7 +41,7 @@ class App {
 
     InputView.readHateMenus(currentCoachName, hateMenus => {
       if (this.isValidInputValue(CoachHateMenusValidator, hateMenus)) {
-        this.#hateMenuInfo[currentCoachName] = hateMenus;
+        this.#hateMenuInfo[currentCoachName] = hateMenus.split(',');
         this.inputHateMenus(coachNameList.slice(1));
         return;
       }
