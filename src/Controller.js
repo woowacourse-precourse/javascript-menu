@@ -42,12 +42,14 @@ class Controller {
         namesArr[this.#menuAskingIndex] + MESSAGE.ASK_MENU,
         this.askMenuCallback.bind(this)
       );
-    } else this.returnResult();
+      return;
+    }
+    this.returnResult();
   }
 
   askMenuCallback(input) {
     const coachName = this.#namesArr[this.#menuAskingIndex];
-    const menuArr = makeArray(input);
+    const menuArr = input === "" ? [] : makeArray(input);
     this.#menuRecommender.setNoNoMenus(coachName, menuArr);
     this.#menuAskingIndex++;
     this.askMenu();
