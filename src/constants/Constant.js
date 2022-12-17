@@ -6,7 +6,7 @@ const SAMPLE = Object.freeze({
   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 });
 
-const CATEGORY_CODE = Object.freeze({
+const CATEGORY = Object.freeze({
   1: '일식',
   2: '한식',
   3: '중식',
@@ -14,4 +14,4 @@ const CATEGORY_CODE = Object.freeze({
   5: '양식',
 });
 
-module.exports = { SAMPLE, CATEGORY_CODE };
+module.exports = { SAMPLE, CATEGORY };
