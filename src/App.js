@@ -9,6 +9,20 @@ const SAMPLE = {
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
+const OUTPUT_MESSAGE = {
+  START: '점심 메뉴 추천을 시작합니다.\n',
+  RESULT: '메뉴 추천 결과입니다.',
+  HEADER: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+  CATEGORY_OPEN: '[ 카테고리 ',
+  ARR_CLOSE: ']',
+  FINISH: '추천을 완료했습니다.\n',
+}
+
+const INPUT_MESSAGE = {
+  NAME: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
+  MENU: '(이)가 못 먹는 메뉴를 입력해 주세요.\n',
+}
+
 const CATEGORIES = new Map()
 CATEGORIES.set(1, '일식')
 CATEGORIES.set(2, '한식')
@@ -35,14 +49,14 @@ function printRecommende(toPrint, idx) {
 
 function makePrintRecommended(idx) {
   if(idx === Names.length) {
-    Console.print('추천을 완료했습니다.')
+    Console.print(OUTPUT_MESSAGE.FINISH)
     return finishService()
   }
   const toPrint = [`[ ${Names[idx]} `]
   Recommended[idx].forEach((menu) => {
     toPrint.push(`| ${menu} `)
   })
-  toPrint.push(']')
+  toPrint.push(OUTPUT_MESSAGE.ARR_CLOSE)
   return printRecommende(toPrint.join(''), idx)
 }
 
@@ -52,17 +66,17 @@ function printCategories(toPrint) {
 }
 
 function makePrintCategories() {
-  const toPrint = ['[ 카테고리 ']
+  const toPrint = [OUTPUT_MESSAGE.CATEGORY_OPEN]
   Categories.forEach((category) => {
     toPrint.push(`| ${category} `)
   })
-  toPrint.push(']')
+  toPrint.push(OUTPUT_MESSAGE.ARR_CLOSE)
   return printCategories(toPrint.join(''))
 }
 
 function printResult() {
-  Console.print('메뉴 추천 결과입니다.')
-  Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]')
+  Console.print(OUTPUT_MESSAGE.RESULT)
+  Console.print(OUTPUT_MESSAGE.HEADER)
   return makePrintCategories()
 }
 
@@ -133,7 +147,7 @@ function cantEatIsValid(answer) {
 
 function inputCantEat(idx) {
   const name = Names[idx]
-  Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (answer => {
+  Console.readLine(`${name}${INPUT_MESSAGE.MENU}`, (answer => {
     try {
       const cantEatArray = cantEatIsValid(answer)
       BannedMenu[name] = cantEatArray.slice()
@@ -191,7 +205,7 @@ function namesToConst(names) {
 }
 
 function inputCoachNames() {
-  Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)\n', (answer => {
+  Console.readLine(INPUT_MESSAGE.NAME, (answer => {
     try {
       const names = namesAreValid(answer)
       return namesToConst(names)
@@ -203,7 +217,7 @@ function inputCoachNames() {
 }
 
 function startService() {
-  Console.print('점심 메뉴 추천을 시작합니다.\n')
+  Console.print(OUTPUT_MESSAGE.START)
   return inputCoachNames()
 }
 
