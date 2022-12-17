@@ -29,7 +29,7 @@ class Coachs {
   }
 
   setAteMenu(coachName, ateMenu) {
-    this.#coachs[coachName].ateMenu.push(ateMenu);
+    this.#coachs[coachName].ateMenu.push(ateMenu.trim());
     console.log(this.#coachs[coachName].ateMenu, coachName);
   }
 }

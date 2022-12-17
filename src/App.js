@@ -44,9 +44,10 @@ class App {
     this.coachs.setCoachNotEatMenu("구구", "김밥");
     this.coachs.setCoachNotEatMenu("제임스", "떡볶이");
 
-    Array.from({ length: 5 }).forEach(() => {
+    Array.from({ length: 5 }).forEach((_, i) => {
       this.decideCategory();
     });
+    this.recommendMenu();
 
     this.printResultRecommendMenu();
   }
@@ -56,7 +57,6 @@ class App {
 
     if (this.getCategoryCount(categoryName) <= 2) {
       this.categorys.push(categoryName);
-      this.recommendMenu(categoryName);
       return;
     }
     this.decideCategory();
@@ -66,16 +66,18 @@ class App {
     return categorysNames[CategoryRandomNumberGenerator.generate() - 1];
   }
 
-  recommendMenu(categoryName) {
+  recommendMenu() {
     this.coachs.getCoachName().forEach((coachName) => {
-      let ateMenu = this.getEatMenu(categoryName);
-      while (
-        this.coachs.isAteMenu(coachName, ateMenu) ||
-        this.coachs.isNotEatMenu(coachName, ateMenu)
-      ) {
-        ateMenu = this.getEatMenu(categoryName);
-      }
-      this.coachs.setAteMenu(coachName, ateMenu);
+      this.categorys.forEach((categoryName) => {
+        let ateMenu = this.getEatMenu(categoryName);
+        while (
+          this.coachs.isAteMenu(coachName, ateMenu) ||
+          this.coachs.isNotEatMenu(coachName, ateMenu)
+        ) {
+          ateMenu = this.getEatMenu(categoryName);
+        }
+        this.coachs.setAteMenu(coachName, ateMenu);
+      });
     });
   }
 
@@ -83,7 +85,7 @@ class App {
     const randomNumber = Random.shuffle(
       Array.from({ length: 9 }, (_, i) => i)
     )[0];
-    return SAMPLE[categoryName].split(",")[randomNumber];
+    return SAMPLE[categoryName].split(",")[randomNumber - 1];
   }
 
   printResultRecommendMenu() {

@@ -15,6 +15,7 @@ const OutputView = {
         `[ ${coachName} | ${coach[coachName].ateMenu.join(" | ")} ]`
       );
     });
+    Console.print("추천을 완료했습니다.");
   },
 };
 
