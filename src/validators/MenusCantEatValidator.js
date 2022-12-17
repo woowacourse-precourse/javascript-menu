@@ -3,6 +3,7 @@ const { GameError } = require('../errors');
 
 // 각 코치가 못 먹는 음식은 0~2개 이며,
 // 해당 경계에 포함되지 않는 케이스가 있다면 에러 throw
+// TODO: 음식 메뉴에 존재하지 않는 메뉴를 입력 시 에러 throw
 
 class MenusCantEatValidator {
   static validateList(menus) {

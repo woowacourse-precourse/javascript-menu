@@ -8,6 +8,8 @@ const MENUS = {
   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
+const CATEGORY = { 1: '일식', 2: '한식', 3: '중식', 4: '아시안', 5: '양식' };
+
 const GAME_MESSAGE = deepFreeze({
   start: '점심 메뉴 추천을 시작합니다.\n',
   input_coach_name: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
@@ -37,15 +39,10 @@ const VALIDATION_MESSAGE = deepFreeze({
   },
 });
 
-const SPACE = deepFreeze({
-  0: 'D',
-  1: 'U',
-});
-
 module.exports = {
   MENUS,
+  CATEGORY,
   GAME_MESSAGE,
   ERROR_MESSAGE,
   VALIDATION_MESSAGE,
-  SPACE,
 };

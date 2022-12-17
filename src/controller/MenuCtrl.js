@@ -47,16 +47,23 @@ class MenuCtrl extends GameCtrl {
         MenusCantEatValidator.validateList(splittedMenusCoachCantEat);
 
         this.model.setMenusCoachesCantEat(splittedMenusCoachCantEat);
-        this.#currentCoachflag += 1;
 
-        if (coachesList.length !== this.#currentCoachflag) {
-          this.#inputMenusCoachesCantEat();
+        this.#currentCoachflag += 1;
+        if (coachesList.length > this.#currentCoachflag) {
+          return this.#inputMenusCoachesCantEat();
         }
+
+        return this.#makeRecommendedMenus();
       } catch (error) {
         this.view.output(error.message);
         this.#inputMenusCoachesCantEat();
       }
     });
+  }
+
+  #makeRecommendedMenus() {
+    // this.model.makeRecommendedMenus();
+    console.log('hi');
   }
 
   end() {}
