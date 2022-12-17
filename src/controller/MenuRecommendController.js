@@ -46,10 +46,11 @@ class MenuRecommendController {
   }
 
   #returnRecommendMenu() {
+    this.#coachRepository.initCount();
     this.#setRecommendCategory();
-    this.#setRecommendMenu();
-
-    OutputView.printMenu();
+    this.#setCouchWeeklyMenu();
+    OutputView.printMenu(this.#coachRepository);
+    OutputView.printQuit();
   }
 
   #setRecommendCategory() {
@@ -59,9 +60,25 @@ class MenuRecommendController {
     }
   }
 
-  #setRecommendMenu() {
-    this.#recommendWeeklyMenu.getWeeklyCategory().forEach(category => {
+  #setRecommendMenu(NotGoodMenu) {
+    const weeklyMenu = [];
+    const weeklyCategory = this.#recommendWeeklyMenu.getWeeklyCategory();
+    let index = 0;
+    while (weeklyMenu.length < 5) {
+      const recommendMenu = this.#categoryRepository
+        .getRandomMenuByCategory(weeklyCategory[index]);
+      if (!NotGoodMenu.includes(recommendMenu)) {
+        weeklyMenu.push(recommendMenu);
+        index += 1;
+      }
+    }
+    return weeklyMenu;
+  }
 
+  #setCouchWeeklyMenu() {
+    this.#coachRepository.getCoachList().forEach((coach, name) => {
+      const weeklyRecommendMenu = this.#setRecommendMenu(coach.getNotGoodMenu());
+      coach.setWeeklyMenu(weeklyRecommendMenu);
     });
   }
 }

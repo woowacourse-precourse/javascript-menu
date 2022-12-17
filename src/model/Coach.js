@@ -19,6 +19,10 @@ class Coach {
     this.#weeklyMenu = menus;
   }
 
+  getWeeklyMenu() {
+    return this.#weeklyMenu;
+  }
+
   getNotGoodMenu() {
     return this.#NotGoodMenu;
   }
