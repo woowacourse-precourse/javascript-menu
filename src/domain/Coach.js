@@ -6,6 +6,7 @@ class Coach {
   constructor(name) {
     this.#name = name;
     this.#menus = [];
+    this.#bannedMenu = [];
   }
 
   addBannedMenu(bannedMenu) {
