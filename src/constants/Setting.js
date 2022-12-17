@@ -11,6 +11,8 @@ const MENU_CONSTANTS = {
 
 const PROCESS_CONSTANTS = {
   weeks: ['월요일', '화요일', '수요일', '목요일', '금요일'],
+  headerWeeks: '구분',
+  headerCategory: '카테코리',
   menuStart: '[ ',
   menuEnd: ' ]',
   menuDivision: ' | ',

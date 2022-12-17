@@ -49,7 +49,7 @@ class MenuRecommendController {
     this.#coachRepository.initCount();
     this.#setRecommendCategory();
     this.#setCouchWeeklyMenu();
-    OutputView.printMenu(this.#coachRepository);
+    OutputView.printMenu(this.#coachRepository, this.#recommendWeeklyMenu);
     OutputView.printQuit();
   }
 
