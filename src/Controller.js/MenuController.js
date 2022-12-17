@@ -49,13 +49,14 @@ class MenuController {
     InputView.readNoMenu(coachName, this.validateMenu.bind(this));
   }
 
+  // 못 먹는 메뉴 선정
   validateMenu(menus) {
     try {
       Validate.noMenu(menus);
       Coach.addNoFood(menus);
     } catch ({ message }) {
       OutputView.print(message);
-      this.readNoMenu();
+      this.getCoach();
     }
     this.checkAllInput();
   }
@@ -78,6 +79,7 @@ class MenuController {
 
   recommendMenu() {
     const category = Category.getCategory();
+
     for (const [coachName, noMenu] of Coach.people()) {
       const recommendMenu = MenuPicker.recommend(
         noMenu,

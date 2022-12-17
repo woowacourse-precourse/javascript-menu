@@ -6,7 +6,10 @@ const InputView = {
   },
 
   readNoMenu(name, callback) {
-    Console.readLine(`\n${name}의 못 먹는 메뉴를 입력해주세요\n`, callback);
+    Console.readLine(
+      `\n${name}(이)가 못 먹는 메뉴를 입력해주세요.\n`,
+      callback
+    );
   },
 };
 

@@ -37,8 +37,8 @@ class Coach {
     const name = this.getName();
     const foodSet = new Set(foods.split(','));
 
-    this.addInputCount();
     this.#coaches.set(name, foodSet);
+    this.addInputCount();
   }
 
   static people() {

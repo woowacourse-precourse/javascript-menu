@@ -1,2 +1,0 @@
-
-      const categoryIndex = category[count];

@@ -59,3 +59,6 @@ class Category {
   }
 }
 module.exports = Category;
+
+Category.init();
+Category.generate();
