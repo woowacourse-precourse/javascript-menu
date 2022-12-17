@@ -26,6 +26,10 @@ class Recommendor {
     return this.#categories;
   }
 
+  getCategories() {
+    return this.#categories;
+  }
+
   setAllMenus(SAMPLE) {
     let array = [];
 

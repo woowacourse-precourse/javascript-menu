@@ -72,8 +72,15 @@ class Controller {
   recommendMenus() {
     this.recommendor.setCategories();
     this.recommendor.setAllMenus(this.sample);
-
     this.recommendor.recommendMenus();
+
+    this.printRecommendedMenus();
+  }
+
+  printRecommendedMenus() {
+    OutputView.printMessage(MESSAGE.showResult);
+    OutputView.printMessage(MESSAGE.showWeek);
+    OutputView.printCategory(this.recommendor);
   }
 }
 
