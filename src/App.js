@@ -2,6 +2,8 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 
+const Coach = require("./model/Coach");
+
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
   한식: "김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음",
@@ -12,6 +14,8 @@ const SAMPLE = {
 };
 
 class App {
+  #coachesManager;
+
   play() {
     this.printStartMessage();
   }
@@ -26,7 +30,9 @@ class App {
     InputView.readCoachesName(this.divideEachCoach.bind(this));
   }
 
-  divideEachCoach(names) {}
+  divideEachCoach(names) {
+    this.#coachesManager = new Coach(names);
+  }
 }
 
 const app = new App();
