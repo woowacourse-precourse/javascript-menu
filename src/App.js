@@ -54,8 +54,8 @@ class App {
         return this.suggestCoachMenu(0);
       } catch (error) {
         console.error(error);
-        if (error.message === 'No Food') OutputView.ErrorNoMenu();
-        if (error.message === 'OverFlow Foods') OutputView.ErrorNoMenuLength();
+        if (error.message === ERROR.INVALID_ENABLE_EAT_FOOD) OutputView.ErrorNoMenu();
+        if (error.message === ERROR.INVALID_FOOD_LIST_LENGTH) OutputView.ErrorNoMenuLength();
         return this.unableEatCheckStart(coachLength);
       }
     });
