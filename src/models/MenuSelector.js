@@ -94,7 +94,6 @@ class MenuSelector {
     return menu;
   }
 
-  //한 코치의 하루 메뉴정하기
   decideDayMenu(dayCategory, coach) {
     let menu;
     do {
@@ -113,14 +112,12 @@ class MenuSelector {
     return dayCategory;
   }
 
-  //한 코치의 일주일 메뉴정하기
   decideWeekMenu(coach) {
     this.#weekCategories.forEach((dayCategory) => {
       this.decideDayMenu(dayCategory, coach);
     });
   }
 
-  //모든 코치의 일주일 메뉴정하기
   decideAllCoachWeekMenu() {
     for (let i = 0; i < 5; i += 1) this.decideDayCategory();
     this.#coachs.forEach((coach) => {

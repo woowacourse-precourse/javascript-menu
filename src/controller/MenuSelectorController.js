@@ -17,7 +17,6 @@ class MenuSelectorController {
     InputView.readCoachNames(this.#registerCoachPhase.bind(this));
   }
 
-  //["토미,제임스" Coach(토미), Coach(제임스), ..]
   #registerCoachPhase(names) {
     try {
       Validator.checkCoachNames(names);
