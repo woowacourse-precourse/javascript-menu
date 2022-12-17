@@ -14,11 +14,11 @@ const InputView = {
     });
   },
 
-  /* readNotEatMenu(coachName, callback) {
-    Console.readLine(INPUT_MESSAGE.notEatMenu(coachName), (coachNames) => {
-      callback(coachNames);
+  readNotEatMenu(coachName, callback) {
+    Console.readLine(INPUT_MESSAGE.notEatMenu(coachName), (menus) => {
+      callback(coachName, menus);
     });
-  }, */
+  },
 };
 
 module.exports = InputView;

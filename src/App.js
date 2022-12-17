@@ -16,7 +16,8 @@ const SAMPLE = {
 const categorysNames = Object.keys(SAMPLE);
 
 class App {
-  categorys = new Categorys(categorysNames);
+  #categorys = new Categorys(categorysNames);
+  #sequence = 0;
 
   play() {
     OutputView.printServiceStart();
@@ -31,16 +32,28 @@ class App {
   actionCoachNames(coachNames) {
     this.coachs = new Coachs(coachNames);
 
-    // 각 코치가 못 먹는 메뉴를 입력받는다.
-    this.coachs.setCoachNotEatMenu("구구", "김밥");
+    this.inputNotEatMenu();
 
     this.recommendMenu();
     this.printResultRecommendMenu();
   }
 
+  inputNotEatMenu() {
+    InputView.readNotEatMenu(
+      this.coachs.getCoachName()[this.#sequence],
+      this.saveCoachNotEatMenu.bind(this)
+    );
+  }
+
+  saveCoachNotEatMenu(coachName, menus) {
+    this.coachs.setCoachNotEatMenu(coachName, menus);
+    this.#sequence += 1;
+    this.inputNotEatMenu();
+  }
+
   recommendMenu() {
     this.coachs.getCoachName().forEach((coachName) => {
-      this.categorys.get().forEach((categoryName) => {
+      this.#categorys.get().forEach((categoryName) => {
         let ateMenu = this.getEatMenu(categoryName);
         while (
           this.coachs.isAteMenu(coachName, ateMenu) ||
@@ -62,7 +75,7 @@ class App {
 
   printResultRecommendMenu() {
     OutputView.printResultRecommendMenu(
-      this.categorys.get(),
+      this.#categorys.get(),
       this.coachs.getCoachs()
     );
   }
