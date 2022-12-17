@@ -7,8 +7,8 @@ const convertCategory = (categoryIdxArr) => {
 };
 
 const combineCoachMenu = (coach, menu) => {
-  for (const idx in coach) {
-    menu[idx].unshift(coach[idx]);
+  for (const index in coach) {
+    menu[index] = [coach[index], ...menu[index]];
   }
   return menu;
 };
