@@ -14,7 +14,6 @@ class Coach {
       if (dislike !== todayMenu) recommend = true;
       else recommend = false;
     });
-
     if (recommend) this.lunch.push(todayMenu);
   }
 

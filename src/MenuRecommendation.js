@@ -27,14 +27,11 @@ class MenuRecommendation {
   chooseMenuForCoach(coach) {
     for (let i = 0; i < 5; i++) {
       let todayCat = this.category[i];
-
       let numArr = [];
       for (let j = 1; j < menus[todayCat].length + 1; j++) {
         numArr.push(j);
       }
-
       const menu = MissionUtils.Random.shuffle(numArr)[0];
-
       this.coachs[Number(coach)].setLunch(menus[todayCat][menu - 1]);
     }
   }
@@ -66,7 +63,6 @@ class MenuRecommendation {
         this.category.push(random);
       }
     }
-
     this.chooseMenu();
   }
 
@@ -75,7 +71,6 @@ class MenuRecommendation {
       this.coachs[this.count].setDislikeMenu(menu);
     });
     this.count++;
-
     if (this.count === this.coachs.length) {
       this.chooseCat();
     } else {
@@ -91,11 +86,9 @@ class MenuRecommendation {
     names.split(",").forEach((name) => {
       this.coachs.push(new Coach(name));
     });
-
     if (checkCoachNumber(this.coachs.length)) {
       return InputView.readCoachName(this.receiveCoachName.bind(this));
     }
-
     InputView.readDislikeMenu(
       this.receiveDislikeMenu.bind(this),
       this.coachs,
@@ -105,7 +98,6 @@ class MenuRecommendation {
 
   start() {
     OutputView.printStartText();
-
     InputView.readCoachName(this.receiveCoachName.bind(this));
   }
 }
