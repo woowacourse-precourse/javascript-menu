@@ -71,6 +71,16 @@ class MenuSelector {
     return this.#coachs;
   }
 
+  //한 코치의 하루 메뉴정하기
+  decideDayMenu(dayCategory, coach) {
+    let menu;
+    do {
+      menu = this.selectMenu(dayCategory);
+    } while (coach.hasSameMenu(menu) || coach.isDislikeMenu(menu));
+
+    coach.setMenu(menu);
+  }
+
   decideDayCategory() {
     let dayCategory;
     do {
