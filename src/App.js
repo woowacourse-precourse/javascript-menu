@@ -4,8 +4,10 @@ const Vaildator = require('./util/vaildator');
 const Coach = require('./Coach');
 const InputProcessor = require('./util/InputProcessor');
 const Food = require('./Food');
-const MENUS = require('./constant/menus');
 const MenuUtil = require('./util/menuUtil');
+const { Randoms } = require('@woowacourse/mission-utils');
+const categoryTable = require('./constant/categoryTable');
+const MENUS = require('./constant/menus');
 
 class App {
   constructor() {
@@ -13,6 +15,8 @@ class App {
     this.input = new InputUI();
     this.coachs = [];
     this.dislikeIdx = 0;
+    this.recommends = [];
+    this.categoryCounts = [0, 0, 0, 0, 0, 0];
   }
   play() {
     this.output.print('점심 메뉴 추천을 시작합니다.');
@@ -38,9 +42,10 @@ class App {
     });
     this.inputCoachsDislikeFood();
   }
+
   inputCoachsDislikeFood() {
     if (this.dislikeIdx > this.coachs.length - 1) {
-      // 메뉴 추천 결과 실행 로직
+      this.selectMenuByDay();
       return;
     }
     this.input.readLine(
@@ -48,6 +53,7 @@ class App {
       `${this.coachs[this.dislikeIdx].name}(이)가 못 먹는 메뉴를 입력해 주세요.`
     );
   }
+
   inputDislikeFoodByCoach(input) {
     const inputFoods = InputProcessor.parseCommaStringsToArray(input);
 
@@ -61,6 +67,16 @@ class App {
 
     this.dislikeIdx++;
     this.inputCoachsDislikeFood();
+  }
+
+  selectCategory() {
+    while (1) {
+      const category = Randoms.pickNumberInRange(1, 5);
+      if (!this.categoryCounts[category] <= 2) {
+        this.categoryCounts[category]++;
+        return category;
+      }
+    }
   }
 }
 
