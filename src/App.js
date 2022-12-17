@@ -12,9 +12,10 @@ const SAMPLE = {
 
 class App {
   #coachNameArray;
-
+  // #coachCannotEatFoodArray;
   constructor() {
     this.#coachNameArray = [];
+    // this.#coachCannotEatFoodArray = [];
   }
 
   printGameStart() {
@@ -24,7 +25,16 @@ class App {
   play() {
     this.printGameStart();
     this.#coachNameArray = InputView.getCoachNameArray();
-    console.log(this.#coachNameArray);
+    //console.log(this.#coachNameArray);
+    for (let i = 0; i < this.#coachNameArray.length; i++) {
+      let coachCannotEatFoodArray = InputView.getCoachCannotEatFoodsArray(
+        this.#coachNameArray[i]
+      );
+
+      for (let j = 0; j < coachCannotEatFoodArray.length; j++) {
+        this.#coachNameArray[i] += `+${coachCannotEatFoodArray[j]}`;
+      }
+    }
   }
 }
 
