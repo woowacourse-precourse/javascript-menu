@@ -1,5 +1,6 @@
 const CategoryMaker = require('../CategoryMaker');
 const RandomShuffler = require('../RandomShuffler');
+const { CATEGORY_LENGTH, ZERO } = require('../utils/constants');
 
 class Recommendor {
   #coaches = [];
@@ -35,12 +36,44 @@ class Recommendor {
     this.#allMenus = array;
   }
 
-  recommendMenus(SAMPLE) {
-    this.setAllMenus(SAMPLE);
+  recommendMenus() {
+    this.#coaches.forEach((coach, index) => {
+      let recommendedMenusPerCoach = [];
 
-    this.#categories.forEach((category) => {
-      const MENU_ORDER = RandomShuffler.shuffle();
-      // console.log(this.#allMenus[category - 1][MENU_ORDER]);
+      while (recommendedMenusPerCoach.length !== CATEGORY_LENGTH) {
+        const MENU_ORDER = RandomShuffler.shuffle();
+
+        // 메뉴를 못 먹는 경우 다시 shuffle
+        if (
+          this.#hateMenus[index].includes(
+            this.#allMenus[this.#categories[recommendedMenusPerCoach.length]][
+              MENU_ORDER
+            ]
+          )
+        ) {
+          continue;
+        }
+
+        // 메뉴 오더가 중복되는 경우 다시 shuffle
+        if (
+          recommendedMenusPerCoach.length !== ZERO &&
+          recommendedMenusPerCoach.includes(
+            this.#allMenus[this.#categories[recommendedMenusPerCoach.length]][
+              MENU_ORDER
+            ]
+          )
+        ) {
+          continue;
+        }
+
+        recommendedMenusPerCoach.push(
+          this.#allMenus[this.#categories[recommendedMenusPerCoach.length]][
+            MENU_ORDER
+          ]
+        );
+      }
+
+      this.#recommendedMenus.push(recommendedMenusPerCoach);
     });
   }
 }
