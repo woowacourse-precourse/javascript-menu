@@ -38,18 +38,30 @@ class MenuController {
     const coaches = names.replace(REGEX.SPACE, '').split(',');
     this.#menuService.addCoaches(coaches);
 
-    this.#inputNonEdibleMenus();
+    this.#inputNonEdibleMenus(coaches);
   }
 
-  #inputNonEdibleMenus() {
-    const coaches = this.#menuService.getCoachesName();
-
-    InputView.askNonEdibleMenus(coaches, this.#validateNonEdibleMenus.bind(this));
+  #inputNonEdibleMenus(coaches) {
+    const lastCoachName = coaches[coaches.length - 1];
+    InputView.askNonEdibleMenus(coaches[0], (menus) => {
+      try {
+        this.#validateNonEdibleMenus(menus);
+      } catch ({ message }) {
+        OutputView.printErrorMessage(message);
+        return this.#inputNonEdibleMenus(coaches);
+      }
+      if (coaches[0] !== lastCoachName) {
+        return this.#onInputNonEdibleMenus(coaches.slice(1), menus);
+      }
+      this.#onInputNonEdibleMenus(coaches[0], menus);
+    });
   }
 
   #validateNonEdibleMenus(menus) {
-    console.log(menus);
+    Validator.throwErrorIfInvalidNonEdibleMenus(menus);
   }
+
+  #onInputNonEdibleMenus(coachName, menus) {}
 }
 
 module.exports = MenuController;

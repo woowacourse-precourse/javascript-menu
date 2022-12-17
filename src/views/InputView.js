@@ -10,16 +10,8 @@ const InputView = {
     Console.readLine(MESSAGE.ASK_COACHES_NAME, callback);
   },
 
-  askNonEdibleMenus(coaches, callback) {
-    const lastCoachName = coaches[coaches.length - 1];
-
-    Console.readLine(MESSAGE.askNonEdibleMenus(coaches[0]), (menus) => {
-      if (coaches[0] !== lastCoachName) {
-        callback(menus);
-        return this.askNonEdibleMenus(coaches.slice(1), callback);
-      }
-      return callback(menus);
-    });
+  askNonEdibleMenus(coachName, callback) {
+    Console.readLine(MESSAGE.askNonEdibleMenus(coachName), callback);
   },
 };
 
