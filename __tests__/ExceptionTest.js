@@ -22,7 +22,6 @@ describe('사용자 입력 값에 대한 예외 테스트', () => {
 
     INPUTS.forEach((input) => {
       expect(() => {
-        console.log(input);
         Exception.checkInedibleMenusInput(input);
       }).toThrow('[ERROR]');
     });
@@ -33,7 +32,6 @@ describe('사용자 입력 값에 대한 예외 테스트', () => {
 
     INPUTS.forEach((input) => {
       expect(() => {
-        console.log(input);
         Exception.checkInedibleMenusInput(input);
       }).toThrow('[ERROR]');
     });
