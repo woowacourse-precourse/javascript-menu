@@ -9,6 +9,8 @@ const foods = {
 	양식: ['라자냐', '그라탱', '뇨끼', '끼슈', '프렌치 토스트', '바게트', '스파게티', '피자', '파니니'],
 };
 
+const foodsIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 class Recommend{
     #coaches;
     #category;
@@ -52,25 +54,22 @@ class Recommend{
     randomFoodAll(){
         const category = this.#category.at(-1);
         for(let name of Object.keys(this.#coaches)){
-            randomFood(category, name);
+            this.randomFood(category, name);
         }
     }
 
     randomFood(category, name){
         const cantFood = this.#coaches[name][0].concat( this.#coaches[name][1]);
         const menus = foods[category];
-
         while(true){
-            const menu = Random.shuffle(menus)[0];
+            const index = Random.shuffle(foodsIndex)[0] - 1;
+            const menu = menus[index];
             if (!cantFood.includes(menu)){
                 this.#coaches[name][1].push(menu);
                 break;
             }
         }
     }
-    
 }
-
-console.log([1,2].concat([3]));
 
 module.exports = Recommend;
