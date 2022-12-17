@@ -4,6 +4,7 @@ class MenuRecommendManager {
   #inputView;
   #outputView;
   #menuRecommend;
+  #counter = 0;
   constructor(configuration) {
     const { inputView, outputView, menuRecommend } = configuration;
     this.#inputView = inputView;
@@ -17,10 +18,18 @@ class MenuRecommendManager {
   onReadCoachesName() {
     this.#inputView.readCoachesName((coaches) => {
       const coachesNames = coaches.split(",");
-      console.log(coachesNames);
+      this.#menuRecommend.registerCoaches(coachesNames);
+
+      this.onReadHateFood(coachesNames[this.#counter++], coachesNames);
     });
   }
-  onReadHateFood() {}
+  onReadHateFood(name, coachesNames) {
+    this.#inputView.readHateFood(name, (food) => {
+      console.log(food);
+      if (this.#counter !== coachesNames.length)
+        this.onReadHateFood(coachesNames[this.#counter++], coachesNames);
+    });
+  }
 }
 
 module.exports = MenuRecommendManager;

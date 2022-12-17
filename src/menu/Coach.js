@@ -1,5 +1,8 @@
 class Coach {
-  constructor(name) {}
+  #name;
+  constructor(name) {
+    this.#name = name;
+  }
   registerHateFood(food) {}
   canEat(food) {}
   ateBefore(food) {}

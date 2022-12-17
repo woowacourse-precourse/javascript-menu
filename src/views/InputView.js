@@ -6,7 +6,9 @@ const InputView = {
   readCoachesName(callback) {
     this.module.readLine(INPUT_MESSAGES.readCoachesNameMessage, callback);
   },
-  readHateFood(callback) {},
+  readHateFood(name, callback) {
+    this.module.readLine(name + INPUT_MESSAGES.readHateFoodMessage, callback);
+  },
 };
 
 module.exports = InputView;

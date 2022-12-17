@@ -3,6 +3,7 @@ class MenuRecommend {
   #coachConstructor;
   #menuList;
   #menuRecommendRecorder;
+  #coaches = [];
   constructor(configuration) {
     const {
       categoryRecorder,
@@ -16,7 +17,12 @@ class MenuRecommend {
     this.#menuList = menuList;
     this.#menuRecommendRecorder = menuRecommendRecorder;
   }
-  registerCoaches(coaches) {}
+  registerCoaches(coachesNames) {
+    for (const name of coachesNames) {
+      let coach = new this.#coachConstructor(name);
+      this.#coaches.push(coach);
+    }
+  }
   registerHateFoods(foods) {}
   recommendMenus() {}
 }
