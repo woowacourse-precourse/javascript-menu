@@ -1,4 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
+const { MAX, DAYS } = require("../constants/constants");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -7,12 +8,6 @@ const SAMPLE = {
   아시안:
     "팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜",
   양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
-};
-
-const s = {
-  1: "2,3,4,5,6",
-  2: "a,b,c,d,e",
-  3: "f,g,h,i",
 };
 
 class Recommend {
@@ -28,15 +23,15 @@ class Recommend {
 
   makeRecommendCategory() {
     let categories = Object.keys(SAMPLE);
-    let rcmCategory = [];
+    let rcmCategory = new Array(1).fill(0);
     let i = 0;
     while (i < 5) {
       const category = categories[Random.pickNumberInRange(1, 5) - 1];
-      if (i == 0) {
+      if (i > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
         rcmCategory.push(category);
         i += 1;
       }
-      if (i > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
+      if (i == 0) {
         rcmCategory.push(category);
         i += 1;
       }
@@ -63,10 +58,14 @@ class Recommend {
 
   checkRcmDishes(idx) {
     let menu = [];
-    let day = 0;
-    while (day < 5) {
+    let day = 1;
+    let idx_menu = [];
+    for (let i = 0; i < MAX; i++) {
+      idx_menu.push(i);
+    }
+    while (day <= DAYS) {
       const dishes = SAMPLE[this.#categories[day]].split(", ");
-      const dish = dishes[Random.pickNumberInRange(1, dishes.length) - 1];
+      const dish = dishes[Random.shuffle(idx_menu)[0] - 1];
       if (
         this.checkHateDish(idx, dish) &&
         this.checkDuplicatedDish(menu, dish)

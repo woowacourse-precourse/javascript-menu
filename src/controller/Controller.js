@@ -2,7 +2,7 @@ const InputView = require("../views/InputView");
 const OutputView = require("../views/OutputView");
 const { Console } = require("@woowacourse/mission-utils");
 const Validator = require("../Validator");
-const Recommend = require("../Recommend");
+const Recommend = require("../model/Recommend");
 
 class Controller {
   #coaches;
@@ -37,7 +37,6 @@ class Controller {
 
   hateHandler(hates) {
     try {
-      //   Validator.validateHates(hates);
       this.makeHates(hates.split(","));
     } catch (error) {
       Console.print(error);
@@ -47,14 +46,12 @@ class Controller {
 
   makeHates(hates) {
     this.#hates.push(hates);
-    console.log(this.#hates);
     this.#idx += 1;
     this.inputHateHandler(this.#idx);
   }
 
   resultHandler() {
     this.recommendDishes();
-    // OutputView.printResult();
   }
 
   recommendDishes() {
