@@ -1,0 +1,13 @@
+class MenuCategory {
+  #index;
+  #category;
+  #menus = [];
+
+  constructor([category, menus, index]) {
+    this.#index = index;
+    this.#category = category;
+    this.#menus = menus.split(',');
+  }
+}
+
+module.exports = MenuCategory;
