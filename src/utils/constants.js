@@ -6,6 +6,14 @@ const ERROR = {
   NUM_DISLIKE_MENU: `${ERROR_PREFIX} 못 먹는 음식은 0개 이상 2개 이하입니다.`,
 };
 
+const MESSAGES = {
+  START: '점심 메뉴 추천을 시작합니다.',
+  GET_COACH_INPUT: '코치의 이름을 입력해 주세요. (, 로 구분)',
+  GET_DISLIKE_MENU: '(이)가 못 먹는 메뉴를 입력해 주세요.',
+  RESULT: '메뉴 추천 결과입니다.',
+  END: '추천을 완료했습니다.',
+};
+
 const CATEGORIES = ['일식', '한식', '중식', '아시안', '양식'];
 
 const MENUS = [
@@ -38,4 +46,4 @@ const MENUS = [
 
 const DAYS = ['구분', '월요일', '화요일', '수요일', '목요일', '금요일'];
 
-module.exports = { ERROR, CATEGORIES, MENUS, DAYS };
+module.exports = { ERROR, MESSAGES, CATEGORIES, MENUS, DAYS };

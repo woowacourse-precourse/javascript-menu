@@ -1,8 +1,9 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGES } = require('./utils/constants');
 
 const InputView = {
   readCoachName(callback) {
-    Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)', (name) => {
+    Console.readLine(MESSAGES.GET_COACH_INPUT, (name) => {
       try {
         callback(name);
       } catch (e) {
@@ -12,7 +13,7 @@ const InputView = {
   },
 
   readDislikeMenu(name, callback) {
-    Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.`, (menu) => {
+    Console.readLine(`${name}${MESSAGES.GET_DISLIKE_MENU}`, (menu) => {
       try {
         callback(menu);
       } catch (e) {
