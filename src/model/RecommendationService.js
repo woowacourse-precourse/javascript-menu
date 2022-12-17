@@ -34,6 +34,18 @@ class RecommendationService {
     this.#excludeMenu[index] = menus;
   }
 
+  getCoaches() {
+    return this.#coaches;
+  }
+
+  getMenus() {
+    return this.#menus;
+  }
+
+  getCategoryForEachDay() {
+    return this.#categoryForEachDay;
+  }
+
   choiceCategoryForWeek() {
     const selectedCategories = [this.randomChoiceCategory()];
     while (selectedCategories.length < 5) {
