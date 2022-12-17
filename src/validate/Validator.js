@@ -18,8 +18,15 @@ class Validator {
     });
   }
 
-  checkSeperator() {
+  checkSeperator(coachMembers) {
     // 콤마가 구분자가 아닌 경우 예외처리
+  }
+
+  checkUnableToEatMenuLength(unableToEatMenu) {
+    if (unableToEatMenu.split(',').length > MEMBER.maxUnableToEatMenuLength) {
+      throw ERROR_MESSAGES.invalidUnableToEatMenuLength;
+    }
+    return true;
   }
 }
 
