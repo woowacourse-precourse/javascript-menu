@@ -5,10 +5,10 @@ const OutputView = {
     Console.print('점심 메뉴 추천을 시작합니다.');
     OutputView.printNewLine();
   },
-  printRecommandTitle() {
+  printRecommandTitle(courseNumbers) {
     Console.print('메뉴 추천 결과입니다.');
     Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
-    Console.print('[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]');
+    Console.print(`[ ${courseNumbers} ]`);
   },
   printRecommand(recommand) {
     Console.print(`[ ${recommand} ]`);

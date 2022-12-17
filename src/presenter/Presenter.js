@@ -13,7 +13,7 @@ const {
   checkNameLength,
 } = require('../utils/InputValidator');
 const Coach = require('../model/Coach');
-const recommandFood = require('../utils/FoodRecommandation');
+const { recommandFood, makeCourseNumbers } = require('../utils/FoodRecommandation');
 
 class Presenter {
   #coaches = [];
@@ -67,10 +67,16 @@ class Presenter {
   }
 
   #result() {
-    printRecommandTitle();
+    const COURSE = ['일식', '한식', '중식', '아시안', '양식'];
+    const courseNumbers = makeCourseNumbers();
+    const courseFormat = ['카테고리'];
+    courseNumbers.forEach((number) => {
+      courseFormat.push(COURSE[number - 1]);
+    });
+    printRecommandTitle(courseFormat.join(' | '));
     this.#coaches.forEach((coach) => {
       const { name, excludeFood } = coach.getCoach();
-      const format = [name, ...recommandFood(excludeFood)];
+      const format = [name, ...recommandFood(courseNumbers, excludeFood)];
       printRecommand(format.join(' | '));
     });
     printNewLine();

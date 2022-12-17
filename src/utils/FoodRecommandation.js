@@ -26,21 +26,16 @@ const makeCourseNumbers = () => {
   return courseNumbers;
 };
 
-const courseNumbers = makeCourseNumbers();
-
-const recommandFood = (excludeFood) => {
+const recommandFood = (courseNumbers, excludeFood) => {
   const recommand = [];
   courseNumbers.forEach((courseNumber) => {
     const menus = Object.values(CATEGORIES)[courseNumber - 1].split(', ');
-    const menuNumber = Random.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9])[0];
-    const exception = excludeFood + recommand;
-    if (!exception.includes(menus[menuNumber - 1])) {
-      recommand.push(menus[menuNumber - 1]);
+    const number = Random.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9])[0];
+    if (!excludeFood.includes(menus[number - 1]) || !recommand.includes(menus[number - 1])) {
+      recommand.push(menus[number - 1]);
     }
   }, []);
   return recommand;
 };
 
-module.exports = recommandFood;
-
-// console.log(recommandFood('asdas'));
+module.exports = { recommandFood, makeCourseNumbers };
