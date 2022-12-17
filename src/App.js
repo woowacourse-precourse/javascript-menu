@@ -17,6 +17,10 @@ const SAMPLE = {
 };
 
 class App {
+  constructor() {
+    this.step = 0;
+  }
+
   play() {
     Console.print(START_MESSAGE);
     this.getCoachName();
@@ -30,24 +34,37 @@ class App {
 
   changeCoachNameToArray(coachNames) {
     const nameSplit = coachNames.split(',');
-    const nameArray = Array.from(nameSplit);
+    this.nameArray = Array.from(nameSplit);
+    this.nameArrayLength = this.nameArray.length;
 
-    this.validateCoachName(nameArray);
+    this.validateCoachName(this.nameArray);
   }
 
   validateCoachName(nameArray) {
     try {
       checkValidateCoach(nameArray);
       checkValidateCoachNames(nameArray);
-
-      this.getNotEatMenu();
+      this.moveName();
     } catch (error) {
       Console.print(error);
       this.getCoachName();
     }
   }
 
-  getNotEatMenu() {}
+  moveName() {
+    if (this.nameArray[this.step] === undefined) {
+      console.log('끝');
+    } else {
+      this.getNotEatMenu(this.nameArray[this.step]);
+    }
+  }
+
+  getNotEatMenu(name) {
+    Console.readLine(NOT_EAT_MENU(name), menu => {
+      this.step += 1;
+      this.moveName();
+    });
+  }
 
   // getCategories() {
   //   const categoriesNumber = Random.pickNumberInRange(1, 5);
