@@ -23,6 +23,19 @@ const INPUT_MESSAGE = {
   MENU: '(이)가 못 먹는 메뉴를 입력해 주세요.\n',
 }
 
+const ERROR = {
+  MENU: {
+    COUNT: '[ERROR] 못 먹는 메뉴는 2개 이하여야만 합니다.',
+    INVALID: '[ERROR] 존재하지 않는 메뉴를 입력하셨습니다.',
+    DUP: '[ERROR] 중복된 메뉴를 입력하셨습니다.',
+  },
+  NAME: {
+    COUNT: '[ERROR] 코치의 숫자는 2명 이상, 5명 이하여야만 합니다.',
+    INVALID: '[ERROR] 코치의 이름은 2글자 이상, 4글자 이하여야만 합니다.',
+    DUP: '[ERROR] 코치의 이름은 중복되면 안됩니다.'
+  },
+}
+
 const CATEGORIES = new Map()
 CATEGORIES.set(1, '일식')
 CATEGORIES.set(2, '한식')
@@ -113,7 +126,7 @@ function chooseCategory() {
 
 function menusCntValid(menus) {
   if(menus.length > 2) {
-    throw new Error('[ERROR] 못먹는 메뉴가 너무 많음')
+    throw new Error(ERROR.MENU.COUNT)
   }
 }
 
@@ -124,14 +137,14 @@ function menuIsValid(menu) {
     if(menuArr.includes(menu)) isValid = true
   })
   if(isValid === false) {
-    throw new Error('[ERROR] 존재하지 않는 메뉴')
+    throw new Error(ERROR.MENU.INVALID)
   }
 }
 
 function menuIsDup(menus) {
   const menuSet = new Set(menus)
   if(menuSet.size !== menus.length) {
-    throw new Error('[ERROR] 중복된 메뉴 존재')
+    throw new Error(ERROR.MENU.DUP)
   }
 }
 
@@ -153,7 +166,7 @@ function inputCantEat(idx) {
       BannedMenu[name] = cantEatArray.slice()
       return cantEat(idx+1)
     } catch(error) {
-      Console.print(error)
+      Console.print(error.message)
       return inputCantEat(idx)
     }
   }))
@@ -170,20 +183,20 @@ function cantEat(idx) {
 
 function namesCntValid(names) {
   if(names.length < 2 || names.length > 5) {
-    throw new Error('[ERROR] 코치 숫자가 안맞음')
+    throw new Error(ERROR.NAME.COUNT)
   }
 }
 
 function nameIsValid(name) {
   if(name.length < 2 || name.length > 4) {
-    throw new Error('[ERROR] 코치 이름이 유효하지 않음');
+    throw new Error(ERROR.NAME.INVALID);
   }
 }
 
 function nameIsDup(names) {
   const nameSet = new Set(names)
   if(nameSet.size !== names.length) {
-    throw new Error('[ERROR] 중복된 코치 이름 존재')
+    throw new Error(ERROR.NAME.DUP)
   }
 }
 
@@ -210,7 +223,7 @@ function inputCoachNames() {
       const names = namesAreValid(answer)
       return namesToConst(names)
     } catch(error) {
-      Console.print(error)
+      Console.print(error.message)
       return inputCoachNames()
     }
   }))
