@@ -9,6 +9,7 @@ const Validation = {
       throw new Error("코치는 최소 2명 최대 5명이어야 합니다.");
     if (new Set([...names]).size !== names.length)
       throw new Error("중복된 코치 이름이 있습니다.");
+    return names;
   },
 };
 
