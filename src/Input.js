@@ -9,7 +9,7 @@ const Input = {
                 this.nameValidate(names.split(","))
                 callback(names.split(","));
             } catch (error) {
-                Output.Error(error.message);
+                Output.Error(error);
                 this.requestName(callback);
             }
         })
@@ -18,18 +18,18 @@ const Input = {
     nameValidate(names) { //arr
         if (names.length < COACH.MIN || names.length > COACH.MAX) throw new Error(MESSAGE.ERROR_COACH_COUNT);
         names.forEach(name => {
-            if (name.length < NAME.MIN || name.length > NAME.MAX) throw new Error(MESSAGE.ERROR_COACH_COUNT);
+            if (name.length < NAME.MIN || name.length > NAME.MAX) throw new Error(MESSAGE.ERROR_COACH_NAME);
         })
     },
 
-    requestNotEat(name, callback) {
+    requestNotEat(name, i, callback) {
         Console.readLine(`${name}${MESSAGE.INPUT_NOTEAT}`, (foods) => {
             try {
                 this.NotEatValidate(foods.split(","))
-                callback(foods.split(","));
+                callback(i, foods.split(","));
             } catch (error) {
-                Output.Error(error.message);
-                this.requestNotEat(callback);
+                Output.Error(error);
+                this.requestNotEat(name, i, callback);
             }
         })
     },

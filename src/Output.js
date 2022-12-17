@@ -12,12 +12,12 @@ const Output = {
     },
 
     endBody([coachName, menu]) {
-        menu.shift(coachName);
-        const printMenu = coachMenu.join(" | ")
-        Console.print(`[ ${printMenu.join(" | ")} ]`)
+        menu.unshift(coachName);
+        const printMenu = menu.join(" | ")
+        Console.print(`[ ${printMenu} ]`)
     },
 
-    endHead() {
+    endtail() {
         Console.print(MESSAGE.END_SECOND);
         Console.close();
     },
