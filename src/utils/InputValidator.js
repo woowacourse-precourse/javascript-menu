@@ -46,7 +46,7 @@ class InputValidator extends Validator {
 
   static isValidFood(food) {
     for (let idx = CATEGORY.min; idx <= CATEGORY.max; idx++) {
-      if (MENUS[CATEGORY[idx]].has(food)) return true;
+      if (MENUS[CATEGORY[idx]].includes(food)) return true;
     }
     return false;
   }
