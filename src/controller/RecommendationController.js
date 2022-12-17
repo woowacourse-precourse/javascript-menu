@@ -10,4 +10,4 @@ class RecommendationController {
   }
 }
 
-module.exports = RecommendationModel;
+module.exports = RecommendationController;
