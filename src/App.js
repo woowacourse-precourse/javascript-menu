@@ -1,7 +1,6 @@
 const Category = require("./model/Category.js");
 const Coach = require("./model/Coach.js");
 const CouchMenu = require("./model/CouchMenu.js");
-const { makeCategory } = require("./utils/CategoryMaker.js");
 const InputView = require("./view/InputView.js");
 const OutputView = require("./view/OutputView.js");
 
@@ -62,6 +61,23 @@ class App {
         this.#coachMenus[j].updateMenu(category);
       }
     }
+    const strWithSideSpace = (str) => " " + str + " ";
+
+    const result = this.#coachMenus
+      .map(
+        (coachMenu) =>
+          "[" +
+          strWithSideSpace(coachMenu.getCoachName()) +
+          coachMenu
+            .getMenus()
+            .map((menu) => "|" + strWithSideSpace(menu))
+            .join("") +
+          "]"
+      )
+      .join("\n");
+
+    OutputView.printResult(result);
+    InputView.close();
   }
 
   #updateCategory() {
