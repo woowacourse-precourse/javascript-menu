@@ -16,6 +16,16 @@ class Coach {
     return this.#name;
   }
 
+  isMe(coachName) {
+    return this.#name === coachName;
+  }
+
+  addDislikeFoods(dislikeFoods) {
+    dislikeFoods
+      .split(',')
+      .forEach((dislikeFood) => this.#dislikeFoods.push(dislikeFood));
+  }
+
   static validationCoachNames(coachNames) {
     try {
       CoachNameValidator.validation(coachNames);

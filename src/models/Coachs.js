@@ -7,10 +7,11 @@ class Coachs {
     this.#list.push(new Coach(coachName));
   }
 
-  addDislikeFoods(coach, dislikeFoods) {
+  addDislikeFoods(coachName, dislikeFoods) {
     if (dislikeFoods === '') return console.log('다 잘 먹어요!');
 
-    console.log(`${coach}는 ${dislikeFoods}를 못 먹어요!`);
+    const coach = this.#list.filter((coach) => coach.isMe(coachName))[0];
+    coach.addDislikeFoods(dislikeFoods);
   }
 
   getCoachsName() {

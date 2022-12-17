@@ -23,7 +23,10 @@ class Gategorys {
   }
 
   #addAllMenus(menus) {
-    menus.split(',').forEach((menu) => this.#allMenus.push(menu));
+    menus.split(',').forEach((menu) => {
+      if (menu[0] === ' ') menu = menu.slice(1);
+      this.#allMenus.push(menu);
+    });
   }
 }
 

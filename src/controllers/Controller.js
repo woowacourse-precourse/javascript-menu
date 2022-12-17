@@ -48,8 +48,8 @@ class Controller {
     );
     if (!isValid) return this.requestDislikeFoods();
 
-    const coach = this.#coachNames.shift();
-    this.#coachs.addDislikeFoods(coach, dislikeFoods);
+    const coachName = this.#coachNames.shift();
+    this.#coachs.addDislikeFoods(coachName, dislikeFoods);
     if (this.#coachNames.length > 0) return this.requestDislikeFoods();
   }
 }
