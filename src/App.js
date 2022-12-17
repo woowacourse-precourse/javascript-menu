@@ -2,7 +2,6 @@ const { Random } = require('@woowacourse/mission-utils');
 
 const OutputUI = require('./view/OutputUI');
 const InputUI = require('./view/InputUI');
-const Vaildator = require('./util/vaildator');
 const Coach = require('./Coach');
 const InputProcessor = require('./util/InputProcessor');
 const Food = require('./Food');
@@ -11,10 +10,10 @@ const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
 const { checkValid } = require('./util/ErrorChecker');
 const {
-  isVaildCoachNumber,
-  isVaildDislikeFoodsLength,
-  isVaildNameLength,
-} = require('./util/vaildator');
+  isValidCoachNumber,
+  isValidDislikeFoodsLength,
+  isValidNameLength,
+} = require('./util/Validator');
 
 class App {
   constructor() {
@@ -37,14 +36,14 @@ class App {
     try {
       checkValid(
         coachNames,
-        isVaildCoachNumber,
+        isValidCoachNumber,
         '[ERROR]: 유효 범위에 맞지 않은 입력입니다.'
       );
     } catch (error) {
       this.output.print(error.message);
       this.input.readLine(this.inputCoachs.bind(this));
     }
-    if (!coachNames.every(isVaildNameLength)) {
+    if (!coachNames.every(isValidNameLength)) {
     }
 
     coachNames.forEach((coachname) => {
@@ -76,7 +75,7 @@ class App {
     try {
       checkValid(
         inputFoods,
-        isVaildDislikeFoodsLength,
+        isValidDislikeFoodsLength,
         '[ERROR]: 올바르지 않는 입력입니다.'
       );
     } catch (error) {

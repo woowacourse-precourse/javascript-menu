@@ -1,15 +1,15 @@
-const Vaildator = {
-  isVaildNameLength(name) {
+const Validator = {
+  isValidNameLength(name) {
     return name.length >= 2 && name.length <= 4;
   },
 
-  isVaildCoachNumber(coachs) {
+  isValidCoachNumber(coachs) {
     return coachs.length >= 2 && coachs.length <= 5;
   },
 
-  isVaildDislikeFoodsLength(dislikeFoods) {
+  isValidDislikeFoodsLength(dislikeFoods) {
     return dislikeFoods.length <= 2;
   },
 };
 
-module.exports = Vaildator;
+module.exports = Validator;
