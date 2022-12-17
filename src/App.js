@@ -97,7 +97,7 @@ class App {
       const values = SAMPLE[`${category}`].split(", ");
       for (let coach = 0; coach < this.names.length; coach++) {
         let select = this.selectedMenu(values, coach);
-        this.addSelectedMenu(index, select);
+        this.result[coach].push(select);
       }
     }
   }
@@ -109,17 +109,6 @@ class App {
       return this.selectedMenu(values, coach);
     }
     return menu;
-  }
-
-  addSelectedMenu(index, select) {
-    for (let name = 0; name < this.names.length; name++) {
-      for (let count = 0; count < 5; count++) {
-        if (this.names[name] == index) {
-          this.result[name].push(select);
-        }
-      }
-    }
-    console.log(this.result);
   }
 }
 
