@@ -55,15 +55,19 @@ class App {
     this.coachs.getCoachName().forEach((coachName) => {
       this.#categorys.get().forEach((categoryName) => {
         let ateMenu = this.getEatMenu(categoryName);
-        while (
-          this.coachs.isAteMenu(coachName, ateMenu) ||
-          this.coachs.isNotEatMenu(coachName, ateMenu)
-        ) {
+        while (this.isInputEatMenu(coachName, ateMenu)) {
           ateMenu = this.getEatMenu(categoryName);
         }
         this.coachs.setAteMenu(coachName, ateMenu);
       });
     });
+  }
+
+  isInputEatMenu(coachName, ateMenu) {
+    return (
+      this.coachs.isAteMenu(coachName, ateMenu) ||
+      this.coachs.isNotEatMenu(coachName, ateMenu)
+    );
   }
 
   getEatMenu(categoryName) {
