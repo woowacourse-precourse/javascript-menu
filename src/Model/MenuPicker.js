@@ -6,7 +6,6 @@ class MenuPicker {
   static recommend(noMenu, category, samples) {
     return this.makeMenuList(noMenu, category, samples);
   }
-
   static makeMenuList(noMenu, category, samples) {
     const menus = [];
 

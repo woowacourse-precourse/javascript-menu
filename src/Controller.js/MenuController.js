@@ -17,12 +17,10 @@ class MenuController {
     this.readCoaches();
   }
 
-  // 코치 이름 입력받기
   readCoaches() {
     InputView.readCoachNames(this.validateCoach.bind(this));
   }
 
-  // 유효성 검사
   validateCoach(names) {
     try {
       Validate.names(names);
@@ -33,13 +31,11 @@ class MenuController {
     }
   }
 
-  // 코치 생성
   createCoach(names) {
     Coach.create(names);
     this.getCurrentCoachName();
   }
 
-  // 코치 이름 받기(카운팅)
   getCurrentCoachName() {
     const coachName = Coach.getName();
     this.readNoMenu(coachName);
@@ -49,7 +45,6 @@ class MenuController {
     InputView.readNoMenu(coachName, this.validateMenu.bind(this));
   }
 
-  // 못 먹는 메뉴 선정
   validateMenu(menus) {
     try {
       Validate.noMenu(menus);
