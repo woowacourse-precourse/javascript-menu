@@ -23,18 +23,30 @@ const Names = []
 const Categories = []
 const Recommended = []
 
-function printCategories() {
-  Console.print('[ ')
-  Categories.forEach((category) => {
-    Console.print(`| ${category}`)
+function makePrintRecommended(idx) {
+  const toPrint = [`[ ${Names[idx]} `]
+  Recommended[idx].forEach((menu) => {
   })
-  Console.print(' ]')
+}
+
+function printCategories(toPrint) {
+  Console.print(toPrint)
+  return makePrintRecommended(0)
+}
+
+function makePrintCategories() {
+  const toPrint = ['[ 카테고리 ']
+  Categories.forEach((category) => {
+    toPrint.push(`| ${category} `)
+  })
+  toPrint.push((']'))
+  return printCategories(toPrint.join(''))
 }
 
 function printResult() {
   Console.print('메뉴 추천 결과입니다.')
   Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]')
-  return printCategories()
+  return makePrintCategories()
 }
 
 function getMenu(idx, date) {
