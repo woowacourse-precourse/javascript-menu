@@ -5,18 +5,17 @@ const Validation = require('../Validation');
 
 const InputView = {
   readCoachesName(callback) {
-    Console.readLine(`${GAME_MESSAGE.inputCoachesName}\n`, (names) => {
-      const check = InputErrorHandler(
-        () => Validation.name(names),
-        InputView.readCoachesName,
-        callback
-      );
-      if (check) return callback(names);
+    Console.readLine(`${GAME_MESSAGE.inputCoachesName}\n`, (coachesName) => {
+      const check = InputErrorHandler(Validation.coachAndName, coachesName);
+      if (check) return callback(coachesName);
+      return InputView.readCoachesName(callback);
     });
   },
   readDontLikeMenu(name, callback) {
     Console.readLine(GAME_MESSAGE.showDontLikeMenu(name), (menus) => {
-      return callback(menus);
+      const check = InputErrorHandler(Validation.menu, menus);
+      if (check) return callback(name, menus);
+      return InputView.readDontLikeMenu(name, callback);
     });
   },
 };

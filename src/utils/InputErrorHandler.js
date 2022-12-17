@@ -1,12 +1,11 @@
 const { Console } = require('@woowacourse/mission-utils');
 
-const InputErrorHandler = (validate, catchFunc, nextFunc) => {
+const InputErrorHandler = (validate, input) => {
   try {
-    validate();
+    validate(input);
     return true;
   } catch ({ message }) {
     Console.print(message);
-    catchFunc(nextFunc);
     return false;
   }
 };
