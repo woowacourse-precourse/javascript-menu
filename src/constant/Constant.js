@@ -66,6 +66,8 @@ const MENUS = Object.freeze({
   ],
 });
 
+const MENU_NUMBERS = Array.from({ length: 9 }, (_, idx) => idx + 1);
+
 const WEEK = Object.freeze({
   SEP: "구분",
   MON: "월요일",
@@ -106,6 +108,7 @@ module.exports = {
   CATEGORY,
   CATEGORIES,
   MENUS,
+  MENU_NUMBERS,
   WEEK,
   RESULT_ELEMENT,
   OUTPUT_MESSAGE,

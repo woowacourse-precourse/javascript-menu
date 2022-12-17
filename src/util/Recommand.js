@@ -1,7 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
-const { CATEGORIES, MENUS } = require("../constant/Constant");
-
-const menuNumbers = Array.from({ length: 9 }, (_, idx) => idx + 1);
+const { CATEGORIES, MENUS, MENU_NUMBERS } = require("../constant/Constant");
 
 const Recommand = {
   selectCategory() {
@@ -10,7 +8,7 @@ const Recommand = {
   },
 
   selectMenu(category) {
-    const menuNumber = Random.shuffle(menuNumbers)[0];
+    const menuNumber = Random.shuffle(MENU_NUMBERS)[0];
     const menu = MENUS[category][menuNumber - 1];
     return menu;
   },
