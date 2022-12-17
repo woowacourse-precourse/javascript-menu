@@ -112,7 +112,4 @@ class App {
   }
 }
 
-// TODO: Remove this
-new App().play();
-
 module.exports = App;
