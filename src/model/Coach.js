@@ -35,6 +35,10 @@ class Coach {
   setRecommended(menu) {
     this.#recommended.push(menu);
   }
+
+  getRecommended() {
+    return this.#recommended;
+  }
 }
 
 module.exports = Coach;

@@ -64,6 +64,9 @@ class RecommendController {
     for (let i = 0; i < 5; i++) {
       this.recommendCategory();
     }
+    this.#coaches.forEach((coach) => {
+      IO.output(coach.getRecommended());
+    });
   }
 
   checkValidCategory(categoryNum, categoryMenus) {
@@ -78,9 +81,9 @@ class RecommendController {
     const categoryMenus = this.#menus.getCategory(randomNum);
     if (this.checkValidCategory(randomNum, categoryMenus)) {
       this.#categories.push(this.#menus.getCategory(randomNum));
-      this.#coaches.forEach((coach) =>
-        this.insertRecommendToCoach(categoryMenus, coach),
-      );
+      this.#coaches.forEach((coach) => {
+        this.insertRecommendToCoach(categoryMenus, coach);
+      });
     }
   }
 
