@@ -49,7 +49,8 @@ describe('점심 메뉴 테스트', () => {
 	});
 
 	describe('전체 기능 테스트', () => {
-		test('카테고리 메뉴 중복 없는 추천', () => {
+		
+		test('카테고리 메뉴 중복 없는 추천(2인)', () => {
 			const logSpy = getLogSpy();
 
 			mockRandoms([2, 5, 1, 3, 4]);
@@ -90,5 +91,311 @@ describe('점심 메뉴 테스트', () => {
 				),
 			);
 		});
+		
+		test('카테고리 메뉴 중복 없는 추천(5인)', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([1, 2, 3, 4, 5]);
+			mockQuestions(['구구,팔팔,칠칠,육육,오오', '', '', '', '', '',]);
+
+			const sequenced = (_, idx) => idx + 1;
+			mockShuffles([
+				// 구구
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+
+				// 팔팔
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+
+				// 칠칠
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+
+				// 육육
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+
+				// 오오
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+			]);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expect(log.replace(/\n/g, '')).toEqual(
+				expect.stringContaining(
+					[
+						'점심 메뉴 추천을 시작합니다.',
+						'메뉴 추천 결과입니다.',
+						'[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+						'[ 카테고리 | 일식 | 한식 | 중식 | 아시안 | 양식 ]',
+						'[ 구구 | 규동 | 김밥 | 깐풍기 | 팟타이 | 라자냐 ]',
+						'[ 팔팔 | 규동 | 김밥 | 깐풍기 | 팟타이 | 라자냐 ]',
+						'[ 칠칠 | 규동 | 김밥 | 깐풍기 | 팟타이 | 라자냐 ]',
+						'[ 육육 | 규동 | 김밥 | 깐풍기 | 팟타이 | 라자냐 ]',
+						'[ 오오 | 규동 | 김밥 | 깐풍기 | 팟타이 | 라자냐 ]',
+						'추천을 완료했습니다.',
+					].join(''),
+				),
+			);
+		});
+
+		test('카테고리 메뉴 중복 있는 추천', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 1]);
+			mockQuestions(['구구,제임스', '김밥', '떡볶이']);
+
+			const sequenced = (_, idx) => idx + 1;
+			mockShuffles([
+				// 구구
+				[2, Array.from({ length: 9 }, sequenced)],
+				[7, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[4, Array.from({ length: 9 }, sequenced)],
+				[2, Array.from({ length: 9 }, sequenced)],
+
+				//제임스
+				[9, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[4, Array.from({ length: 9 }, sequenced)],
+			]);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expect(log.replace(/\n/g, '')).toEqual(
+				expect.stringContaining(
+					[
+						'점심 메뉴 추천을 시작합니다.',
+						'메뉴 추천 결과입니다.',
+						'[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+						'[ 카테고리 | 한식 | 양식 | 일식 | 중식 | 일식 ]',
+						'[ 구구 | 김치찌개 | 스파게티 | 규동 | 짜장면 | 우동 ]',
+						'[ 제임스 | 제육볶음 | 라자냐 | 가츠동 | 짬뽕 | 스시 ]',
+						'추천을 완료했습니다.',
+					].join(''),
+				),
+			);
+		});
+
+		test('카테고리 메뉴 중복(왕창) 있는 추천', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([1, 2, 3, 1, 1, 4]);
+			mockQuestions(['구구,제임스', '김밥', '떡볶이']);
+
+			const sequenced = (_, idx) => idx + 1;
+			mockShuffles([
+				// 구구
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[2, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+
+				//제임스
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[2, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+			]);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expect(log.replace(/\n/g, '')).toEqual(
+				expect.stringContaining(
+					[
+						'점심 메뉴 추천을 시작합니다.',
+						'메뉴 추천 결과입니다.',
+						'[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+						'[ 카테고리 | 일식 | 한식 | 중식 | 일식 | 아시안 ]',
+						'[ 구구 | 규동 | 김밥 | 깐풍기 | 우동 | 팟타이 ]',
+						'[ 제임스 | 규동 | 김밥 | 깐풍기 | 우동 | 팟타이 ]',
+						'추천을 완료했습니다.',
+					].join(''),
+				),
+			);
+		});
+
+		test('메뉴 중복 있는 추천', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 1]);
+			mockQuestions(['구구,제임스', '김밥', '떡볶이']);
+
+			const sequenced = (_, idx) => idx + 1;
+			mockShuffles([
+				// 구구
+				[2, Array.from({ length: 9 }, sequenced)],
+				[7, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[4, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[2, Array.from({ length: 9 }, sequenced)],
+
+				//제임스
+				[9, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[4, Array.from({ length: 9 }, sequenced)],
+			]);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expect(log.replace(/\n/g, '')).toEqual(
+				expect.stringContaining(
+					[
+						'점심 메뉴 추천을 시작합니다.',
+						'메뉴 추천 결과입니다.',
+						'[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+						'[ 카테고리 | 한식 | 양식 | 일식 | 중식 | 일식 ]',
+						'[ 구구 | 김치찌개 | 스파게티 | 규동 | 짜장면 | 우동 ]',
+						'[ 제임스 | 제육볶음 | 라자냐 | 가츠동 | 짬뽕 | 스시 ]',
+						'추천을 완료했습니다.',
+					].join(''),
+				),
+			);
+		});
 	});
+
+	describe('입력 예외 처리 테스트', () => {
+		test('코치 인원이 2명 미만일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+		
+		test('코치 인원이 5명 초과일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구,팔팔,칠칠,육육,오오,사사', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+		
+		test('코치 이름이 2글자 미만일때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+
+		test('코치 이름이 4글자 초과일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구구구구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+
+		test('각 코치가 못먹는 음식이 2개 초과일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구', '구구,제임스', '스시,김밥,짜장면']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+
+		test('각 코치가 못먹는 음식이 중복될 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구', '구구,제임스', '스시,스시']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+
+		test('각 코치가 못먹는 음식이 메뉴에 존재하지 않을 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구', '구구,제임스', '딸기빙수']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+	});
+
 });
