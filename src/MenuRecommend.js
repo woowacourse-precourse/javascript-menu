@@ -27,13 +27,20 @@ class MenuRecommend {
     getCategory(day) {
         return this.#category[day]
     }
+    
+    getCategoryArray() {
+        const categoryArray = []
+        for (let key in this.#category) {
+            categoryArray.push(this.#category[key])
+        }
+        return categoryArray
+    }
 
     setCategory(day) {
         const categoryName = MakeRandomCategory.createCategory(MakeRandomCategory.generateRandomNum())
         if (this.#categoryCnt[categoryName] < 2) {
             this.#category[day] += categoryName
             this.#categoryCnt[categoryName] += 1
-            console.log(this.#category)
         } else {
             this.setCategory(day)
         }

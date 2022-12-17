@@ -32,8 +32,13 @@ class Coachs {
         this.#coachMenu[coach].push(food)
     }
 
-    isNotEatFood(coach, food) {
-        return this.#notEat[coach].includes(food)
+    isNotEatFood(index, food) {
+        console.log(this.#notEat[this.#coachs[index]].includes(food), "tf")
+        return this.#notEat[this.#coachs[index]].includes(food)
+    }
+
+    isNotContained(index, food) {
+        return this.#coachMenu[this.#coachs[index]].includes(food)
     }
 
 }

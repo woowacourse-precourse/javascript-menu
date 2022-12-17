@@ -3,7 +3,6 @@ const OutputView = require("./OutputView");
 const  {Console} = require("@woowacourse/mission-utils");
 const Coachs = require("./Coachs");
 const MenuRecommend = require("./MenuRecommend");
-const MakeRandomCategory = require("./MakeRandomCategory");
 const {Random} = require("@woowacourse/mission-utils")
 
 
@@ -14,7 +13,7 @@ const SAMPLE = {
 	아시안:
 		'팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-};
+}
 
 const MENUS = {
 	일식: ["규동", "우동", "미소시루", "스시", "가츠동", "오니기리", "하이라이스", "라멘", "오코노미야끼"],
@@ -25,13 +24,7 @@ const MENUS = {
 	양식: ["라자냐", "그라탱", "뇨끼", "끼슈", "프렌치 토스트", "바게트", "스파게티", "피자", "파니니"],
 };
 
-const menu = {
-	일식: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-	일식: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-	일식: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-	일식: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-	일식: [0,1,2,3,4,5,6,7,8]
-}
+
 
 class App {
 	play() {
@@ -61,7 +54,6 @@ class App {
 					
 				}
 				this.getResults(menu, coachs)
-		// this.getResults(menu, coachs)
 
 			}
 		})
@@ -72,18 +64,20 @@ class App {
 		const currentCategory = menu.getCategory(i)
 		this.getRandomMenu(coachs, currentCategory)
 	}
-
+	
 	getRandomMenu(coachs,currentCategory) {
 		coachs.getCoachs().forEach((coach, index) => {
-			const menuIndex = Random.shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8])[0]
-		console.log(currentCategory, "current")
-
-			if (coachs.isNotEatFood(coachs.getCoachs()[index], MENUS[currentCategory][menuIndex])) {
-				this.getRandomMenu(coachs,currentCategory)
-			} else {
-				coachs.addCoachMenu(coach,MENUS[currentCategory][menuIndex])
-			}
+			this.checkMenu(coachs, coach, currentCategory, index)
 		});
+	}
+
+	checkMenu(coachs, coach, currentCategory, index) {
+		let menuIndex = Random.shuffle(SAMPLE[currentCategory])[0] - 1
+		if (coachs.isNotEatFood(index, MENUS[currentCategory][menuIndex]) || coachs.isNotContained(index, MENUS[currentCategory][menuIndex])) {
+			this.checkMenu(coachs,currentCategory,currentCategory,index)
+		} else {
+			coachs.addCoachMenu(coach,MENUS[currentCategory][menuIndex])
+		}
 	}
 
 	getResults(menu, coachs) {
