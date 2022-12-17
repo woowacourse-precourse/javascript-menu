@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { Console } = MissionUtils;
+const { Console, Random } = MissionUtils;
 const InputView = require('./InputView');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -12,10 +12,11 @@ const SAMPLE = {
 
 class App {
   #coachNameArray;
-  // #coachCannotEatFoodArray;
+  #categoriesArray;
+
   constructor() {
     this.#coachNameArray = [];
-    // this.#coachCannotEatFoodArray = [];
+    this.#categoriesArray = [];
   }
 
   printGameStart() {
@@ -25,7 +26,7 @@ class App {
   play() {
     this.printGameStart();
     this.#coachNameArray = InputView.getCoachNameArray();
-    //console.log(this.#coachNameArray);
+
     for (let i = 0; i < this.#coachNameArray.length; i++) {
       let coachCannotEatFoodArray = InputView.getCoachCannotEatFoodsArray(
         this.#coachNameArray[i]
@@ -35,6 +36,21 @@ class App {
         this.#coachNameArray[i] += `+${coachCannotEatFoodArray[j]}`;
       }
     }
+
+    this.makeCategoriesArray();
+
+    console.log(this.#categoriesArray);
+  }
+
+  makeCategoriesArray() {
+    do {
+      const categoryRandom = Random.pickNumberInRange(1, 5);
+      let duplicationCount = this.#categoriesArray.filter(
+        element => categoryRandom === element
+      ).length;
+      if (duplicationCount <= 2) this.#categoriesArray.push(categoryRandom);
+      else this.makeCategoriesArray();
+    } while (this.#categoriesArray.length < 5);
   }
 }
 
