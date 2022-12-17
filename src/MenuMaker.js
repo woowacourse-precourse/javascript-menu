@@ -1,0 +1,3 @@
+class MenuMaker {
+  constructor() {}
+}
