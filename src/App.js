@@ -34,7 +34,11 @@ class App {
     this.coachs.setCoachNotEatMenu("구구", "김밥");
     this.coachs.setCoachNotEatMenu("제임스", "떡볶이");
 
-    this.decideCategory();
+    Array.from({ length: 5 }).forEach(() => {
+      this.decideCategory();
+    });
+
+    this.printResultRecommendMenu();
   }
 
   decideCategory() {
@@ -71,6 +75,13 @@ class App {
       Array.from({ length: 9 }, (_, i) => i)
     )[0];
     return SAMPLE[categoryName].split(",")[randomNumber];
+  }
+
+  printResultRecommendMenu() {
+    OutputView.printResultRecommendMenu(
+      this.categorysCount,
+      this.coachs.getCoachs()
+    );
   }
 }
 

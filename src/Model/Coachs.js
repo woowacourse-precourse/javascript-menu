@@ -6,6 +6,10 @@ class Coachs {
     });
   }
 
+  getCoachs() {
+    return this.#coachs;
+  }
+
   getCoachName() {
     return Object.keys(this.#coachs);
   }
@@ -26,7 +30,7 @@ class Coachs {
 
   setAteMenu(coachName, ateMenu) {
     this.#coachs[coachName].ateMenu.push(ateMenu);
-    console.log(this.#coachs[coachName].ateMenu);
+    console.log(this.#coachs[coachName].ateMenu, coachName);
   }
 }
 
