@@ -27,18 +27,15 @@ class Crew {
     this.canNotEat = notEatList;
   }
 
-  // getMenu() {
-  //   return this.menu;
-  // }
-
   setMenu(category) {
-    const random = MissionUtils.Random
+    const menu = category;
+    const random = MissionUtils.Random;
     const sameCategory = this.menu.category.filter(menu => menu === category);
 
     if (sameCategory.length === Constant.NOT_EAT_MAX) {
-      category = CATEGORY[random.pickNumberInRange(Constant.ONE, Constant.FIVE)];
-      return this.setMenu(category);
-    } else this.menu.category.push(category);
+      menu = CATEGORY[random.pickNumberInRange(Constant.ONE, Constant.FIVE)];
+      return this.setMenu(menu);
+    } else this.menu.category.push(menu);
   }
 
   setDetailMenu() {

@@ -5,6 +5,8 @@ const Utils = require('./Utils');
 const MissionUtils = require('@woowacourse/mission-utils');
 const { CATEGORY, DAY } = require('./Sample');
 const Constant = require('./Constant');
+const ErrorHandler = require('./ErrorHandler');
+const Validate = require('./Validate');
 
 class MenuController {
   crews = [];
@@ -22,6 +24,10 @@ class MenuController {
   }
 
   makingCrews(names) {
+    // const makeCewFn = names => this.makingCrews(names);
+    // const errorCallback = () => this.inputView.readCrewNames(makeCewFn);
+    // const validTarget = () => Validate.crewName(names);
+    // ErrorHandler.crewNames(validTarget, errorCallback);
     const crewList = Utils.stringConvertor(names);
     crewList.forEach(name => this.crews.push(new Crew(name)));
 
@@ -52,15 +58,14 @@ class MenuController {
   }
 
   print() {
-    this.outputView.print('메뉴 추천 결과입니다.');
-    this.outputView.print(
-      '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
-    );
+    this.outputView.print(Constant.MENU_RESULT);
+    this.outputView.print(Constant.DAYS);
+
     const category = this.crews[0].getCategory();
     this.outputView.print(`[ 카테고리 | ${category} ]`);
 
     this.crews.forEach(crew => crew.printMenu(this.outputView.print));
-    this.outputView.printEnd('추천을 완료했습니다.');
+    this.outputView.printEnd(Constant.END_RECOMAND);
     MissionUtils.Console.close();
   }
 }
