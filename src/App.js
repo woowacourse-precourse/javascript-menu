@@ -19,7 +19,6 @@ class App {
     this.foodList = [];
     this.category = [];
     this.selectedCategory = [];
-    this.selectedMenu = [];
   }
 
   play() {
@@ -78,7 +77,6 @@ class App {
       }
       this.category.push(category);
     }
-    console.log(this.category);
     this.getCategoryMenu();
   }
 
@@ -89,25 +87,27 @@ class App {
       const selectedCategory = MenuCategory[categoryNumber - 1];
       this.selectedCategory.push(selectedCategory);
     }
-    console.log(this.selectedCategory);
     this.recommendMenu();
   }
 
   recommendMenu() {
     for (let index = 0; index < this.selectedCategory.length; index++) {
       const category = this.selectedCategory[index];
-      console.log(category);
       const values = SAMPLE[`${category}`].split(", ");
       for (let coach = 0; coach < this.names.length; coach++) {
-        const select = this.selectedNumber();
-        console.log(select, values[select]);
+        let select = this.selectedMenu(values, coach);
+        console.log(select);
       }
     }
   }
 
-  selectedNumber(values, index) {
+  selectedMenu(values, coach) {
     const select = Random.shuffle(VALUE.NUMBER)[0];
-    return select;
+    const menu = values[select];
+    if (this.foodList[coach].includes(menu)) {
+      return this.selectedMenu(values, coach);
+    }
+    return menu;
   }
 }
 
