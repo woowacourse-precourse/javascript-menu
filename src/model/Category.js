@@ -4,10 +4,16 @@ class Category {
 
   constructor(name, menus) {
     this.#name = name;
-    this.#menus = this.#convertMenus(menus);
+    this.#menus = Category.#convertMenus(menus);
+  }
+  getName() {
+    return this.#name;
   }
 
-  #convertMenus(menus) {
+  getRandomMenu() {
+  }
+
+  static #convertMenus(menus) {
     return menus.replace(/ /g, '').split(',');
   }
 }
