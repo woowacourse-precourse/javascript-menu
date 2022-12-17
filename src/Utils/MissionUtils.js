@@ -13,8 +13,8 @@ const utils = {
   pickNumber() {
     return MissionUtils.Random.pickNumberInRange(1, 5);
   },
-  shuffle(menus) {
-    return MissionUtils.Random.shuffle(menus);
+  shuffle() {
+    return MissionUtils.Random.shuffle([1, 2, 3, 4, 5]);
   },
 };
 

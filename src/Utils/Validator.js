@@ -9,11 +9,7 @@ const {
 
 const regexKorean = /^[가-힣]+$/;
 const allMenus =
-  MENU["KOREAN"] +
-  MENU["JAPANESE"] +
-  MENU["CHINESE"] +
-  MENU["ASIAN"] +
-  MENU["WESTERN"];
+  MENU["한식"] + MENU["일식"] + MENU["중식"] + MENU["아시안"] + MENU["양식"];
 
 class Validator {
   notEnoughPeople(name) {

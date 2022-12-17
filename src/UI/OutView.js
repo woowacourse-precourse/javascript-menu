@@ -16,10 +16,12 @@ const OutputView = {
   /**
    * 결과와 서비스 종료 문구를 출력한다.
    */
-  printResult(result) {
+  printResult(category, result) {
     print(RESULT);
-    print(result);
+    print(`[ 카테고리 | ${category} ]`);
+    print(`| ${result} ]`);
     print(END);
+    close();
   },
 };
 

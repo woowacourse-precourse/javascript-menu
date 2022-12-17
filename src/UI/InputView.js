@@ -2,7 +2,8 @@ const { GAME_MESSAGES } = require("../Utils/Constants");
 const { NAME, CAN_NOT_EAT } = GAME_MESSAGES;
 const { readLine, print } = require("../Utils/MissionUtils");
 const Validator = require("../Utils/Validator");
-const OutputView = require("./OutView");
+
+const RecommandationMenuMaker = require("../RecommendationMenuMaker");
 
 const InputView = {
   /**
@@ -31,7 +32,8 @@ const InputView = {
         Validator.notExistMenu(menu);
         Validator.tooMany(menu);
         index += 1;
-        if (index === name.length) return;
+        if (index === name.length)
+          return new RecommandationMenuMaker().chooseCategory(name, menu);
         this.readHateMenu(name, index, menu);
       } catch (error) {
         print(error);
