@@ -1,4 +1,4 @@
-const CategoryRandomNumberGenerator = require("./CategoryRandomNumberGenerator");
+const Categorys = require("./Model/Categorys");
 const Coachs = require("./Model/Coachs");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
@@ -16,16 +16,7 @@ const SAMPLE = {
 const categorysNames = Object.keys(SAMPLE);
 
 class App {
-  categorys = [];
-
-  getCategoryCount(target) {
-    return this.categorys.reduce((count, category) => {
-      if (target === category) {
-        return (count += 1);
-      }
-      return count;
-    }, 0);
-  }
+  categorys = new Categorys(categorysNames);
 
   play() {
     OutputView.printServiceStart();
@@ -44,31 +35,16 @@ class App {
     this.coachs.setCoachNotEatMenu("구구", "김밥");
     this.coachs.setCoachNotEatMenu("제임스", "떡볶이");
 
-    Array.from({ length: 5 }).forEach((_, i) => {
-      this.decideCategory();
-    });
+    this.categorys.saveCategory();
+
     this.recommendMenu();
 
     this.printResultRecommendMenu();
   }
 
-  decideCategory() {
-    const categoryName = this.getCategoryName();
-
-    if (this.getCategoryCount(categoryName) <= 2) {
-      this.categorys.push(categoryName);
-      return;
-    }
-    this.decideCategory();
-  }
-
-  getCategoryName() {
-    return categorysNames[CategoryRandomNumberGenerator.generate() - 1];
-  }
-
   recommendMenu() {
     this.coachs.getCoachName().forEach((coachName) => {
-      this.categorys.forEach((categoryName) => {
+      this.categorys.get().forEach((categoryName) => {
         let ateMenu = this.getEatMenu(categoryName);
         while (
           this.coachs.isAteMenu(coachName, ateMenu) ||
@@ -90,7 +66,7 @@ class App {
 
   printResultRecommendMenu() {
     OutputView.printResultRecommendMenu(
-      this.categorys,
+      this.categorys.get(),
       this.coachs.getCoachs()
     );
   }
