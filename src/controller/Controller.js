@@ -59,8 +59,8 @@ class Controller {
 
   recommendDishes() {
     const recommend = new Recommend(this.#coaches, this.#hates);
-    let result = recommend.getResult();
-    OutputView.printResult(result);
+    let [categories, result] = recommend.getResult();
+    OutputView.printResult(categories, result);
   }
 }
 

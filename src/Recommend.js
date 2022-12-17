@@ -90,7 +90,7 @@ class Recommend {
   }
 
   getResult() {
-    return this.#result;
+    return [this.#categories, this.#result];
   }
 }
 module.exports = Recommend;
