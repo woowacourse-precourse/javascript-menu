@@ -3,10 +3,14 @@ const { CoachNameValidator } = require('../libs/Validator');
 
 class Coach {
   #name;
-  #dislikeFood = [];
+  #dislikeFoods = [];
 
   constructor(coachName) {
     this.#name = coachName;
+  }
+
+  getName() {
+    return this.#name;
   }
 
   static validationCoachNames(coachNames) {
