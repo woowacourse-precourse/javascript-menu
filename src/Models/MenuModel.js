@@ -32,8 +32,7 @@ class MenuModel {
     }
 
     getMenu(category) {
-        const categoryMenu = this.#menu[category].split(', ');
-        return categoryMenu;
+        return this.#menu[category];
     }
 
     addMenu(index, menu) {

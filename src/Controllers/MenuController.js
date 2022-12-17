@@ -46,12 +46,12 @@ class MenuController extends MenuModel {
     setMenu(coaches, category) {
         for(let i = 0; i < coaches.length; i++) {
             const categoryMenu = this.getMenu(category);
-            const menu = RandomUtil.randomMenu(categoryMenu);
-            if(!coachesController.checkReluctant(coaches[i], menu)){ 
+            const setMenu = RandomUtil.randomMenu(categoryMenu);
+            if(!coachesController.checkReluctant(coaches[i], setMenu)){ 
                 i -= 1;
                 continue;
             }
-            this.addMenu(i, menu);
+            this.addMenu(i, setMenu);
         }
     }
 
