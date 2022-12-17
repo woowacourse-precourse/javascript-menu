@@ -1,10 +1,13 @@
 class Coach {
   #data = {
-    name: '',
-    hateMenu: '',
+    names: [],
+    hateMenus: [],
   };
 
-  constructor() {}
+  constructor(inputNames) {
+    const names = inputNames;
+    console.log(names);
+  }
 }
 
 module.exports = Coach;
