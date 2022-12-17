@@ -19,9 +19,20 @@ const InputView = {
     validateNames(names){
         const names = names.split(',');
         if (names.length < 2 || names.length > 5){
-            this.errorHandling("[ERROR] 인원은 2~5이여야 합니다.\n");
+            this.errorHandling("[ERROR] 인원은 2~5명이여야 합니다.\n");
             return false;
         }
+
+        return true;
+    },
+
+    validateMenu(menus){
+        if (menus.length < 0 || menus.length > 2){
+            this.errorHandling("[ERROR] 못먹는 메뉴는 0~2개여야 합니다.\n");
+            return false;
+        }
+
+        return true;
     },
 
     errorHandling(message){
