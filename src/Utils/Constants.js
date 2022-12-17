@@ -1,14 +1,15 @@
 const ERROR_PREFIX = "[ERROR]";
 
 const ERROR_MESSAGES = {
-  NOT_OVER_TWO: `${ERROR_PREFIX} 코치는 최소 2명 이상 입력해야 합니다.`,
   NOT_TWO_AND_FOUR_LENGTH: `${ERROR_PREFIX} 코치 이름은 최소 2글자, 최대 4글자여야 합니다.`,
-  TWO_FOOD: `${ERROR_PREFIX} 못 먹는 메뉴는 최대 2개까지 입력할 수 있습니다.`,
+  NOT_ENOUGH_PEOPLE: `${ERROR_PREFIX} 코치는 최소 2명, 최대 5명까지 식사를 함께 해야 합니다.`,
+  NOT_KOREAN: `${ERROR_PREFIX} 공백없이 모음과 자음이 모두 갖춰진 한글을 입력해야 합니다.`,
+  OVER_TWO_FOOD: `${ERROR_PREFIX} 못 먹는 메뉴는 최대 2개까지 입력할 수 있습니다.`,
   NOT_EXIST_FOOD: `${ERROR_PREFIX} 해당 메뉴는 메뉴 추천 서비스에 없는 메뉴 입니다.`,
 };
 
 const GAME_MESSAGES = {
-  START: "점심 메뉴 추천을 시작합니다.\n\n",
+  START: "점심 메뉴 추천을 시작합니다.\n",
   NAME: "코치의 이름을 입력해 주세요. (, 로 구분)\n",
   CAN_NOT_EAT: "(이)가 못 먹는 메뉴를 입력해 주세요.\n",
   RESULT:
