@@ -1,14 +1,14 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const { RANDOM_RANGE_NUMBER } = require("../Constant");
 
-const BridgeRandomNumberGenerator = {
-  RANDOM_LOWER_INCLUSIVE: 1,
-  RANDOM_UPPER_INCLUSIVE: 5,
+const RandomNumberGenerator = {
+
   generate() {
     return MissionUtils.Random.pickNumberInRange(
-      BridgeRandomNumberGenerator.RANDOM_LOWER_INCLUSIVE,
-      BridgeRandomNumberGenerator.RANDOM_UPPER_INCLUSIVE
+      RANDOM_RANGE_NUMBER.RANDOM_LOWER_INCLUSIVE,
+      RANDOM_RANGE_NUMBER.RANDOM_UPPER_INCLUSIVE
     );
   },
 };
 
-module.exports = BridgeRandomNumberGenerator;
+module.exports = RandomNumberGenerator;
