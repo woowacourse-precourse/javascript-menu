@@ -3,6 +3,15 @@ const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
 class MenuController {
+  #categoryList;
+
+  #coachList;
+
+  constructor() {
+    this.#categoryList = [];
+    this.#coachList = [];
+  }
+
   start() {
     OutputView.printStart();
     this.inputCoachName();
@@ -10,6 +19,7 @@ class MenuController {
 
   inputCoachName() {
     const nameList = InputView.readCoachName();
+    this.#coachList = nameList.split(',');
     this.inputNoMenu(nameList);
   }
 
@@ -28,8 +38,11 @@ class MenuController {
 
   recommendCategory() {
     const categories = new Category();
-    const category = categories.recommend();
+    const categoryList = categories.recommend();
+    this.#categoryList = categoryList;
   }
+
+  recommendMenu() {}
 }
 
 module.exports = MenuController;
