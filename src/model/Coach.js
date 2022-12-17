@@ -31,6 +31,15 @@ class Coach {
     });
   }
 
+  inputRecommendedMenu(coachName, recommendedMenu) {
+    this.#coachList.filter((coach) => {
+      if (coach.name === coachName) {
+        coach.recommendedMenuList.push(recommendedMenu);
+      }
+    });
+  }
+
+
   getCoachList() {
     return this.#coachList;
   }
