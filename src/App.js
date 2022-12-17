@@ -3,8 +3,11 @@ const OutputView = require('./OutputView');
 
 const CoachNameValidator = require('./CoachNameValidator');
 const CoachHateMenusValidator = require('./CoachHateMenusValidator');
+const RecommendedMenuGenerator = require('./RecommendedMenuGenerator');
 
-const SAMPLE = {
+const WEEKDAYS = ['월요일', '화요일', '수요일', '목요일', '금요일'];
+
+const MENU_INFO = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
   중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
@@ -13,6 +16,12 @@ const SAMPLE = {
 };
 
 class App {
+  #hateMenuInfo = {};
+  #recommendedMenuInfo = {
+    categories: [],
+    menus: [],
+  };
+
   play() {
     OutputView.printServiceStartMessage();
     this.inputCoachNames();
@@ -38,9 +47,8 @@ class App {
     const currentCoachName = coachNameList[0];
 
     InputView.readHateMenus(currentCoachName, hateMenus => {
-      // TODO: save hate menus
       if (this.isValidInputValue(CoachHateMenusValidator, hateMenus)) {
-        console.log(hateMenus);
+        this.#hateMenuInfo[currentCoachName] = hateMenus;
         this.inputHateMenus(coachNameList.slice(1));
         return;
       }
@@ -50,7 +58,37 @@ class App {
   }
 
   recommendMenus() {
-    OutputView.printRecommendResult('메뉴 추천 결과입니다.');
+    // TODO: 월~금 반복
+    const coachList = Object.keys(this.#hateMenuInfo);
+
+    while (this.#recommendedMenuInfo.categories.length < 5) {
+      const category = RecommendedMenuGenerator.getRandomCategory();
+      if (this.isValidCategory(category)) {
+        this.#recommendedMenuInfo.categories.push(category);
+
+        for (let j = 0; j < coachList.length; j++) {
+          const menu = RecommendedMenuGenerator.getRandomMenu(category);
+          console.log(menu);
+        }
+      }
+    }
+
+    console.log(this.#recommendedMenuInfo);
+
+    // OutputView.printRecommendResult({});
+  }
+
+  isValidCategory(category) {
+    const categories = this.#recommendedMenuInfo.categories;
+
+    if (!categories.includes(category)) return true;
+
+    const matchCount = categories.filter(c => c === category).length;
+    if (matchCount > 1) {
+      return false;
+    }
+
+    return true;
   }
 
   isValidInputValue(validator, inputValue) {
