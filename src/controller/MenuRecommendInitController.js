@@ -23,16 +23,17 @@ class MenuRecommendInitController {
     }
     createCoachs(callback) {
         InputView.readCoachsName((result) => {
-            for(let i = 0; i < result.length-1; i++) {
-                this.readHateFoodByName(result[i]);
-            }
-            this.readHateFoodByName(result[result.length-1], callback);
+            this.readHateFoodByName(0, result, callback);
         });
     }
-    readHateFoodByName(name, callback) {
-        InputView.readHateFood(name, (result) => {
-            this.#coachs.push(new Coach(name, result));
-            if(callback != null) callback();
+    readHateFoodByName(idx, names, callback) {
+        if(idx == names.length)  {
+            callback();
+            return;
+        }
+        InputView.readHateFood(names[idx], (result) => {
+            this.#coachs.push(new Coach(names[idx], result));
+            this.readHateFoodByName(idx+1, names, callback);
         });
     }
 }
