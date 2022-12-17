@@ -3,29 +3,29 @@ const App = require('../src/App');
 
 const mockQuestions = (answers) => {
   MissionUtils.Console.readLine = jest.fn();
-  answers.reduce((acc, input) => {
-    return acc.mockImplementationOnce((_, callback) => {
-      callback(input);
-    });
-  }, MissionUtils.Console.readLine);
+  answers.reduce(
+    (acc, input) => acc.mockImplementationOnce((_, callback) => { callback(input); }),
+    MissionUtils.Console.readLine,
+  );
 };
 
 const mockRandoms = (numbers) => {
   MissionUtils.Random.pickNumberInRange = jest.fn();
-  numbers.reduce((acc, number) => {
-    return acc.mockReturnValueOnce(number);
-  }, MissionUtils.Random.pickNumberInRange);
+  numbers.reduce(
+    (acc, number) => acc.mockReturnValueOnce(number),
+    MissionUtils.Random.pickNumberInRange,
+  );
 };
 
 const mockShuffles = (rows) => {
   MissionUtils.Random.shuffle = jest.fn();
 
-  rows.reduce((acc, [firstNumber, numbers]) => {
-    return acc.mockReturnValueOnce([
-      firstNumber,
-      ...numbers.filter((number) => number !== firstNumber),
-    ]);
-  }, MissionUtils.Random.shuffle);
+  rows.reduce(
+    (acc, [firstNumber, numbers]) => (
+      acc.mockReturnValueOnce([firstNumber, ...numbers.filter((number) => number !== firstNumber)])
+    ),
+    MissionUtils.Random.shuffle,
+  );
 };
 
 const getLogSpy = () => {
@@ -33,9 +33,7 @@ const getLogSpy = () => {
   return logSpy;
 };
 
-const getOutput = (logSpy) => {
-  return [...logSpy.mock.calls].join('');
-};
+const getOutput = (logSpy) => [...logSpy.mock.calls].join('');
 
 const expectLogContains = (received, logs) => {
   logs.forEach((log) => {
