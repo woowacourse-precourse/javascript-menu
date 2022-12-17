@@ -59,12 +59,13 @@ class App {
   printResults() {
     MissionUtils.Console.print(RESULT_MESSAGE.result);
     MissionUtils.Console.print(RESULT_MESSAGE.day);
-    console.log(this.#categories);
+    const catLine = ['카테고리', ...this.#categories];
+    MissionUtils.Console.print(`[ ${catLine.join(' | ')} ]`);
     const results = [];
     this.#coaches.forEach((coach) => {
       results.push([coach.getName(), ...coach.getFoods()]);
     });
-    results.forEach((line) => console.log(`[ ${line.join(' | ')} ]`));
+    results.forEach((line) => MissionUtils.Console.print(`[ ${line.join(' | ')} ]`));
     MissionUtils.Console.print(RESULT_MESSAGE.bye);
   }
 }

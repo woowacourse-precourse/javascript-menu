@@ -45,10 +45,12 @@ class Coach {
       for (let i = 0; i < foods.length; i += 1) {
         arr.push(i);
       }
-      let menu = foods[MissionUtils.Random.shuffle(arr)[0]];
+      const temp = MissionUtils.Random.shuffle(arr);
+      let index = 0;
+      let menu = foods[temp[index]];
       if (this.#bannedFoods.includes(menu)) {
         while (!this.#bannedFoods.includes(menu)) {
-          menu = foods[MissionUtils.Random.shuffle(arr)[0]];
+          menu = foods[temp[index++]];
         }
         this.#foods.push(menu);
       } else {
