@@ -22,8 +22,8 @@ const Input = {
         })
     },
 
-    requestNotEat(callback) {
-        Console.readLine(MESSAGE.INPUT_NOTEAT, (foods) => {
+    requestNotEat(name, callback) {
+        Console.readLine(`${name}${MESSAGE.INPUT_NOTEAT}`, (foods) => {
             try {
                 this.NotEatValidate(foods.split(","))
                 callback(foods.split(","));
