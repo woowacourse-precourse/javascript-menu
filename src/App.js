@@ -24,6 +24,12 @@ class App {
     OutputView.printRecommendStartMessage();
     InputView.readCoachName(this.manageCoach.bind(this));
   }
+  manageCoach(nameInput) {
+    const nameList = nameInput.split(",");
+    Validator.validateCoachName(nameList);
+    this.makeCoachList(nameList);
+    this.getDisableMenu();
+  }
 }
 
 module.exports = App;
