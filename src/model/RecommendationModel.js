@@ -11,8 +11,8 @@ class RecommendationModel {
   }
 
   generateRecommendations(categories) {
-    for (const singleCategory of categories) {
-      for (const singleCoach of this.#coaches) {
+    for (const singleCoach of this.#coaches) {
+      for (const singleCategory of categories) {
         singleCoach.generateRecommendedFood(singleCategory);
       }
     }
