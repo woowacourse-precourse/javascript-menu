@@ -1,3 +1,4 @@
+const Coach = require('../models/Coach');
 const { OutputView, InputView } = require('../views/IOView');
 
 class Controller {
@@ -7,11 +8,12 @@ class Controller {
   }
 
   requestCoachNames() {
-    InputView.readCoachNames((coachName) => this.handleCoachNames(coachName));
+    InputView.readCoachNames((coachNames) => this.handleCoachNames(coachNames));
   }
 
-  handleCoachNames(coachName) {
-    console.log(`추천받을 코치들은 ${coachName}입니다.`);
+  handleCoachNames(coachNames) {
+    const isValid = Coach.validationCoachNames(coachNames);
+    if (!isValid) return this.requestCoachNames();
   }
 }
 
