@@ -1,7 +1,7 @@
 const { ERROR } = require('../../constants/Constants');
-const NameError = require('./NameError');
+const HateMenusError = require('./HateMenusError');
 
-const HateMenusLengthError = class extends NameError {
+const HateMenusLengthError = class extends HateMenusError {
   constructor() {
     super(ERROR.hateMenusLength);
   }
