@@ -11,7 +11,7 @@ const INPUT = {
   
 const ERROR = {
   INPUT_NAME: "[ERROR] 코치의 이름은 최소 2글자, 최대 4글자입니다.",
-  INPUT_MEMBERS: "[ERROR] 코치는 최소 2명 이상 입력해야 합니다.",
+  INPUT_MEMBERS: "[ERROR] 코치는 최소 2명 이상 최대 5명을 입력해야 합니다.",
   INPUT_MENU: "[ERROR] 못 먹는 메뉴는 최대 2개입니다.",
 };
 
