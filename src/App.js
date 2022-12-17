@@ -19,6 +19,7 @@ class App {
     this.recommendCategory = [];
     this.categoryCounts = [0, 0, 0, 0, 0, 0];
   }
+
   play() {
     this.output.print('점심 메뉴 추천을 시작합니다.');
     this.input.readLine(this.inputCoachs.bind(this));
@@ -27,12 +28,17 @@ class App {
   inputCoachs(input) {
     const coachNames = InputProcessor.parseCommaStringsToArray(input);
 
-    if (!coachNames.every(Vaildator.isVaildNameLength)) {
-      // 에러 처리
+    try {
+      ErrorChecker.checkValid(
+        coachNames,
+        Vaildator.isVaildCoachNumber,
+        '[ERROR]: 올바르지 않는 입력입니다.'
+      );
+    } catch (error) {
+      this.output.print(error.message);
+      this.input.readLine(this.inputCoachs.bind(this));
     }
-
-    if (!Vaildator.isVaildCoachNumber(coachNames)) {
-      // 에러 처리
+    if (!coachNames.every(Vaildator.isVaildNameLength)) {
     }
 
     coachNames.forEach((coachname) => {
