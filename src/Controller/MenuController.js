@@ -18,13 +18,33 @@ class MenuController {
   }
 
   getCoaches = () => {
-    InputView.readCoaches((userAnswer) => {
-      this.menuModel.setCoaches(userAnswer);
-      this.getCantEat();
+    InputView.readCoaches((coaches) => {
+      this.menuModel.setCoaches(coaches);
+      this.getCantEat(coaches);
     });
   };
 
-  getCantEat = () => {
+  getCantEat = (coaches) => {
+    InputView.readCantEat(
+      coaches,
+      (cantEat, count) => {
+        this.menuModel.setCantEat(cantEat);
+        if (coaches.length === count) this.getRecommends();
+      },
+      0
+    );
+
+    // console.log(coaches);
+    // coaches.forEach((coach, index) => {
+    //   console.log(index);
+    //   InputView.readCantEat(coach, (cantEat) => {
+    //     this.menuModel.setCantEat(cantEat);
+    //     if (coaches.length - 1 === index) this.getRecommends();
+    //   });
+    // });
+  };
+
+  getRecommends = () => {
     console.log("hi");
   };
 }

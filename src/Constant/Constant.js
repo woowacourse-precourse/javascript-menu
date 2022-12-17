@@ -9,6 +9,7 @@ const ANNOUNCEMENT_MESSAGE = Object.freeze({
 const ERROR_MESSAGE = Object.freeze({
   IS_COACH_LENGTH: "[ERROR] 코치는 2~5명 입력해야 합니다.",
   IS_COACH_NAME_LENGTH: "[ERROR] 코치이름은 2~4글자로 입력해야 합니다.",
+  IS_CANT_EAT: "[ERROR] 못 먹는 음식수는 0~2개를 입력해주세요.",
 });
 
 module.exports = { ANNOUNCEMENT_MESSAGE, ERROR_MESSAGE };

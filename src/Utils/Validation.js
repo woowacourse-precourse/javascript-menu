@@ -13,12 +13,17 @@ const Validation = {
       throw new Error(ERROR_MESSAGE.IS_COACH_NAME_LENGTH);
   },
 
-  isCoaches(userInput) {
-    const coaches = userInput.split(",");
-    this.isCoachLength(coaches);
-    coaches.forEach((coach) => {
+  isCoaches(coachesArr) {
+    this.isCoachLength(coachesArr);
+    coachesArr.forEach((coach) => {
       this.isCoachNameLength(coach);
     });
+  },
+
+  isCantEat(cantEatArr) {
+    const cantEatArrLength = cantEatArr.length;
+    if (cantEatArrLength < 1 || cantEatArrLength > 2)
+      throw new Error(ERROR_MESSAGE.IS_CANT_EAT);
   },
 };
 
