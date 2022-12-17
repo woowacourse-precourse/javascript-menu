@@ -11,14 +11,27 @@ const SAMPLE = {
 };
 
 class App {
+  constructor() {
+    this.coach = null;
+    this.dislikeMenu = {};
+  }
   play() {
     OutputView.printStart();
     InputView.readCoachName(this.getCoachNameInput.bind(this));
   }
 
   getCoachNameInput(name) {
-    const coach = name.split(',');
-    validateCoachName(coach);
+    this.coach = name.split(',');
+    validateCoachName(this.coach);
+    InputView.readDislikeMenu(this.coach[0], 0, this.getDislikeMenuInput.bind(this));
+  }
+
+  getDislikeMenuInput(menu, idx) {
+    this.dislikeMenu[this.coach[idx]] = menu;
+    idx++;
+    if (idx === this.coach.length) return;
+    InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
+    console.log(this.dislikeMenu);
   }
 }
 

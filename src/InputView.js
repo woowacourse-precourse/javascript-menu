@@ -10,6 +10,16 @@ const InputView = {
       }
     });
   },
+
+  readDislikeMenu(name, idx, callback) {
+    Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.`, (menu) => {
+      try {
+        callback(menu, idx);
+      } catch (e) {
+        this.readDislikeMenu(name, idx, callback);
+      }
+    });
+  },
 };
 
 module.exports = InputView;
