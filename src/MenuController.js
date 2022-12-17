@@ -7,7 +7,9 @@ const CatchError = require('./validation/CatchError');
 class MenuController {
   constructor(SAMPLE) {
     this.SAMPLE = SAMPLE;
-    this.menuGame = new MenuGame(this.SAMPLE, () => this.progressSelectMenu());
+    this.menuGame = new MenuGame(this.SAMPLE, name =>
+      this.progressSelectMenu(name)
+    );
     this.#initPrint();
   }
 
@@ -27,7 +29,11 @@ class MenuController {
   }
 
   progressSelectMenu(name) {
-    InputView.readSelectMenu(name, menu => {});
+    InputView.readSelectMenu(name, menu => {
+      this.menuGame.setMenu([menu]);
+      this.menuGame.increseUserCount();
+      return this.menuGame.progressMenu();
+    });
   }
 }
 

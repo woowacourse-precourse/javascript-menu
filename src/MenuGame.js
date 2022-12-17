@@ -7,6 +7,7 @@ class MenuGame {
     this.progressSelectMenu = progressSelectMenu;
 
     this.userName = [];
+    this.menu = [];
     this.userCount = 0;
   }
 
@@ -14,6 +15,10 @@ class MenuGame {
 
   setUserName(userName) {
     return (this.userName = userName);
+  }
+
+  setMenu(menu) {
+    return (this.menu = menu);
   }
 
   increseUserCount() {
