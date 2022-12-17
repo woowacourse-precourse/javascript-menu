@@ -11,7 +11,7 @@ const CATEGORIES = Object.freeze({
 const categoryFormatter = (categories) => {
   const menus = Object.values(categories);
   return menus.reduce((acc, menu) => {
-    const foods = menu.split(' ').join('').split(',');
+    const foods = menu.split(', ');
     acc.push(foods);
     return acc;
   }, []);
@@ -38,8 +38,26 @@ const makeCourseNumbers = () => {
 const recommandFood = (excludeFood) => {
   const category = categoryFormatter(CATEGORIES);
   const courseNumbers = makeCourseNumbers();
+  return courseNumbers.reduce((recommand, courseNumber) => {
+    const menus = category[courseNumber - 1];
+    const menu = getMenu(recommand, menus, excludeFood.split(', '));
+    recommand.push(menu);
+    return recommand;
+  }, []);
+};
+
+const getMenu = (recommand, menus, excludeFood) => {
+  let menu = '';
+  while (menu === '') {
+    const menuNumber = Random.shuffle([0, 1, 2, 3, 4, 5, 6, 7, 8])[0];
+    const food = recommand + excludeFood;
+    if (!food.includes(menus[menuNumber])) {
+      menu = menus[menuNumber];
+    }
+  }
+  return menu;
 };
 
 module.exports = recommandFood;
 
-console.log(makeCourseNumbers());
+console.log(recommandFood('규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘'));
