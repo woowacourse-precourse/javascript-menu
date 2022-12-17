@@ -1,4 +1,5 @@
 const InputView = require("../view/InputView");
+const OutputView = require("../view/OutputView");
 const MenuRecommend = require("../model/MenuRecommend");
 const Coach = require("../model/Coach");
 
@@ -15,6 +16,7 @@ class MenuRecommendInitController {
     }
 
     exetute() {
+        OutputView.printStart();
         this.createCoachs(() => {
             const controller = new MenuRecommendController(this.#menuRecommend, this.#coachs);
             controller.exetute();
