@@ -1,4 +1,5 @@
 const OutputView = require("./OutputView");
+const Validation = require("./Validation");
 const { Console } = require("@woowacourse/mission-utils");
 const { INPUT } = require("./constants/messages");
 
@@ -13,7 +14,7 @@ const SAMPLE = {
 
 class App {
   constructor() {
-    this.names = [];
+    this.names;
   }
 
   play() {
@@ -22,9 +23,17 @@ class App {
   }
 
   inputCoachName() {
-    Console.readLine(INPUT.NAME, (name) => {
-      console.log(name);
+    Console.readLine(INPUT.NAME, (names) => {
+      this.names = names.split(",");
+      this.handleInputName();
     });
+  }
+
+  handleInputName() {
+    const checkCount = Validation.checkInputNameCount(this.names);
+    if (!checkCount) {
+      this.inputCoachName();
+    }
   }
 }
 
