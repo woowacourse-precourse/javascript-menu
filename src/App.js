@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { PRINT_STRING } = require('./constants');
+const { PRINT_STRING, PRINT_ERROR_STRING } = require('./constants');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -24,7 +24,14 @@ class App {
 
   namesCallback(coachName) {
     const coachArray = coachName.split(',');
+    try {
+      this.validateNames(coachArray);
+    } catch (error) {
+      MissionUtils.Console.print(error.massage);
+    }
   }
+
+  validateNames(coachArray) {}
 
   play() {
     this.printRecommendedStart();
