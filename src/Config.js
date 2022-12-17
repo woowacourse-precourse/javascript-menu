@@ -1,10 +1,10 @@
 const MenuConfig = {
   CATEGORIES: 5,
-  JAPANESE: 1,
-  KOREAN: 2,
-  CHINESE: 3,
-  ASIAN: 4,
-  WESTERN: 5,
+  일식: 1,
+  한식: 2,
+  중식: 3,
+  아시안: 4,
+  양식: 5,
 
   1: '일식',
   2: '한식',
