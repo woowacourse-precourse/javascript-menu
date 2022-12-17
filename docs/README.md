@@ -71,6 +71,7 @@ OutputView() - 결과물 출력하는곳
 - printStart() - 시작 문장 출력
 - printEnd() - 끝 문장 출력
 
+- printError() - 에러문장 출력;
 -------------------------------------------------
 Menu - 메뉴 추천하는 곳
 카테고리는 Random.pickNumberInRange()를 사용해 정하고

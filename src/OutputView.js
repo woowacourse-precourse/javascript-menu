@@ -18,4 +18,9 @@ const OutputView = {
     printEnd() {
         MU.Console.print('추천을 완료했습니다.');
     },
+    printError(e) {
+        MU.Console.print(e);
+    }
 };
+
+module.exports = OutputView;
