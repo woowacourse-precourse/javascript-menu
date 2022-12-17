@@ -1,6 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
 const InputView = require('./InputView');
+const OutputView = require('./OutputView');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -15,6 +16,7 @@ class App {
   #categoriesArray;
   #categoriesNameArray;
   #coachFoodRecommendationArray;
+
   constructor() {
     this.#coachNameArray = [];
     this.#categoriesArray = [];
@@ -22,12 +24,9 @@ class App {
     this.#coachFoodRecommendationArray = [];
   }
 
-  printGameStart() {
-    Console.print('점심 메뉴 추천을 시작합니다.');
-  }
-
   play() {
-    this.printGameStart();
+    OutputView.printGameStart();
+
     this.#coachNameArray = InputView.getCoachNameArray();
 
     for (let i = 0; i < this.#coachNameArray.length; i++) {
@@ -41,20 +40,12 @@ class App {
     }
 
     this.makeCategoriesArray();
-    Console.print('메뉴 추천 결과입니다.');
-    Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
-    Console.print(
-      `[ 카테고리 | ${this.#categoriesNameArray[0]} | ${
-        this.#categoriesNameArray[1]
-      } | ${this.#categoriesNameArray[2]} | ${this.#categoriesNameArray[3]} | ${
-        this.#categoriesNameArray[4]
-      } ]`
-    );
-    for (let i = 0; i < this.#coachFoodRecommendationArray.length; i++) {
-      Console.print(`[ ${this.#coachFoodRecommendationArray[i]} ]`);
-    }
 
-    Console.print('추천을 완료했습니다.');
+    OutputView.printGameInfoResult();
+    OutputView.printWeekInfo();
+    OutputView.printCategories(this.#categoriesNameArray);
+    OutputView.printRecommendations(this.#coachFoodRecommendationArray);
+    OutputView.printGameEnd();
   }
 
   makeCategoriesArray() {
