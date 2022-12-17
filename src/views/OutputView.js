@@ -3,6 +3,7 @@ const { Console } = require('@woowacourse/mission-utils');
 const Category = require('../domains/Category');
 const Coach = require('../domains/Coach');
 const Menu = require('../domains/Menu');
+const AppError = require('../errors/AppError');
 
 class OutputView {
   /**
@@ -22,6 +23,13 @@ class OutputView {
 
   printGoodbye() {
     this.print('추천을 완료했습니다.');
+  }
+
+  /**
+   * @param {AppError} error
+   */
+  printError(error) {
+    this.print(error.message);
   }
 
   /**
