@@ -97,6 +97,7 @@ class App {
 
   recommendByCoach(foodList, coach) {
     const [...totalFoodList] = foodList;
+    console.log(totalFoodList);
     let selectFood = Random.shuffle(totalFoodList)[0];
     while (true) {
       if (coach.dislikeFoods.some((food) => food.name === selectFood)) {
@@ -115,6 +116,8 @@ class App {
   showResult() {
     this.output.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
     this.output.print(this.makeCategoryResult());
+    this.printByCoachs();
+    this.output.print('추천을 완료했습니다.');
   }
 
   makeCategoryResult() {
@@ -124,6 +127,17 @@ class App {
     });
     result += ']';
     return result;
+  }
+
+  printByCoachs() {
+    this.coachs.forEach((coach) => {
+      let result = `[ ${coach.name} `;
+      coach.ateFoods.forEach((food) => {
+        result += `| ${food} `;
+      });
+      result += ']';
+      this.output.print(result);
+    });
   }
 }
 
