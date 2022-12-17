@@ -13,8 +13,8 @@ const InputView = {
     });
   },
 
-  readCoachName() {
-    this.readInput(MESSAGE.COACH_NAME);
+  readCoachName(setCoaches) {
+    this.readInput(MESSAGE.COACH_NAME, setCoaches);
   },
 };
 
