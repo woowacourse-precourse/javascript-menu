@@ -6,10 +6,11 @@ const AppError = require('../errors/AppError');
 
 class InputView {
   /**
+   * @param {string} query
    * @param {function(string): void} callback
    */
-  read(callback) {
-    Console.readLine('', (text) => callback(text));
+  read(query, callback) {
+    Console.readLine(`${query}\n`, (text) => callback(text));
   }
 
   /**
@@ -20,8 +21,7 @@ class InputView {
   }
 
   readCoaches(callback) {
-    this.print('코치의 이름을 입력해 주세요. (, 로 구분)');
-    this.read((text) => {
+    this.read('코치의 이름을 입력해 주세요. (, 로 구분)', (text) => {
       callback(text.split(',').map((coachName) => new Coach(coachName.trim())));
     });
   }
@@ -32,8 +32,7 @@ class InputView {
    * @param {function(string): void} callback
    */
   readDislikeMenus(coach, sourceMenus, callback) {
-    this.print(`${coach.getName()}(이)가 못 먹는 메뉴를 입력해 주세요.`);
-    this.read((text) => {
+    this.read(`${coach.getName()}(이)가 못 먹는 메뉴를 입력해 주세요.`, (text) => {
       const menus = text
         .split(',')
         .map((menuName) => sourceMenus.find((menu) => menu.getName() === menuName.trim()) ?? null);
@@ -45,6 +44,10 @@ class InputView {
       }
       callback(menus);
     });
+  }
+
+  close() {
+    Console.close();
   }
 }
 
