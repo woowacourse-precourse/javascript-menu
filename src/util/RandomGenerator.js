@@ -4,10 +4,10 @@ const { RANDOM_RANGE_NUMBER } = require("../Constant");
 const RandomNumberGenerator = {
 
   generate() {
-    return MissionUtils.Random.pickNumberInRange(
+    return parseInt(MissionUtils.Random.pickNumberInRange(
       RANDOM_RANGE_NUMBER.RANDOM_LOWER_INCLUSIVE,
       RANDOM_RANGE_NUMBER.RANDOM_UPPER_INCLUSIVE
-    );
+    ),10);
   },
 };
 

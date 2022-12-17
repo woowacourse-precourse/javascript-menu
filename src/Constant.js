@@ -25,10 +25,5 @@ const RESULT = {
 
 const ERROR_MESSAGE = {}
 
-// 매개변수 사용하기
-
-// const RESULT = {
-//   resultMap : (user,count) => `${user} ${count}`
-// }
 
 module.exports = {MENU_OBJ,RANDOM_RANGE_NUMBER,INPUT_MESSAGE,OUTPUT_MESSAGE,ERROR_MESSAGE,RESULT}
