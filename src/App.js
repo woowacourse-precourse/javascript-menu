@@ -1,3 +1,4 @@
+const MenuService = require("./MenuService");
 const OutputView = require("./OutputView");
 
 const SAMPLE = {
@@ -15,6 +16,8 @@ class App {
 
   runMenu() {
     OutputView.printStartMent();
+    this.menuService = new MenuService();
+    this.menuService.inputCoachName();
   }
 }
 
