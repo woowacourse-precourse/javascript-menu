@@ -4,6 +4,7 @@ const SERVICE_SETTINGS = Object.freeze({
   maxNumberOfCoaches: 5,
   minLengthOfCoachesName: 2,
   maxLengthOfCoachesName: 4,
+  maxNumberOfMenus: 2,
   error: '[ERROR]',
 });
 

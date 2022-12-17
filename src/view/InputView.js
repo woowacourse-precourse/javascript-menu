@@ -50,9 +50,30 @@ const InputView = {
 
   readExcludeMenu(name, callback) {
     Console.readLine(MESSAGES.excludeMenu(name), (input) => {
-      callback(input);
-      //this.validateExcludeMenus(input, callback);
+      this.validateExcludeMenus(name, input, callback);
     });
+  },
+
+  validateExcludeMenus(name, input, callback) {
+    try {
+      this.handleWrongExcludeMenus(input);
+      callback(input.split(SERVICE_SETTINGS.separationCriteria));
+    } catch (error) {
+      Console.print(error);
+      this.readExcludeMenu(name, callback);
+    }
+  },
+
+  handleWrongExcludeMenus(input) {
+    const menus = input.split(SERVICE_SETTINGS.separationCriteria);
+    this.handleWrongNumberOfMenusException(menus);
+  },
+
+  handleWrongNumberOfMenusException(menus) {
+    const numberOfMenus = menus.length;
+    if (numberOfMenus > SERVICE_SETTINGS.maxNumberOfMenus) {
+      throw ERROR_MESSAGES.numberOfMenus;
+    }
   },
 };
 

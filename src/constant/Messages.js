@@ -10,6 +10,7 @@ const ERROR_MESSAGES = Object.freeze({
   lessNumberOfCoaches: `${SERVICE_SETTINGS.error} 코치는 최소 ${SERVICE_SETTINGS.minNumberOfCoaches}명 이상 입력해야 합니다.`,
   moreNumberOfCoaches: `${SERVICE_SETTINGS.error} 코치는 최대 ${SERVICE_SETTINGS.maxNumberOfCoaches}명까지 입력됩니다.`,
   lengtOfCoachName: `${SERVICE_SETTINGS.error} 코치의 이름은 최소 ${SERVICE_SETTINGS.minLengthOfCoachesName}글자, 최대 ${SERVICE_SETTINGS.maxLengthOfCoachesName}글자입니다.`,
+  numberOfMenus: `메뉴는 최대 ${SERVICE_SETTINGS.maxNumberOfMenus}개를 입력해주세요.`,
 });
 
 module.exports = { MESSAGES, ERROR_MESSAGES };
