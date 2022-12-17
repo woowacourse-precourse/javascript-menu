@@ -4,3 +4,5 @@ class Food {
     this.category = category;
   }
 }
+
+module.exports = Food;
