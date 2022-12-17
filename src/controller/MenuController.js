@@ -31,12 +31,9 @@ class MenuController {
     const coachList = nameList.split(',');
     const noMenuAllList = {};
     coachList.forEach(coach => {
-      console.log('coco', coach);
       const noMenus = InputView.readNoMenu(coach);
-      console.log('asdf', noMenus);
       noMenuAllList[coach] = noMenus;
     });
-    console.log('no', noMenuAllList);
     this.#noMenuAllList = noMenuAllList;
     this.recommendCategory();
   }
@@ -49,18 +46,53 @@ class MenuController {
   }
 
   recommendMenu() {
+    const allMenu = [];
+    this.#coachList.forEach(coach => {
+      console.log(coach);
+      const coachMenu = [];
+      coachMenu.push(coach);
+      this.makeMenuList(coachMenu, coach);
+      console.log(coachMenu);
+      allMenu.push(coachMenu);
+    });
+    // console.log(menu);
+    console.log('a', allMenu);
+  }
+
+  makeMenuList(coachMenu, coach) {
     const menuTool = new Menu(
       this.#categoryList,
-      this.#coachList,
+      // this.#coachList,
       this.#noMenuAllList,
     );
-    this.#coachList.forEach(coach => {
-      const menus = [];
-      const menu = menuTool.recommend();
-      menus.push(menu);
-      console.log('s', menus);
-    });
-    console.log(menu);
+    console.log(coach, coa);
+    const menu = menuTool.recommend();
+    console.log('hi', menu);
+    if (this.checkMenu(menu, coachMenu, coach)) {
+      coachMenu.push(menu);
+    }
+    if (!this.checkMenu(menu, coachMenu, coach)) {
+      this.makeMenuList();
+    }
+  }
+
+  checkMenu(menu, coachMenu, coach) {
+    this.isDuplicate(menu, coachMenu);
+    this.isNoMenu(menu, coach);
+  }
+
+  isDuplicate(menu, coachMenu) {
+    if (coachMenu.includes(menu)) {
+      return false;
+    }
+    return true;
+  }
+
+  isNoMenu(menu, coach) {
+    if (this.#noMenuAllList[coach].includes(menu)) {
+      return false;
+    }
+    return true;
   }
 }
 

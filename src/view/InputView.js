@@ -17,13 +17,10 @@ const InputView = {
 
   readNoMenu(coach) {
     const noMenuList = [];
-    console.log('ca', coach);
     Console.readLine(`${coach}${Message.INPUT_NO_MENU}`, answer => {
       Console.print(answer);
       noMenuList.push(answer);
-      console.log('li', noMenuList);
       this.validateNoMenuList(noMenuList);
-      console.log('li2', noMenuList);
     });
     return noMenuList;
   },
@@ -40,9 +37,7 @@ const InputView = {
 
   validateNoMenuList(noMenuList) {
     try {
-      console.log('trbe', noMenuList);
       const inputNoMenu = new NoMenuList(noMenuList[0]);
-      console.log('tr');
     } catch (error) {
       this.isUserError(error);
       Console.print(error.message);

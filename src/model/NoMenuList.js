@@ -5,10 +5,8 @@ class NoMenuList {
   #noMenuList;
 
   constructor(noMenuList) {
-    console.log('1', noMenuList);
     this.#noMenuList = noMenuList.split(',');
     this.validate();
-    console.log('2', noMenuList);
   }
 
   validate() {
