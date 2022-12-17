@@ -63,6 +63,10 @@ class MenuController {
           this.#unableToEatMenu.push({ [this.#coachMembers[1]]: menus });
           InputView.readCoachUnableEatMenu(this.#coachMembers[2], (menus) => {
             this.#unableToEatMenu.push({ [this.#coachMembers[2]]: menus });
+            for (let i = 0; i < 5; i++) {
+              this.createRecommendedMenu();
+            }
+            this.printResult();
           });
         });
       });
@@ -77,6 +81,10 @@ class MenuController {
             this.#unableToEatMenu.push({ [this.#coachMembers[2]]: menus });
             InputView.readCoachUnableEatMenu(this.#coachMembers[3], (menus) => {
               this.#unableToEatMenu.push({ [this.#coachMembers[3]]: menus });
+              for (let i = 0; i < 5; i++) {
+                this.createRecommendedMenu();
+              }
+              this.printResult();
             });
           });
         });
@@ -94,6 +102,10 @@ class MenuController {
               this.#unableToEatMenu.push({ [this.#coachMembers[3]]: menus });
               InputView.readCoachUnableEatMenu(this.#coachMembers[4], (menus) => {
                 this.#unableToEatMenu.push({ [this.#coachMembers[4]]: menus });
+                for (let i = 0; i < 5; i++) {
+                  this.createRecommendedMenu();
+                }
+                this.printResult();
               });
             });
           });
@@ -104,6 +116,7 @@ class MenuController {
 
   createRecommendedMenu() {
     const categoryNumber = pickNumberInRange(1, 5);
+
     // 1이면 일식, 2면 한식, 3이면 중식, 4면 아시안, 5면 양식
     const menu = menuList[categoryNumber - 1];
 
@@ -121,7 +134,6 @@ class MenuController {
     this.#weekMenu.push(menuItemList[randomIndex]);
   }
 
-  // 결과를 출력시키는 메서드
   printResult() {
     OutputView.printResult(this.#coachMembers[0], this.#weekCategory, this.#weekMenu);
   }
