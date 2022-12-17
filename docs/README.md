@@ -10,8 +10,8 @@
 
 #### 입력
 
-- [ ] 코치 이름 입력 메세지를 출력하고 입력받는다. - InputView#readCoachNames()
-- [ ] 각 코치별 못먹는 음식 메세지를 출력하고 입력받는다. - InputView#readFoodNames()
+- [x] 코치 이름 입력 메세지를 출력하고 입력받는다. - InputView#readCoachNames()
+- [x] 각 코치별 못먹는 음식 메세지를 출력하고 입력받는다. - InputView#readFoodNames()
 
 #### 출력
 
