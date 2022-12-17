@@ -3,9 +3,9 @@ const Menus = require('./Menus');
 class Coach {
   #name;
 
-  #menus;
+  #cantEat;
 
-  #toEat = new Menus();
+  #menus = new Menus();
 
   constructor(name) {
     Coach.#validate(name);
@@ -27,27 +27,27 @@ class Coach {
   }
 
   setMenus(menus) {
-    this.#menus = menus;
-  }
-
-  isIncludeToEat(menu) {
-    return this.#toEat.contains(menu);
+    this.#cantEat = menus;
   }
 
   isIncludeMenus(menu) {
-    return this.#menus.includes(menu);
+    return this.#menus.contains(menu);
+  }
+
+  isIncludeCantEat(menu) {
+    return this.#cantEat.includes(menu);
   }
 
   isCanRecommend(menu) {
-    return !this.isIncludeMenus(menu) && !this.isIncludeToEat(menu);
+    return !this.isIncludeMenus(menu) && !this.isIncludeCantEat(menu);
   }
 
   addToEat(menu) {
-    this.#toEat.add(menu);
+    this.#menus.add(menu);
   }
 
   toString() {
-    return `[ ${this.#name} | ${this.#toEat.toString()} ]`;
+    return `[ ${this.#name} | ${this.#menus.toString()} ]`;
   }
 }
 

@@ -42,18 +42,18 @@ class App {
       ListValidator.validate(nameList, 2, 5);
       const coaches = names.split(',').map((coach) => new Coach(coach));
       this.#coaches = new Coaches(coaches);
-      return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+      return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
     } catch (error) {
       printError(error);
       readCoaches(this.#onCoachesSubmit.bind(this));
     }
   }
 
-  #onMenuSubmit(menu) {
+  #onCantEatSubmit(menu) {
     try {
-      const menus = menu.split(',');
-      ListValidator.validate(menus, 0, 2);
-      this.#coaches.setCoachMenu(this.#index, menus);
+      const cantEat = menu.split(',');
+      ListValidator.validate(cantEat, 0, 2);
+      this.#coaches.setCoachMenu(this.#index, cantEat);
       this.#index += 1;
 
       if (this.#index === this.#coaches.count()) {
@@ -61,10 +61,10 @@ class App {
         return Console.close();
       }
 
-      return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+      return readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
     } catch (error) {
       printError(error);
-      readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+      readMenu(this.#coaches, this.#index, this.#onCantEatSubmit.bind(this));
     }
   }
 
