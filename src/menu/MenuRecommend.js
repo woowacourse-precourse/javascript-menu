@@ -34,6 +34,15 @@ class MenuRecommend {
 
     if (!moreThanTwice) {
       this.#categoryRecorder.writeRecord(category);
+      let i = 0;
+      while (i !== this.#coaches.length) {
+        const targetCoach = this.#coaches[i];
+        const menu = this.#menuList.getMenu(category);
+        if (!targetCoach.canEat(menu)) continue;
+        if (targetCoach.ateBefore(menu)) continue;
+        targetCoach.writeEatingRecord(menu);
+        i++;
+      }
       return;
     }
     this.recommendMenus();
