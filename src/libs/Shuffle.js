@@ -6,12 +6,12 @@ const Shuffle = {
   },
 
   shuffledMenu(categoryMenus) {
-    const firstIdx = Shuffle.shuffledMenuIndex(categoryMenus)[0];
-    return categoryMenus[firstIdx];
+    firstIdx = Shuffle.shuffledMenuIndex(categoryMenus)[0];
+    return categoryMenus[firstIdx - 1];
   },
 
   shuffledMenuIndex(categoryMenus) {
-    return Random.shuffle(categoryMenus.map((_, idx) => idx));
+    return Random.shuffle(categoryMenus.map((_, idx) => idx + 1));
   },
 };
 

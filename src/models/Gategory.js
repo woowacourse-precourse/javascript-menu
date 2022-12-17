@@ -23,7 +23,6 @@ class Gategory {
 
   increaseRecommendedCount() {
     this.#recommendedCount += 1;
-    console.log(this.#category, this.#recommendedCount);
   }
 
   canRecommend() {
