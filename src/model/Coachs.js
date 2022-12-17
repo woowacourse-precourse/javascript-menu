@@ -5,7 +5,6 @@ class Coachs {
 
   addCoach(coachName) {
     this.#list.push(new Coach(coachName));
-    console.log(this.#list);
   }
 
   getCoachsName() {
