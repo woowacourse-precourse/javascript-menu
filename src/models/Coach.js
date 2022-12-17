@@ -20,6 +20,10 @@ class Coach {
   hasSameMenu(menu) {
     return this.#menu.includes(menu);
   }
+
+  isDislikeMenu(menu) {
+    return this.#dislikeMenu.includes(menu);
+  }
 }
 
 module.exports = Coach;
