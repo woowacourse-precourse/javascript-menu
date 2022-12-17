@@ -71,7 +71,7 @@ class App {
 			if(number===5) this.#dayCategory.push('양식')
 		})
 		for(let coach=0; coach<this.#coachNames.length;coach++) this.insertMenu(coach)
-		console.log(this.#result)
+		this.printResult()
 	}
 
 	insertMenu(coach){
@@ -88,6 +88,16 @@ class App {
 			array.push(menus[menu])
 		}
 		this.#result.push(array);
+	}
+
+	printResult(){
+		MissionUtils.Console.print("메뉴 추천 결과입니다.")
+		MissionUtils.Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]")
+		MissionUtils.Console.print("[ 카테고리 | " + this.#dayCategory.join(" | ") + " ]")
+		this.#result.map((result)=>{
+			MissionUtils.Console.print("[ " + result.join(" | ") + " ]")
+		})
+		MissionUtils.Console.print("추천을 완료했습니다.")
 	}
 }
 
