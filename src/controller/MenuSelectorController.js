@@ -52,6 +52,20 @@ class MenuSelectorController {
       .forEach((coach, index) =>
         coach.setDislikeMenu(this.#tempDislikeMenu[index])
       );
+    this.#selectMenuPhase();
+  }
+
+  #selectMenuPhase() {
+    this.#menuSelector.decideAllCoachWeekMenu();
+    this.#printResultPhase();
+  }
+
+  #printResultPhase() {
+    OutputView.printResultTitle(this.#menuSelector.getWeekCategories());
+    this.#menuSelector.getCoachs().forEach((coach) => {
+      OutputView.printOneCoachMenu(coach.getName(), coach.getMenu());
+    });
+    OutputView.printEndMessage();
   }
 }
 
