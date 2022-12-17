@@ -13,11 +13,15 @@ class App {
 	#coachNames;
 	#eachCoachUnableToEat;
 	#coachNumber;
+	#dayCategory;
+	#categoryRepeatCheck;
 
 	constructor(){
 		this.#coachNames=[]
 		this.#eachCoachUnableToEat={}
 		this.#coachNumber=0
+		this.#dayCategory = []
+		this.#categoryRepeatCheck = []
 	}
   play() {
 		MissionUtils.Console.print("점심 메뉴 추천을 시작합니다.\n")
@@ -34,13 +38,35 @@ class App {
 	unableToEat(coach){
 		MissionUtils.Console.readLine(`${coach}(이)가 못 먹는 메뉴를 입력해 주세요.`, (menu)=>{
 			this.#eachCoachUnableToEat[coach] = menu.split(',')
-			console.log(this.#eachCoachUnableToEat)
-			if(this.#coachNumber+1 === this.#coachNames.length) MissionUtils.Console.close()
-			this.#coachNumber++;
-			this.unableToEat(this.#coachNames[this.#coachNumber])
+			if(this.#coachNumber === (this.#coachNames.length-1)) this.categoryRandomChoice()
+			else{
+				this.#coachNumber++;
+				this.unableToEat(this.#coachNames[this.#coachNumber])
+			}
 		})
 	}
 
+	categoryRandomChoice(){
+		for(let day=0; day<5; day++){
+			const category = MissionUtils.Random.pickNumberInRange(1, 5)
+			if(this.#categoryRepeatCheck.filter((number)=>category===number).length>2){
+				day--;
+				continue;
+			}
+			this.#categoryRepeatCheck.push(category)
+		}
+		this.insertCategory()
+	}
+
+	insertCategory(){
+		this.#categoryRepeatCheck.map((number)=>{
+			if(number===1) this.#dayCategory.push('일식')
+			if(number===2) this.#dayCategory.push('한식')
+			if(number===3) this.#dayCategory.push('중식')
+			if(number===4) this.#dayCategory.push('아시안')
+			if(number===5) this.#dayCategory.push('양식')
+		})
+	}
 }
 
 const app = new App()
