@@ -1,10 +1,16 @@
 const InputView = require('../view/InputView');
+const OuputView = require('../view/OutputView');
 
 class Controller {
   #coachs;
   #notEatList = [];
 
-  inputCoach() {
+  startService() {
+    OuputView.startMent();
+    this.#inputCoach();
+  }
+
+  #inputCoach() {
     InputView.Coach((input) => {
       this.#checkCoach(input);
     });
