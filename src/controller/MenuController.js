@@ -32,6 +32,17 @@ const MenuController = class {
 
   #saveHateMenus(hateMenus) {
     this.#members.pushHateMenus(hateMenus);
+    this.#printResult();
+  }
+
+  #printResult() {
+    this.#io.printRecommendMenu();
+    this.#quit();
+  }
+
+  #quit() {
+    this.#io.printClosing();
+    this.#io.close();
   }
 };
 
