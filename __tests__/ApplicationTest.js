@@ -41,6 +41,14 @@ const expectLogContains = (received, logs) => {
   });
 };
 
+const makeFalseShuffles = (menuIndexList) => {
+  const shuffles = [];
+  menuIndexList.forEach((value) => {
+    shuffles.push([value, Array.from({ length: 9 }, (_, idx) => idx + 1)]);
+  });
+  return shuffles;
+};
+
 describe('점심 메뉴 테스트', () => {
   afterEach(() => {
     jest.clearAllMocks();
@@ -52,22 +60,12 @@ describe('점심 메뉴 테스트', () => {
 
       mockRandoms([2, 5, 1, 3, 4]);
       mockQuestions(['구구,제임스', '김밥', '떡볶이']);
-
-      const sequenced = (_, idx) => idx + 1;
       mockShuffles([
         // 구구
-        [2, Array.from({ length: 9 }, sequenced)],
-        [7, Array.from({ length: 9 }, sequenced)],
-        [1, Array.from({ length: 9 }, sequenced)],
-        [4, Array.from({ length: 9 }, sequenced)],
-        [2, Array.from({ length: 9 }, sequenced)],
+        ...makeFalseShuffles([2, 7, 1, 4, 2]),
 
         // 제임스
-        [9, Array.from({ length: 9 }, sequenced)],
-        [1, Array.from({ length: 9 }, sequenced)],
-        [5, Array.from({ length: 9 }, sequenced)],
-        [5, Array.from({ length: 9 }, sequenced)],
-        [4, Array.from({ length: 9 }, sequenced)],
+        ...makeFalseShuffles([9, 1, 5, 5, 4]),
       ]);
 
       const app = new App();
