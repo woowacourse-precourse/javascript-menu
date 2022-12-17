@@ -37,12 +37,12 @@ class App {
   #readCoachNotWantMenu(coachName, idx) {
     InputView.readCoachNotWantMenu(coachName, (notWantMenu) => {
       try {
-        this.#coachMenus[idx] = new CouchMenu(
-          coachName,
-          notWantMenu
-        ).getNotWantMenu();
-        if (idx + 1 < this.#coachNames.length)
-          this.#readCoachNotWantMenu(this.#coachNames[idx + 1], idx + 1);
+        this.#coachMenus[idx] = new CouchMenu(coachName, notWantMenu);
+        const newIdx = idx + 1;
+        const newCoachName = this.#coachNames[newIdx];
+        const coachNamesLen = this.#coachNames.length;
+        const isValidIdx = newIdx < coachNamesLen;
+        if (isValidIdx) this.#readCoachNotWantMenu(newCoachName, newIdx);
       } catch (err) {
         OutputView.printError(err.message);
         this.#readCoachNotWantMenu(coachName, idx);
