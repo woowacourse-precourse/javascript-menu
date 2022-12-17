@@ -1,8 +1,18 @@
-const Validator = require('../utils/Validator');
+const MenuService = require('../service/MenuService');
+
 const InputView = require('../views/InputView');
 const OutputView = require('../views/OutputView');
 
+const Validator = require('../utils/Validator');
+const { REGEX } = require('../constants');
+
 class MenuController {
+  #menuService;
+
+  constructor() {
+    this.#menuService = new MenuService();
+  }
+
   startRecommend() {
     OutputView.printStartRecommend();
 
@@ -24,7 +34,10 @@ class MenuController {
     this.#onInputCoachesName(names);
   }
 
-  #onInputCoachesName(names) {}
+  #onInputCoachesName(names) {
+    const coaches = names.replace(REGEX.SPACE, '').split(',');
+    this.#menuService.addCoaches(coaches);
+  }
 }
 
 module.exports = MenuController;
