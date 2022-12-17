@@ -14,7 +14,12 @@ const OutputView = {
     Console.print(errorMessage);
   },
 
-  close() {
+  printResult() {
+    Console.print(OUTPUT_MESSAGE.result);
+    Console.print(OUTPUT_MESSAGE.day);
+    Console.print(OUTPUT_MESSAGE.category);
+
+    Console.print(OUTPUT_MESSAGE.end);
     Console.close();
   },
 };

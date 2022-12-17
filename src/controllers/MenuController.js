@@ -1,5 +1,5 @@
 const { readCoachNames, readHateFoods } = require('../views/InputView');
-const { printStart, printError, pirntNewLine } = require('../views/OutputView');
+const { printStart, printError, pirntNewLine, printResult } = require('../views/OutputView');
 const {
   validateCoachNamesInput,
   validateCoachNames,
@@ -52,6 +52,7 @@ class MenuController {
 
   startRealService() {
     this.#menuService.recommend();
+    printResult();
   }
 }
 
