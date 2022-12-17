@@ -1,7 +1,7 @@
 const Coach = require('../models/Coach');
 const Coachs = require('../models/Coachs');
 const Categorys = require('../models/Categorys');
-const { OutputView, InputView } = require('../views/IOView');
+const { OutputView, InputView, quit } = require('../views/IOView');
 const { generator } = require('../libs/GeneratorCategoryNumber');
 
 class Controller {
@@ -79,6 +79,11 @@ class Controller {
       this.#coachs.getCoachsRecommendedMenu(),
       this.#recommendedCategory
     );
+    this.quitApp();
+  }
+
+  quitApp() {
+    quit();
   }
 }
 
