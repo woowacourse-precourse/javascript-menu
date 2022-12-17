@@ -49,9 +49,12 @@ class CouchMenu {
   updateMenu(category) {
     const categoryMenus = this.#filterCategory(category);
     const splitedMenus = MENU_LIST[categoryMenus].split(", ");
-    const menuNumArr = Array.from({ length: 9 }, (_, idx) => idx + 1);
+    const menuNumArr = Array.from(
+      { length: splitedMenus.length },
+      (_, idx) => idx + 1
+    );
     while (1) {
-      const idx = getRandomMenu(menuNumArr)[0];
+      const idx = getRandomMenu(menuNumArr);
       const curMenu = splitedMenus[idx - 1];
       if (
         this.#menuList.includes(curMenu) ||

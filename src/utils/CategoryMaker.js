@@ -12,8 +12,8 @@ const CategoryMaker = {
     }
   },
 
-  getRandomMenu: (menus, curMenus) => {
-    return MissionUtils.Random.shuffle(menus);
+  getRandomMenu: (menus) => {
+    return MissionUtils.Random.shuffle(menus)[0];
   },
 };
 module.exports = CategoryMaker;
