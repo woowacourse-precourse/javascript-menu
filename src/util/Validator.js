@@ -27,7 +27,7 @@ const Validator = {
   },
 
   validateMenusLength(menus) {
-    if (menus > 2) {
+    if (menus.length > 2) {
       throw new Error("[ERROR] 못 먹는 음식은 최대 두개 이하로 입력해야 합니다.");
     }
   },
