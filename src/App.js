@@ -16,6 +16,7 @@ class App {
   constructor() {
     this.names;
     this.index = 0;
+    this.foodList = [];
   }
 
   play() {
@@ -51,10 +52,16 @@ class App {
 
   inputCannotEatFoods() {
     Console.readLine(`\n${this.names[this.index]}${INPUT.FOOD}`, (foods) => {
-      this.index += 1;
-      if (this.names.length !== this.index) {
-        this.inputCannotEatFoods();
+      const inputFoods = foods.split(",");
+      const checkFoodCount = Validation.checkInputFoodCount(inputFoods.length);
+
+      if (!checkFoodCount) this.inputCannotEatFoods();
+      else {
+        this.foodList.push(inputFoods);
+        this.index += 1;
       }
+
+      if (this.names.length !== this.index) this.inputCannotEatFoods();
     });
   }
 }

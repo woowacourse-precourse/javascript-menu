@@ -25,6 +25,18 @@ const Validation = {
     }
     return true;
   },
+
+  checkInputFoodCount(foodCount) {
+    try {
+      if (!(foodCount >= 0 && foodCount <= 2)) {
+        throw new Error(ERROR.FOOD);
+      }
+    } catch (error) {
+      Console.print(error.message);
+      return false;
+    }
+    return true;
+  },
 };
 
 module.exports = Validation;
