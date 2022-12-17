@@ -9,17 +9,23 @@ const MENU_INFO = {
 };
 
 const RecommendedMenuGenerator = {
-  getRandomCategory() {
-    const categoryList = Object.keys(MENU_INFO);
+  CATEGORY_INFO: {
+    1: '일식',
+    2: '한식',
+    3: '중식',
+    4: '아시안',
+    5: '양식',
+  },
 
-    return categoryList[Random.pickNumberInRange(1, 5) - 1];
+  getRandomCategory() {
+    return this.CATEGORY_INFO[Random.pickNumberInRange(1, 5)];
   },
 
   getRandomMenu(category) {
     const menuList = MENU_INFO[category].split(', ');
-    const randomMenu = menuList[Random.shuffle(menuList.map((_, i) => i))[0]];
+    const randomIndex = Random.shuffle(menuList.map((_, i) => i + 1))[0] - 1;
 
-    return randomMenu;
+    return menuList[randomIndex];
   },
 };
 

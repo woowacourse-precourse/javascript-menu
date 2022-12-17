@@ -10,6 +10,15 @@ const OutputView = {
   printErrorMessage(errorMessage) {
     Console.print(errorMessage);
   },
+
+  printRecommendResult(result) {
+    Console.print('메뉴 추천 결과입니다.');
+    Object.entries(result).forEach(([key, value]) => {
+      Console.print(`[ ${key} | ${value.join(' | ')} ]`);
+    });
+    Console.print('추천을 완료했습니다.');
+    // Console.close();
+  },
 };
 
 module.exports = OutputView;

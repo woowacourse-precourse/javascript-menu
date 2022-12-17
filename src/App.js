@@ -104,6 +104,10 @@ class App {
     return !menuList.includes(menu) && !hateMenus.includes(menu);
   }
 
+  showRecommendResult() {
+    OutputView.printRecommendResult(this.#recommendedMenuInfo);
+  }
+
   isValidInputValue(validator, inputValue) {
     try {
       validator.validate(inputValue);
