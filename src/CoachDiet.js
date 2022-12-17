@@ -15,9 +15,7 @@ class CoachDiet {
     return this.#name;
   }
 
-  setImpossibles(impossibles) {
-    if (impossibles === '') return;
-    const impossibleList = impossibles.split(',');
+  setImpossibles(impossibleList) {
     this.#impossibles = impossibleList;
   }
 
