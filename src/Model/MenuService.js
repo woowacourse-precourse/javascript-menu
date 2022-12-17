@@ -80,6 +80,14 @@ class MenuService {
     });
     return repeat < 2;
   }
+
+  recommendMenu() {
+    this.#categoryOfWeek.forEach((category) => {
+      this.#coaches.forEach((coach) => {
+        coach.addMenu(category);
+      });
+    });
+  }
 }
 
 module.exports = MenuService;
