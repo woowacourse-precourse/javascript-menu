@@ -7,7 +7,7 @@ const Category = {
     const selected = [];
     while (selected.length < length) {
       const category = Recommend.randomCategory();
-      if (duplicateCount[MenuConfig[category]] < 2) {
+      if (duplicateCount[MenuConfig[category]] < MenuConfig.DUPLICATE_CATECORY_LIMIT) {
         duplicateCount[MenuConfig[category]] += 1;
         selected.push(category);
       }
