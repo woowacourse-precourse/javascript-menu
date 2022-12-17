@@ -26,8 +26,16 @@ class Coach {
     return this.#coaches.size;
   }
 
+  // 순서에 해당하는 코치 이름 반환
   static getName() {
     return this.#coachOrder[this.#inputCount];
+  }
+
+  // 코치의 못 먹는 음식 저장
+  static addNoFood(foods) {
+    const name = this.getName();
+    const foodSet = new Set(foods);
+    this.#coaches.set(name, foodSet);
   }
 }
 
