@@ -54,8 +54,35 @@ const InputView = {
             }
             console.log(randomArray)
 
+
             randomArray.forEach(num => {
-                console.log(Random.shuffle(recommend.coaches[0].likes[num - 1])[0])
+                let category;
+                if (num === 1) {
+                    category === '일식';
+                    console.log(Random.shuffle(recommend.coaches[0].likes[category])[0])
+                }
+
+                if (num === 1) {
+                    category === '일식';
+                    console.log(Random.shuffle(recommend.coaches[0].likes[category])[0])
+                }
+                if (num === 2) {
+                    category === '한식';
+                    console.log(Random.shuffle(recommend.coaches[0].likes[category])[0])
+                }
+                if (num === 3) {
+                    category === '중식';
+                    console.log(Random.shuffle(recommend.coaches[0].likes[category])[0])
+                }
+                if (num === 4) {
+                    category === '아시안';
+                    console.log(Random.shuffle(recommend.coaches[0].likes[category])[0])
+                }
+                if (num === 5) {
+                    category === '양식';
+                    console.log(Random.shuffle(recommend.coaches[0].likes[category])[0])
+                }
+
             })
 
             OutputView.print('메뉴 추천 결과입니다.');
