@@ -1,3 +1,4 @@
+const CategoryMaker = require('./CategoryMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const { validateCoachName, validateDislikeMenu } = require('./utils/validate');
@@ -31,7 +32,10 @@ class App {
     validateDislikeMenu(menuArr);
     this.dislikeMenu[this.coach[idx]] = menuArr;
     idx++;
-    if (idx === this.coach.length) return;
+    if (idx === this.coach.length) {
+      const category = CategoryMaker.createCategory();
+      return;
+    }
     InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
   }
 }
