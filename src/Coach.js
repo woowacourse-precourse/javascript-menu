@@ -1,5 +1,8 @@
 class Coach {
-  constructor(CoachName) {}
+  #name;
+  constructor(CoachName) {
+    this.#name = CoachName;
+  }
 }
 
 module.exports = Coach;
