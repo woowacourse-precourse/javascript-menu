@@ -336,7 +336,7 @@
       "error",
       2
     ],
-    "max-lines-per-function": ["warn", 10],
+    "max-lines-per-function": ["error", 15],
     "operator-linebreak": "off",
     "nonblock-statement-body-position": "off",
     "no-plusplus": "off",
