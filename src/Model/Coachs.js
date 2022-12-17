@@ -16,12 +16,17 @@ class Coachs {
     });
   }
 
+  isNotEatMenu(coachName, ateMenu) {
+    return new Set(this.#coachs[coachName].notEatMenu).has(ateMenu);
+  }
+
   isAteMenu(coachName, ateMenu) {
     return new Set(this.#coachs[coachName].ateMenu).has(ateMenu);
   }
 
   setAteMenu(coachName, ateMenu) {
     this.#coachs[coachName].ateMenu.push(ateMenu);
+    console.log(this.#coachs[coachName].ateMenu);
   }
 }
 

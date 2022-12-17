@@ -41,7 +41,8 @@ class App {
     const categoryName = this.getCategoryName();
 
     if (this.categorysCount[categoryName] || 0 <= 2) {
-      this.categorysCount[category] = this.categorysCount[category] + 1 || 1;
+      this.categorysCount[categoryName] =
+        this.categorysCount[categoryName] + 1 || 1;
       this.recommendMenu(categoryName);
       return;
     }
@@ -55,10 +56,13 @@ class App {
   recommendMenu(categoryName) {
     this.coachs.getCoachName().forEach((coachName) => {
       let ateMenu = this.getEatMenu(categoryName);
-      while (this.coachs.isAteMenu(coachName, ateMenu)) {
+      while (
+        this.coachs.isAteMenu(coachName, ateMenu) ||
+        this.coachs.isNotEatMenu(coachName, ateMenu)
+      ) {
         ateMenu = this.getEatMenu(categoryName);
       }
-      this.coachs.setAteMenu(ateMenu);
+      this.coachs.setAteMenu(coachName, ateMenu);
     });
   }
 
