@@ -8,4 +8,15 @@ describe('Vaildator 객체 테스트', () => {
     expect(Vaildator.isVaildNameLength(',')).toEqual(false);
     expect(Vaildator.isVaildNameLength('빅')).toEqual(false);
   });
+
+  test('못먹는 음식의 개수가 2개 이하인지 확인하는 기능', () => {
+    expect(Vaildator.isVaildDislikeFoodsLength(['김치찌개', '쌈밥'])).toEqual(
+      true
+    );
+    expect(Vaildator.isVaildDislikeFoodsLength(['김치찌개'])).toEqual(true);
+    expect(Vaildator.isVaildDislikeFoodsLength([''])).toEqual(true);
+    expect(
+      Vaildator.isVaildDislikeFoodsLength(['김치찌개', '된장찌개', '쌈밥'])
+    ).toEqual(false);
+  });
 });
