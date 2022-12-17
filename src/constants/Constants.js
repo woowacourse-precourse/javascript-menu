@@ -1,3 +1,12 @@
+const COACH = Object.freeze({
+  minNameSize: 2,
+  maxNameSize: 4,
+  minPerson: 2,
+  maxPerson: 5,
+  minHateMenu: 0,
+  maxHateMenu: 2,
+});
+
 const MARK = Object.freeze({
   divider: '|',
   openBracket: '[',
@@ -10,7 +19,26 @@ const MESSAGE = Object.freeze({
   getName: `코치의 이름을 입력해 주세요. (${MARK.rest} 로 구분)`,
   cantEat: (name) => `${name}(이)가 못 먹는 메뉴를 입력해 주세요.`,
   result: '메뉴 추천 결과입니다.',
+  category: '카테고리',
   finish: '추천을 완료했습니다.',
+});
+
+const WEEK = Object.freeze({
+  week: '구분',
+  mon: '월요일',
+  tues: '화요일',
+  wed: '수요일',
+  thur: '목요일',
+  fri: '금요일',
+});
+
+const CATEGORY = Object.freeze({
+  category: '카테고리',
+  korean: '한식',
+  japanese: '일식',
+  chinese: '중식',
+  asian: '아시안',
+  western: '양식',
 });
 
 const ERROR = Object.freeze({
@@ -18,6 +46,7 @@ const ERROR = Object.freeze({
 });
 
 const MENU = Object.freeze({
+  maxRecommendCount: 2,
   japanese: [
     '규동',
     '우동',
@@ -80,8 +109,11 @@ const MENU = Object.freeze({
 });
 
 module.exports = {
+  COACH,
   MARK,
   MESSAGE,
+  WEEK,
+  CATEGORY,
   ERROR,
   MENU,
 };
