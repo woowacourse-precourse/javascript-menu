@@ -28,4 +28,4 @@
 - [x] 코치 이름 길이를 2보다 작거나 4보다 크게 입력한다. - Validator#validateCoachNameLength()
 - [x] 코치 이름을 2개보다 작거나 5보다 크게 입력한다. - Validator#validateCoachNameCount()
 - [x] 음식 목록에 없는 음식을 입력한다. - Validator#validateFoodName()
-- [ ] 각 코치별 못먹는 음식을 3개 이상 입력한다. - Validator#validateFoodNameCount()
+- [x] 각 코치별 못먹는 음식을 3개 이상 입력한다. - Validator#validateFoodNameCount()

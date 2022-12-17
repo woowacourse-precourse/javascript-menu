@@ -33,8 +33,13 @@ const Validator = {
     if (!foodList.includes(name)) throw '목록에 있는 음식을 입력해주세요.';
   },
 
-  validateFoodNameCount() {
-    
+  /**
+   * 음식 이름 개수 유효성을 검사한다.
+   * @param {stirng[]} names 음식 이름 목록
+   */
+  validateFoodNameCount(names) {
+    const size = names.length;
+    if (size > 2) throw '[ERROR] 음식은 최대 2개 이하 입력해야 합니다.';
   },
 };
 
