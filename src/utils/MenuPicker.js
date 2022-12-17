@@ -7,7 +7,6 @@ const MenuPicker = {
       acc[i + 1] = cur;
       return acc;
     }, {});
-    console.log(menuList);
     const menuIndex = Random.shuffle(menuIndexList)[0];
     return menuList[menuIndex + ''];
   },

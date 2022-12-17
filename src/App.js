@@ -58,9 +58,11 @@ class App {
     printDays();
     const categories = CategoryMaker.makeCategories(RandomNumberGenerator.generate);
     printCategories(categories);
-    categories.forEach((category) => {
-      const menus = SAMPLE[category].split(', ');
-      this.#addToEat(menus);
+    this.#coaches.getState().forEach((coach) => {
+      categories.forEach((category) => {
+        const menus = SAMPLE[category].split(', ');
+        this.#addToEat(coach, menus);
+      });
     });
 
     this.#printCoaches();
@@ -75,14 +77,17 @@ class App {
     });
   }
 
-  #addToEat(menus) {
-    this.#coaches.getState().forEach((coach) => {
-      let recommend = MenuPicker.pickMenu(menus);
-      while (coach.isIncludeToEat(recommend)) {
-        recommend = MenuPicker.pickMenu(menus);
-      }
-      coach.addToEat(recommend);
-    });
+  #addToEat(coach, menus) {
+    const recommend = this.#pickNonDuplicate(coach, menus);
+    coach.addToEat(recommend);
+  }
+
+  #pickNonDuplicate(coach, menus) {
+    let recommend = MenuPicker.pickMenu(menus);
+    while (!coach.isCanRecommend(recommend)) {
+      recommend = MenuPicker.pickMenu(menus);
+    }
+    return recommend;
   }
 }
 

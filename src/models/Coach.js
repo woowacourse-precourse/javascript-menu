@@ -34,6 +34,14 @@ class Coach {
     return this.#toEat.contains(menu);
   }
 
+  isIncludeMenus(menu) {
+    return this.#menus.includes(menu);
+  }
+
+  isCanRecommend(menu) {
+    return !this.isIncludeMenus(menu) && !this.isIncludeToEat(menu);
+  }
+
   addToEat(menu) {
     this.#toEat.add(menu);
   }
