@@ -17,9 +17,10 @@ const OutputView = {
   printResult(coaches) {
     Console.print(OUTPUT_MESSAGE.result);
     Console.print(OUTPUT_MESSAGE.day);
-    Console.print(OUTPUT_MESSAGE.category);
     coaches.forEach((coach) => {
       const name = coach.getName();
+      const category = coach.getCategories();
+      Console.print(`[ 카테고리 | ${category.join(' | ')} ]`);
       Console.print(`[ ${name} | ${coach.getMenus().join(' | ')} ]`);
     });
     Console.print(OUTPUT_MESSAGE.end);
