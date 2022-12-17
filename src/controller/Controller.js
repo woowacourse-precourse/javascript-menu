@@ -29,7 +29,10 @@ class Controller {
       this.#coachs = input.split(',');
       Validation.coachNumber(this.#coachs);
       this.#checkCoachList();
-    } catch (error) {}
+    } catch (error) {
+      OuputView.errorMessage(error);
+      this.#inputCoach;
+    }
   }
 
   #checkCoachList() {
@@ -49,7 +52,10 @@ class Controller {
     try {
       Validation.notEat(input);
       this.#notEatList.push([coachName, input]);
-    } catch (error) {}
+    } catch (error) {
+      OuputView.errorMessage(error);
+      this.#checkCoachList();
+    }
   }
 
   #deliverNotEatList() {
