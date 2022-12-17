@@ -8,10 +8,7 @@ const InputView = {
    * 코치 이름을 입력받는다.
    */
   readCoachNames(callback) {
-    Console.readLine(
-      MESSAGE.SERVICE_START_MESSAGE + MESSAGE.REQUEST_COACH_NAME,
-      callback
-    );
+    Console.readLine(MESSAGE.REQUEST_COACH_NAME, callback);
   },
 
   /**
