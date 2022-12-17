@@ -6,6 +6,7 @@ const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
 //utils
 const { CATEGORY, SAMPLE } = require("./utils/Menu");
+const InputValidation = require("./utils/Validate");
 
 class App {
 
@@ -25,6 +26,7 @@ class App {
   askName() {
 	InputView.readName((names)=>{
 		const nameList = names.split(',');
+		InputValidation.isValidName(nameList); //유효성 검사
 		this.nameList = nameList; //누구인지 저장해두기
 		//this.personCnt = nameList.length; //총 몇명인지 카운트
 		//console.log(nameList, this.personCnt);	
@@ -34,6 +36,7 @@ class App {
   askMenu(name) {
 	InputView.readMenu(name, (menus)=> {
 		const menuList = menus.split(',');
+		InputValidation.isValidMenu(menuList); //유효성 검사
 		//console.log(name,menuList);	
 		this.inEdible[name] = menuList; //딕셔너리에 사람마다 못먹는 메뉴 저장
 		//console.log(this.inEdible); 
@@ -43,7 +46,7 @@ class App {
 			this.categories = this.selectCategory();
 			console.log(this.categories);
 			this.menuList = this.recommendMenu(); 
-			console.log(this.menuList); 
+			//console.log(this.menuList); 
 			return this.showRecommendation();
 		} 
 		return this.askMenu(this.nameList[this.personCnt]);
