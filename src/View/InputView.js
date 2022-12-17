@@ -30,8 +30,15 @@ const InputView = {
     InputView.question(`${coachName} ${InputView.HATE_FOODS}`, (input) => {
       const hateFoods = input.split(',');
 
+      InputView.validateHateFoods(hateFoods);
       callback(hateFoods);
     });
+  },
+
+  validateHateFoods(hateFoods) {
+    if (hateFoods.length > 2) {
+      throw new Error('최대 2개의 못 먹는 메뉴를 선택할 수 있습니다.');
+    }
   },
 
   question(string, callback) {
