@@ -52,11 +52,10 @@ class MenuController {
         OutputView.printErrorMessage(message);
         return this.#inputNonEdibleMenus(coaches);
       }
-      if (coaches[0] !== lastCoachName) {
-        this.#onInputNonEdibleMenus(coaches[0], toArray(menus));
-        return this.#inputNonEdibleMenus(coaches.slice(1));
-      }
       this.#onInputNonEdibleMenus(coaches[0], toArray(menus));
+      if (coaches[0] !== lastCoachName) return this.#inputNonEdibleMenus(coaches.slice(1));
+
+      this.#printResult(coaches[0], toArray(menus));
     });
   }
 
@@ -68,8 +67,6 @@ class MenuController {
     if (menus.length > 0) {
       this.#menuService.addNonEdibleMenus(coachName, menus);
     }
-
-    this.#printResult();
   }
 
   #printResult() {

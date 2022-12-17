@@ -12,6 +12,13 @@ class Coach {
       this.#nonEdibleMenu = menus;
     }
   }
+
+  getCoachLog() {
+    return {
+      nonEdibleMenu: this.#nonEdibleMenu,
+      menus: this.#menus,
+    };
+  }
 }
 
 module.exports = Coach;

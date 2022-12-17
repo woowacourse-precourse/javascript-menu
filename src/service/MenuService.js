@@ -3,6 +3,7 @@ const Recommend = require('../models/Recommend');
 
 class MenuService {
   #coaches;
+
   #recommend;
 
   constructor() {
@@ -19,15 +20,26 @@ class MenuService {
   }
 
   getRecommendMenuResult() {
-    this.#recommendMenu();
-  }
-
-  #recommendMenu() {
     const randomCategory = this.#recommend.getRandomCategory();
-    const randomMenu = this.#recommend.getRandomMenu(randomCategory);
+
+    this.#recommendMenu(randomCategory);
   }
 
-  #getRandomCategory() {}
+  #recommendMenu(category) {
+    Object.keys(this.#coaches).forEach((coachName) => {
+      const { nonEdibleMenu, menus } = this.#coaches[coachName].getCoachLog();
+      const menu = this.#getRecommendMenu(category, nonEdibleMenu, menus);
+    });
+  }
+
+  #getRecommendMenu(category, nonEdibleMenu, menus) {
+    const randomMenu = this.#recommend.getRandomMenu(category);
+    if (nonEdibleMenu.includes(randomMenu) || menus.includes(randomMenu)) {
+      return this.#getRecommendMenu(category, nonEdibleMenu, menus);
+    }
+
+    return randomMenu;
+  }
 }
 
 module.exports = MenuService;

@@ -15,7 +15,8 @@ class Recommend {
   getRandomMenu(category) {
     const menuOfCategory = toArray(MENUS[category]);
     const shuffledMenus = shuffle(menuOfCategory);
-    console.log(shuffledMenus);
+
+    return shuffledMenus[0];
   }
 }
 
