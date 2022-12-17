@@ -1,5 +1,3 @@
-const { SAMPLE } = require("./model/repository");
-
 class Coach {
   #name = "";
   #disabledFoods = [];
@@ -24,6 +22,8 @@ class Coach {
     foods.split(",").map((food) => {
       this.#disabledFoods.push(food);
     })
+
+		
   }
 
   getDayFood() {
@@ -31,6 +31,7 @@ class Coach {
   }
   setDayFood(food) {
     this.#dayFood.push(food)
+
   }
 
 }
