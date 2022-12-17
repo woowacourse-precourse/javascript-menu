@@ -6,7 +6,7 @@ const Coach = require('./model/Coach');
 const InputProcessor = require('./util/InputProcessor');
 const Food = require('./model/Food');
 const MenuUtil = require('./util/menuUtil');
-const categoryTable = require('./constant/categoryTable');
+const CATEGORY_TABLE = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
 const { checkValid } = require('./util/ErrorChecker');
 const {
@@ -103,7 +103,7 @@ class App {
   }
   calcRecommendedList() {
     const categoryNumber = this.selectCategory();
-    const category = categoryTable[categoryNumber];
+    const category = CATEGORY_TABLE[categoryNumber];
     this.recommendCategory.push(category);
   }
 
