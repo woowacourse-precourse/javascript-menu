@@ -41,14 +41,22 @@ class Coach {
     const numberArray = menuArray.map((menu, index) => (menu = index));
     const menuNumber = MissionUtils.Random.shuffle(numberArray)[0];
     const menu = menuArray[menuNumber];
-    if (this.isPickyMenu(menu)) {
+    if (this.isPickyMenu(menu) || this.isDuplicatedMenu(menu)) {
       this.randomMenu(categoryNumber);
     }
     return menu;
   }
 
-  isPickyMenu(menu) {
-    return this.#pickyMenu.includes(menu);
+  isPickyMenu(newMenu) {
+    return this.#pickyMenu.includes(newMenu);
+  }
+
+  isDuplicatedMenu(newMenu) {
+    let repeat = 0;
+    this.#menuOfWeek.forEach((menu) => {
+      if (newMenu == menu) repeat++;
+    });
+    return repeat < 1;
   }
 }
 
