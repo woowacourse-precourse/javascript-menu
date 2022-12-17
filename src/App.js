@@ -1,5 +1,9 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { START_MESSAGE, NOT_EAT_MENU } = require('./Constants');
+const {
+  START_MESSAGE,
+  NOT_EAT_MENU,
+  COMPLETE_MESSAGE,
+} = require('./Constants');
 const { checkValidateCoach, checkValidateCoachNames } = require('./Validate');
 const { readCoachName, readNotEatMenu } = require('./InputView');
 const SAMPLE = {
@@ -53,6 +57,11 @@ class App {
   //   const randomNumber = Random.pickUniqueNumbersInRange(1, 9, 9);
   // const menu = Random.shuffle(randomNumber)[0];
   // }
+
+  finish() {
+    Console.print(COMPLETE_MESSAGE);
+    Console.close();
+  }
 }
 
 const app = new App();
