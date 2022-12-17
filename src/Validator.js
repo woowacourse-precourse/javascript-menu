@@ -4,6 +4,11 @@ const Validator = {
   validateCoach(coaches) {
     this.coachesLength(coaches);
     this.coachNameLength(coaches);
+    this.coachDuplicated(coaches);
+  },
+  coachDuplicated(coaches) {
+    let set = new Set(coaches);
+    if (set.size != coaches.length) throw ERR_MSG.C_DUP_ERR;
   },
 
   coachesLength(coaches) {
@@ -15,6 +20,7 @@ const Validator = {
       if (name.length < 2 || name.length > 4) throw ERR_MSG.NAME_ERR;
     });
   },
+  validateHates(hates) {},
 };
 
 module.exports = Validator;
