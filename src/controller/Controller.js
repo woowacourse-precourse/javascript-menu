@@ -7,7 +7,7 @@ const Recommend = require("../model/Recommend");
 class Controller {
   #coaches;
   #hates = [];
-  #idx = 0;
+  #totalCoachIdx = 0;
 
   init() {
     OutputView.printInit();
@@ -22,7 +22,7 @@ class Controller {
     try {
       Validator.validateCoach(coaches.split(",").map((name) => name.trim()));
       this.#coaches = coaches.split(",").map((name) => name.trim());
-      this.inputHateHandler(this.#idx);
+      this.inputHateHandler(this.#totalCoachIdx);
     } catch (error) {
       Console.print(error);
       this.inputCoachesHandler();
@@ -30,8 +30,8 @@ class Controller {
   }
 
   inputHateHandler(coachIdx) {
-    if (this.#idx == this.#coaches.length) this.resultHandler();
-    if (this.#idx < this.#coaches.length)
+    if (this.#totalCoachIdx == this.#coaches.length) this.resultHandler();
+    if (this.#totalCoachIdx < this.#coaches.length)
       InputView.readHates(this.#coaches[coachIdx], this.hateHandler.bind(this));
   }
 
@@ -41,14 +41,14 @@ class Controller {
       this.makeHates(hates.split(",").map((name) => name.trim()));
     } catch (error) {
       Console.print(error);
-      this.inputHateHandler(this.#idx);
+      this.inputHateHandler(this.#totalCoachIdx);
     }
   }
 
   makeHates(hates) {
     this.#hates.push(hates);
-    this.#idx += 1;
-    this.inputHateHandler(this.#idx);
+    this.#totalCoachIdx += 1;
+    this.inputHateHandler(this.#totalCoachIdx);
   }
 
   resultHandler() {

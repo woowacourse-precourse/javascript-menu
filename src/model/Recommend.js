@@ -30,21 +30,21 @@ class Recommend {
   }
 
   makeRandomCategory(categories, rcmCategory) {
-    let idx = 0;
-    while (idx < DAYS) {
+    let dayIdx = 0;
+    while (dayIdx < DAYS) {
       const category = categories[Random.pickNumberInRange(MIN, MAX) - 1];
-      if (idx > 0 && this.isDuplicateCategory(rcmCategory, category)) {
-        idx = this.addCategory(rcmCategory, category, idx);
+      if (dayIdx > 0 && this.isDuplicateCategory(rcmCategory, category)) {
+        dayIdx = this.addCategory(rcmCategory, category, dayIdx);
       }
-      if (idx == 0) {
-        idx = this.addCategory(rcmCategory, category, idx);
+      if (dayIdx == 0) {
+        dayIdx = this.addCategory(rcmCategory, category, dayIdx);
       }
     }
   }
 
-  addCategory(rcmCategory, category, idx) {
+  addCategory(rcmCategory, category, dayIdx) {
     rcmCategory.push(category);
-    return (idx += 1);
+    return (dayIdx += 1);
   }
 
   isDuplicateCategory(rcmCategory, category) {
@@ -63,11 +63,11 @@ class Recommend {
     return rcmDishes;
   }
 
-  checkRcmDishes(idx) {
+  checkRcmDishes(coachIdx) {
     let menu = [];
     let idx_menu = [];
     this.makeIdxMenu(idx_menu);
-    this.makeCoachesMenu(idx, menu, idx_menu);
+    this.makeCoachesMenu(coachIdx, menu, idx_menu);
     return menu;
   }
 
@@ -77,12 +77,12 @@ class Recommend {
     }
   }
 
-  makeCoachesMenu(idx, menu, idx_menu) {
+  makeCoachesMenu(coachIdx, menu, idx_menu) {
     let day = 1;
     while (day <= DAYS) {
       const dishes = SAMPLE[this.#categories[day]].split(", ");
       const dish = dishes[Random.shuffle(idx_menu)[0] - 1];
-      if (this.isHateDish(idx, dish) && this.isDuplicateDish(menu, dish)) {
+      if (this.isHateDish(coachIdx, dish) && this.isDuplicateDish(menu, dish)) {
         menu.push(dish);
         day += 1;
       }
@@ -95,8 +95,8 @@ class Recommend {
     return true;
   }
 
-  isHateDish(idx, dish) {
-    if (this.#hates[idx].includes(dish)) return false;
+  isHateDish(coachIdx, dish) {
+    if (this.#hates[coachIdx].includes(dish)) return false;
     return true;
   }
 
