@@ -16,8 +16,11 @@ const Validator = {
 
   checkHates(input) {
     Validator.checkInput(input);
+    if (input === '') return;
     const hates = input.split(',');
     if (hates.every(Validator.isInMenu) === false) throw new Error('메뉴에 없는 음식입니다.');
+    if (new Set(hates).size !== hates.length) throw new Error('중복은 불가능합니다.');
+    if (hates.length > 2) throw new Error('최대 2개까지 가능합니다.');
   },
 
   isInMenu(food) {
