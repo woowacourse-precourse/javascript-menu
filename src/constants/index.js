@@ -1,3 +1,4 @@
 const MESSAGE = require('./message');
+const CATEGORIES = require('./categories');
 
-module.exports = { ...MESSAGE };
+module.exports = { ...MESSAGE, CATEGORIES };
