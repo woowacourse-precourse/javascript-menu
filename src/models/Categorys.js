@@ -15,6 +15,13 @@ class Gategorys {
     }
   }
 
+  isExistMenu(dislikeFoods) {
+    dislikeFoods = dislikeFoods.split(',');
+    return dislikeFoods.every((dislikeFood) =>
+      this.#allMenus.includes(dislikeFood)
+    );
+  }
+
   #addAllMenus(menus) {
     menus.split(',').forEach((menu) => this.#allMenus.push(menu));
   }

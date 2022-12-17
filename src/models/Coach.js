@@ -26,9 +26,9 @@ class Coach {
     return true;
   }
 
-  static validationDislikeFoods(dislikeFoods) {
+  static validationDislikeFoods(dislikeFoods, isExistInMenus) {
     try {
-      DislikeFoodsValidation.validation(dislikeFoods);
+      DislikeFoodsValidation.validation(dislikeFoods, isExistInMenus);
     } catch (error) {
       ErrorHandler.throwError(error);
       return false;

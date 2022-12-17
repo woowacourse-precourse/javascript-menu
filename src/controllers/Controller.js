@@ -42,7 +42,10 @@ class Controller {
   }
 
   handleDislikeFoods(dislikeFoods) {
-    const isValid = Coach.validationDislikeFoods(dislikeFoods);
+    const isValid = Coach.validationDislikeFoods(
+      dislikeFoods,
+      this.#categorys.isExistMenu(dislikeFoods)
+    );
     if (!isValid) return this.requestDislikeFoods();
 
     const coach = this.#coachNames.shift();
