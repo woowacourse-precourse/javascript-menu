@@ -32,7 +32,7 @@ class Validator {
 
   static #isValidInputFormat(Input) {
     const check = /^[가-힣]+(,[가-힣]+)+$/;
-    return !check.test(Input);
+    return check.test(Input);
   }
 
   static #isLessThanMinimumCoachNumber(coachNames) {
