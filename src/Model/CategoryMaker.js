@@ -1,22 +1,24 @@
-const { Random } = require('@woowacourse/mission-utils');
+const CategoryNumberMaker = require('./CategoryNumberMaker');
+const { CATEGORY } = require('../Util/Constants');
 
 const CategoryMaker = {
-  RANDOM_LOWER_INCLUSIVE: 1,
-  RANDOM_UPPER_INCLUSIVE: 5,
+  JAPANESE_NUMBER: 1,
+  KOREAN_NUMBER: 2,
+  CHINESE_NUMBER: 3,
+  ASIAN_NUMBER: 4,
+  ITALIAN_NUMBER: 5,
 
   makeCategory() {
     const category = [];
-    while (category.length < 5) {
-      const randomNumber = this.generateRandomNumber();
-      const filtered = category.filter((item) => item === randomNumber);
-      if (filtered.length > 1) continue;
-      category.push(randomNumber);
-    }
+    const randomNumbers = CategoryNumberMaker.makeRandomFiveNumbers();
+    randomNumbers.forEach((number) => {
+      if (number === this.JAPANESE_NUMBER) category.push(CATEGORY.JAPANESE);
+      if (number === this.KOREAN_NUMBER) category.push(CATEGORY.KOREAN);
+      if (number === this.CHINESE_NUMBER) category.push(CATEGORY.CHINESE);
+      if (number === this.ASIAN_NUMBER) category.push(CATEGORY.ASIAN);
+      if (number === this.ITALIAN_NUMBER) category.push(CATEGORY.ITALIAN);
+    });
     return category;
-  },
-
-  generateRandomNumber() {
-    return Random.pickNumberInRange(CategoryMaker.RANDOM_LOWER_INCLUSIVE, CategoryMaker.RANDOM_UPPER_INCLUSIVE);
   },
 };
 
