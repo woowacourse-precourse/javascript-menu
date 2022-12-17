@@ -9,6 +9,10 @@ const InputView = {
   readCoachName(callback) {
     this.input(MESSAGE.COACH_NAME, callback);
   },
+
+  readCoachDislike(name, callback) {
+    this.input(name + MESSAGE.COACH_DISLIKE, callback);
+  },
 };
 
 module.exports = InputView;

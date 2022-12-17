@@ -12,16 +12,37 @@ MenuServiceController = class {
   start() {
     this.view.printStartMessage();
 
-    this.#setCoachName();
+    try {
+      this.inputCoachName();
+    } catch (message) {
+      this.view.printError(message);
+      this.inputCoachName();
+    }
   }
 
-  #setCoachName() {
+  inputCoachName() {
     this.view.readCoachName((names) => {
       names = [...new Set(names.split(","))];
 
       checkNameCountValid(names);
       checkNameLengthValid(names);
+
+      this.model.setCoachName(names);
+
+      this.inputCoachDislike(names.reverse());
     });
+  }
+
+  inputCoachDislike(names) {
+    this.view.readCoachDislike(names.pop(), (menus) => {
+      if (!names.length) this.next();
+
+      this.inputCoachDislike(names);
+    });
+  }
+
+  next() {
+    console.log("done");
   }
 };
 

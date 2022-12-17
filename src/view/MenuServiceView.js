@@ -8,8 +8,16 @@ MenuServiceView = class {
     this.inputView.readCoachName(callback);
   }
 
+  readCoachDislike(name, callback) {
+    this.inputView.readCoachDislike(name, callback);
+  }
+
   printStartMessage() {
     this.outputView.printStartMessage();
+  }
+
+  printError(message) {
+    this.outputView.print(message);
   }
 };
 
