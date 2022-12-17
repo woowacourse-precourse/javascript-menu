@@ -1,3 +1,4 @@
+const Coachs = require("./Model/Coachs");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
 
@@ -21,7 +22,9 @@ class App {
     InputView.readBridgeSize(this.actionCoachNames.bind(this));
   }
 
-  actionCoachNames(coachNames) {}
+  actionCoachNames(coachNames) {
+    this.coachs = new Coachs(coachNames);
+  }
 }
 
 const app = new App();
