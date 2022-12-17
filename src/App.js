@@ -5,10 +5,15 @@ const Coach = require('./Coach');
 const InputProcessor = require('./util/InputProcessor');
 const Food = require('./Food');
 const MenuUtil = require('./util/menuUtil');
-const MissionUtils = require('@woowacourse/mission-utils');
 const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
-const ErrorChecker = require('./util/ErrorChecker');
+const { Random } = require('@woowacourse/mission-utils');
+const { checkValid } = require('./util/ErrorChecker');
+const {
+  isVaildCoachNumber,
+  isVaildDislikeFoodsLength,
+  isVaildNameLength,
+} = require('./util/vaildator');
 
 class App {
   constructor() {
@@ -29,16 +34,16 @@ class App {
     const coachNames = InputProcessor.parseCommaStringsToArray(input);
 
     try {
-      ErrorChecker.checkValid(
+      checkValid(
         coachNames,
-        Vaildator.isVaildCoachNumber,
-        '[ERROR]: 올바르지 않는 입력입니다.'
+        isVaildCoachNumber,
+        '[ERROR]: 유효 범위에 맞지 않은 입력입니다.'
       );
     } catch (error) {
       this.output.print(error.message);
       this.input.readLine(this.inputCoachs.bind(this));
     }
-    if (!coachNames.every(Vaildator.isVaildNameLength)) {
+    if (!coachNames.every(isVaildNameLength)) {
     }
 
     coachNames.forEach((coachname) => {
@@ -68,9 +73,9 @@ class App {
 
     // 개수가 올바른지 판단하기
     try {
-      ErrorChecker.checkValid(
+      checkValid(
         inputFoods,
-        Vaildator.isVaildDislikeFoodsLength,
+        isVaildDislikeFoodsLength,
         '[ERROR]: 올바르지 않는 입력입니다.'
       );
     } catch (error) {
@@ -96,7 +101,7 @@ class App {
 
   selectCategory() {
     while (true) {
-      const category = MissionUtils.Random.pickNumberInRange(1, 5);
+      const category = Random.pickNumberInRange(1, 5);
       if (!this.categoryCounts[category] <= 2) {
         this.categoryCounts[category]++;
         return category;
@@ -110,19 +115,19 @@ class App {
   }
 
   recommendByCoach(foodList, coach) {
-    let selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
+    let selectFoodIdx = Random.shuffle(foodList)[0];
     selectFoodIdx -= 1;
     while (true) {
       if (
         coach.dislikeFoods.some((food) => food.name === foodList[selectFoodIdx])
       ) {
-        selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
+        selectFoodIdx = Random.shuffle(foodList)[0];
         continue;
       }
       if (
         coach.ateFoods.some((food) => food.name === foodList[selectFoodIdx])
       ) {
-        selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
+        selectFoodIdx = Random.shuffle(foodList)[0];
         continue;
       }
       break;
