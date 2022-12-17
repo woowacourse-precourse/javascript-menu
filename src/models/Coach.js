@@ -1,7 +1,7 @@
 const MENU_MAP = require('../constants');
 const { Random } = require('@woowacourse/mission-utils');
 
-class Menu {
+class Coach {
   #hates;
   #foods;
 
@@ -10,7 +10,7 @@ class Menu {
     this.#foods = [];
   }
 
-  choiceFood(categoris) {
+  choiceFoods(categoris) {
     while (this.#foods.length < 5) {
       const categori = categoris[this.#foods.length];
       const menu = MENU_MAP[categori];
@@ -24,4 +24,4 @@ class Menu {
   }
 }
 
-module.exports = Menu;
+module.exports = Coach;
