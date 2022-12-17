@@ -45,14 +45,21 @@ CATEGORIES.set(5, '양식')
 
 const RANDOM_ARRAY = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
-const BannedMenu = {}
-const Names = []
-const Categories = []
-const Recommended = []
+let BannedMenu = {}
+let Names = []
+let Categories = []
+let Recommended = []
+
+function initUtils() {
+  BannedMenu = {}
+  Names = []
+  Categories = []
+  Recommended = []
+}
 
 function finishService() {
   Console.close()
-  return
+  return initUtils()
 }
 
 function printRecommende(toPrint, idx) {
@@ -94,7 +101,8 @@ function printResult() {
 }
 
 function getMenu(idx, date) {
-  const menu = SAMPLE[Categories[date]].split(', ')[Random.shuffle(RANDOM_ARRAY)[0]-1]
+  const menus = SAMPLE[Categories[date]].split(', ')
+  const menu = menus[Random.shuffle(RANDOM_ARRAY)[0]-1]
   if(Recommended[idx].includes(menu)) return getMenu(idx, date)
   if(BannedMenu[Names[idx].includes(menu)]) return getMenu(idx, date)
   Recommended[idx].push(menu)
@@ -241,6 +249,3 @@ class App {
 }
 
 module.exports = App;
-
-const a = new App()
-a.play();
