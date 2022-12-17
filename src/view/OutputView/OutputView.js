@@ -1,13 +1,14 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { MESSAGE } = require('../../constants/Constants');
 
 const OutputView = class extends IOutputView {
   printError(message) {
     Console.print(message);
   }
 
-  // printOpening() {
-  //   throw new OverrideError();
-  // }
+  printOpening() {
+    Console.print(MESSAGE.opening);
+  }
 
   // printRecommendMenu() {
   //   throw new OverrideError();
