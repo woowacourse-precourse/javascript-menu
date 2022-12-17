@@ -33,7 +33,7 @@ class Recommend {
     let idx = 0;
     while (idx < DAYS) {
       const category = categories[Random.pickNumberInRange(MIN, MAX) - 1];
-      if (idx > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
+      if (idx > 0 && this.isDuplicateCategory(rcmCategory, category)) {
         idx = this.addCategory(rcmCategory, category, idx);
       }
       if (idx == 0) {
@@ -47,7 +47,7 @@ class Recommend {
     return (idx += 1);
   }
 
-  checkDuplicateCategory(rcmCategory, category) {
+  isDuplicateCategory(rcmCategory, category) {
     return rcmCategory.indexOf(category) != rcmCategory.lastIndexOf(category)
       ? false
       : true;
@@ -82,23 +82,20 @@ class Recommend {
     while (day <= DAYS) {
       const dishes = SAMPLE[this.#categories[day]].split(", ");
       const dish = dishes[Random.shuffle(idx_menu)[0] - 1];
-      if (
-        this.checkHateDish(idx, dish) &&
-        this.checkDuplicateDish(menu, dish)
-      ) {
+      if (this.isHateDish(idx, dish) && this.isDuplicateDish(menu, dish)) {
         menu.push(dish);
         day += 1;
       }
     }
   }
 
-  checkDuplicateDish(menu, dish) {
+  isDuplicateDish(menu, dish) {
     if (menu.length == 0) return true;
     if (menu.length > 0 && menu.includes(dish)) return false;
     return true;
   }
 
-  checkHateDish(idx, dish) {
+  isHateDish(idx, dish) {
     if (this.#hates[idx].includes(dish)) return false;
     return true;
   }
