@@ -19,8 +19,6 @@ class ChooseSystem {
   banMenu(coachName, menus) {
     const trimmedMenus = menus.split(',');
     this.#bans[coachName] = trimmedMenus;
-    console.log(this.#coachNames);
-    console.log({ ban: this.#bans });
   }
 
   chooseAllMenus() {

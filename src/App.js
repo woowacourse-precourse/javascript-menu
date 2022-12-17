@@ -26,7 +26,6 @@ class App {
       try {
         Validator.errorIfCoachNamesInvalid(coachNames);
         this.#coaches = coachNames.split(',');
-        console.log(this.#coaches);
         this.#chooseSystem.addCoaches(this.#coaches);
         this.#inputBanMenuPhase(0);
       } catch (error) {
