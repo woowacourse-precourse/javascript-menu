@@ -47,7 +47,7 @@ class MenuController {
     const lastCoachName = coaches[coaches.length - 1];
     InputView.askNonEdibleMenus(coaches[0], (menus) => {
       try {
-        this.#validateNonEdibleMenus(toArray(menus));
+        if (menus.length > 0) this.#validateNonEdibleMenus(toArray(menus));
       } catch ({ message }) {
         OutputView.printErrorMessage(message);
         return this.#inputNonEdibleMenus(coaches);
@@ -65,7 +65,11 @@ class MenuController {
   }
 
   #onInputNonEdibleMenus(coachName, menus) {
-    this.#menuService.addNonEdibleMenus(coachName, menus);
+    if (menus.length > 0) {
+      this.#menuService.addNonEdibleMenus(coachName, menus);
+    }
+
+    this.#printResult();
   }
 
   #printResult() {

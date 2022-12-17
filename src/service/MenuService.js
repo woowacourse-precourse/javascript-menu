@@ -24,6 +24,7 @@ class MenuService {
 
   #recommendMenu() {
     const randomCategory = this.#recommend.getRandomCategory();
+    const randomMenu = this.#recommend.getRandomMenu(randomCategory);
   }
 
   #getRandomCategory() {}

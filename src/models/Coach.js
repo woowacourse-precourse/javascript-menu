@@ -3,11 +3,14 @@ class Coach {
   #menus;
 
   constructor() {
+    this.#nonEdibleMenu = [];
     this.#menus = [];
   }
 
   setNonEdibleMenus(menus) {
-    this.#nonEdibleMenu = menus;
+    if (menus.length > 0) {
+      this.#nonEdibleMenu = menus;
+    }
   }
 }
 
