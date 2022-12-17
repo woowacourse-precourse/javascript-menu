@@ -11,4 +11,4 @@ const CategoryRandomNumberGenerator = {
   },
 };
 
-module.exports = CategoryRandomNumberGenrator;
+module.exports = CategoryRandomNumberGenerator;
