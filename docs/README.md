@@ -4,6 +4,22 @@
 
 ## 파일 구조
 
+```
+📦src
+ ┣ 📂constant
+ ┃ ┗ 📜Constant.js
+ ┣ 📂model
+ ┃ ┣ 📜CategoryChooser.js
+ ┃ ┣ 📜ChooseSystem.js
+ ┃ ┗ 📜MenuChooser.js
+ ┣ 📂view
+ ┃ ┣ 📜InputView.js
+ ┃ ┗ 📜OutputView.js
+ ┣ 📜App.js
+ ┣ 📜Trimmer.js
+ ┗ 📜Validator.js
+```
+
 ## 기능 목록
 
 ### Model
