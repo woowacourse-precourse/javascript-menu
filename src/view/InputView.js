@@ -16,7 +16,7 @@ const InputView = Object.freeze({
   },
 
   readCannotEat(coach, readingHandler) {
-    Console.readLine(`${coach.getName()}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (input) => {
+    Console.readLine(`\n${coach.getName()}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (input) => {
       const menuList = this.preProcessList(input);
       try {
         InputValidator.checkMenus(menuList);

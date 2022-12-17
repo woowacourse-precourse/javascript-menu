@@ -31,27 +31,21 @@ class Controller {
     return (menusCannotEat) => {
       const coach = coachList.shift();
 
-      if (menusCannotEat[0] !== '') {
+      if (menusCannotEat[0] !== '')
         this.#lunchRecommendation.setMenusCannotEat(coach, menusCannotEat);
-      }
 
-      if (coachList.length === 0) {
-        return this.#recommendLunchMenu;
-      }
+      if (coachList.length === 0) return this.#recommendLunchMenu();
 
       this.#inputView.readCannotEat(
         coachList[0],
         this.#handleSettingCannotEat(coachList).bind(this)
       );
-      //TODO: #model -> coach 객체에서 못먹는 메뉴 등록
-      //TODO: coachList가 남아 있는 경우)
-      //TODO: #input ->  cannotEat(못먹는 메뉴)입력 --> handleSettingCannotEat
-      //TODO: coachList가 없는 경우)
-      //TODO: 메뉴 추천 결과
     };
   }
 
   #recommendLunchMenu() {
+    const recommendationResult = this.#lunchRecommendation.getRecommendation();
+
     //TODO: #model -> 메뉴 추천 결과 가져오기
     //TODO: #output -> 메뉴 추천 결과 출력하기
   }

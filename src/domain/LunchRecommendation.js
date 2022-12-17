@@ -1,9 +1,15 @@
+const { CATEGORY } = require('../../constants');
 const menuDB = require('../storage/menuDB');
+const { result } = require('../view/messages');
 const Coach = require('./Coach');
+const RandomNumberGenerator = require('./RandomNumberGenerator');
+const Result = require('./Result');
+const Shuffler = require('./Shuffler');
 
 class LunchRecommendation {
   constructor(SAMPLE) {
     this.#createMenuDB(SAMPLE);
+    this.categoryList = [];
     this.coachList = [];
   }
 
@@ -20,11 +26,69 @@ class LunchRecommendation {
   }
 
   getCoaches() {
-    return this.coachList;
+    return [...this.coachList];
+  }
+
+  getRecommendation() {
+    let daysLeft = 5;
+
+    while (daysLeft > 0) {
+      console.log('daysLeft', daysLeft);
+      this.#getRecommendationByCoaches();
+      daysLeft -= 1;
+    }
+    this.coachList.forEach((coach) => {
+      console.log('coach.getMenuList()', coach.getMenuList());
+    });
+
+    return new Result([...this.coachList], [...this.categoryList]);
   }
 
   setMenusCannotEat(coach, menus) {
     coach.setCannotEat(menus);
+  }
+
+  #getRecommendationByCoaches() {
+    const menuListSelected = this.getCategoryMenu(this.#pickCategory());
+    console.log('menuListSelected', menuListSelected);
+
+    this.coachList.forEach((coach) => {
+      this.#setRecommendationMenu(coach, menuListSelected);
+    });
+  }
+
+  #setRecommendationMenu(coach, menuListSelected) {
+    const menuNumber = Shuffler.shuffle(menuListSelected.length);
+    console.log('menu', menuListSelected[menuNumber]);
+    if (!coach.checkCanEat(menuListSelected[menuNumber])) {
+      return this.#setRecommendationMenu(coach, menuListSelected);
+    }
+
+    return coach.setMenu(menuListSelected[menuNumber]);
+  }
+
+  #pickCategory() {
+    const category = RandomNumberGenerator.generate();
+    console.log('categoryNumber', category);
+    if (!this.#validateCategory(category)) {
+      return this.#pickCategory();
+    }
+    this.categoryList.push(category);
+    return category;
+  }
+
+  getCategoryMenu(categoryNumber) {
+    return menuDB[CATEGORY[categoryNumber]];
+  }
+
+  #validateCategory(category) {
+    const repeat = this.categoryList.filter((element) => element === category).length;
+
+    if (repeat === 2) {
+      return false;
+    }
+
+    return true;
   }
 }
 
@@ -35,7 +99,8 @@ class LunchRecommendation {
 //   아시안: '팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
 //   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 // });
-
-// menuDB
+// menuDB['양식']; //?
+// CATEGORY; //?
+// lunch.getCategoryMenu(5); //?
 
 module.exports = LunchRecommendation;
