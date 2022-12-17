@@ -6,6 +6,12 @@ const Validator = {
       throw Error();
     }
   },
+
+  errorIfBanMenuInvalid(banMenu) {
+    if (!REGEX.IS_BAN_MENU_VALID.test(banMenu)) {
+      throw Error();
+    }
+  },
 };
 
 module.exports = Validator;
