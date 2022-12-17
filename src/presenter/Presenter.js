@@ -16,14 +16,11 @@ const Coach = require('../model/Coach');
 const recommandFood = require('../utils/FoodRecommandation');
 
 class Presenter {
-  #menuSample;
-
   #coaches = [];
 
   #count = 0;
 
-  constructor(SAMPLE) {
-    this.#menuSample = SAMPLE;
+  constructor() {
     printStart();
   }
 
