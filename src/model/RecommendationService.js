@@ -25,10 +25,46 @@ class RecommendationService {
     this.#menu[index] = menus;
   }
 
-  choiceCategoryForEachDay(day) {
-    const category = this.randomChoiceCategory();
-    this.#categoryForEachDay[day] = category;
-    const menu = this.randomChoiceMenuInCategory(category);
+  choiceCategoryForWeek() {
+    const selectedCategories = [this.randomChoiceCategory()];
+    while (selectedCategories.length < 5) {
+      const category = this.randomChoiceCategory();
+      if (this.checkCanChoiceCategory(category, selectedCategories)) {
+        selectedCategories.push(category);
+      }
+    }
+
+    this.assignCategoryForEachDay(selectedCategories);
+  }
+
+  assignCategoryForEachDay(categories) {
+    const DAY_INDEX = {
+      0: 'Mon',
+      1: 'Tue',
+      2: 'Wed',
+      3: 'Thu',
+      4: 'Fri',
+    };
+
+    for (let index = 0; index < 5; index += 1) {
+      const day = DAY_INDEX[index];
+      this.#categoryForEachDay[day] = categories[index];
+    }
+  }
+
+  checkCanChoiceCategory(category, categories) {
+    const count = this.calculateCountSameCategory(category, categories);
+    return count < 2;
+  }
+
+  calculateCountSameCategory(compareCategory, categories) {
+    let count = 0;
+    categories.forEach((category) => {
+      if (category === compareCategory) {
+        count += 1;
+      }
+    });
+    return count;
   }
 
   randomChoiceCategory() {

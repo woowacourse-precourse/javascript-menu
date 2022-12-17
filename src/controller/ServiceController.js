@@ -27,8 +27,7 @@ class ServiceController {
       this.#service.setMenuForEachCoah(menu, index);
 
       if (index + 1 === names.length) {
-        const START_DAY_INDEX = 0;
-        this.choiceCategory(0);
+        this.choiceCategory();
       } else {
         this.recieveExcludeMenuForEachCoach(names, index + 1);
       }
@@ -37,17 +36,8 @@ class ServiceController {
     InputView.readExcludeMenu(name, onDeliveryMenu);
   }
 
-  choiceCategory(index) {
-    const DAY_INDEX = {
-      0: 'Mon',
-      1: 'Tue',
-      2: 'Wed',
-      3: 'Thu',
-      4: 'Fri',
-    };
-
-    console.log('요일 : ', DAY_INDEX[index]);
-    this.#service.choiceCategoryForEachDay(DAY_INDEX[index]);
+  choiceCategory() {
+    this.#service.choiceCategoryForWeek();
   }
 }
 
