@@ -18,6 +18,13 @@ const ERROR_MESSAGE = Object.freeze({
   coachNameIsWeird: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자입니다.',
   tooManyFoods: '[ERROR] 최소 0개, 최대 2개의 못 먹는 메뉴가 있어야 합니다.',
 });
+
+const RESULT_MESSAGE = Object.freeze({
+  result: '메뉴 추천 결과입니다.',
+  day: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+  bye: '추천을 완료했습니다.',
+});
+
 module.exports = {
-  SAMPLE, READ_MESSAGE, ERROR_MESSAGE, WELCOME,
+  SAMPLE, READ_MESSAGE, ERROR_MESSAGE, WELCOME, RESULT_MESSAGE,
 };

@@ -1,7 +1,7 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Coach } = require('./models/Coach');
 const { findIndexByCoachName } = require('./utils/common');
-const { SAMPLE } = require('./utils/constants');
+const { SAMPLE, RESULT_MESSAGE } = require('./utils/constants');
 const { readCoaches, readBannedFoods } = require('./views/InputView');
 const { OutputView } = require('./views/OutputView');
 
@@ -45,11 +45,27 @@ class App {
     arr.forEach((el) => {
       this.#coaches[findIndexByCoachName(this.#coaches, el.name)].setBannedFoods(el.foods);
     });
-    this.recommendFoods();
+    this.recommendFoodsToCoaches();
   }
 
-  recommendFoods() {
+  recommendFoodsToCoaches() {
     console.log('추천 시작한다');
+    this.#coaches.forEach((coach) => {
+      coach.recommendFoods(this.#categories);
+    });
+    this.printResults();
+  }
+
+  printResults() {
+    MissionUtils.Console.print(RESULT_MESSAGE.result);
+    MissionUtils.Console.print(RESULT_MESSAGE.day);
+    console.log(this.#categories);
+    const results = [];
+    this.#coaches.forEach((coach) => {
+      results.push([coach.getName(), ...coach.getFoods()]);
+    });
+    results.forEach((line) => console.log(`[ ${line.join(' | ')} ]`));
+    MissionUtils.Console.print(RESULT_MESSAGE.bye);
   }
 }
 
