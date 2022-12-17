@@ -33,7 +33,7 @@ class MenuManager {
     });
   }
 
-  getCoachsMenus() {
+  getMenusByCoaches() {
     return this.#coachs.map((coach) => ({ name: coach.getName(), menus: coach.getMenus() }));
   }
 }

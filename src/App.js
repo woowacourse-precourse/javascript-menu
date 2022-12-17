@@ -52,8 +52,8 @@ class App {
   makeRecommendedMenu() {
     const randomCategorys = RandomCategoryGenerator.generateRandomCategorys();
     this.#menuManager.setMenus(randomCategorys);
-    const coachsMenus = this.#menuManager.getCoachsMenus();
-    OutputView.printRecommendedMenu(randomCategorys, coachsMenus);
+    const menusByCoaches = this.#menuManager.getMenusByCoaches();
+    OutputView.printRecommendedMenu(randomCategorys, menusByCoaches);
     this.close();
   }
 
