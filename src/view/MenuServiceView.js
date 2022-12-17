@@ -16,6 +16,18 @@ MenuServiceView = class {
     this.outputView.printStartMessage();
   }
 
+  printResultMessage() {
+    this.outputView.printResultMessage();
+  }
+
+  printResult(categoryMessage, coachMessages) {
+    this.outputView.printResult(categoryMessage, coachMessages);
+  }
+
+  printEndMessage() {
+    this.outputView.printEndMessage();
+  }
+
   printError(message) {
     this.outputView.print(message);
   }

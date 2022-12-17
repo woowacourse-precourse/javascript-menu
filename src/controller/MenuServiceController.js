@@ -5,6 +5,7 @@ const {
   checkDislikeMenuValid,
 } = require("../validator/index");
 const { getCategory, getMenu } = require("../picker/index");
+const { Console } = require("@woowacourse/mission-utils");
 
 MenuServiceController = class {
   constructor(view, model) {
@@ -115,10 +116,29 @@ MenuServiceController = class {
       });
     });
 
-    this.outputResult(dislikeHash, recommendHash);
+    this.outputResult(weekCategories, recommendHash);
   }
 
-  outputResult(dislikeHash, recommendHash) {}
+  outputResult(weekCategories, recommendHash) {
+    this.view.printResultMessage();
+
+    const categoryMessage = "[ " + weekCategories.join(" | ") + " ]";
+    const coachMessages = [];
+
+    [...recommendHash.entries()].forEach((e) => {
+      const coachMessage = "[ " + e[0] + " | " + e[1].join(" | ") + " ]";
+
+      coachMessages.push(coachMessage);
+    });
+
+    this.view.printResult(categoryMessage, coachMessages);
+
+    this.exit();
+  }
+
+  exit() {
+    Console.close();
+  }
 };
 
 module.exports = MenuServiceController;
