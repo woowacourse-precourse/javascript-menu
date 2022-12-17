@@ -83,6 +83,7 @@ const Constants = Object.freeze({
 
   COMMON_MSG: Object.freeze({
     newLine: '\n',
+    comma: ',',
   }),
 });
 
