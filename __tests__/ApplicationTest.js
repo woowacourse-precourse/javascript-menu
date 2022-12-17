@@ -49,6 +49,7 @@ describe('점심 메뉴 테스트', () => {
 	});
 
 	describe('전체 기능 테스트', () => {
+		
 		test('카테고리 메뉴 중복 없는 추천', () => {
 			const logSpy = getLogSpy();
 
@@ -91,4 +92,82 @@ describe('점심 메뉴 테스트', () => {
 			);
 		});
 	});
+
+	describe('입력 예외 처리 테스트', () => {
+		test('코치 인원이 2명 미만일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+		
+		test('코치 인원이 5명 초과일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구,팔팔,칠칠,육육,오오,사사', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+		
+		test('코치 이름이 2글자 미만일때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+
+		test('코치 이름이 4글자 초과일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구구구구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+
+		test('코치 인원이 2명 미만일 때', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 1, 3, 4]);
+			mockQuestions(['구구', '구구,제임스']);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expectLogContains(log, [
+				"[ERROR]"
+			])
+		});
+	});
+
 });
