@@ -19,7 +19,7 @@ class MenuManager {
     }
   }
 
-  addMenuToCoach(coach, category) {
+  #addMenuToCoach(coach, category) {
     let isAddSuccess = false;
     while (!isAddSuccess) {
       const menu = shuffleArray(MENU_LIST[category])[0];
@@ -29,7 +29,7 @@ class MenuManager {
 
   setMenus(categorys) {
     this.#coaches.forEach((coach) => {
-      categorys.forEach((category) => this.addMenuToCoach(coach, category));
+      categorys.forEach((category) => this.#addMenuToCoach(coach, category));
     });
   }
 
