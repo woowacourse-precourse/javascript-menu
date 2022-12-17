@@ -92,6 +92,50 @@ describe("점심 메뉴 테스트", () => {
       );
     });
   });
+
+  describe("전체 기능 테스트", () => {
+    test("카테고리 메뉴 중복 없는 추천", () => {
+      const logSpy = getLogSpy();
+
+      mockRandoms([1, 2, 3, 4, 5]);
+      mockQuestions(["구구,제임스", "김밥", "떡볶이"]);
+
+      const sequenced = (_, idx) => idx + 1;
+      mockShuffles([
+        // 구구
+        [1, Array.from({ length: 9 }, sequenced)],
+        [2, Array.from({ length: 9 }, sequenced)],
+        [3, Array.from({ length: 9 }, sequenced)],
+        [4, Array.from({ length: 9 }, sequenced)],
+        [5, Array.from({ length: 9 }, sequenced)],
+
+        //제임스
+        [1, Array.from({ length: 9 }, sequenced)],
+        [2, Array.from({ length: 9 }, sequenced)],
+        [3, Array.from({ length: 9 }, sequenced)],
+        [4, Array.from({ length: 9 }, sequenced)],
+        [5, Array.from({ length: 9 }, sequenced)],
+      ]);
+
+      const app = new App();
+      app.play();
+      const log = getOutput(logSpy);
+
+      expect(log.replace(/\n/g, "")).toEqual(
+        expect.stringContaining(
+          [
+            "점심 메뉴 추천을 시작합니다.",
+            "메뉴 추천 결과입니다.",
+            "[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]",
+            "[ 카테고리 | 일식 | 한식 | 중식 | 아시안 | 양식 ]",
+            "[ 구구 | 규동 | 김치찌개 | 동파육 | 파인애플 볶음밥 | 프렌치 토스트 ]",
+            "[ 제임스 | 규동 | 김치찌개 | 동파육 | 파인애플 볶음밥 | 프렌치 토스트 ]",
+            "추천을 완료했습니다.",
+          ].join("")
+        )
+      );
+    });
+  });
 });
 
 describe("유효성 검사", () => {
