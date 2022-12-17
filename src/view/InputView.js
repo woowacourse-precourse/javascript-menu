@@ -1,9 +1,10 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { GuideString } = require("../static/Static");
 
 const InputView = {
   readCoachName(callback) {
     this.getUserInput(
-      "\n코치의 이름을 입력해 주세요. (, 로 구분)\n",
+      GuideString.READ_COACH_NAME,
       callback,
       this.readCoachName.bind(this)
     );
@@ -11,7 +12,7 @@ const InputView = {
 
   readUnLikeMenu(callback, name) {
     this.getUserInput(
-      `\n${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
+      `\n${name}` + GuideString.READ_UNLIKE_MENU,
       callback,
       this.readUnLikeMenu.bind(this),
       name

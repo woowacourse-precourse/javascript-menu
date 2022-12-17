@@ -1,5 +1,7 @@
 const ErrorMsg = Object.freeze({
-  MSG: "[ERROR]",
+  COACH_NAME: "[ERROR] 코치의 이름은 2글자에서 4글자 사이입니다.",
+  COACH_COUNT: "[ERROR] 함께 밥을 먹는 코치의 수는 2명에서 5명 사이입니다.",
+  UNLIKE_MENU_COUNT: "[ERROR] 못 먹는 메뉴는 0개에서 2개만 가능합니다.",
 });
 
 const AllMenu = Object.freeze({
@@ -21,7 +23,7 @@ const AllMenu = Object.freeze({
     "된장찌개",
     "비빔밥",
     "칼국수",
-    "불고기,",
+    "불고기",
     "떡볶이",
     "제육볶음",
   ],
@@ -62,4 +64,25 @@ const AllMenu = Object.freeze({
 
 const AllCategory = ["일식", "한식", "중식", "아시안", "양식"];
 
-module.exports = { AllCategory, AllMenu };
+const StaticValues = Object.freeze({
+  EAT_TOGETHER_COUNT_MIN: 2,
+  EAT_TOGETHER_COUNT_MAX: 5,
+  EAT_TOGHTHER_DAYS: 5,
+  CAN_DUPLICATE_CATEGORIES: 2,
+  CAN_DUPLICATE_UNLIKE_MENUS: 2,
+  COACH_NAME_LENGTH_MIN: 2,
+  COACH_NAME_LENGTH_MAX: 4,
+  CATEGORY_RANGE_START: 1,
+  CATEGORY_RANGE_END: 5,
+});
+
+const GuideString = Object.freeze({
+  READ_COACH_NAME: "\n코치의 이름을 입력해 주세요. (, 로 구분)\n",
+  READ_UNLIKE_MENU: `(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
+  START_MENU_RECOMMEND: "점심 메뉴 추천을 시작합니다.\n",
+  RESULT: "메뉴 추천 결과입니다.",
+  DAYS: "[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]",
+  END: "\n추천을 완료했습니다.",
+});
+
+module.exports = { AllCategory, AllMenu, ErrorMsg, StaticValues, GuideString };

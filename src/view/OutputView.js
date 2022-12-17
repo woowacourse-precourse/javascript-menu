@@ -1,13 +1,14 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { GuideString } = require("../static/Static");
 
 const OutputView = {
   printStart() {
-    Console.print("점심 메뉴 추천을 시작합니다.\n");
+    Console.print(GuideString.START_MENU_RECOMMEND);
   },
 
   printResult() {
-    Console.print("메뉴 추천 결과입니다.");
-    Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
+    Console.print(GuideString.RESULT);
+    Console.print(GuideString.DAYS);
   },
 
   printCategory(category) {
@@ -19,7 +20,7 @@ const OutputView = {
   },
 
   printEnd() {
-    Console.print("\n추천을 완료했습니다.");
+    Console.print(GuideString.END);
     Console.close();
   },
 };

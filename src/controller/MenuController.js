@@ -1,6 +1,11 @@
 const Category = require("../domain/Category");
 const Coach = require("../domain/Coach");
-const { AllCategory, AllMenu } = require("../static/Static");
+const {
+  AllCategory,
+  AllMenu,
+  ErrorMsg,
+  StaticValues,
+} = require("../static/Static");
 const RandomNumberGenerator = require("../utils/RandomNumber");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
@@ -11,8 +16,19 @@ class MenuController {
 
   constructor() {}
 
+  validate(coachs) {
+    if (
+      coachs.length > StaticValues.EAT_TOGETHER_COUNT_MAX ||
+      coachs.length < StaticValues.EAT_TOGETHER_COUNT_MIN
+    )
+      throw new Error(ErrorMsg.COACH_COUNT);
+  }
+
   startRecommendMenu() {
-    this.generateCategory();
+    this.generateCategory(
+      StaticValues.CATEGORY_RANGE_START,
+      StaticValues.CATEGORY_RANGE_END
+    );
 
     OutputView.printStart();
 
@@ -28,6 +44,8 @@ class MenuController {
         coachs.push(new Coach(coachName));
       });
 
+      this.validate(coachs);
+
       this.#coachs = coachs;
       this.inputUnLikeMenu(0);
     });
@@ -42,13 +60,18 @@ class MenuController {
     }, this.#coachs[index].getName());
   }
 
-  generateCategory() {
+  generateCategory(categoryStart, categoryEnd) {
     const category = [];
 
-    while (category.length < 5) {
-      const newCategory = AllCategory[RandomNumberGenerator.generate(1, 5) - 1];
+    while (category.length < StaticValues.EAT_TOGHTHER_DAYS) {
+      const categoryIndex =
+        RandomNumberGenerator.generate(categoryStart, categoryEnd) - 1;
+      const newCategory = AllCategory[categoryIndex];
 
-      if (category.filter((v) => v === newCategory).length < 2)
+      if (
+        category.filter((v) => v === newCategory).length <
+        StaticValues.CAN_DUPLICATE_CATEGORIES
+      )
         category.push(newCategory);
     }
 
@@ -81,19 +104,20 @@ class MenuController {
   }
 
   getTodayCategoryMenu(todayCategoryMenus) {
-    return todayCategoryMenus[
+    const randomIndex =
       RandomNumberGenerator.shuffle(
         Array(todayCategoryMenus.length)
-          .fill(0)
-          .map((v, i) => i)
-      )[0] - 1
-    ];
+          .fill(1)
+          .map((v, i) => v + i)
+      )[0] - 1;
+
+    return todayCategoryMenus[randomIndex];
   }
 
   fillRecommendMenu(recommendMenu, category, unLikeMenu) {
     let index = 0;
 
-    while (recommendMenu.length < 5) {
+    while (recommendMenu.length < StaticValues.EAT_TOGHTHER_DAYS) {
       const todayCategoryMenus = AllMenu[category[index]];
       const todayCategoryMenu = this.getTodayCategoryMenu(todayCategoryMenus);
 
