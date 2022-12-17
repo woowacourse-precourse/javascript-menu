@@ -9,6 +9,21 @@ const SAMPLE = {
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
+const {
+	MENU_RECOMMEND_START,
+  COACH_NAME_INPUT,
+  UNABLE_TO_EAT,
+  RECOMMEND_COMPLETE,
+  RESULT_MENU_RECOMMEND,
+  DIVISION_DAY,
+  CATEGORY,
+	KOREAN_FOOD,
+  JAPANESE_FOOD,
+  CHINESE_FOOD,
+  ASIAN_FOOD,
+  AMERICA_FOOD,
+  START_BRACKET,
+  CLOSE_BRACKET} = require("./utils/constant")
 class App {
 	#coachNames;
 	#eachCoachUnableToEat;
@@ -28,19 +43,19 @@ class App {
 		this.#result=[]
 	}
   play() {
-		MissionUtils.Console.print("점심 메뉴 추천을 시작합니다.\n")
+		MissionUtils.Console.print(MENU_RECOMMEND_START)
 		this.insertCoachName()
 	}
 
 	insertCoachName(){
-		MissionUtils.Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)\n',(name)=>{
+		MissionUtils.Console.readLine(COACH_NAME_INPUT,(name)=>{
 			this.#coachNames=name.split(',');
 			this.unableToEat(this.#coachNames[this.#coachNumber]);
 		});
 	}
 
 	unableToEat(coach){
-		MissionUtils.Console.readLine(`${coach}(이)가 못 먹는 메뉴를 입력해 주세요.`, (menu)=>{
+		MissionUtils.Console.readLine(`${coach}`+UNABLE_TO_EAT, (menu)=>{
 			this.#eachCoachUnableToEat[coach] = menu.split(',')
 			if(this.#coachNumber === (this.#coachNames.length-1)) this.categoryRandomChoice()
 			else{
@@ -64,11 +79,11 @@ class App {
 
 	insertCategory(){
 		this.#categoryRepeatCheck.map((number)=>{
-			if(number===1) this.#dayCategory.push('일식')
-			if(number===2) this.#dayCategory.push('한식')
-			if(number===3) this.#dayCategory.push('중식')
-			if(number===4) this.#dayCategory.push('아시안')
-			if(number===5) this.#dayCategory.push('양식')
+			if(number===1) this.#dayCategory.push(JAPANESE_FOOD)
+			if(number===2) this.#dayCategory.push(KOREAN_FOOD)
+			if(number===3) this.#dayCategory.push(CHINESE_FOOD)
+			if(number===4) this.#dayCategory.push(ASIAN_FOOD)
+			if(number===5) this.#dayCategory.push(AMERICA_FOOD)
 		})
 		for(let coach=0; coach<this.#coachNames.length;coach++) this.insertMenu(coach)
 		this.printResult()
@@ -91,13 +106,13 @@ class App {
 	}
 
 	printResult(){
-		MissionUtils.Console.print("메뉴 추천 결과입니다.")
-		MissionUtils.Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]")
-		MissionUtils.Console.print("[ 카테고리 | " + this.#dayCategory.join(" | ") + " ]")
+		MissionUtils.Console.print(RESULT_MENU_RECOMMEND)
+		MissionUtils.Console.print(DIVISION_DAY)
+		MissionUtils.Console.print(CATEGORY + this.#dayCategory.join(" | ") + CLOSE_BRACKET)
 		this.#result.map((result)=>{
-			MissionUtils.Console.print("[ " + result.join(" | ") + " ]")
+			MissionUtils.Console.print(START_BRACKET + result.join(" | ") + CLOSE_BRACKET)
 		})
-		MissionUtils.Console.print("추천을 완료했습니다.")
+		MissionUtils.Console.print(RECOMMEND_COMPLETE)
 	}
 }
 
