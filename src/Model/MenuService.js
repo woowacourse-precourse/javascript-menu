@@ -1,5 +1,6 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Coach = require("./Coach");
+const { MENU_CATEGORY } = require("../constant/value");
 
 class MenuService {
   #status;
@@ -87,6 +88,14 @@ class MenuService {
         coach.addMenu(category);
       });
     });
+  }
+
+  makeCategoryName() {
+    let categoryName = [];
+    this.#categoryOfWeek.forEach((category) => {
+      categoryName.push(MENU_CATEGORY[category - 1]);
+    });
+    return categoryName;
   }
 }
 
