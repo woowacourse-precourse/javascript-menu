@@ -1,3 +1,4 @@
+const CoachValidation = require("../Validation/coachValidation");
 const InputView = require("../View/InputView");
 
 class Menu {
@@ -12,9 +13,11 @@ class Menu {
   }
 
   handleCoachNames = (name) => {
-    this.#coachNames = name.split(",").map((name) => {
-      return name;
-    });
+    const error = CoachValidation.validateCoach(name)
+    if (error) return this.getCoachNames();
+    // this.#coachNames = name.split(",").map((name) => {
+    //   return name;
+    // });
   };
 }
 
