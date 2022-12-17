@@ -17,6 +17,10 @@ const OutputView = {
     printEnd() {
         Console.print('\n추천을 완료했습니다.');
         Console.close();
+    },
+
+    printException(errorMessage) {
+        Console.print(errorMessage);
     }
 };
 

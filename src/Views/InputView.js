@@ -1,6 +1,8 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 const Console = MissionUtils.Console;
 
+const ExceptionController = require("../Controllers/ExceptionController");
+
 const CoachesController = require("../Controllers/CoachesController");
 let coachesController;
 let menuController;
@@ -12,6 +14,7 @@ const InputView = {
 
     readCoaches() {
         Console.readLine('\n코치의 이름을 입력해 주세요. (, 로 구분)\n', (coaches) => {
+            if(!ExceptionController.checkCoaches(coaches)) this.readCoaches();
             coachesController = new CoachesController(coaches);
             coaches = coachesController.getCoaches();
             this.readReluctantFood(coaches, 0);
