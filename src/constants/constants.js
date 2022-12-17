@@ -13,7 +13,8 @@ const MESSAGE = Object.freeze({
 const CATEGORY = Object.freeze(['일식', '한식', '중식', '아시안', '양식']);
 
 const ERROR = Object.freeze({
-  EXAMPLE: '[ERROR]',
+  COACHCOUNT: '[ERROR] 코치는 최소 2명 이상 최대 5명 이하로 입력해야 합니다.',
+  COACHNAME: '[ERROR] 코치의 이름은 최소 2글자 최대 4글자 입니다.',
 });
 
 const INPUT = Object.freeze({
@@ -21,4 +22,4 @@ const INPUT = Object.freeze({
   NO_EAT: (name) => `${name}(이)가 못 먹는 메뉴를 입력해 주세요.`,
 });
 
-module.exports = { MESSAGE, ERROR, INPUT, CATEGORY, FOODS };
+module.exports = { MESSAGE, ERROR, INPUT, CATEGORY };
