@@ -43,9 +43,11 @@ class App {
     }
   }
 
-  handleNames(coachName) {
+  handleNames(coachArray) {
     this.#coaches = [];
-    this.#coaches.push(new Coach(coachName));
+    for (let i = 0; i < coachArray.length; i++) {
+      this.#coaches.push(new Coach(coachArray[i]));
+    }
     this.#currentBanCoachIndex = 0;
     this.readBanMenus(
       this.#coaches[this.#currentBanCoachIndex].getName(),
