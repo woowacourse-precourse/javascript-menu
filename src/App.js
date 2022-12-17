@@ -1,9 +1,10 @@
-const { Console, Random } = require("@woowacourse/mission-utils");
+const { Console } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
 const { getRandomMenues } = require("./RecommandMenus");
 const { categoryKey } = require("./utils/constant");
-const { splitString } = require("./utils/UtilityFunctions");
+const { splitString, trim } = require("./utils/UtilityFunctions");
 const { checkCoach, checkFood } = require("./Validate");
+const { InputView } = require("./View/InputView");
 
 class App {
   #coaches; // 코치들이 저장되는 배열. 코치의 이름과(string), 요일별 먹을 메뉴(string), 그리고 먹지 못하는 메뉴(string[])가 저장
@@ -15,18 +16,19 @@ class App {
     Console.print("점심 메뉴 추천을 시작합니다.");
     this.#categories = randomCategory(this.#categories);
 
-    this.getCoachesName();
+    InputView.inputCoachNames((names) => this.getCoachesNameCallBack(names));
   }
 
-  getCoachesName() {
-    Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", (input) => {
-      const coaches = splitString(input, ",").map((name) => name.trim()); // 이름 깔끔하게 정리
-      checkCoach(coaches, () => this.getCoachesName());
-      this.setCoachesToMap(coaches);
-      // 코치를 하나하나 넘겨주자.
-      const firstCoach = [...this.#coaches][0];
-      this.askNotEatMenu(firstCoach, 0, this.#coaches);
-    });
+  getCoachesNameCallBack(names) {
+    const coaches = splitString(names, ",").map(trim); // 이름 깔끔하게 정리
+    const result = checkCoach(coaches, () =>
+      InputView.inputCoachNames((names) => this.getCoachesNameCallBack(names)),
+    );
+    if (!result) return;
+    this.setCoachesToMap(coaches);
+    // 코치를 하나하나 넘겨주자.
+    const firstCoach = [...this.#coaches][0];
+    this.askNotEatMenu(firstCoach, 0, this.#coaches);
   }
 
   setCoachesToMap(coaches) {

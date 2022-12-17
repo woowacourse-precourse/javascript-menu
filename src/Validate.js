@@ -31,10 +31,12 @@ const coachCount = function checkCoachTotalCount(coaches, callack) {
 
 const checkCoach = function checkCoachValidation(coaches, callback) {
   const checkCoachesName = coachNameLength(coaches, () => callback());
-  if (!checkCoachesName) return;
+  if (!checkCoachesName) return false;
 
   const checkCoachCount = coachCount(coaches, () => callback());
-  if (!checkCoachCount) return;
+  if (!checkCoachCount) return false;
+
+  return true;
 };
 
 const foodCount = function checkFoodCharCount(foods, callback) {
