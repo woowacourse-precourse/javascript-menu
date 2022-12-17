@@ -81,6 +81,7 @@ class MenuSelectorController {
       OutputView.printOneCoachMenu(coach.getName(), coach.getMenu());
     });
     OutputView.printEndMessage();
+    OutputView.close();
   }
 }
 
