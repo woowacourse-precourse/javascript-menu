@@ -17,4 +17,8 @@ const ERROR = {
   FOOD: "[ERROR] 못 먹는 메뉴는 최소 0개 이상 최대 2개 이하로 입력해야 합니다.\n",
 };
 
-module.exports = { INPUT, OUTPUT, ERROR };
+const VALUE = {
+  NUMBER: [0, 1, 2, 3, 4, 5, 6, 7, 8],
+};
+
+module.exports = { INPUT, OUTPUT, ERROR, VALUE };

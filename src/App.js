@@ -1,7 +1,7 @@
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
 const { Console, Random } = require("@woowacourse/mission-utils");
-const { INPUT } = require("./constants/messages");
+const { INPUT, VALUE } = require("./constants/messages");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -19,6 +19,7 @@ class App {
     this.foodList = [];
     this.category = [];
     this.selectedCategory = [];
+    this.selectedMenu = [];
   }
 
   play() {
@@ -89,6 +90,24 @@ class App {
       this.selectedCategory.push(selectedCategory);
     }
     console.log(this.selectedCategory);
+    this.recommendMenu();
+  }
+
+  recommendMenu() {
+    for (let index = 0; index < this.selectedCategory.length; index++) {
+      const category = this.selectedCategory[index];
+      console.log(category);
+      const values = SAMPLE[`${category}`].split(", ");
+      for (let coach = 0; coach < this.names.length; coach++) {
+        const select = this.selectedNumber();
+        console.log(select, values[select]);
+      }
+    }
+  }
+
+  selectedNumber(values, index) {
+    const select = Random.shuffle(VALUE.NUMBER)[0];
+    return select;
   }
 }
 
