@@ -14,6 +14,7 @@ const {
   isValidDislikeFoodsLength,
   isValidNameLength,
 } = require('./util/Validator');
+const { ERROR, INFO } = require('./constant/message');
 
 class App {
   constructor() {
@@ -26,7 +27,7 @@ class App {
   }
 
   play() {
-    this.output.print('점심 메뉴 추천을 시작합니다.');
+    this.output.print(INFO.START);
     this.input.readLine(this.inputCoachs.bind(this));
   }
 
@@ -34,11 +35,7 @@ class App {
     const coachNames = InputProcessor.parseCommaStringsToArray(input);
 
     try {
-      checkValid(
-        coachNames,
-        isValidCoachNumber,
-        '[ERROR]: 유효 범위에 맞지 않은 입력입니다.'
-      );
+      checkValid(coachNames, isValidCoachNumber, ERROR.OUT_RANGE);
     } catch (error) {
       this.output.print(error.message);
       this.input.readLine(this.inputCoachs.bind(this));
@@ -73,11 +70,7 @@ class App {
 
     // 개수가 올바른지 판단하기
     try {
-      checkValid(
-        inputFoods,
-        isValidDislikeFoodsLength,
-        '[ERROR]: 올바르지 않는 입력입니다.'
-      );
+      checkValid(inputFoods, isValidDislikeFoodsLength, ERROR.NOT_VALID);
     } catch (error) {
       this.output.print(error.message);
       this.inputCoachsDislikeFood();
@@ -136,11 +129,11 @@ class App {
   }
 
   showResult() {
-    this.output.print('메뉴 추천 결과입니다.');
-    this.output.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    this.output.print(INFO.RESULT_TITLE);
+    this.output.print(INFO.RESULT_DAY);
     this.output.print(this.makeCategoryResult());
     this.printByCoachs();
-    this.output.print('추천을 완료했습니다.');
+    this.output.print(INFO.FINISH);
   }
 
   makeCategoryResult() {
