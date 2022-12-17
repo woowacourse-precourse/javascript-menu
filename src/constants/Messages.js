@@ -7,7 +7,7 @@ const COACH_NAME = Object.freeze({
 });
 
 const HATE_FOOD = Object.freeze({
-  INPUT: "(이)가 못 먹는 메뉴를 입력해 주세요.\n",
+  INPUT: "\n(이)가 못 먹는 메뉴를 입력해 주세요.\n",
   ERROR: "[ERROR] 콤마(,) 로 구분된 최소 0개, 최대 2개의 메뉴만 입력 가능합니다.",
 });
 
