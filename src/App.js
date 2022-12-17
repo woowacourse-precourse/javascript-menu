@@ -11,6 +11,7 @@ const SAMPLE = {
 
 class App {
   play() {
+	GameController.saveMenu(SAMPLE);
 	GameController.startGame();
   }
 }
