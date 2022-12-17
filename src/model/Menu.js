@@ -2,12 +2,11 @@ const { Random } = require('@woowacourse/mission-utils');
 const { FOOD } = require('../settings');
 
 class Menu {
-  static recommend(recommendedCategory, shuffle) {
+  static recommend(recommendedCategory) {
     const menus = Menu.getMenus(recommendedCategory);
     const menuIndexes = menus.map((_, index) => index);
-
-    const shuffledMenus = shuffle(menuIndexes).map((menuIndex) => menus[menuIndex]);
-    const recommendedMenu = shuffledMenus[0];
+    const shuffledIndexes = Random.shuffle(menuIndexes);
+    const recommendedMenu = shuffledIndexes?.map((menuIndex) => menus[menuIndex])[0];
 
     return recommendedMenu;
   }
@@ -22,7 +21,5 @@ class Menu {
     return menus;
   }
 }
-
-Menu.recommend('일식', Random.shuffle);
 
 module.exports = Menu;

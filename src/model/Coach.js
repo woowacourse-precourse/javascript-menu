@@ -4,8 +4,10 @@ class Coach {
   #coaches = [];
 
   setNames(input) {
+    if (!input) return this.#coaches;
     this.#coaches = input.split(SPLITTER).map((name) => ({
       name,
+      inedibleMenu: [],
       recommendedMenu: [],
     }));
 
@@ -13,6 +15,8 @@ class Coach {
   }
 
   setInedibleMenu(input, coachName) {
+    if (!input) return this.#coaches;
+
     const inedibleMenu = input.split(SPLITTER);
     this.#coaches.find(({ name }) => name === coachName).inedibleMenu = inedibleMenu;
 
