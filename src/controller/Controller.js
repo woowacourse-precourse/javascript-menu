@@ -27,6 +27,7 @@ class Controller {
     try {
       Validation.coachName(input);
       this.#coachs = input.split(',');
+      Validation.coachNumber(this.#coachs);
       this.#checkCoachList();
     } catch (error) {}
   }
