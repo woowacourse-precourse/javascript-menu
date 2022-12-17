@@ -6,10 +6,12 @@ const { validateCoachName, validateDislikeMenu } = require('./utils/validate');
 const { convertCategory, combineCoachMenu } = require('./utils/menuUtil');
 
 class App {
+  #index;
   constructor() {
     this.coach = null;
     this.category = null;
     this.recommendMenu = [];
+    this.#index = 0;
   }
 
   play() {
@@ -21,20 +23,20 @@ class App {
     this.coach = name.split(',');
     validateCoachName(this.coach);
     this.category = CategoryMaker.createCategory();
-    InputView.readDislikeMenu(this.coach[0], 0, this.getDislikeMenuInput.bind(this));
+    InputView.readDislikeMenu(this.coach[this.#index], this.getDislikeMenuInput.bind(this));
   }
 
-  getDislikeMenuInput(menu, idx) {
+  getDislikeMenuInput(menu) {
     const dislikeMenu = menu.split(',');
     validateDislikeMenu(dislikeMenu);
     this.getMenuRecommendation(dislikeMenu);
 
-    idx++;
-    if (idx === this.coach.length) {
+    this.#index++;
+    if (this.#index === this.coach.length) {
       this.getResult();
       return;
     }
-    InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
+    InputView.readDislikeMenu(this.coach[this.#index], this.getDislikeMenuInput.bind(this));
   }
 
   getMenuRecommendation(dislikeMenu) {

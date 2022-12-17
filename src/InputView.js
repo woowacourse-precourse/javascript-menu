@@ -11,12 +11,12 @@ const InputView = {
     });
   },
 
-  readDislikeMenu(name, idx, callback) {
+  readDislikeMenu(name, callback) {
     Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.`, (menu) => {
       try {
-        callback(menu, idx);
+        callback(menu);
       } catch (e) {
-        this.readDislikeMenu(name, idx, callback);
+        this.readDislikeMenu(name, callback);
       }
     });
   },
