@@ -18,14 +18,16 @@ class InputView {
   }
 
   inputUnlikeMenu(names, unlikeMenus) {
-    Console.readLine(INPUT_MESSAGE.FOOD_NAME(names.shift()), input => {
+    const temp = names;
+
+    Console.readLine(INPUT_MESSAGE.FOOD_NAME(temp.shift()), input => {
       const foods = input.split(',');
 
       Validation.food(foods);
       unlikeMenus.push(foods);
 
-      if (names.length) {
-        this.inputUnlikeMenu(names, unlikeMenus);
+      if (temp.length) {
+        this.inputUnlikeMenu(temp, unlikeMenus);
         return;
       }
 
