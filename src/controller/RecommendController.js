@@ -55,15 +55,20 @@ class RecommendController {
       this.inputCoachCantEatMenus(coachIndex + 1);
     }
     if (coachIndex + 1 === this.#coaches.length) {
-      this.repeatWeekCategory();
+      this.repeatWeekOfDaysCategory();
     }
   }
 
-  // 함수명수정
-  repeatWeekCategory() {
+  repeatWeekOfDaysCategory() {
     for (let i = 0; i < 5; i++) {
       this.recommendCategory();
     }
+    this.repeatInsertCoaches();
+
+    this.printResult();
+  }
+
+  repeatInsertCoaches() {
     this.#coaches.forEach((coach) => {
       this.#categories.forEach((category) => {
         const categoryNum = this.#menus.getCategoryNum(category);
@@ -71,8 +76,6 @@ class RecommendController {
         this.insertRecommendToCoach(categoryMenus, coach);
       });
     });
-
-    this.printResult();
   }
 
   checkValidNum(value) {
@@ -81,12 +84,10 @@ class RecommendController {
   }
 
   checkRepeatCategory(category) {
-    if (
-      this.#categories.filter(
-        (categoryElement) => categoryElement === category,
-      ) < 2
-    )
-      return true;
+    const sameCategoryNum = this.#categories.filter(
+      (categoryElement) => categoryElement === category,
+    );
+    if (sameCategoryNum < 2) return true;
     return false;
   }
 
@@ -95,9 +96,8 @@ class RecommendController {
       this.checkRepeatCategory(category) &&
       this.checkValidNum(category) &&
       this.checkValidNum(categoryMenus)
-    ) {
+    )
       return true;
-    }
     return false;
   }
 
@@ -108,9 +108,9 @@ class RecommendController {
 
     if (this.checkValidCategory(category, categoryMenus)) {
       this.#categories.push(category);
-    } else {
-      this.recommendCategory();
+      return;
     }
+    this.recommendCategory();
   }
 
   insertRecommendToCoach(menus, coach) {
@@ -118,14 +118,20 @@ class RecommendController {
     const recommendedMenuIndex = Random.shuffle(menuIndex)[0];
     const recommendedMenu = menus[recommendedMenuIndex - 1];
 
+    if (this.checkValidCoachMenu(coach, recommendedMenu)) {
+      coach.setRecommended(recommendedMenu);
+      return;
+    }
+    this.insertRecommendToCoach();
+  }
+
+  checkValidCoachMenu(coach, recommendedMenu) {
     if (
       coach.checkCanEatMenu(recommendedMenu) &&
       coach.checkNotRepeatMenu(recommendedMenu)
-    ) {
-      coach.setRecommended(recommendedMenu);
-    } else {
-      this.insertRecommendToCoach();
-    }
+    )
+      return true;
+    return false;
   }
 
   printResult() {
