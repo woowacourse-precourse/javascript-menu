@@ -29,11 +29,18 @@ class Coach {
   }
 
   setMenu(menu) {
+    this.#menuValidate(menu);
     this.#menuList.push(menu);
   }
 
   getMenuList() {
     return [...this.#menuList];
+  }
+
+  #menuValidate(menu) {
+    if (this.#menuList.includes(menu)) {
+      throw new Error(`[ERROR] 메뉴가 중복되었습니다.`);
+    }
   }
 }
 

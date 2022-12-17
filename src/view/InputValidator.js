@@ -9,21 +9,21 @@ const InputValidator = Object.freeze({
 
   checkCoachesSize(coachList) {
     if (coachList.length < 2 || coachList.length > 5) {
-      throw new Error(`[ERROR] 코치는 최소 2명, 최대 5명까지 식사를 함께 합니다.`);
+      throw new Error(`[ERROR] 코치는 최소 2명, 최대 5명까지 식사를 함께 합니다.\n`);
     }
   },
 
   checkCoachesNameLength(coachList) {
     coachList.forEach((coach) => {
       if (coach.length < 2 || coach.length > 4) {
-        throw new Error(`[ERROR] 코치의 이름은 최소 2글자, 최대 4글자입니다.`);
+        throw new Error(`[ERROR] 코치의 이름은 최소 2글자, 최대 4글자입니다.\n`);
       }
     });
   },
 
   checkCoachRepeat(coachList) {
     if (new Set(coachList).size !== coachList.length) {
-      throw new Error(`[ERROR] 중복된 코치 이름이 있습니다.`);
+      throw new Error(`[ERROR] 중복된 코치 이름이 있습니다.\n`);
     }
   },
 

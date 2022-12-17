@@ -45,6 +45,7 @@ class Controller {
   #recommendLunchMenu() {
     const recommendationResult = this.#lunchRecommendation.getRecommendation();
     this.#outputView.printResult(recommendationResult);
+    this.#end();
   }
 
   #end() {
