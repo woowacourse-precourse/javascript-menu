@@ -4,12 +4,15 @@ const CoachNamesChecker = require('../utils/CoachNamesChecker');
 const Coach = require('../models/Coach');
 
 class Service {
+  #index;
+
   #instance = {
     coach: null,
   };
 
   constructor() {
     OutputView.printStart();
+    this.#index = 0;
   }
 
   start() {
@@ -32,7 +35,21 @@ class Service {
     this.#enterHateMenus();
   }
 
-  #enterHateMenus() {}
+  #enterHateMenus() {
+    const { names } = this.#instance.coach.get();
+
+    InputView.readHateMenus(
+      names[this.#index],
+      this.#setHateMenus.bind(this, names.length)
+    );
+  }
+
+  #setHateMenus(length, hateMenus) {
+    this.#index++;
+    if (this.#index < length) {
+      this.#enterHateMenus();
+    }
+  }
 }
 
 module.exports = Service;

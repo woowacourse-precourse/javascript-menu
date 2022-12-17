@@ -5,6 +5,10 @@ const InputView = {
   readNames(enterNames) {
     Console.readLine(MESSAGE_QUERY.NAMES, enterNames);
   },
+
+  readHateMenus(coach, setHateMenus) {
+    Console.readLine(`${coach}${MESSAGE_QUERY.MENUS}`, setHateMenus);
+  },
 };
 
 module.exports = InputView;
