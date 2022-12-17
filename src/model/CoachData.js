@@ -7,7 +7,6 @@ class CoachData {
   #hateMenus = {};
 
   constructor(coaches) {
-    console.log(coaches);
     const coachArray = SplitAndTrim(coaches);
     this.#coaches = coachArray;
     this.#coaches.forEach((coachName) => {

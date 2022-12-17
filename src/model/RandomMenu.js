@@ -32,11 +32,9 @@ class RandomMenu {
   }
 
   setCategoryDays() {
-    Array.from({ length: 5 }).forEach((day) => {
+    Array.from({ length: 5 }).forEach(() => {
       this.setCategory();
     });
-    console.log(this.#categoryCount);
-    console.log(this.#days);
   }
 
   setCategory() {
@@ -69,7 +67,6 @@ class RandomMenu {
     coaches.forEach((name, index) =>
       this.setCoachMenus(name, hateMenus[index])
     );
-    console.log(this.#result);
   }
 
   setCoachMenus(name, hateMenus) {
@@ -97,6 +94,10 @@ class RandomMenu {
     );
     const menu = this.#menus[categoryIndex][randomNumber];
     return menu;
+  }
+
+  getResults() {
+    return { days: this.#days, result: this.#result };
   }
 
   static createRandomNumber(category) {

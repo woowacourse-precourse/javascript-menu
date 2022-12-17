@@ -1,8 +1,7 @@
-const { GAME_STRING, GAME_NUMBER } = require('../Constant');
 const CoachData = require('../model/CoachData');
 const RandomMenu = require('../model/RandomMenu');
 const { readCoachesName, readDontLikeMenu } = require('../view/InputView');
-const { printStart } = require('../view/OutputView');
+const { printStart, printResult } = require('../view/OutputView');
 
 class MenuController {
   #coachData;
@@ -12,7 +11,6 @@ class MenuController {
   start() {
     printStart();
     this.#randomMenu.setCategoryDays();
-    this.#randomMenu.setRandomMenu('일식');
     readCoachesName(this.checkCoachesName.bind(this));
   }
 
@@ -32,14 +30,20 @@ class MenuController {
     this.#coachData.setHateMenus(name, menu);
     const coachesLength = this.#coachData.getCoachLength() - 1;
     if (count === coachesLength) {
-      return this.showResult();
+      return this.calculateResult();
     }
     this.checkDontLikeMenu(count + 1);
   }
 
-  showResult() {
+  calculateResult() {
     const result = this.#coachData.getHateMenus();
     this.#randomMenu.setResult(result);
+    this.showResult();
+  }
+
+  showResult() {
+    const { days, result } = this.#randomMenu.getResults();
+    printResult(days, result);
   }
 }
 
