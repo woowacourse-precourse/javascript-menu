@@ -8,8 +8,8 @@ const foods = {
 	아시안: ['팟타이', '카오 팟', '나시고렝', '파인애플 볶음밥', '쌀국수', '똠얌꿍', '반미', '월남쌈', '분짜'],
 	양식: ['라자냐', '그라탱', '뇨끼', '끼슈', '프렌치 토스트', '바게트', '스파게티', '피자', '파니니'],
 };
-
 const foodsIndex = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+
 
 class Recommend{
     #coaches;
@@ -41,33 +41,33 @@ class Recommend{
     }
 
     randomCategory(){
-        while(true){
+        while(this.#category.length < 5){
             const category = categories[Random.pickNumberInRange(1, 5)];
             const count = this.#category.filter(x => category === x).length;
-            if(count < 2){
-                this.#category.push(category);
-                break;
-            }
+            
+            if(count < 2) this.#category.push(category);
         }
     }
 
     randomFoodAll(){
-        const category = this.#category.at(-1);
-        for(let name of Object.keys(this.#coaches)){
-            this.randomFood(category, name);
+        const names = Object.keys(this.#coaches);
+        for(let i = 0; i < names.length; i++){
+            this.randomFood(names[i]);
         }
     }
 
-    randomFood(category, name){
-        const cantFood = this.#coaches[name][0].concat( this.#coaches[name][1]);
-        const menus = foods[category];
-        while(true){
+    randomFood(name){
+        let i = 0;
+        while(this.#coaches[name][1].length < 5){
+            let menus = foods[this.#category[i]];
+            let cantFood = this.#coaches[name][0].concat( this.#coaches[name][1]);
+
             const index = Random.shuffle(foodsIndex)[0] - 1;
             const menu = menus[index];
-            if (!cantFood.includes(menu)){
+            if (!cantFood.includes(menu)) {
                 this.#coaches[name][1].push(menu);
-                break;
-            }
+                i++
+            };
         }
     }
 }

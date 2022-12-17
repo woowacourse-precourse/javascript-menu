@@ -14,8 +14,6 @@ const Recommend = require("./Recommend.js");
 // 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 // };
 
-
-
 class App {
 	#recommend;
 	#inputIter;
@@ -55,10 +53,9 @@ class App {
 	}
 
 	recommend(){
-		for(let i = 0; i < 5; i++){
-			this.#recommend.randomCategory();
-			this.#recommend.randomFoodAll();
-		}
+		this.#recommend.randomCategory();
+		this.#recommend.randomFoodAll();
+		
 		this.result();
 	}
 
