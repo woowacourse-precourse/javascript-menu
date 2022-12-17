@@ -1,3 +1,4 @@
+const { Coach } = require('./models/Coach');
 const { readCoaches } = require('./views/InputView');
 const { OutputView } = require('./views/OutputView');
 
@@ -10,8 +11,11 @@ class App {
   }
 
   setCoaches(answer) {
-    this.#coaches = answer.split(',');
-    console.log(this.#coaches);
+    const coaches = answer.split(',');
+    coaches.forEach((coach) => {
+      this.#coaches.push(new Coach(coach));
+    });
+    console.log(this.#coaches.length);
   }
 }
 
