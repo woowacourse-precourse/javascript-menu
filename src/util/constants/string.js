@@ -7,10 +7,11 @@ const SIGN = {
   opener: '[ ',
   closer: ' ]',
   divider: ' | ',
+  weekTitle: '구분',
+  categoryTitle: '카테고리',
 };
 
 const WEEK = {
-  title: '구분',
   monday: '월요일',
   tuesday: '화요일',
   wednesday: '수요일',
@@ -19,9 +20,8 @@ const WEEK = {
 };
 
 const CATEGORY = {
-  title: '카테고리',
-  korean: '한식',
   japanese: '일식',
+  korean: '한식',
   chinese: '중식',
   asian: '아시안',
   western: '양식',
