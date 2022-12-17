@@ -1,4 +1,5 @@
-const { CATEGORY } = require('../Constants');
+const { CATEGORY, FOOD_NAMES } = require('../Constants');
+const foodNames = [, ...Object.values(FOOD_NAMES)];
 
 const Converter = {
   convertNumberToCategory(number) {
@@ -7,6 +8,10 @@ const Converter = {
 
   convertToStringArray(names) {
     return names.split(',');
+  },
+
+  convertNumberToFoodName(category, number) {
+    return foodNames[category][number];
   },
 };
 
