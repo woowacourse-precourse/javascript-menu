@@ -3,14 +3,11 @@ const OutputView = require('./OutputView');
 const Coach = require('./Coach');
 const { categoryGenerate } = require('./CategoryRandomGenerator');
 const { menuGenerate } = require('./MenuRandomGenerator');
-const Validation = require('./Validation');
-
 class MenuController {
   #menus;
   #coachsName;
   #coachs;
   #categories;
-
   constructor(menus) {
     this.#menus = {};
     for (const menu in menus) {
@@ -19,18 +16,14 @@ class MenuController {
     this.#coachs = [];
     this.#categories = [];
   }
-
-  startRecommendService() {
+  startRecommend() {
     OutputView.printStartMessage();
     InputView.readCoachsName(this.getCoachsName.bind(this));
   }
-
   getCoachsName(coachsName) {
     this.#coachsName = coachsName.split(',');
-    Validation.checkCoachs(this.#coachsName);
     return this.readCoachsHateMenu();
   }
-
   readCoachsHateMenu() {
     const coachIndex = 0;
     InputView.readHateMenu(
@@ -40,40 +33,32 @@ class MenuController {
       this.#coachsName
     );
   }
-
-  makeCoach(coachName, foods) {
-    const hateMenu = foods.split(',');
-    Validation.checkHateMenu(hateMenu);
-    this.#coachs.push(new Coach(coachName, hateMenu));
+  makeCoach(coachName, hateMenu) {
+    this.#coachs.push(new Coach(coachName, hateMenu.split(',')));
   }
-
   getRandomCategory() {
-    const menuKeys = Object.keys(this.#menus);
-
     for (let i = 0; i < 5; i++) {
-      let category = categoryGenerate(menuKeys);
+      let category = categoryGenerate(Object.keys(this.#menus));
       while (this.#categories.filter((el) => category === el).length == 2) {
-        category = categoryGenerate(menuKeys);
+        category = categoryGenerate(Object.keys(this.#menus));
       }
       this.#categories.push(category);
     }
     return this.recommendMenu();
   }
-
-  recommendCoachMenu(menuList) {
+  recommendCoachMenu(menus) {
     for (const coach of this.#coachs) {
-      let menu = menuGenerate(menuList);
+      let menu = menuGenerate(menus);
       while (!coach.checkMenu(menu)) {
-        menu = menuGenerate(menuList);
+        menu = menuGenerate(menus);
       }
       coach.recommendedMenu.push(menu);
     }
   }
-
   recommendMenu() {
     for (const category of this.#categories) {
-      const menuList = this.#menus[category];
-      this.recommendCoachMenu(menuList);
+      const menus = this.#menus[category];
+      this.recommendCoachMenu(menus);
     }
     OutputView.printEndMessage(this.#categories, this.#coachs);
   }
