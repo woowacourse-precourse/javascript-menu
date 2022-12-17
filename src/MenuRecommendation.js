@@ -172,8 +172,11 @@ class MenuRecommendation {
       return InputView.readCoachName(this.receiveCoachName.bind(this));
     }
 
-    console.log(this.coachs);
-    InputView.readDislikeMenu(this.receiveDislikeMenu.bind(this), 0);
+    InputView.readDislikeMenu(
+      this.receiveDislikeMenu.bind(this),
+      this.coachs,
+      0
+    );
   }
 
   start() {

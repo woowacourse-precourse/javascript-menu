@@ -11,17 +11,13 @@ const InputView = {
   },
 
   readDislikeMenu(callback, coachs, count) {
-    //console.log(coachs);
-    //console.log(coachs[1].getName());
-    //coachs.forEach((coach) => {
-    //let count = coachs.length;
+    console.log(coachs);
     MissionUtils.Console.readLine(
       `${coachs[count]?.getName()}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
       (menu) => {
         callback(menu);
       }
     );
-    //});
   },
 };
 
