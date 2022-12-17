@@ -35,9 +35,14 @@ class CoachDiet {
     return true;
   }
 
+  validateExist(food) {
+    if (this.#menu.includes(food)) return false;
+    return true;
+  }
+
   recommendMenu(category) {
     let menu = RandomMenuGenerator(category);
-    while (!this.validateImpossible(menu)) {
+    while (!this.validateImpossible(menu) && !this.validateExist(menu)) {
       menu = RandomMenuGenerator(category);
     }
     this.setMenu(menu);
