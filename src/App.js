@@ -94,7 +94,6 @@ class App {
 
 			// 메뉴
 			const menus = SAMPLE[categoryOfDay].split(",")
-			
 
 			this.#coaches.map((coach) => {
 				coach.setDayFood(this.pickFood(coach, menus))
@@ -123,9 +122,12 @@ class App {
 		const randomFood = menus[Random.shuffle(menusIndex)[0]]
 
 		if(coach.getDayFood().includes(randomFood) || coach.getDisabledFood().includes(randomFood)){
+			// 중복된음식이 있거나, 못먹는음식이있으면
 			this.pickFood(coach)
 		}
 		return randomFood;
+
+
 	}
 
 

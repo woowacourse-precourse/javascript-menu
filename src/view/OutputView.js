@@ -5,7 +5,7 @@ const OutputView = {
     Console.print('점심 메뉴 추천을 시작합니다.\n');
   },
 
-  result(categories, coaches) {
+  result(categories) {
     Console.print(
 `
 메뉴 추천 결과입니다.

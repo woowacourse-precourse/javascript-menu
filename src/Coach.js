@@ -3,10 +3,12 @@ const { SAMPLE } = require("./model/repository");
 class Coach {
   #name = "";
   #disabledFoods = [];
-  #dayCategoty = [];
   #dayFood = []
 
   constructor(name) {
+    if(!(name.length >= 2 && name.length <= 4)){
+      throw new Error("[ERROR] 코치의 이름은 최소 2글자, 최대 4글자이다.")
+    }
     this.#name = name;
   }
 
@@ -22,8 +24,6 @@ class Coach {
     foods.split(",").map((food) => {
       this.#disabledFoods.push(food);
     })
-
-    console.log(this.#disabledFoods)
   }
 
   getDayFood() {
