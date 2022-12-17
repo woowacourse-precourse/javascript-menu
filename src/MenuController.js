@@ -3,6 +3,7 @@ const OutputView = require('./OutputView');
 const Coach = require('./Coach');
 const { categoryGenerate } = require('./CategoryRandomGenerator');
 const { menuGenerate } = require('./MenuRandomGenerator');
+const Validation = require('./Validation');
 
 class MenuController {
   #menus;
@@ -19,13 +20,16 @@ class MenuController {
     this.#categories = [];
   }
 
-  startRecommend() {
+  startRecommendService() {
     OutputView.printStartMessage();
     InputView.readCoachsName(this.getCoachsName.bind(this));
   }
 
   getCoachsName(coachsName) {
     this.#coachsName = coachsName.split(',');
+    for (const name of this.#coachsName) {
+      Validation.checkCoachName(name);
+    }
     return this.readCoachsHateMenu();
   }
 

@@ -11,7 +11,7 @@ const SAMPLE = {
 
 class App {
   play() {
-    new MenuController(SAMPLE).startRecommend();
+    new MenuController(SAMPLE).startRecommendService();
   }
 }
 
