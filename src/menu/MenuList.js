@@ -1,4 +1,5 @@
 const { Random } = require("@woowacourse/mission-utils");
+const InputView = require("../views/InputView");
 
 class MenuList {
   #categories = ["", "일식", "한식", "중식", "아시안", "양식"];
@@ -22,13 +23,12 @@ class MenuList {
 
     const end = targetMenus.length;
     let temp = [];
-    for (let i = 0; i < end; i++) {
+    for (let i = 1; i < end + 1; i++) {
       temp.push(i);
     }
-    const shuffled = this.#randomGenerator.shuffle(temp);
-    console.log(shuffled);
+    const shuffled = Random.shuffle(temp);
 
-    return targetMenus[shuffled[0]];
+    return targetMenus[shuffled[0] - 1];
   }
 }
 

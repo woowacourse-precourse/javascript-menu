@@ -9,6 +9,7 @@ class Coach {
   }
   registerHateFood(foods) {
     this.#hateFood.push(...foods);
+    console.log(this.#hateFood);
   }
   canEat(food) {
     if (this.#hateFood.includes(food)) return false;

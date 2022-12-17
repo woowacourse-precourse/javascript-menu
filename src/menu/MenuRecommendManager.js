@@ -12,10 +12,12 @@ class MenuRecommendManager {
     this.#outputView = outputView;
     this.#menuRecommend = menuRecommend;
   }
+
   start() {
     this.#outputView.print(OUTPUT_MESSAGES.startMessage);
     this.onReadCoachesName();
   }
+
   onReadCoachesName() {
     this.#inputView.readCoachesName((coaches) => {
       const coachesNames = coaches.split(",");
@@ -38,6 +40,7 @@ class MenuRecommendManager {
       this.#counter += 1;
       if (this.#counter !== coachesNames.length) {
         this.onReadHateFood(coachesNames[this.#counter], coachesNames);
+        return;
       }
       if (this.#counter === coachesNames.length) {
         const records = this.#menuRecommend.recommendMenus(5);
