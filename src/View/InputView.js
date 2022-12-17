@@ -9,6 +9,16 @@ const InputView = {
       }
     );
   },
+
+  readPickyMenu(name, callback) {
+    MissionUtils.Console.readLine(
+      name + "(이)가 못 먹는 메뉴를 입력해 주세요.",
+      (input) => {
+        const menuArray = input.split(",");
+        callback(menuArray);
+      }
+    );
+  },
 };
 
 module.exports = InputView;
