@@ -2,6 +2,7 @@ const CategoryController = require("./CategoryController");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 const RecommendationController = require("./RecommendationController");
+const { Console } = require("@woowacourse/mission-utils");
 
 class MainController {
   #categoryController;
@@ -50,6 +51,15 @@ class MainController {
 
   printError(errorLog) {
     OutputView.printError(errorLog);
+  }
+
+  printResult(categories, overallInformation) {
+    OutputView.printResult(categories, overallInformation);
+    this.finishRecommendation();
+  }
+
+  finishRecommendation() {
+    Console.close();
   }
 
   initializeRecommendation() {
