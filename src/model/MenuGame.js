@@ -2,7 +2,7 @@ const CategoryRandomGenerator = require('../utils/CategoryRandomGenerator');
 const MenuRandomGenerator = require('../utils/MenuRandomGenerator');
 
 class MenuGame {
-  #coaches; // key: 이름, value: 못먹는 음식 Array
+  #coaches;
   #weeklyCategory;
 
   constructor() {

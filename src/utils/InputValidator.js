@@ -12,6 +12,9 @@ const InputValidator = Object.freeze({
         throw new Error(ERROR_MSG.COACH_NAME_LENGTH);
       }
     });
+    if (new Set(coaches).size !== coaches.length) {
+      throw new Error(ERROR_MSG.COACHES_DUPLICATE);
+    }
   },
 
   hateMenu(input) {
