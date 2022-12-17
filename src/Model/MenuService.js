@@ -1,3 +1,4 @@
+const MissionUtils = require("@woowacourse/mission-utils");
 const Coach = require("./Coach");
 
 class MenuService {
@@ -55,7 +56,21 @@ class MenuService {
   makeCoach(name, pickyMenu) {
     const coach = new Coach(name, pickyMenu);
     this.#coaches.push(coach);
-    console.log(this.#coaches.length);
+  }
+
+  makeCategoryOfWeek() {
+    for (let i = 0; i < 5; i++) {
+      const category = this.randomCategory();
+      this.#categoryOfWeek.push(category);
+    }
+  }
+
+  randomCategory() {
+    const category = MissionUtils.Random.pickNumberInRange(1, 5);
+    if (!this.isAvailableCategory(category)) {
+      this.randomCategory();
+    }
+    return category;
   }
 }
 
