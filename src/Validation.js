@@ -16,10 +16,10 @@ const Validation = {
   },
 
   checkAvoidMenu(menu) {
-    if (!menu.trim()) throw new Error("아무것도 입력되지 않았습니다.")
     menu = menu.split(',');
     menu = menu.map((kind) => kind.trim());
     if(menu.some((kind) => !SAMPLE_MENU.includes(kind))) throw new Error('메뉴 목록에 없는 메뉴입니다.')
+    if(menu.length > 2) throw new Error('못 먹는 메뉴는 최소 0개에서 최대 2개여야 합니다.')
   }
 };
 
