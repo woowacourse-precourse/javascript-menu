@@ -5,20 +5,19 @@ class Coach {
   #names;
 
   constructor(names) {
-    if (this.#isValidNames(names)) this.#names = names;
+    const nameArr = names.split(",");
+    if (this.#isValidNames(nameArr)) this.#names = nameArr;
   }
 
   #baseValidate(condition, message) {
-    console.log(condition);
     if (!condition) throw new InValidInputError(message);
     return true;
   }
   #isValidNames(names) {
-    const nameArr = names.split(",");
     return (
-      this.#isValidCoachNum(nameArr) &&
-      this.#isValidCoachNameNum(nameArr) &&
-      this.#isDifferentCouchNames(nameArr)
+      this.#isValidCoachNum(names) &&
+      this.#isValidCoachNameNum(names) &&
+      this.#isDifferentCouchNames(names)
     );
   }
   #isValidCoachNum(names) {
