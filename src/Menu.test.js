@@ -36,6 +36,13 @@ describe("Input_test", () => {
 describe("Random_make_test", () => {
     test("카테고리 추출", () => {
         const val = Random.makeCategory()
-        expect(val).toBeTruthy();
+        const arr = ["한식", "중식", "양식", "일식", "아시안"]
+        expect(arr.includes(val)).toBeTruthy();
+    })
+
+    test("카테고리별 음식 추출", () => {
+        const val = Random.makeMenu("한식")
+        const arr = ["김밥", "김치찌개", "쌈밥", "된장찌개", "비빔밥", "칼국수", "불고기", "떡볶이", "제육볶음"]
+        expect(arr.includes(val)).toBeTruthy();
     })
 })
