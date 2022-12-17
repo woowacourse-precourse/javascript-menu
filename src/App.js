@@ -1,6 +1,6 @@
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
-const { validateCoachName } = require('./utils/validate');
+const { validateCoachName, validateDislikeMenu } = require('./utils/validate');
 
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -27,11 +27,12 @@ class App {
   }
 
   getDislikeMenuInput(menu, idx) {
-    this.dislikeMenu[this.coach[idx]] = menu;
+    const menuArr = menu.split(',');
+    validateDislikeMenu(menuArr);
+    this.dislikeMenu[this.coach[idx]] = menuArr;
     idx++;
     if (idx === this.coach.length) return;
     InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
-    console.log(this.dislikeMenu);
   }
 }
 

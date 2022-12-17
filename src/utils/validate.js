@@ -15,4 +15,11 @@ const validateCoachName = (coach) => {
   }
 };
 
-module.exports = { validateCoachName };
+const validateDislikeMenu = (menu) => {
+  if (menu.length > 2) {
+    Console.print('[ERROR] 못 먹는 음식은 0개 이상 2개 이하입니다.');
+    throw new Error();
+  }
+};
+
+module.exports = { validateCoachName, validateDislikeMenu };
