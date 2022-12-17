@@ -3,6 +3,7 @@ const OutputView = require('./OutputView');
 
 const InputView = {
   COACH_NAMES: '\n코치의 이름을 입력해 주세요. (, 로 구분)\n',
+  HATE_FOODS: '(이)가 못 먹는 메뉴를 입력해 주세요.\n',
 
   readCoachNames(callback) {
     InputView.question(InputView.COACH_NAMES, (input) => {
@@ -22,6 +23,14 @@ const InputView = {
       if (name.length < 2 || name.length > 4) {
         throw new Error('코치 이름은 2글자부터 4글자까지 입력 가능합니다.');
       }
+    });
+  },
+
+  readHateFoods(coachName, callback) {
+    InputView.question(`${coachName} ${InputView.HATE_FOODS}`, (input) => {
+      const hateFoods = input.split(',');
+
+      callback(hateFoods);
     });
   },
 

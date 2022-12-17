@@ -11,7 +11,9 @@ const SAMPLE = {
 
 class App {
   play() {
-    MenuRecommandationController.run();
+    const menuRecommandationController = new MenuRecommandationController();
+
+    menuRecommandationController.run();
   }
 }
 
