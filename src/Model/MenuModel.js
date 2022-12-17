@@ -68,13 +68,13 @@ class MenuModel {
     const toStringCategory = this.#getCategory(category);
     const currentCategory = this.#sample[toStringCategory];
     const shuffledMenu = ShuffleMenu.get(
-      Array.from({ length: 9 }, (v, i) => i + 1)
+      Array.from({ length: 9 }, (v, i) => i)
     );
     if (index === 0) {
       if (this.cantEat.includes(currentCategory[shuffledMenu[0]])) {
         this.#pickMenu(foodArr, index, category);
       }
-      return currentCategory[shuffledMenu[0] - 1];
+      return currentCategory[shuffledMenu[0]];
     }
     return this.#duplicateMenu(foodArr, shuffledMenu, toStringCategory);
   }
@@ -99,7 +99,7 @@ class MenuModel {
   #reDuplicateMenu(foodArr, toStringCategory) {
     this.#duplicateMenu(
       foodArr,
-      ShuffleMenu.get(Array.from({ length: 9 }, (v, i) => i + 1)),
+      ShuffleMenu.get(Array.from({ length: 9 }, (v, i) => i)),
       toStringCategory
     );
   }
