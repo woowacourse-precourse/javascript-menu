@@ -1,4 +1,5 @@
 const ErrorHandler = require('../libs/ErrorHandler');
+const Shuffle = require('../libs/Shuffle');
 const {
   CoachNameValidator,
   DislikeFoodsValidation,
@@ -7,6 +8,7 @@ const {
 class Coach {
   #name;
   #dislikeFoods = [];
+  #recommendedMenus = [];
 
   constructor(coachName) {
     this.#name = coachName;
@@ -24,6 +26,15 @@ class Coach {
     dislikeFoods
       .split(',')
       .forEach((dislikeFood) => this.#dislikeFoods.push(dislikeFood));
+  }
+
+  decideMenu(categoryMenus) {
+    let recommendedMenu = Shuffle.getRandomMenu(categoryMenus);
+    while (this.#dislikeFoods.includes(recommendedMenu)) {
+      recommendedMenu = Shuffle.getRandomMenu(categoryMenus);
+    }
+
+    this.#recommendedMenus.push(recommendedMenu);
   }
 
   static validationCoachNames(coachNames) {

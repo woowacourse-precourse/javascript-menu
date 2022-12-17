@@ -22,6 +22,14 @@ class Gategorys {
     );
   }
 
+  getCategoryMenus(categoryNumber) {
+    const category = this.#list.filter((category) =>
+      category.isMe(categoryNumber)
+    )[0];
+
+    return category.getMenu();
+  }
+
   #addAllMenus(menus) {
     menus.split(',').forEach((menu) => {
       if (menu[0] === ' ') menu = menu.slice(1);

@@ -2,11 +2,13 @@ const Coach = require('../models/Coach');
 const Coachs = require('../models/Coachs');
 const Categorys = require('../models/Categorys');
 const { OutputView, InputView } = require('../views/IOView');
+const { generator } = require('../libs/GeneratorCategoryNumber');
 
 class Controller {
   #categorys = new Categorys();
   #coachs = new Coachs();
   #coachNames;
+  #recommendedCount = 0;
 
   constructor(categorys) {
     this.#categorys.addGategorys(categorys);
@@ -48,10 +50,26 @@ class Controller {
     );
     if (!isValid) return this.requestDislikeFoods();
 
+    this.addDislikeFoods(dislikeFoods);
+    if (this.#coachNames.length > 0) return this.requestDislikeFoods();
+    this.setRecommendedMenu();
+  }
+
+  addDislikeFoods(dislikeFoods) {
     const coachName = this.#coachNames.shift();
     this.#coachs.addDislikeFoods(coachName, dislikeFoods);
-    if (this.#coachNames.length > 0) return this.requestDislikeFoods();
   }
+
+  setRecommendedMenu() {
+    if (this.#recommendedCount === 5) return this.printRecommendedMenu();
+    this.#recommendedCount += 1;
+    const categoryNumber = generator();
+    const categoryMenus = this.#categorys.getCategoryMenus(categoryNumber);
+    this.#coachs.decideMenu(categoryMenus);
+    return this.setRecommendedMenu();
+  }
+
+  printRecommendedMenu() {}
 }
 
 module.exports = Controller;

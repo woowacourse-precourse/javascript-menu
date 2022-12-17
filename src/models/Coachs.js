@@ -17,6 +17,10 @@ class Coachs {
   getCoachsName() {
     return this.#list.map((coach) => coach.getName());
   }
+
+  decideMenu(categoryMenus) {
+    this.#list.forEach((coach) => coach.decideMenu(categoryMenus));
+  }
 }
 
 module.exports = Coachs;
