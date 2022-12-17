@@ -19,7 +19,7 @@ class setCategory {
   }
 
   categoryOfWeak() {
-    let categoryNumber = this.randomGenerator();
+    const categoryNumber = this.randomGenerator();
     if (this.#list.includes(categoryNumber)) this.#counts[categoryNumber - 1] += 1;
     if (this.isAddToResults(categoryNumber)) this.#list.push(categoryNumber);
     else this.categoryOfWeak();
