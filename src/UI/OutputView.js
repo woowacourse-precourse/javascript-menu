@@ -19,6 +19,10 @@ const OutputView = {
   printFinished() {
     MissionUtils.Console.print(Message.FINISHED);
   },
+
+  printError(error) {
+    MissionUtils.Console.print(error.message);
+  },
 };
 
 module.exports = OutputView;
