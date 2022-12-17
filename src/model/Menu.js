@@ -72,26 +72,23 @@ class Menu {
     let onesDiet = [];
     const onesUneatableMenu = this.#uneatableMenus[index];
 
-    this.#categories.forEach((cate) => {
-      const menu = this.getMenuPerADay(cate, onesUneatableMenu);
+    this.#categories.forEach((category) => {
+      const menu = this.getMenuPerADay(category, onesUneatableMenu);
       onesDiet.push(menu);
     });
 
     return onesDiet;
   }
 
-  getMenuPerADay(cate, onesUneatableMenu) {
+  getMenuPerADay(category, onesUneatableMenu) {
     const arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-    let list = MENU_LIST[cate].split(", ");
+    let list = MENU_LIST[category].split(", ");
     const menu = list[Random.shuffle(arr)[0] - 1];
     if (menu === onesUneatableMenu) {
-      return this.getMenuPerADay(cate, onesUneatableMenu);
+      return this.getMenuPerADay(category, onesUneatableMenu);
     }
     return menu;
   }
 }
-
-const menu = new Menu();
-menu.makeRecommandResult();
 
 module.exports = Menu;
