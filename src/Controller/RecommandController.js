@@ -59,11 +59,16 @@ class RecommandController {
       return;
     }
 
+    this.setMenusEachCoach(noEatMenus);
+
+    this.readNoEatMenuPhase();
+  }
+
+  setMenusEachCoach(noEatMenus) {
     this.menusEachCoach[this.currentCoachName] = {};
     this.menusEachCoach[this.currentCoachName].noEatMenus =
       noEatMenus.split(",");
     this.menusEachCoach[this.currentCoachName].recommandedMenus = [];
-    this.readNoEatMenuPhase();
   }
 
   recommandMenuPhase() {
