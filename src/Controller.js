@@ -1,4 +1,5 @@
 const { MESSAGE, SYMBOL } = require("./constants");
+const NameValidator = require("./validation/NameValidator");
 const InputView = require("./views/InputView");
 const OutputView = require("./views/OutputView");
 
@@ -10,8 +11,8 @@ class Controller {
 
   askName() {
     const callback = (input) => {
-      // 유효성검사
       const namesArr = input.split(SYMBOL.COMMA);
+      new NameValidator(namesArr);
       console.log(namesArr);
     };
 

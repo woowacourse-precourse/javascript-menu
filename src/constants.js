@@ -4,6 +4,7 @@ const SYMBOL = Object.freeze({
   RESULT_CLOSE: " ]",
   SEPARATOR: " | ",
   NEW_LINE: "\n",
+  ERROR: "[ERROR] ",
 });
 
 const MESSAGE = Object.freeze({
@@ -12,6 +13,10 @@ const MESSAGE = Object.freeze({
   ASK_MENU: `(이)가 못 먹는 메뉴를 입력해 주세요.${SYMBOL.NEW_LINE}`,
   RESULT_START: "메뉴 추천 결과입니다.",
   RESULT_END: "추천을 완료했습니다.",
+});
+
+const ERROR_MESSAGE = Object.freeze({
+  NAME_LENGTH: `${SYMBOL.ERROR}코치의 이름은 최소 2글자, 최대 4글자 입니다.`,
 });
 
 const DAY = Object.freeze({
@@ -32,4 +37,18 @@ const CATEGORY = Object.freeze({
   WES: "양식",
 });
 
-module.exports = { MESSAGE, SYMBOL, DAY, CATEGORY };
+const NAME_VALIDITY = Object.freeze({
+  MAX_NAME_LENGTH: 4,
+  MIN_NAME_LENGTH: 2,
+  MAX_NAMES_COUNT: 5,
+  MIN_NAMES_COUNT: 2,
+});
+
+module.exports = {
+  MESSAGE,
+  ERROR_MESSAGE,
+  SYMBOL,
+  DAY,
+  CATEGORY,
+  NAME_VALIDITY,
+};
