@@ -57,6 +57,6 @@ const InputValidator = Object.freeze({
 });
 
 // InputValidator.checkCoaches(['김또', '유권', '유가리', '유가', '기리', '오로']);
-InputValidator.checkMenus(['고기', '고기']);
+// InputValidator.checkMenus(['고기', '고기']);
 
 module.exports = InputValidator;

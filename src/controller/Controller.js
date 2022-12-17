@@ -15,10 +15,12 @@ class Controller {
 
   execute() {
     //TODO: #input -> readCoachName --> handleSettingCoach
+    this.#inputView.readCoaches(this.#handleSettingCoach);
   }
 
-  #handleSettingCoach(coachName) {
+  #handleSettingCoach(coachNames) {
     //TODO: #model -> coach 객체 생성하여 저장
+    this.#lunchRecommendation.setCoaches(coachNames);
     //TODO: #model -> coach list 받기.
     //TODO: 코치 못먹는 메뉴 설정
     //TODO: #input ->  cannotEat(못먹는 메뉴)입력 --> handleSettingCannotEat
