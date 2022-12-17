@@ -13,7 +13,6 @@ const InputView = {
                 const COACH = nameString.split(',');
                 ErrorHandler.coachNameError(COACH);
                 this.readHateMenu(COACH,[],0);
-                //Menu.pickMenu(COACH, Menu.pickCategory(), hateMenu);
             } catch(e) {
                 OutputView.printError(e);
                 this.readCoachName();
@@ -28,16 +27,12 @@ const InputView = {
             try {
                 hateMenu[i] = menu.split(',');
                 ErrorHandler.hateMenuError(hateMenu[i]);
-                if(i == COACH.length - 1){
-                    Menu.pickMenu(COACH, Menu.pickCategory(), hateMenu);
-                }
-                else this.readHateMenu(COACH,hateMenu,++i);
+                i == COACH.length - 1 ? Menu.pickMenu(COACH, Menu.pickCategory(), hateMenu) : this.readHateMenu(COACH,hateMenu,++i);
             } catch(e) {
                 OutputView.printError(e);
                 this.readHateMenu(COACH,hateMenu,i);
             }
         });
-
     },
 };
 module.exports = InputView;
