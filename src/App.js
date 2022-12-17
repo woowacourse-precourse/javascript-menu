@@ -34,19 +34,16 @@ class App {
         this.#coaches = [...this.#coaches, coachObj];
       }
 
-      this.getCoachesMenu();
+      this.askNotEatMenu(0);
     });
   }
 
-  getCoachesMenu() {
-    this.askNotEatMenu(0);
-
-    console.log(this.#coaches, "EEE");
-  }
-
   askNotEatMenu(i) {
+    if (i === this.#coaches.length) {
+      this.getResult();
+      return;
+    }
     const coach = this.#coaches[i];
-    if (!coach) return;
 
     Console.readLine(
       `${coach.name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
@@ -58,6 +55,10 @@ class App {
         this.askNotEatMenu(i + 1);
       },
     );
+  }
+
+  getResult() {
+    console.log(this.#coaches, "코치들 못먹는 음식");
   }
 }
 
