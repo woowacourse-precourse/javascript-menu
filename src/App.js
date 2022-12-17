@@ -60,12 +60,15 @@ class App {
     this.askNotEatMenu(coaches, index + 1);
   }
 
-  getResult() {
+  appendRandomMenus() {
     for (const [name, attrs] of this.#coaches) {
       const coachMenus = getRandomMenues(this.#categories, attrs.canNotEat);
       this.#coaches.set(name, { ...attrs, menus: [...coachMenus] });
     }
+  }
 
+  getResult() {
+    this.appendRandomMenus();
     Console.print("메뉴 추천 결과입니다.");
     Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
 
