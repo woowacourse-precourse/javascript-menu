@@ -11,6 +11,14 @@ class MenuController {
   #weekCategory = [];
   #weekMenu = [];
 
+  #categoryCount = {
+    일식: 0,
+    한식: 0,
+    중식: 0,
+    아시안: 0,
+    양식: 0,
+  };
+
   constructor() {
     this.validator = new Validator();
   }
