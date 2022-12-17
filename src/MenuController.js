@@ -1,6 +1,8 @@
 const Console = require('./utils/Console');
 const InputView = require('./InputView');
 const MenuGame = require('./MenuGame');
+const userNameValid = require('./validation/userNameValid');
+const CatchError = require('./validation/CatchError');
 
 class MenuController {
   constructor(SAMPLE) {
