@@ -25,9 +25,9 @@ const ERROR_MESSAGE = deepFreeze({
 });
 
 const VALIDATION_MESSAGE = deepFreeze({
-  bridge_length: {
-    number: '다리 길이는 숫자를 입력해주셔야 합니다.',
-    range: '다리 길이는 3-20 사이의 숫자를 입력해주어야 합니다.',
+  name_list: {
+    range: '코치 숫자는 2명에서 5명 사이여야 합니다.',
+    length: '코치의 이름은 2글자에서 4글자 사이여야 합니다.',
   },
   move_space: {
     command: '플레이어가 이동할 칸은 대문자 U 또는 D중 하나만 입력할 수 있습니다.',

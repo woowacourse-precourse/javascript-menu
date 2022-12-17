@@ -1,4 +1,6 @@
 const IGameCtrl = require('./IGameCtrl');
+const { NameValidator } = require('../validators');
+
 const { ERROR_MESSAGE } = require('../constants');
 
 class GameCtrl extends IGameCtrl {
@@ -13,9 +15,27 @@ class GameCtrl extends IGameCtrl {
 
   start() {
     this.view.printStartMessage();
+    this.gameProcess();
   }
 
-  gameProcess() {}
+  gameProcess() {
+    this.#inputCoachName();
+  }
+
+  // 입력
+  // 코치의 이름을 입력해 주세요. (, 로 구분)
+  // 토미,제임스,포코
+  #inputCoachName() {
+    this.view.readCoachesName(nameList => {
+      const splittedNameList = nameList.split(',');
+      NameValidator.validateList(splittedNameList);
+
+      console.log(splittedNameList);
+      // SizeValidator.validateList(bridgeSize);
+      // this.model.createBridge(bridgeSize);
+      // this.#getUserCommand();
+    });
+  }
 
   end() {}
 }
