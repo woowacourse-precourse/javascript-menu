@@ -11,11 +11,11 @@ const OutputView = {
         PrintRecommandResult();
         MissionUtils.Console.print('추천을 완료했습니다.');
     },
-    printRecommandResult(categorys, recommandResults) {
+    printRecommandResult(categorys, coachs) {
         MissionUtils.Console.print(this.classToString());
         MissionUtils.Console.print(this.categorysToString(categorys));
-        recommandResults.array.forEach(result => {
-            MissionUtils.Console.print(this.recommandResultToString(result));
+        coachs.array.forEach(coach => {
+            MissionUtils.Console.print(coach.toString());
         });
     },
     classToString() {
@@ -23,12 +23,8 @@ const OutputView = {
         return '[ ' + content.join(' | ') + ' ]';
     },
     categorysToString(categorys) {
-        const content = ['카테코리', ...categorys];
+        const content = ['카테고리', ...categorys];
         return '[ ' + content.join(' | ') + ' ]';
     },
-    recommandResultToString(result) {
-        const content = [result.coach, ...result.foodList]
-        return '[ ' + content.join(' | ') + ' ]';
-    }
 };
 module.exports = OutputView;
