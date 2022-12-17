@@ -11,9 +11,19 @@ const SAMPLE = {
 
 class App {
   coachs;
+  noFoodArr;
+
+  constructor() {
+	this.coachs = [];
+	this.noFoodArr = [];
+	this.indexCount = 0;
+
+  }
+
   play() {
 	Console.print("점심 메뉴 추천을 시작합니다.");
 	this.inputCreatCoach();
+
 	
   }
 
@@ -22,8 +32,7 @@ class App {
 	Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분).\n", (names) => {
 	  this.coachs = names.split(",");
 	  this.validName();
-	  this.repeatInputNoFoods();
-
+	  this.replay();
 	  });
   }
 
@@ -39,18 +48,14 @@ class App {
 	});
   }
 
-  /** 4. 코치 인원 만큼 입력값 반복하는 기능 */
-  repeatInputNoFoods() {
-	let crrentName = 0;
-	while(crrentName < this.coachs.length) {
-	  //입력값 받는 기능 구현해서 넣기
-	  break;
+
+	/**4. 코치 인원 만큼 입력값 반복하는 기능 */
+  replay() {
+	if(this.indexCount !== this.coachs.length) {
+		this.inputNoFoods();
 	}
-
-  
-
-
   }
+
 
 
 
