@@ -17,7 +17,10 @@ class CategoryList {
   }
 
   addMenuList(menuList) {
-    menuList.split(',').forEach((menu) => this.#everyMenuList.push(menu));
+    menuList.split(',').forEach((menu) => {
+      if (menuList[0] === ' ') menu = menu.slice(1);
+      this.#everyMenuList.push(menu);
+    });
   }
 }
 

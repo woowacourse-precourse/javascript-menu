@@ -10,6 +10,14 @@ class CoachList {
   getCoachNameList() {
     return this.#coachList.map((coach) => coach.getCoachName());
   }
+
+  addHateMenuList(coachName, hateMenuList) {
+    if (!hateMenuList) return;
+    const coach = this.#coachList.filter((el) =>
+      el.getCorrectCoachName(coachName)
+    )[0];
+    coach.addHateMenuList(hateMenuList);
+  }
 }
 
 module.exports = CoachList;

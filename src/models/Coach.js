@@ -6,6 +6,7 @@ const {
 
 class Coach {
   #name;
+  #hateMenuList;
 
   constructor(coachName) {
     this.#name = coachName;
@@ -37,6 +38,16 @@ class Coach {
 
   getCoachName() {
     return this.#name;
+  }
+
+  getCorrectCoachName(coachName) {
+    return this.#name === coachName;
+  }
+
+  addHateMenuList(hateMenuList) {
+    hateMenuList.split(',').forEach((hateMenu) => {
+      this.#hateMenuList.push(hateMenu);
+    });
   }
 }
 
