@@ -3,6 +3,7 @@ const { MENU, WEEK, CATEGORY } = require('../constants/Constants');
 
 const MenuRecommender = class {
   recommend(names, hateMenus) {
+    const weekCategory = this.#initWeekCategory();
     const recommendList = {};
 
     names.reduce((recommendList, name, i) => {
@@ -12,14 +13,13 @@ const MenuRecommender = class {
 
   #personalRecommend(name, hateMenus) {}
 
-  initWeekCategory() {
+  #initWeekCategory() {
     const category = [];
 
     while (category.length < WEEK.size) {
       const selected = Random.pickNumberInRange(1, CATEGORY.size);
       if (!this.#isAlreadyHave(category, selected)) category.push(selected);
     }
-    console.log(category);
     return category;
   }
 
@@ -33,5 +33,4 @@ const MenuRecommender = class {
 };
 
 const a = new MenuRecommender();
-a.initWeekCategory();
 module.exports = MenuRecommender;
