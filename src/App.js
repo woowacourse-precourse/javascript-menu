@@ -15,6 +15,7 @@ class App {
   #currentBanCoachIndex;
   constructor() {
     this.namesCallback = this.namesCallback.bind(this);
+	this.banMenusCallback = this.banMenusCallback.bind(this)
     this.categories = [];
   }
 
