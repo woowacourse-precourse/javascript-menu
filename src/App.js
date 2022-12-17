@@ -5,7 +5,7 @@ const Coach = require('./Coach');
 const InputProcessor = require('./util/InputProcessor');
 const Food = require('./Food');
 const MenuUtil = require('./util/menuUtil');
-const { Randoms } = require('@woowacourse/mission-utils');
+const { Random } = require('@woowacourse/mission-utils');
 const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
 
@@ -83,7 +83,7 @@ class App {
 
   selectCategory() {
     while (1) {
-      const category = Randoms.pickNumberInRange(1, 5);
+      const category = Random.pickNumberInRange(1, 5);
       if (!this.categoryCounts[category] <= 2) {
         this.categoryCounts[category]++;
         return category;
@@ -92,24 +92,20 @@ class App {
   }
 
   recommendByCoach(foodList, coach) {
-    let [...totalFoodList] = foodList;
-    // 못 먹는 음식 빼기
-    coach.dislikeFoods.forEach((food) => {
-      if (totalFoodList.includes(food.name)) {
-        const idx = totalFoodList.indexOf(food.name);
-        totalFoodList.splice(idx, 1);
+    const [...totalFoodList] = foodList;
+    let selectFood = Random.shuffle(totalFoodList)[0];
+    while (1) {
+      if (coach.dislikeFoods.some((food) => food.name === selectFood)) {
+        selectFood = Random.shuffle(totalFoodList)[0];
+        continue;
       }
-    });
-    // 먹었던 메뉴 빼기
-    coach.ateFoods.forEach((food) => {
-      if (totalFoodList.includes(food.name)) {
-        const idx = totalFoodList.indexOf(food.name);
-        totalFoodList.splice(idx, 1);
+      if (coach.ateFoods.some((food) => food.name === selectFood)) {
+        selectFood = Random.shuffle(totalFoodList)[0];
+        continue;
       }
-    });
-
-    // 메뉴 선택
-    return Randoms.shuffle(totalFoodList)[0];
+      break;
+    }
+    return selectFood;
   }
 }
 
