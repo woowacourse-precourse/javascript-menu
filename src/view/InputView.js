@@ -47,6 +47,13 @@ const InputView = {
       }
     });
   },
+
+  readExcludeMenu(name, callback) {
+    Console.readLine(MESSAGES.excludeMenu(name), (input) => {
+      callback(input);
+      //this.validateExcludeMenus(input, callback);
+    });
+  },
 };
 
 module.exports = InputView;
