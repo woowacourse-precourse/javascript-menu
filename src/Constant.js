@@ -1,10 +1,4 @@
-const MATCH = {
-    1: "일식",
-    2: "한식",
-    3: "중식",
-    4: "아시안",
-    5: "양식"
-}
+
 
 const CATEGORY = {
     일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -36,4 +30,4 @@ const MESSAGE = {
     ERROR_COACH_NAME: "[ERROR] 코치이름은 최소 2자 이상 최대 4자 이하입니다.",
     ERROR_NOTEAT: "[ERROR] 못먹는 음식은 최소 0개 이상 최대 2개 이하입니다.",
 }
-module.exports = { MATCH, CATEGORY, NAME, COACH, MESSAGE };
+module.exports = { CATEGORY, NAME, COACH, MESSAGE };
