@@ -22,7 +22,9 @@ class App {
     MissionUtils.Console.readLine(PRINT_STRING.INPUT_COACH_NAME, callback);
   }
 
-  namesCallback(coachName) {}
+  namesCallback(coachName) {
+    const coachArray = coachName.split(',');
+  }
 
   play() {
     this.printRecommendedStart();
