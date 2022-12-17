@@ -1,4 +1,3 @@
-const SAMPLE = require('../src/App');
 const { Random } = require('@woowacourse/mission-utils');
 
 class Category {
@@ -10,11 +9,11 @@ class Category {
 
   static generate() {
     this.init();
+    this.pickCategory();
   }
 
-  // 각 코치에게 음식 추천
-  static recommend(coachName) {
-    this.pickCategory();
+  static getCategory() {
+    return this.categories;
   }
 
   // 랜덤 넘버 생성
@@ -22,38 +21,24 @@ class Category {
     return Random.pickNumberInRange(1, 5);
   }
 
-  static getCategoryName(number) {
-    if (number === 1) {
-      return '일식';
-    }
-    if (number === 2) {
-      return '한식';
-    }
-    if (number === 3) {
-      return '중식';
-    }
-    return number === 4 ? '아시안' : '양식';
+  static hasTwoCategory(number) {
+    return this.categories.filter((category) => category === number).length > 1;
   }
 
-  static hasTwoCategory(categoryName) {
-    return (
-      this.categories.filter((category) => category === categoryName).length > 2
-    );
-  }
-
+  // 카테고리 선택
   static pickCategory() {
     let count = 0;
 
     while (count < 5) {
-      const name = this.getCategoryName(this.generateRandom());
-      const hasTwoCategory = this.hasTwoCategory(name);
+      const number = this.generateRandom(); // 1 ~ 5
+      const hasTwoCategory = this.hasTwoCategory(number) || 0;
 
       if (!hasTwoCategory) {
-        this.categories.push(name);
+        this.categories.push(number);
         count++;
       }
     }
-    console.log(this.categories);
+    // console.log(this.categories);
     // return this.categories;
   }
 }

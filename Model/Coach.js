@@ -41,8 +41,16 @@ class Coach {
     this.#coaches.set(name, foodSet);
   }
 
+  static showCoach() {
+    return this.#coaches;
+  }
+
   static people() {
     return this.#coaches;
+  }
+
+  static setMenu(coachName, menus) {
+    this.#coaches.set(coachName, menus);
   }
 }
 

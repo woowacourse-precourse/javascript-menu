@@ -1,10 +1,17 @@
 const Category = require('../Model/Category');
 const Coach = require('../Model/Coach');
+const MenuPicker = require('../Model/MenuPicker');
 const Validate = require('../Model/Validate');
+const SAMPLE = require('../src/App');
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
 
 class MenuController {
+  #samples;
+  constructor(samples) {
+    this.#samples = samples;
+  }
+
   start() {
     OutputView.print('점심 메뉴 추천을 시작합니다.\n');
     this.readCoaches();
@@ -68,9 +75,21 @@ class MenuController {
   }
 
   recommendMenu() {
-    Coach.people().forEach((coach) => {
-      Category.recommend(coach);
-    });
+    const category = Category.getCategory();
+    for (const [coachName, noMenu] of Coach.people()) {
+      const recommendMenu = MenuPicker.recommend(
+        noMenu,
+        category,
+        this.#samples
+      );
+      Coach.setMenu(coachName, recommendMenu);
+    }
+
+    this.showCoach();
+  }
+
+  showCoach() {
+    Coach.showCoach();
   }
 }
 

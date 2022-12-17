@@ -63,6 +63,7 @@ describe('점심 메뉴 테스트', () => {
         [1, Array.from({ length: 9 }, sequenced)],
         [4, Array.from({ length: 9 }, sequenced)],
         [2, Array.from({ length: 9 }, sequenced)],
+        // 메뉴 번호인데
 
         //제임스
         [9, Array.from({ length: 9 }, sequenced)],

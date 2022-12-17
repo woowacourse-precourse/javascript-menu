@@ -13,15 +13,17 @@ class App {
   #menuController;
 
   constructor() {
-    this.#menuController = new MenuController();
+    this.#menuController = new MenuController(SAMPLE);
   }
   play() {
     this.#menuController.start();
   }
 }
 
-// const app = new App();
-// app.play();
+const app = new App();
+app.play();
 
 module.exports = App;
 module.exports = SAMPLE;
+
+// console.log(SAMPLE['일식'].split(', '));
