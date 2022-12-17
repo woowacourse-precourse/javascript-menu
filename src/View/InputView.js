@@ -6,6 +6,10 @@ const InputView = {
     Console.readLine(MESSAGE.names, callback);
   },
 
+  inputNotFood(name, callback) {
+    Console.readLine(`${name}${MESSAGE.foods}`, callback);
+  },
+
 };
 
 module.exports = InputView;
