@@ -1,6 +1,3 @@
-const OutputView = require("./OutputView");
-const MenuController = require("./MenuController");
-
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
 	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -10,18 +7,4 @@ const SAMPLE = {
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
-class App {
-	constructor() {
-		this.controller = new MenuController();
-	}
-  play() {
-		OutputView.printStart();
-		this.controller.readCoachNamesCallback();
-	}
-}
-
-const app = new App();
-app.play();
-
-module.exports = App;
-module.exports = { SAMPLE };
+module.exports = SAMPLE;
