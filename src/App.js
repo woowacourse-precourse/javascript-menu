@@ -1,7 +1,7 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
 const { splitString } = require("./utils/UtilityFunctions");
-const { checkCoach } = require("./Validate");
+const { checkCoach, checkFood } = require("./Validate");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -38,8 +38,9 @@ class App {
       const coaches = splitString(input, ",").map((name) => name.trim()); // 이름 깔끔하게 정리
       checkCoach(coaches, () => this.getCoachesName());
       this.setCoachesToMap(coaches);
-
-      this.askNotEatMenu(0);
+      // 코치를 하나하나 넘겨주자.
+      const firstCoach = [...this.#coaches][0];
+      this.askNotEatMenu(firstCoach, 0, this.#coaches);
     });
   }
 
@@ -52,18 +53,22 @@ class App {
     }
   }
 
-  askNotEatMenu(index) {
-    if (index === this.#coaches.size) {
+  askNotEatMenu(coach, index, coaches) {
+    if (index === coaches.size) {
       this.getResult();
       return;
     }
-    const [name, attrs] = [...this.#coaches][index];
+
+    const [name, attrs] = coach;
     Console.readLine(
       `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
       (input) => {
-        const notEat = input.split(","); // 여기도 한번 검증 해야함. 여기서 SAMPLEDATA에 있지 않는 음식이라면 다시 입력하라고 해줘야 함.
-        this.#coaches.set(name, { ...attrs, canNotEat: notEat });
-        this.askNotEatMenu(i + 1);
+        const foods = splitString(input, ",").map((name) => name.trim()); // 여기도 한번 검증 해야함. 여기서 SAMPLEDATA에 있지 않는 음식이라면 다시 입력하라고 해줘야 함.
+        checkFood(foods, () => this.askNotEatMenu(coach, index, coaches));
+
+        this.#coaches.set(name, { ...attrs, canNotEat: foods });
+        const nextCoach = [...this.#coaches][index + 1];
+        this.askNotEatMenu(nextCoach, index + 1, coaches);
       },
     );
   }
@@ -83,10 +88,8 @@ class App {
           { length: canMenu.length },
           (_, idx) => idx,
         );
-        console.log(canMenu, numMenus);
         while (true) {
           const menuIdx = Random.shuffle(numMenus)[0]; // 이제 같은 음식이 안나오게끔 해야 함.
-          console.log(canMenu[menuIdx], attrs, "가능한 음식");
           if (attrs.menus.includes(canMenu[menuIdx])) continue;
           this.#coaches.set(name, {
             ...attrs,

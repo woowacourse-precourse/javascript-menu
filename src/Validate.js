@@ -37,6 +37,24 @@ const checkCoach = function checkCoachValidation(coaches, callback) {
   if (!checkCoachCount) return;
 };
 
+const foodCount = function checkFoodCharCount(foods, callback) {
+  try {
+    if (foods.length > 2)
+      throw new Error("[ERROR]: 못먹는 메뉴의 개수는 0 ~ 2개 입니다.");
+    return true;
+  } catch (error) {
+    Console.print(error);
+    callback();
+    return false;
+  }
+};
+
+const checkFood = function checkCanNotEatValidation(foods, callback, index) {
+  const checkFoodCount = foodCount(foods, callback);
+  if (!checkFoodCount) return;
+};
+
 module.exports = {
   checkCoach,
+  checkFood,
 };
