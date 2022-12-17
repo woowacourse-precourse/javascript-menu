@@ -10,6 +10,11 @@ const View = {
   ErrorMsg(error) {
     Console.print(error);
   },
+
+  end() {
+    Console.print('\n추천을 완료했습니다.');
+    Console.close();
+  },
 };
 
 module.exports = View;

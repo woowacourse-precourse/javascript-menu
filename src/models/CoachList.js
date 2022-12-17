@@ -22,6 +22,10 @@ class CoachList {
   recommendMenu(menuList) {
     this.#coachList.forEach((coach) => coach.recommendMenu(menuList));
   }
+
+  getRecommendedMenu() {
+    return this.#coachList.map((coach) => coach.getRecommendedMenuList())
+  }
 }
 
 module.exports = CoachList;

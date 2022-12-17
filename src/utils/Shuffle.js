@@ -6,12 +6,13 @@ const Shuffle = {
   },
 
   shuffledMenu(categoryMenuList) {
-    const idx = Shuffle.shuffledMenuIdx(categoryMenuList)[0];
-    return categoryMenuList[idx];
+    let idx = Shuffle.shuffledMenuIdx(categoryMenuList)[0];
+    return categoryMenuList[idx - 1];
   },
 
   shuffledMenuIdx(categoryMenuList) {
-    return Random.shuffle(categoryMenuList.map((menu, idx) => idx));
+    const categoryMenusNumberList = categoryMenuList.map((_, idx) => idx + 1);
+    return Random.shuffle(categoryMenusNumberList);
   },
 };
 

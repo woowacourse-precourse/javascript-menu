@@ -2,6 +2,7 @@ class Category {
   #category;
   #menuList;
   #idx;
+  #count;
 
   constructor([category, menuList, idx]) {
     this.#category = category;
@@ -17,6 +18,15 @@ class Category {
 
   getMenuList() {
     return this.#menuList;
+  }
+
+  countUpRecommendation() {
+    this.#count++;
+  }
+
+  limitRecommend() {
+    if (this.#count === 2) return false;
+    return true;
   }
 }
 

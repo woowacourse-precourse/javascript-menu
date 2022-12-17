@@ -55,11 +55,18 @@ class Coach {
   recommendMenu(menuList) {
     let decidedMenu = Shuffle.getRandomMenu(menuList);
 
-    while (this.#hateMenuList.includes(decidedMenu)) {
+    while (
+      this.#hateMenuList.includes(decidedMenu) ||
+      this.#recommendedMenuList.includes(decidedMenu)
+    ) {
       decidedMenu = Shuffle.getRandomMenu(menuList);
     }
 
     this.#recommendedMenuList.push(decidedMenu);
+  }
+
+  getRecommendedMenuList() {
+    return [this.#name, ...this.#recommendedMenuList];
   }
 }
 

@@ -23,10 +23,17 @@ class CategoryList {
     });
   }
 
+  limitRecommend(categoryNum) {
+    const category = this.#list.filter((category) =>
+      category.getCorrectCategory(categoryNum)
+    )[0];
+    return category.limitRecommend();
+  }
+
   getCategoryMenuList(categoryNum) {
     const category = this.#list.filter((category) => {
       category.getCorrectCategory(categoryNum)[0];
-
+      category.countUpRecommendation();
       return category.getMenuList();
     });
   }
