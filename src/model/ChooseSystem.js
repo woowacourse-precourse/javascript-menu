@@ -12,6 +12,10 @@ class ChooseSystem {
   shuffleCategory() {
     this.#categories = CategoryChooser.choose();
   }
+
+  addCoach(coachName) {
+    this.#coachNames.push(coachName);
+  }
 }
 
 module.exports = MenuChooser;
