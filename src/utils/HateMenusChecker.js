@@ -16,6 +16,23 @@ const HateMenusChecker = {
   validateInput(input) {
     Validator.checkType(input, 'string');
   },
+
+  check(hateMenus) {
+    try {
+      this.validate(hateMenus);
+    } catch (error) {
+      OutputView.printError(error);
+      return false;
+    }
+
+    return true;
+  },
+
+  validate(hateMenus) {
+    Validator.checkMenuCount(hateMenus);
+    Validator.checkExistMenu(hateMenus);
+    Validator.checkDuplicateMenu(hateMenus);
+  },
 };
 
 module.exports = HateMenusChecker;

@@ -1,4 +1,5 @@
 const { MESSAGE_ERROR } = require('../constants/messages');
+const { FOOD } = require('../constants/values');
 
 const Validator = {
   checkTruthy(value) {
@@ -30,6 +31,29 @@ const Validator = {
     const newNames = [...set];
 
     if (names.length !== newNames.length) {
+      throw new Error(MESSAGE_ERROR.VALUE);
+    }
+  },
+
+  checkMenuCount(menu) {
+    if (menu.length < 0 || menu.length > 2) {
+      throw new Error(MESSAGE_ERROR.VALUE);
+    }
+  },
+
+  checkExistMenu(menu) {
+    if (
+      !menu.every(food => FOOD.data.some(category => category.includes(food)))
+    ) {
+      throw new Error(MESSAGE_ERROR.VALUE);
+    }
+  },
+
+  checkDuplicateMenu(menu) {
+    const set = new Set(menu);
+    const newMenu = [...set];
+
+    if (menu.length !== newMenu.length) {
       throw new Error(MESSAGE_ERROR.VALUE);
     }
   },

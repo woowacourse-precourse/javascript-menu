@@ -2,13 +2,14 @@ const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
 const CoachNamesChecker = require('../utils/CoachNamesChecker');
 const HateMenusChecker = require('../utils/HateMenusChecker');
-const Coach = require('../models/Coach');
+const CoachNames = require('../models/CoachNames');
+const CoachHateMenus = require('../models/CoachHateMenus');
 
 class Service {
   #index;
 
   #instance = {
-    coach: null,
+    coachNames: null,
   };
 
   constructor() {
@@ -25,19 +26,18 @@ class Service {
       this.start();
       return;
     }
-
-    this.#instance.coach = new Coach(names);
-
-    if (!CoachNamesChecker.check(this.#instance.coach.get().names)) {
+    this.#instance.coachNames = new CoachNames(names);
+    if (!CoachNamesChecker.check(this.#instance.coachNames.get())) {
       this.start();
       return;
     }
 
+    this.#instance.coachHateMenus = new CoachHateMenus();
     this.#enterHateMenus();
   }
 
   #enterHateMenus() {
-    const { names } = this.#instance.coach.get();
+    const names = this.#instance.coachNames.get();
 
     InputView.readHateMenus(
       names[this.#index],
@@ -50,7 +50,11 @@ class Service {
       this.#enterHateMenus();
       return;
     }
-
+    this.#instance.coachHateMenus.set(hateMenus);
+    if (!HateMenusChecker.check(this.#instance.coachHateMenus.get())) {
+      this.#enterHateMenus();
+      return;
+    }
     this.#index += 1;
     if (this.#index < length) {
       this.#enterHateMenus();
