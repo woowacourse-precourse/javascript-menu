@@ -29,6 +29,15 @@ class ChooseSystem {
       this.#results[coachName] = chosenMenus;
     });
   }
+
+  getResults() {
+    const result = [];
+    this.#coachNames.forEach((coachName) => {
+      result.push([coachName].concat(this.#results[coachName]));
+    });
+
+    return result;
+  }
 }
 
 module.exports = MenuChooser;
