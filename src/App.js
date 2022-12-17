@@ -1,4 +1,5 @@
 const Coach = require("./Coach");
+const { NEW_LINE } = require("./Constant");
 const { CATEGORY } = require("./data");
 const { readCoachName, readCoachPickyFoods } = require("./InputView");
 const { print } = require("./OutputView");
@@ -78,6 +79,10 @@ class App {
         coach.setFoodtoMenu(food);
       }
     }
+  }
+
+  getResultLines() {
+    return this.#coaches.map((coach) => coach.getResult()).join(NEW_LINE);
   }
 
   play() {

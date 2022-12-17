@@ -1,3 +1,5 @@
+const { RESULT } = require("./Constant");
+
 class Coach {
   #name;
   #pickyFoods;
@@ -41,6 +43,10 @@ class Coach {
 
   addFoodtoMenu(food) {
     this.#menus.push(food);
+  }
+
+  getResult() {
+    return `[ ${this.name} | ${this.#menus.join(RESULT.divider)} ]`;
   }
 }
 
