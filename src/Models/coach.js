@@ -1,3 +1,11 @@
-class coach {}
+class Coach {
+  #name;
 
-module.exports = Controller;
+  #recomend;
+
+  constructor(name) {
+    this.#name = name;
+  }
+}
+
+module.exports = Coach;
