@@ -13,7 +13,14 @@ class Coach {
     if (!condition) throw new InValidInputError(message);
     return true;
   }
-
+  #isValidNames(names) {
+    const nameArr = names.split(",");
+    return (
+      this.#isValidCoachNum(nameArr) &&
+      this.#isValidCoachNameNum(nameArr) &&
+      this.#isDifferentCouchNames(nameArr)
+    );
+  }
   #isValidCoachNum(names) {
     return this.#baseValidate(
       names.length >= 2 && names.length <= 5,
