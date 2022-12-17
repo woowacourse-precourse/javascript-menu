@@ -4,6 +4,7 @@ class MenuController {
   constructor(SAMPLE) {
     this.SAMPLE = SAMPLE;
     this.coach = [];
+    this.coachAvoidMenu = {};
     this.coachIndex = 0;
   }
 
@@ -16,7 +17,9 @@ class MenuController {
 
   readEachCoachAvoidMenu(name) {
     InputView.readAvoidMenu(name, (menu) => {
+      this.coachAvoidMenu[this.coach[this.coachIndex]] = menu
       this.coachIndex++;
+      console.log(this.coachAvoidMenu)
       if(this.coachIndex === this.coach.length) {
         return 
       }

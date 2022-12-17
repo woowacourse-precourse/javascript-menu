@@ -14,6 +14,7 @@ const InputView = {
   readAvoidMenu(name, readAvoidMenuCallback) {
     Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (menu) => {
       menu = catchError(menu, checkAvoidMenu)  
+      if(!menu) return this.readAvoidMenu(name, readAvoidMenuCallback)
       readAvoidMenuCallback(menu);
       }
     );
