@@ -1,8 +1,12 @@
 const AppValidationError = require('../errors/AppValidationError');
+const Menu = require('./Menu');
 
 class Coach {
   /** @type {string} */
   #name;
+
+  /** @type {Menu} */
+  #dislikeMenus = [];
 
   /**
    * @param {string} name
@@ -20,6 +24,20 @@ class Coach {
 
   getName() {
     return this.#name;
+  }
+
+  /**
+   * @param {Menu[]} dislikeMenus
+   */
+  setDislikeMenus(dislikeMenus) {
+    if (2 < dislikeMenus.length) {
+      throw new AppValidationError('못 먹는 메뉴는 최소 0개, 최대 2개여야 합니다.');
+    }
+    this.#dislikeMenus = dislikeMenus;
+  }
+
+  getDislikeMenus() {
+    return this.#dislikeMenus;
   }
 }
 
