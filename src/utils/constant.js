@@ -14,7 +14,7 @@ const START_BRACKET = "[ "
 const CLOSE_BRACKET = " ]"
 
 const COACH_NAME_ERROR ="[ERROR] 코치의 이름은 최소 2글자, 최대 4글자여야 합니다.\n"
-const COACH_NUMBER_ERROR ="[ERROR] 코치는 최소 2명, 최대 4명이여야 합니다.\n"
+const COACH_NUMBER_ERROR ="[ERROR] 코치는 최소 2명, 최대 5명이여야 합니다.\n"
 const MENU_ERROR ="[ERROR] 각 코치마다 못 먹는 메뉴는 최소 0개, 최대 2개이여야 합니다.\n"
 
 module.exports = {
