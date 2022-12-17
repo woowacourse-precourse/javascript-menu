@@ -97,8 +97,7 @@ class MenuController {
   setMenu() {
     let personFood = Randomgenerator.menuGenerate();
     let tmp = this.allFood[this.category[this.count]];
-    // Console.print(tmp[personFood])
-    return this.eachPersonMenu(tmp[Number(personFood)]);
+    return this.eachPersonMenu(tmp[personFood]);
   };
 
   eachPersonMenu(eachMenu) {
@@ -111,7 +110,7 @@ class MenuController {
   }
 
   menumenu() {
-    if (this.eachFood.size < 5) {
+    if (this.eachFood.size < 5 && this.count < 6) {
       this.count += 1;
       return this.setMenu();
     };
