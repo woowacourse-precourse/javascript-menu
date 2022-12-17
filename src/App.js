@@ -1,6 +1,6 @@
 const OutputView = require("./OutputView");
 const Validation = require("./Validation");
-const { Console } = require("@woowacourse/mission-utils");
+const { Console, Random } = require("@woowacourse/mission-utils");
 const { INPUT } = require("./constants/messages");
 
 const SAMPLE = {
@@ -17,6 +17,7 @@ class App {
     this.names;
     this.index = 0;
     this.foodList = [];
+    this.category = [];
   }
 
   play() {
@@ -55,14 +56,22 @@ class App {
       const inputFoods = foods.split(",");
       const checkFoodCount = Validation.checkInputFoodCount(inputFoods.length);
 
-      if (!checkFoodCount) this.inputCannotEatFoods();
-      else {
-        this.foodList.push(inputFoods);
-        this.index += 1;
-      }
+      !checkFoodCount
+        ? this.inputCannotEatFoods()
+        : (this.foodList.push(inputFoods), (this.index += 1));
 
-      if (this.names.length !== this.index) this.inputCannotEatFoods();
+      this.names.length !== this.index
+        ? this.inputCannotEatFoods()
+        : this.getCategory();
     });
+  }
+
+  getCategory() {
+    for (let day = 0; day < 5; day++) {
+      const category = Random.pickNumberInRange(1, 5);
+      this.category.push(category);
+    }
+    console.log(this.category);
   }
 }
 
