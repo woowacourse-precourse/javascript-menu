@@ -1,7 +1,9 @@
-const { NAME_VALIDITY, ERROR_MESSAGE, REG_EXP } = require("../constants");
+const { NAME_VALIDITY, ERROR_MESSAGE } = require("../constants");
+const StringValidator = require("./Validator");
 
 const { MAX_NAME_LENGTH, MIN_NAME_LENGTH, MAX_NAMES_COUNT, MIN_NAMES_COUNT } =
   NAME_VALIDITY;
+const NAME = "NAME";
 
 class NameValidator {
   constructor(namesArr) {
@@ -21,20 +23,11 @@ class NameValidator {
     const namesCount = namesArr.length;
     if (namesCount < MIN_NAMES_COUNT || namesCount > MAX_NAMES_COUNT)
       throw ERROR_MESSAGE.NAME_COUNT;
-    this.duplicationCheck(namesArr);
+    this.validateStrings(namesArr, NAME);
   }
 
-  duplicationCheck(namesArr) {
-    const nameSet = new Set(namesArr);
-    if (namesArr.length !== nameSet.size) throw ERROR_MESSAGE.NAME_DUPLICATION;
-    this.specialCharsCheck(namesArr);
-  }
-
-  specialCharsCheck(namesArr) {
-    namesArr.forEach((name) => {
-      if (REG_EXP.SPECIAL_CHARS_CHECK.test(name))
-        throw ERROR_MESSAGE.NAME_SPECIAL_CHARS;
-    });
+  validateStrings(namesArr, type) {
+    new StringValidator(namesArr, type);
   }
 }
 
