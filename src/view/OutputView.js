@@ -13,7 +13,7 @@ const OutputView = {
   printMenu(names, menu) {
     this.print('메뉴 추천 결과입니다.');
     const typeName = Object.keys(SAMPLE);
-    const typelist = menu.map((day) => day[0][1]);
+    const typelist = menu.map((day) => day[0][0]);
     this.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
     this.print(
       `[ 카테고리 | ${typeName[typelist[0]]} | ${typeName[typelist[1]]} | ${
@@ -35,7 +35,6 @@ const OutputView = {
 
   menuBoard() {
     return Object.keys(SAMPLE).map((typeName) => SAMPLE[typeName].split(', '));
-    //  return tt[4][1];
   },
 };
 
