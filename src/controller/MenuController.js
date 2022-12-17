@@ -23,11 +23,16 @@ class MenuController {
       });
 
       this.#coachs = coachs;
+      this.inputUnLikeMenu(0);
     });
   }
 
-  inputUnLikeMenu() {
-    InputView.readUnLikeMenu((input) => {});
+  inputUnLikeMenu(index) {
+    InputView.readUnLikeMenu((input) => {
+      this.#coachs[index].setUnLikeMenu(input);
+
+      if (index < this.#coachs.length - 1) this.inputUnLikeMenu(index + 1);
+    }, this.#coachs[index].getName());
   }
 }
 
