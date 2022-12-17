@@ -1,6 +1,7 @@
 class Menu {
   constructor(name) {
     this.name = name;
+    this.count = 0;
   }
 
   setList(menus) {

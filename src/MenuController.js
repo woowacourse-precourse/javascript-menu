@@ -38,7 +38,6 @@ class MenuController {
   }
 
   recommandMenu() {
-    // console.log('Coach list : \n', this.coachList);
     DAYS.forEach(() => {
       const category = RandomMaker.category();
       this.pickMenu(this.menuCategory[category].list);
@@ -46,7 +45,9 @@ class MenuController {
   }
 
   pickMenu(menuList) {
-    // this.coachList.forEach();
+    this.coachList.forEach((coach) => {
+      coach.setDailyMenu(menuList, RandomMaker.menu);
+    });
   }
 }
 
