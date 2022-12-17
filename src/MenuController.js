@@ -24,13 +24,11 @@ class MenuController {
   }
 
   makingCrews(names) {
-    // const makeCewFn = names => this.makingCrews(names);
-    // const errorCallback = () => this.inputView.readCrewNames(makeCewFn);
-    // const validTarget = () => Validate.crewName(names);
-    // ErrorHandler.crewNames(validTarget, errorCallback);
+    const validTarget = () => Validate.crewName(names);
+    const errorCallback = () => this.start();
+    ErrorHandler.crewNames(validTarget, errorCallback);
     const crewList = Utils.stringConvertor(names);
     crewList.forEach(name => this.crews.push(new Crew(name)));
-
     this.setCanNotEat();
   }
 
