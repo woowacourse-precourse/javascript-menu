@@ -2,6 +2,7 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const { Console, Random } = MissionUtils;
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
+const { CATEGORY_NAMES, CATEGORY_NUMBERS } = require('./constants');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -46,15 +47,20 @@ class App {
     OutputView.printCategories(this.#categoriesNameArray);
     OutputView.printRecommendations(this.#coachFoodRecommendationArray);
     OutputView.printGameEnd();
+
+    this.endGame();
   }
 
   makeCategoriesArray() {
     do {
-      const categoryRandom = Random.pickNumberInRange(1, 5);
+      const categoryRandomNumber = Random.pickNumberInRange(1, 5);
+
       let duplicationCount = this.#categoriesArray.filter(
-        element => categoryRandom === element
+        element => categoryRandomNumber === element
       ).length;
-      if (duplicationCount <= 2) this.#categoriesArray.push(categoryRandom);
+
+      if (duplicationCount <= 2)
+        this.#categoriesArray.push(categoryRandomNumber);
       else this.makeCategoriesArray();
     } while (this.#categoriesArray.length < 5);
 
@@ -66,11 +72,16 @@ class App {
     for (let i = 0; i < this.#categoriesArray.length; i++) {
       let categoryName;
 
-      if (this.#categoriesArray[i] == 1) categoryName = '일식';
-      if (this.#categoriesArray[i] == 2) categoryName = '한식';
-      if (this.#categoriesArray[i] == 3) categoryName = '중식';
-      if (this.#categoriesArray[i] == 4) categoryName = '아시안';
-      if (this.#categoriesArray[i] == 5) categoryName = '양식';
+      if (this.#categoriesArray[i] == CATEGORY_NUMBERS.JAPAN)
+        categoryName = `${CATEGORY_NAMES.JAPAN}`;
+      if (this.#categoriesArray[i] == CATEGORY_NUMBERS.KOREAN)
+        categoryName = `${CATEGORY_NAMES.KOREAN}`;
+      if (this.#categoriesArray[i] == CATEGORY_NUMBERS.CHINESE)
+        categoryName = `${CATEGORY_NAMES.CHINESE}`;
+      if (this.#categoriesArray[i] == CATEGORY_NUMBERS.ASIAN)
+        categoryName = `${CATEGORY_NAMES.ASIAN}`;
+      if (this.#categoriesArray[i] == CATEGORY_NUMBERS.WESTERN)
+        categoryName = `${CATEGORY_NAMES.WESTERN}`;
 
       this.#categoriesNameArray.push(categoryName);
     }
@@ -79,12 +90,15 @@ class App {
   makeCoachFoodRecommendationArray() {
     let coachName;
     let coachCannotEat;
+
     for (let i = 0; i < this.#coachNameArray.length; i++) {
       let coachInfo = this.#coachNameArray[i].split('+');
+
       for (let j = 0; j < coachInfo.length; j++) {
         if (j == 0) coachName = coachInfo[j];
         else coachCannotEat += ' ' + coachInfo[j];
       }
+
       this.makeOneCoachRecommendation(coachName, coachCannotEat);
     }
   }
@@ -95,36 +109,36 @@ class App {
     for (let i = 0; i < this.#categoriesNameArray.length; i++) {
       let temp = 0;
       do {
-        let menu;
+        let menuIndex;
         let menuNameArray = [];
         let menuName;
 
-        if (this.#categoriesNameArray[i] === '일식') {
+        if (this.#categoriesNameArray[i] === `${CATEGORY_NAMES.JAPAN}`) {
           menuNameArray = SAMPLE.일식.split(',');
-          menu = Random.shuffle(menuNameArray)[0];
+          menuIndex = Random.shuffle(menuNameArray)[0];
         }
 
-        if (this.#categoriesNameArray[i] === '한식') {
+        if (this.#categoriesNameArray[i] === `${CATEGORY_NAMES.KOREAN}`) {
           menuNameArray = SAMPLE.한식.split(',');
-          menu = Random.shuffle(menuNameArray)[0];
+          menuIndex = Random.shuffle(menuNameArray)[0];
         }
 
-        if (this.#categoriesNameArray[i] === '중식') {
+        if (this.#categoriesNameArray[i] === `${CATEGORY_NAMES.CHINESE}`) {
           menuNameArray = SAMPLE.중식.split(',');
-          menu = Random.shuffle(menuNameArray)[0];
+          menuIndex = Random.shuffle(menuNameArray)[0];
         }
 
-        if (this.#categoriesNameArray[i] === '아시안') {
+        if (this.#categoriesNameArray[i] === `${CATEGORY_NAMES.ASIAN}`) {
           menuNameArray = SAMPLE.아시안.split(',');
-          menu = Random.shuffle(menuNameArray)[0];
+          menuIndex = Random.shuffle(menuNameArray)[0];
         }
 
-        if (this.#categoriesNameArray[i] === '양식') {
+        if (this.#categoriesNameArray[i] === `${CATEGORY_NAMES.WESTERN}`) {
           menuNameArray = SAMPLE.양식.split(',');
-          menu = Random.shuffle(menuNameArray)[0];
+          menuIndex = Random.shuffle(menuNameArray)[0];
         }
 
-        menuName = menuNameArray[menu - 1];
+        menuName = menuNameArray[menuIndex - 1];
 
         if (
           !coachCannotEat.includes(menuName) &&
@@ -142,7 +156,12 @@ class App {
         }
       } while (temp == 0);
     }
+
     this.#coachFoodRecommendationArray.push(recommendationOneWeek);
+  }
+
+  endGame() {
+    Console.close();
   }
 }
 
