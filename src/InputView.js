@@ -16,8 +16,8 @@ const InputView = {
   /**
    * 사용자에게 못먹는 음식을 입력받는다.
    */
-  readMenu(callback) {
-    Console.readLine(`\n${INPUT.HATE_MENU}\n`, callback);
+  readMenu(user, callback) {
+    Console.readLine(`\n${INPUT.HATE_MENU(user)}\n`, callback);
   },
 };
 
