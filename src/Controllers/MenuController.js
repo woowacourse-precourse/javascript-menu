@@ -57,6 +57,7 @@ class MenuController extends MenuModel {
 
     setResult() {
         const result = this.getRecommend();
+        OutputView.printResult(result);
     }
 }
   
