@@ -23,6 +23,17 @@ const Validator = {
       return false;
     }
   },
+
+  readInedibleMenu(inedibleMenu) {
+    const hangeul = /^[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]*$/.test(inedibleMenu.replace(/,/g, ""));
+    try {
+      if (!hangeul) throw Error; //한글과 ,로만 이루어지지 않은 경우
+      return true;
+    } catch (e) {
+      OutputView.printError();
+      return false;
+    }
+  },
 };
 
 module.exports = Validator;
