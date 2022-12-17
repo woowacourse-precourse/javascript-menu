@@ -26,6 +26,12 @@ class Coach {
       ERROR_MESSAGE.INVALID_COUCH_NAME
     );
   }
+  #isDifferentCouchNames(names) {
+    return this.#baseValidate(
+      new Set(names).size === names.length,
+      ERROR_MESSAGE.DUPLICATED_COACH_NAME
+    );
+  }
 
   getData() {
     return this.#names;
