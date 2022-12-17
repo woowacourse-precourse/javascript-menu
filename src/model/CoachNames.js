@@ -9,7 +9,10 @@ class CoachNames {
   }
 
   getCoachName() {
-    if (this.index >= this.coachNames.length) return "끝";
+    if (this.index === this.coachNames.length) {
+      this.index = 0;
+      return "끝";
+    }
 
     const coachName = this.coachNames[this.index];
     this.index += 1;

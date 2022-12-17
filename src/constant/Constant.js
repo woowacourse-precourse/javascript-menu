@@ -1,4 +1,4 @@
-const CATEGORY = Object.freeze({
+const CATEGORIES = Object.freeze({
   1: "일식",
   2: "한식",
   3: "중식",
@@ -99,7 +99,7 @@ const ERROR_MESSAGE = Object.freeze({
 });
 
 module.exports = {
-  CATEGORY,
+  CATEGORIES,
   MENUS,
   WEEK,
   RESULT_ELEMENT,

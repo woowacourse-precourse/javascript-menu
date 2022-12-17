@@ -2,11 +2,16 @@ const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 const Validator = require("../util/Validator");
 const CoachNames = require("../model/CoachNames");
+const Recommand = require("../util/Recommand");
 
 class RecommandController {
-  coachNames;
+  coachNames = "class";
 
-  currentCoachName;
+  currentCoachName = "string";
+
+  categories = [];
+
+  menusEachCoach = {};
 
   start() {
     OutputView.printStart();
@@ -31,9 +36,11 @@ class RecommandController {
   }
 
   readNoEatMenuPhase() {
+    console.log("???");
     this.currentCoachName = this.coachNames.getCoachName();
     if (this.currentCoachName === "끝") {
       this.recommandMenuPhase();
+      return;
     }
     this.eachReadNoEatMenu();
   }
@@ -53,11 +60,47 @@ class RecommandController {
       this.eachReadNoEatMenu();
       return;
     }
+
+    this.menusEachCoach[this.currentCoachName] = {};
+    this.menusEachCoach[this.currentCoachName].noEatMenus =
+      noEatMenus.split(",");
+    this.menusEachCoach[this.currentCoachName].recommandedMenus = [];
     this.readNoEatMenuPhase();
   }
 
   recommandMenuPhase() {
-    // 메뉴 추천 로직
+    for (let i = 0; i < 5; i += 1) {
+      this.selectCategory();
+      this.selectMenuEachCoach();
+      console.log("this.menusEachCoach: ", this.menusEachCoach);
+    }
+  }
+
+  selectCategory() {
+    const tmpCategory = Recommand.selectCategory();
+
+    const dupCnt = this.categories.filter(
+      (category) => category === tmpCategory,
+    ).length;
+    if (dupCnt >= 2) this.selectCategory();
+    else this.categories.push(tmpCategory);
+  }
+
+  selectMenuEachCoach() {
+    const allCoachs = Object.keys(this.menusEachCoach);
+    allCoachs.forEach((coach) => {
+      this.selectMenu(coach);
+    });
+  }
+
+  selectMenu(coach) {
+    const tmpMenu = Recommand.selectMenu(
+      this.categories[this.categories.length - 1],
+    );
+
+    const { recommandedMenus } = this.menusEachCoach[coach];
+    if (recommandedMenus.includes(tmpMenu)) this.selectMenu(coach);
+    else recommandedMenus.push(tmpMenu);
   }
 }
 
