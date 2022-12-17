@@ -59,6 +59,7 @@ const InputView = {
             })
 
             OutputView.print('메뉴 추천 결과입니다.');
+            OutputView.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
             OutputView.print('추천을 완료했습니다.');
         }
 
