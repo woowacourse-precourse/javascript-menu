@@ -12,8 +12,7 @@ class RecommandMenu {
   }
 
   createRandomMenu(category) {
-    const recommandMenu = this.shuffleMenu(this.convertArray(this.menu.get(category)));
-    return recommandMenu;
+    return this.shuffleMenu(this.convertArray(this.menu.get(category)));
   }
 
   convertArray(ovject) {
