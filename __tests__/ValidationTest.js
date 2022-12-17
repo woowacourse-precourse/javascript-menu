@@ -18,3 +18,14 @@ describe('코치 이름 예외 케이스', () => {
     });
   });
 });
+
+describe('못 먹는 메뉴 예외 케이스', () => {
+  test.each([['김밥', '우동', '볶음면']])(
+    '못 먹는 메뉴가 2개 이상인 경우 예외가 발생한다.',
+    (input) => {
+      expect(() => {
+        validateDislikeMenu(input).toThrow('[ERROR]');
+      });
+    }
+  );
+});
