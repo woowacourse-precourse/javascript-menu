@@ -94,6 +94,7 @@ class App {
 	Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
 	Console.print("[ 카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]");
 	Console.print(`${this.coachs[indexCount]}`);
+	Console.print("추천을 완료했습니다.");
 
   }
 
