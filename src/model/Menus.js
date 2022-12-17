@@ -1,5 +1,3 @@
-const { Random } = require('@woowacourse/mission-utils');
-
 class Menus {
   #japaneseFood;
 
@@ -21,17 +19,21 @@ class Menus {
     });
   }
 
-  getCategory(number) {
-    if (number === 1) return this.#japaneseFood;
-    if (number === 2) return this.#koreanFood;
-    if (number === 3) return this.#chineseFood;
-    if (number === 4) return this.#asianFood;
-    if (number === 5) return this.#westernFood;
-    return null;
+  getCategory(categoryNum) {
+    if (categoryNum === 1) return '일식';
+    if (categoryNum === 2) return '한식';
+    if (categoryNum === 3) return '중식';
+    if (categoryNum === 4) return '아시안';
+    if (categoryNum === 5) return '양식';
   }
 
-  static recommend(menus) {
-    return Random.shuffle(menus)[0];
+  getCategoryMenu(categoryNum) {
+    if (categoryNum === 1) return this.#japaneseFood;
+    if (categoryNum === 2) return this.#koreanFood;
+    if (categoryNum === 3) return this.#chineseFood;
+    if (categoryNum === 4) return this.#asianFood;
+    if (categoryNum === 5) return this.#westernFood;
+    return null;
   }
 }
 

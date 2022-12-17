@@ -12,9 +12,12 @@ class RecommendController {
 
   #menus;
 
+  #categories;
+
   constructor(sample) {
     OutputView.printStart();
     this.#menus = new Menus(sample);
+    this.#categories = [];
   }
 
   inputCoachName() {
@@ -52,14 +55,44 @@ class RecommendController {
       this.inputCoachCantEatMenus(coachIndex + 1);
     }
     if (coachIndex + 1 === this.#coaches.length) {
+      this.repeatWeekCategory();
+    }
+  }
+
+  // 함수명수정
+  repeatWeekCategory() {
+    for (let i = 0; i < 5; i++) {
       this.recommendCategory();
     }
   }
 
+  checkValidCategory(categoryNum, categoryMenus) {
+    if (categoryMenus !== null) return true;
+    if (this.#categories.filter(categoryNum) < 2) return true;
+    this.recommendCategory();
+    return false;
+  }
+
   recommendCategory() {
-    const categoryMenus = this.#menus.getCategory(
-      Random.pickNumberInRange(1, 5),
-    );
+    const randomNum = Random.pickNumberInRange(1, 5);
+    const categoryMenus = this.#menus.getCategory(randomNum);
+    if (this.checkValidCategory(randomNum, categoryMenus)) {
+      this.#categories.push(this.#menus.getCategory(randomNum));
+      this.#coaches.forEach((coach) =>
+        this.insertRecommendToCoach(categoryMenus, coach),
+      );
+    }
+  }
+
+  insertRecommendToCoach(menus, coach) {
+    const recommendedMenu = Random.shuffle([0, 1, 2])[0]; //shuffle 이상함..
+
+    if (
+      coach.checkCanEatMenu(recommendedMenu) &&
+      coach.checkNotRepeatMenu(recommendedMenu)
+    ) {
+      coach.setRecommended(recommendedMenu);
+    }
   }
 }
 

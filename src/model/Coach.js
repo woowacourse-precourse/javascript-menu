@@ -5,8 +5,12 @@ class Coach {
 
   #cantEatMenus;
 
+  #recommended;
+
   constructor(name) {
     this.#name = name;
+    this.#recommended = [];
+    this.#cantEatMenus = [];
   }
 
   getName() {
@@ -16,6 +20,20 @@ class Coach {
   setCantEatMenu(menus) {
     const cantEatMenusArr = Utils.divideString(menus);
     this.#cantEatMenus = cantEatMenusArr;
+  }
+
+  checkCanEatMenu(menu) {
+    if (this.#cantEatMenus.includes(menu)) return false;
+    return true;
+  }
+
+  checkNotRepeatMenu(menu) {
+    if (this.#recommended.includes(menu)) return false;
+    return true;
+  }
+
+  setRecommended(menu) {
+    this.#recommended.push(menu);
   }
 }
 
