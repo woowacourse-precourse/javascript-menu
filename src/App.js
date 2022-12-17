@@ -67,7 +67,7 @@ class App {
 
     if (!categories.includes(category)) return true;
 
-    categories.filter(c => c === category).length < 2;
+    return categories.filter(c => c === category).length < 2;
   }
 
   initMenus() {
