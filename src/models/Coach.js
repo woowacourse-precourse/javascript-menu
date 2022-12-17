@@ -5,7 +5,7 @@ class Coach {
 
   #menus;
 
-  toEat = new Menus();
+  #toEat = new Menus();
 
   constructor(name) {
     Coach.#validate(name);
@@ -31,11 +31,15 @@ class Coach {
   }
 
   isIncludeToEat(menu) {
-    return this.toEat.contains(menu);
+    return this.#toEat.contains(menu);
   }
 
   addToEat(menu) {
-    this.toEat.add(menu);
+    this.#toEat.add(menu);
+  }
+
+  toString() {
+    return `[ ${this.#name} | ${this.#toEat.toString()} ]`;
   }
 }
 

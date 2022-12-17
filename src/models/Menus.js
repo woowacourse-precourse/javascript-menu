@@ -9,8 +9,8 @@ class Menus {
     return this.#state.includes(menu);
   }
 
-  getState() {
-    return this.#state;
+  toString() {
+    return this.#state.join(' | ');
   }
 }
 

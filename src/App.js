@@ -6,7 +6,15 @@ const CategoryMaker = require('./utils/CategoryMaker');
 const MenuPicker = require('./utils/MenuPicker');
 const RandomNumberGenerator = require('./utils/RandomNumberGenerator');
 const { readCoaches, readMenu } = require('./views/InputView');
-const { printStart } = require('./views/OutputView');
+const {
+  printStart,
+  printCoachMenus,
+  printResult,
+  printCategories,
+  printDays,
+  printEmptyLine,
+  printFinish,
+} = require('./views/OutputView');
 
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -46,13 +54,25 @@ class App {
   }
 
   #runFinish() {
+    printResult();
+    printDays();
     const categories = CategoryMaker.makeCategories(RandomNumberGenerator.generate);
+    printCategories(categories);
     categories.forEach((category) => {
       const menus = SAMPLE[category].split(', ');
       this.#addToEat(menus);
     });
 
-    console.log(this.#coaches.getState());
+    this.#printCoaches();
+    printEmptyLine();
+    printFinish();
+  }
+
+  #printCoaches() {
+    this.#coaches.getState().forEach((coach) => {
+      const coachMenus = coach.toString();
+      printCoachMenus(coachMenus);
+    });
   }
 
   #addToEat(menus) {
