@@ -4,6 +4,7 @@ const {
   checkDislikeCountValid,
   checkDislikeMenuValid,
 } = require("../validator/index");
+const { getCategory } = require("../picker/index");
 
 MenuServiceController = class {
   constructor(view, model) {
@@ -53,7 +54,7 @@ MenuServiceController = class {
 
       this.model.setCoachDislike([name, menus]);
 
-      if (!names.length) return this.pickMenu();
+      if (!names.length) return this.pickCategory();
 
       try {
         this.inputCoachDislike(names);
@@ -64,11 +65,25 @@ MenuServiceController = class {
     });
   }
 
-  pickMenu() {
-    const names = this.model.getCoachName();
-    const dislikes = this.model.getCoachDislike();
+  pickCategory() {
+    const category = getCategory();
+    const weekCategories = this.model.getWeekCategories();
 
-    console.log(names, dislikes);
+    if (weekCategories.length === 5) return this.pickMenu();
+
+    if (
+      weekCategories.filter((weekCategory) => weekCategory === category)
+        .length !== 2
+    )
+      this.model.setWeekCategories(category);
+
+    this.pickCategory();
+  }
+
+  pickMenu() {
+    const weekCategories = this.model.getWeekCategories();
+
+    console.log(weekCategories);
   }
 };
 

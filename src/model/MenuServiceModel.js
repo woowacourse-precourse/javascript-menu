@@ -1,10 +1,12 @@
 MenuServiceModel = class {
   #names;
   #dislikes;
+  #weekCategories;
 
   constructor() {
     this.#names;
     this.#dislikes = [];
+    this.#weekCategories = [];
   }
 
   setCoachName(names) {
@@ -15,12 +17,20 @@ MenuServiceModel = class {
     this.#dislikes.push([name, menus]);
   }
 
+  setWeekCategories(category) {
+    this.#weekCategories.push(category);
+  }
+
   getCoachName() {
     return this.#names;
   }
 
   getCoachDislike() {
     return this.#dislikes;
+  }
+
+  getWeekCategories() {
+    return this.#weekCategories;
   }
 };
 
