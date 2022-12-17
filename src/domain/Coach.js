@@ -14,7 +14,6 @@ class Coach {
 
   setUnableFood(location) {
     this.#unableEatList.push(...location.slice());
-    console.log(this.#unableEatList);
   }
 
   hasUnableToEatList() {

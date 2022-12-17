@@ -58,7 +58,7 @@ class App {
           return this.unableEatCheckStart(coachLength + 1);
         return this.mondaySuggest();
       } catch (error) {
-        console.log(error);
+        console.error(error);
         if (error.message === 'No Food') OutputView.ErrorNoMenu();
         if (error.message === 'OverFlow Foods') OutputView.ErrorNoMenuLength();
         return this.unableEatCheckStart(coachLength);
