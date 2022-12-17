@@ -34,15 +34,15 @@ const Message = {
   FINISHED: '추천을 완료했습니다.',
 
   ENTER_NAME: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
-  enter_cannotEat(name) {
+  enterCannotEat(name) {
     return `${name}(이)가 못 먹는 메뉴를 입력해 주세요.`;
   },
 
   RESULT_DAY: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
-  result_category(categories) {
+  resultCategory(categories) {
     return `[ 카테고리 | ${categories.join(' | ')} ]`;
   },
-  result_coach(name, menu) {
+  resultCoach(name, menu) {
     return `[ ${name} | ${menu.join(' | ')} ]`;
   },
 
