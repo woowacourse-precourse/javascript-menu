@@ -18,12 +18,12 @@ function selectCategory() {
 
 	while(numberArr.length < 5) {
 		const randomNum = pickRandomNum();
-		console.log(randomNum);
+		//console.log(randomNum);
         const flag = checkAboveTwice(randomNum, numberArr);
-        console.log(flag);
+        //console.log(flag);
 		if(flag) continue;
 		else numberArr.push(randomNum);
-        console.log(numberArr);
+        //console.log(numberArr);
 	}
 	console.log('카테고리는:'+ numberArr);
 }
