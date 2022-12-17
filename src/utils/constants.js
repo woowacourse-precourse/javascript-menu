@@ -7,13 +7,16 @@ const SAMPLE = {
 };
 
 const READ_MESSAGE = Object.freeze({
-  readCoaches: '코치의 이름을 입력해 주세요. (, 로 구분)',
+  readCoaches: '코치의 이름을 입력해 주세요. (, 로 구분)\n',
 });
+
+const WELCOME = '점심 메뉴 추천을 시작합니다.\n';
+
 const ERROR_MESSAGE = Object.freeze({
   coachesNumberGreaterThanOrEqualTwo: '[ERROR] 코치는 최소 2명 이상 입력해야 합니다.',
   coachesNumberLessThanOrEqualFive: '[ERROR] 코치는 최대 5명 까지 입력할 수 있습니다.',
   coachNameIsWeird: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자입니다.',
 });
 module.exports = {
-  SAMPLE, READ_MESSAGE, ERROR_MESSAGE,
+  SAMPLE, READ_MESSAGE, ERROR_MESSAGE, WELCOME,
 };
