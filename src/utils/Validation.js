@@ -1,4 +1,3 @@
-const { SAMPLE } = require('../App');
 const { ERROR, ZERO } = require('../utils/constants');
 
 const Validation = {

@@ -1,5 +1,6 @@
 class Recommendor {
   #coaches = [];
+  #hateMenus = [];
 
   setCoaches(coaches) {
     this.#coaches = coaches;
@@ -7,6 +8,10 @@ class Recommendor {
 
   getCoaches() {
     return this.#coaches;
+  }
+
+  setHateMenuLists(menus) {
+    this.#hateMenus.push(menus);
   }
 }
 

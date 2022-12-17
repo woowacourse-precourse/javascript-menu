@@ -63,7 +63,9 @@ class Controller {
       return this.inputHateMenu();
     }
 
+    this.recommendor.setHateMenuLists.push(menus.split(','));
     this.#index += 1;
+
     this.inputHateMenu();
   }
 
