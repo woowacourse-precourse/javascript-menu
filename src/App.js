@@ -27,7 +27,7 @@ class App {
   menuRecommand() {
 	  Console.readLine(`${Message.INPUT_MESSAGE.INPUT_MEMBER}\n`, (members) => {
 		  let coachList = members.split(',');
-		  if (ErrorHandler.isNumberOfCoahOverTwo(coachList)) {
+		  if (ErrorHandler.isNumberOfCoahAvailable(coachList)) {
 			let idx = 0;
 			this.makeNotEatList(coachList, idx);
 		  }
@@ -51,20 +51,6 @@ class App {
 				Console.close();
 			}
 		}
-		// coachNotEatObject[name] = hateFood.split(',');
-		// coachEatObject[name] = [];
-		// coachNameList.push(name);
-		// idx++;
-		
-		// if (idx<coachList.length) {
-		// 	this.makeNotEatList(coachList, idx);
-		// }
-		// else {
-		// 	this.makeCategory();
-		// 	this.recommandCoachEat(coachList);
-		// 	this.printResult(coachEatObject);
-		// 	Console.close();
-		// }
 	})
   }
 

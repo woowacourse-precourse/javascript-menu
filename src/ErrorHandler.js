@@ -8,11 +8,12 @@ const SAMPLE = {
 	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
-const isNumberOfCoahOverTwo = (coach) => {
+const isNumberOfCoahAvailable = (coach) => {
     if (!(coach.length >= 2 && coach.length <= 5)) throw Error(`${Message.ERROR_MESSAGE.COACH_RANGE}`);
     
     coach.forEach(name => {
         isCoachNameIsAvailable(name);
+        isCoachNameHasVacant(name);
     })
     
     return true;
@@ -23,20 +24,36 @@ const isCoachNameIsAvailable = (name) => {
     return true;
 }
 
-const isHateMenuIsAvailable = (hateFood) => {
-    hateFoodList = hateFood.split(',');
-    hateFoodList.forEach(hate => {
-        let key = 0;
-        for (let menus in SAMPLE) {
-            menuList = SAMPLE[menus].split(', ');
-            if (menuList.includes(hate)) key = 1;
+const isCoachNameHasVacant = (name) => {
+    name = [...name];
+    name.forEach(ele => {
+        if (ele === ' ') {
+            throw Error(`공백 제거 해주세요`);
         }
-        if (key === 0) throw Error(`${hate}은(는)${Message.ERROR_MESSAGE.MENU_NAME_FAULT}`);
     })
-
-    return true;
-
 }
 
+const isHateMenuIsAvailable = (hateFood) => {
+    hateFoodList = hateFood.split(',');
+    if (hateFoodList.length !== 1) {
+        if(isNumberOfHateFoodAvailable(hateFoodList)) {
+            hateFoodList.forEach(hate => {
+                let key = 0;
+                for (let menus in SAMPLE) {
+                    menuList = SAMPLE[menus].split(', ');
+                    if (menuList.includes(hate)) key = 1;
+                }
+                if (key === 0) throw Error(`${hate}${Message.OUTPUT_MESSAGE.SUB}${Message.ERROR_MESSAGE.MENU_NAME_FAULT}`);
+            })
+            return true;
+        }
+    }
+    return true;
+}
 
-module.exports = {isNumberOfCoahOverTwo, isHateMenuIsAvailable}
+const isNumberOfHateFoodAvailable = (hateFoodList) => {
+    if (hateFoodList.length > 2) throw Error(`${Message.ERROR_MESSAGE.HATE_FOOD_LENGTH}`);
+    return true;
+}
+
+module.exports = {isNumberOfCoahAvailable, isHateMenuIsAvailable}
