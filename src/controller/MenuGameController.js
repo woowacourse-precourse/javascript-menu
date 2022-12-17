@@ -1,4 +1,3 @@
-const { SAMPLE } = require('../constants/Constant');
 const MenuGame = require('../model/MenuGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -7,7 +6,7 @@ class menuGameController {
   #menuGame;
 
   constructor() {
-    this.#menuGame = new MenuGame(SAMPLE);
+    this.#menuGame = new MenuGame();
   }
 
   start() {
@@ -25,6 +24,13 @@ class menuGameController {
         this.#menuGame.addCoachesHateMenus(coachName, menus.split(','));
       }, coachName);
     });
+
+    this.decideWeeklyMenu();
+  }
+
+  decideWeeklyMenu() {
+    this.#menuGame.decideWeeklyCategoty();
+    this.#menuGame.decideWeeklyMenu();
   }
 }
 

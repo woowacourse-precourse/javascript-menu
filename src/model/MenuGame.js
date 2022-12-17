@@ -1,15 +1,18 @@
-class MenuGame {
-  #menu;
-  #coaches; // key: 이름, value: 못먹는 음식 Array
+const CategoryRandomGenerator = require('../utils/CategoryRandomGenerator');
+const MenuRandomGenerator = require('../utils/MenuRandomGenerator');
 
-  constructor(menu) {
-    this.#menu = menu;
+class MenuGame {
+  #coaches; // key: 이름, value: 못먹는 음식 Array
+  #weeklyCategory;
+
+  constructor() {
     this.#coaches = {};
+    this.#weeklyCategory = { 일식: 0, 한식: 0, 중식: 0, 아시안: 0, 양식: 0, plan: [] };
   }
 
   setCoaches(coaches) {
     coaches.split(',').forEach(name => {
-      this.#coaches[name] = [];
+      this.#coaches[name] = { hateMenu: [], weeklyMenu: [] };
     });
   }
 
@@ -20,9 +23,53 @@ class MenuGame {
   addCoachesHateMenus(name, menus) {
     menus.forEach(menu => {
       if (menu !== '') {
-        this.#coaches[name].push(menu);
+        this.#coaches[name].hateMenu.push(menu);
       }
     });
+  }
+
+  decideWeeklyCategoty() {
+    while (this.#weeklyCategory.plan.length < 5) {
+      let category = CategoryRandomGenerator.generate();
+      while (this.#weeklyCategory[category] >= 2) category = CategoryRandomGenerator.generate();
+
+      this.#weeklyCategory[category] += 1;
+      this.#weeklyCategory.plan.push(category);
+    }
+  }
+
+  decideWeeklyMenu() {
+    Object.keys(this.#coaches).forEach(name => {
+      this.#weeklyCategory.plan.forEach(category => {
+        this.selectCoachDailyMenu(category, name);
+      });
+    });
+  }
+
+  // selectCategory(category) {
+  //   if (this.#weeklyCategory[category] >= 2) return false;
+
+  //   this.#weeklyCategory[category] += 1;
+  //   Object.keys(this.#coaches).forEach(name => {
+  //     this.selectCoachDailyMenu(category, name);
+  //   });
+
+  //   return true;
+  // }
+
+  selectCoachDailyMenu(category, name) {
+    while (this.addCoachMenu(name, MenuRandomGenerator.generate(category)) === false);
+  }
+
+  addCoachMenu(name, menu) {
+    if (
+      this.#coaches[name].weeklyMenu.includes(menu) ||
+      this.#coaches[name].hateMenu.includes(menu)
+    )
+      return false;
+
+    this.#coaches[name].weeklyMenu.push(menu);
+    return true;
   }
 }
 
