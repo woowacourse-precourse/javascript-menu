@@ -4,6 +4,12 @@ const ErrorChecker = {
       throw new Error(errorMessage);
     }
   },
+
+  checkEveryVaild(array, predicate, errorMessage) {
+    if (!array.every(predicate)) {
+      throw new Error(errorMessage);
+    }
+  },
 };
 
 module.exports = ErrorChecker;

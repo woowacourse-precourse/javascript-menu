@@ -8,7 +8,7 @@ const Food = require('./model/Food');
 const MenuUtil = require('./util/menuUtil');
 const CATEGORY_TABLE = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
-const { checkValid } = require('./util/ErrorChecker');
+const { checkValid, checkEveryVaild } = require('./util/ErrorChecker');
 const {
   isValidCoachNumber,
   isValidDislikeFoodsLength,
@@ -36,11 +36,10 @@ class App {
 
     try {
       checkValid(coachNames, isValidCoachNumber, ERROR.OUT_RANGE);
+      checkEveryVaild(coachNames, isValidNameLength, ERROR.NOT_VALID);
     } catch (error) {
       this.output.print(error.message);
       this.input.readLine(this.inputCoachs.bind(this));
-    }
-    if (!coachNames.every(isValidNameLength)) {
     }
 
     coachNames.forEach((coachname) => {
