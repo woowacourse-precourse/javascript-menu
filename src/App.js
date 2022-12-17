@@ -33,12 +33,8 @@ class App {
 
     // 각 코치가 못 먹는 메뉴를 입력받는다.
     this.coachs.setCoachNotEatMenu("구구", "김밥");
-    this.coachs.setCoachNotEatMenu("제임스", "떡볶이");
-
-    this.categorys.saveCategory();
 
     this.recommendMenu();
-
     this.printResultRecommendMenu();
   }
 

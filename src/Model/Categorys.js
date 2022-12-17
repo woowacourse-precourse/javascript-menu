@@ -5,6 +5,7 @@ class Categorys {
 
   constructor(categorysNames) {
     this.categorysNames = categorysNames;
+    this.saveCategory();
   }
 
   get() {
