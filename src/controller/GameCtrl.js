@@ -30,9 +30,7 @@ class GameCtrl extends IGameCtrl {
       const splittedNameList = nameList.split(',');
       NameValidator.validateList(splittedNameList);
 
-      console.log(splittedNameList);
-      // SizeValidator.validateList(bridgeSize);
-      // this.model.createBridge(bridgeSize);
+      this.model.setCoachesName(splittedNameList);
       // this.#getUserCommand();
     });
   }
