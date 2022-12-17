@@ -14,9 +14,7 @@ const MenuRecommender = class {
   }
 
   #personalRecommend(weekCategory, hateMenus) {
-    const menuArr = Object.entries(MENU).map(([_, category]) =>
-      category.split(`${MARK.rest} `)
-    );
+    const menuArr = this.#initMenuArr();
 
     return weekCategory.reduce((menus, category) => {
       const categoryMenus = menuArr[category - 1];
@@ -38,12 +36,18 @@ const MenuRecommender = class {
     }, []);
   }
 
+  #initMenuArr() {
+    return Object.entries(MENU).map(([_, category]) =>
+      category.split(`${MARK.rest} `)
+    );
+  }
   #isValidMenu(menus, hateMenus, menu) {
     return (
       !this.#isAlreadyEaten(menus, menu) &&
       !this.#isHateThisFood(hateMenus, menu)
     );
   }
+
   #isHateThisFood(hateMenus, menu) {
     return hateMenus.includes(menu);
   }
