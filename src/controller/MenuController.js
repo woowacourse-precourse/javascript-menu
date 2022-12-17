@@ -1,13 +1,17 @@
 const { GAME_STRING, GAME_NUMBER } = require('../Constant');
 const CoachData = require('../model/CoachData');
+const RandomMenu = require('../model/RandomMenu');
 const { readCoachesName, readDontLikeMenu } = require('../view/InputView');
 const { printStart } = require('../view/OutputView');
 
 class MenuController {
   #coachData;
 
+  #randomMenu = new RandomMenu();
+
   start() {
     printStart();
+    this.#randomMenu.setCategory();
     readCoachesName(this.checkCoachesName.bind(this));
   }
 
