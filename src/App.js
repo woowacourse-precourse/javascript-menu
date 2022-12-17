@@ -8,6 +8,7 @@ const MenuUtil = require('./util/menuUtil');
 const MissionUtils = require('@woowacourse/mission-utils');
 const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
+const ErrorChecker = require('./util/ErrorChecker');
 
 class App {
   constructor() {
@@ -50,7 +51,6 @@ class App {
           this.selectMenuByCategory(category, coach);
         });
       });
-
       this.showResult();
       return;
     }
@@ -61,7 +61,16 @@ class App {
     const inputFoods = InputProcessor.parseCommaStringsToArray(input);
 
     // 개수가 올바른지 판단하기
-
+    try {
+      ErrorChecker.checkValid(
+        inputFoods,
+        Vaildator.isVaildDislikeFoodsLength,
+        '[ERROR]: 올바르지 않는 입력입니다.'
+      );
+    } catch (error) {
+      this.output.print(error.message);
+      this.inputCoachsDislikeFood();
+    }
     // 올바르다면
     inputFoods.forEach((food) => {
       const category = MenuUtil.findCategoryByFoodName(food);
