@@ -20,6 +20,14 @@ const InputView = {
       }
     });
   },
+
+  readDislikeFood(callback, coach) {
+    Console.readLine(`\n${coach}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (food) => {
+      try {
+        callback(food);
+      } catch (error) {}
+    });
+  },
 };
 
 module.exports = InputView;
