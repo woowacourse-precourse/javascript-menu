@@ -1,3 +1,4 @@
+const CustomError = require('../utils/CustomError');
 const Menus = require('./Menus');
 
 class Coach {
@@ -14,7 +15,7 @@ class Coach {
 
   static #validate(name) {
     if (Coach.#isOutOfRange(name)) {
-      throw Error('[ERROR] 코치 이름은 최소 2글자, 최대 4글자여야 합니다.');
+      throw new CustomError('코치 이름은 최소 2글자, 최대 4글자여야 합니다.');
     }
   }
 
