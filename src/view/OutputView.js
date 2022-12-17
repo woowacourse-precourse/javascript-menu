@@ -16,6 +16,11 @@ const OutputView = {
   listResult(coach, foodList) {
     Console.print(`[ ${coach} | ${foodList} ]`);
   },
+
+  endMent() {
+    Console.print('추천을 완료했습니다.');
+    Console.close();
+  },
 };
 
 module.exports = OutputView;
