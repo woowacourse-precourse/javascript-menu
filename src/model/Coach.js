@@ -1,3 +1,7 @@
+const { Random } = require("@woowacourse/mission-utils");
+const { GIVEN_DATA } = require("../constants/Data");
+const CategoryConverter = require("../utils/CategoryConverter");
+
 class Coach {
   #name;
   #hateFood;
@@ -9,7 +13,23 @@ class Coach {
     this.#recommendedFood = [];
   }
 
-  generateRecommendedFood() {}
+  getRandomFood(categoryFood) {
+    return categoryFood[
+      Random.shuffle(Array.from({ length: categoryFood.length }, (x, i) => i + 1))[0] - 1
+    ];
+  }
+
+  generateRecommendedFood(category) {
+    const categoryFood = GIVEN_DATA[CategoryConverter.convert(category)];
+    let targetFood = this.getRandomFood(categoryFood);
+    while (
+      this.#recommendedFood.includes(targetFood) ||
+      this.#hateFood.includes(targetFood)
+    ) {
+      targetFood = this.getRandomFood(categoryFood);
+    }
+    this.#recommendedFood.push(targetFood);
+  }
 
   getCoachInformation() {
     return {
