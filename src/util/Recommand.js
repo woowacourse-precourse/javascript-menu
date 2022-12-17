@@ -11,7 +11,6 @@ const Recommand = {
 
   selectMenu(category) {
     const menuNumber = Random.shuffle(menuNumbers)[0];
-
     const menu = MENUS[category][menuNumber - 1];
     return menu;
   },

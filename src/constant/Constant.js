@@ -1,3 +1,5 @@
+const CATEGORY = "카테고리";
+
 const CATEGORIES = Object.freeze({
   1: "일식",
   2: "한식",
@@ -99,6 +101,7 @@ const ERROR_MESSAGE = Object.freeze({
 });
 
 module.exports = {
+  CATEGORY,
   CATEGORIES,
   MENUS,
   WEEK,

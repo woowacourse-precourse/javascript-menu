@@ -15,7 +15,6 @@ class RecommandController {
 
   start() {
     OutputView.printStart();
-
     this.readCoachNamesPhase();
   }
 
@@ -36,7 +35,6 @@ class RecommandController {
   }
 
   readNoEatMenuPhase() {
-    console.log("???");
     this.currentCoachName = this.coachNames.getCoachName();
     if (this.currentCoachName === "끝") {
       this.recommandMenuPhase();
@@ -72,8 +70,10 @@ class RecommandController {
     for (let i = 0; i < 5; i += 1) {
       this.selectCategory();
       this.selectMenuEachCoach();
-      console.log("this.menusEachCoach: ", this.menusEachCoach);
+      // console.log("this.categories: ", this.categories);
+      // console.log("this.menusEachCoach: ", this.menusEachCoach);
     }
+    OutputView.printResult(this.categories, this.menusEachCoach);
   }
 
   selectCategory() {
@@ -82,8 +82,11 @@ class RecommandController {
     const dupCnt = this.categories.filter(
       (category) => category === tmpCategory,
     ).length;
-    if (dupCnt >= 2) this.selectCategory();
-    else this.categories.push(tmpCategory);
+    if (dupCnt >= 2) {
+      this.selectCategory();
+      return;
+    }
+    this.categories.push(tmpCategory);
   }
 
   selectMenuEachCoach() {
@@ -98,9 +101,13 @@ class RecommandController {
       this.categories[this.categories.length - 1],
     );
 
-    const { recommandedMenus } = this.menusEachCoach[coach];
-    if (recommandedMenus.includes(tmpMenu)) this.selectMenu(coach);
-    else recommandedMenus.push(tmpMenu);
+    const { noEatMenus, recommandedMenus } = this.menusEachCoach[coach];
+    if (recommandedMenus.includes(tmpMenu) || noEatMenus.includes(tmpMenu)) {
+      this.selectMenu(coach);
+      return;
+    }
+
+    recommandedMenus.push(tmpMenu);
   }
 }
 
