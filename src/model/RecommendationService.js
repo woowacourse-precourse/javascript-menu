@@ -1,15 +1,15 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { SERVICE_SETTINGS } = require('../constant/ServiceSettings');
+const { SERVICE_SETTINGS, MENUS_FOR_EACH_CATEGORIES } = require('../constant/ServiceSettings');
 
 class RecommendationService {
   #coaches = [];
   #menu = [];
-  #menuForEachDay = {
-    Mon: [],
-    Tue: [],
-    Wed: [],
-    Thu: [],
-    Fri: [],
+  #categoryForEachDay = {
+    Mon: '',
+    Tue: '',
+    Wed: '',
+    Thu: '',
+    Fri: '',
   };
 
   setCoaches(coaches) {
@@ -27,6 +27,8 @@ class RecommendationService {
 
   choiceCategoryForEachDay(day) {
     const category = this.randomChoiceCategory();
+    this.#categoryForEachDay[day] = category;
+    const menu = this.randomChoiceMenuInCategory(category);
   }
 
   randomChoiceCategory() {
@@ -39,6 +41,13 @@ class RecommendationService {
     };
 
     return categories[Random.pickNumberInRange(1, 5)];
+  }
+
+  randomChoiceMenuInCategory(category) {
+    const menus = MENUS_FOR_EACH_CATEGORIES[category].split(', ');
+    const menusIndex = Array.from({ length: menus.length }).map((value, index) => index);
+    const choiceIndex = Random.shuffle(menusIndex)[0];
+    return menus[choiceIndex];
   }
 }
 

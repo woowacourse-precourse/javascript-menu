@@ -38,7 +38,16 @@ class ServiceController {
   }
 
   choiceCategory(index) {
-    this.#service.choiceCategory(index);
+    const DAY_INDEX = {
+      0: 'Mon',
+      1: 'Tue',
+      2: 'Wed',
+      3: 'Thu',
+      4: 'Fri',
+    };
+
+    console.log('요일 : ', DAY_INDEX[index]);
+    this.#service.choiceCategoryForEachDay(DAY_INDEX[index]);
   }
 }
 
