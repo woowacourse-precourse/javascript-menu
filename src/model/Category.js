@@ -5,12 +5,9 @@ class Category {
 
   #category;
 
-  #noMenus;
-
   constructor() {
     this.#categoreis = new Map();
     this.#category = [];
-    this.#noMenus = [];
     this.setCategory();
   }
 
