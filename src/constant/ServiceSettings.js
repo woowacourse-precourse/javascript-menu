@@ -1,4 +1,11 @@
-const SERVICE_SETTINGS = Object.freeze({});
+const SERVICE_SETTINGS = Object.freeze({
+  separationCriteria: ',',
+  minNumberOfCoaches: 2,
+  maxNumberOfCoaches: 5,
+  minLengthOfCoachesName: 2,
+  maxLengthOfCoachesName: 4,
+  error: '[ERROR]',
+});
 
 const MENUS_FOR_EACH_CATEGORIES = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
