@@ -36,8 +36,8 @@ const LunchMenuError = {
 
   isValidImpossibleMenuName(food, totalMenu) {
     let flag = false;
-    for (const category in totalMenu) {
-      if (totalMenu[category].includes(food)) {
+    for (const foods of totalMenu) {
+      if (foods.includes(food)) {
         flag = true;
       }
     }

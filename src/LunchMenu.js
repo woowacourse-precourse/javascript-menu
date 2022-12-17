@@ -2,16 +2,26 @@ const MissionUtils = require('@woowacourse/mission-utils');
 const LunchMenuError = require('./Error/LunchMenuError');
 
 class LunchMenu {
-  #totalMenu;
+  #totalMenu = [];
 
+  // 코치의 이름
   #coach;
 
-  #count = 0;
+  // 카테고리들
+  #categories = [];
+
+  // 선택된 카테고리들
+  #selectedCategory = [];
+
+  // 각 코치마다 못먹는 음식
+  #impossibleFoods = [];
+
+  #currentCoach = 0;
 
   #makeMenu(sample) {
-    this.#totalMenu = sample;
-    for (const food in this.#totalMenu) {
-      this.#totalMenu[food] = this.#totalMenu[food].split(', ');
+    for (const food in sample) {
+      this.#categories.push(food);
+      this.#totalMenu.push(sample[food].split(', '));
     }
   }
 
@@ -31,7 +41,7 @@ class LunchMenu {
     try {
       this.#coach = names.split(',');
       LunchMenuError.isValidCoachName(this.#coach);
-      this.#count = 0;
+      this.#currentCoach = 0;
       this.#readImpossibleMenu();
     } catch {
       this.#readCoachNames();
@@ -39,8 +49,8 @@ class LunchMenu {
   };
 
   #readImpossibleMenu = () => {
-    const name = this.#coach[this.#count];
-    this.#count += 1;
+    const name = this.#coach[this.#currentCoach];
+    this.#currentCoach += 1;
     if (name === undefined) {
       this.#printRecommendMenu();
     } else {
@@ -53,16 +63,72 @@ class LunchMenu {
     try {
       const impossibleMenu = menu.split(',');
       LunchMenuError.isValidImpossibleMenu(impossibleMenu, this.#totalMenu);
-      this.#readImpossibleMenu();
+      this.#impossibleFoods.push(impossibleMenu);
     } catch {
-      this.#count -= 1;
-      this.#readImpossibleMenu();
+      this.#currentCoach -= 1;
     }
+    this.#readImpossibleMenu();
   };
 
   #printRecommendMenu = () => {
     MissionUtils.Console.print('\n메뉴 추천 결과입니다.');
-    MissionUtils.Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]\n');
+    MissionUtils.Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    this.#currentCoach = 0;
+    this.#selectRecommendCategory();
+  };
+
+  #selectRecommendCategory = () => {
+    // 코치 한명에 대한 카테고리를 선택한다.
+    this.#selectedCategory = [0, 0, 0, 0, 0];
+    for (let select = 0; select < 5; select += 1) {
+      const selected = MissionUtils.Random.pickNumberInRange(1, 5);
+      select += this.#selectCategoryHelper(selected);
+    }
+    // 선택한 카테고리로 메뉴를 선택하러 간다.
+    this.#selectRecommendMenu();
+  };
+
+  #selectCategoryHelper = (selected) => {
+    if (this.#selectedCategory[selected - 1] < 2) {
+      this.#selectedCategory[selected - 1] += 1;
+      return 0;
+    }
+    return -1;
+  };
+
+  #selectRecommendMenu = () => {
+    // [1,1,1,1,1]
+    // i는 카테고리, j는 음식의 개수
+    const finalRecommend = [];
+    for (let category = 0; category < 5; category += 1) {
+      for (let food = 0; food < this.#selectedCategory[category]; food += 1) {
+        const temp = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        const recommend = this.#totalMenu[category][MissionUtils.Random.shuffle(temp)[0]];
+        if (this.#impossibleFoods[this.#currentCoach].includes(recommend)) {
+          food -= 1;
+          continue;
+        }
+        this.#impossibleFoods[this.#currentCoach].push(recommend);
+        finalRecommend.push(recommend);
+      }
+    }
+    let answer = `[ ${this.#coach[this.#currentCoach]} |`;
+    for (let i = 0; i < 5; i += 1) {
+      answer += ` ${finalRecommend[i]} `;
+      if (i != 4) {
+        answer += '|';
+      }
+    }
+
+    answer += ']';
+    MissionUtils.Console.print(answer);
+
+    if (this.#currentCoach < this.#coach.length - 1) {
+      this.#currentCoach += 1;
+      this.#selectRecommendCategory();
+    } else {
+
+    }
   };
 }
 
