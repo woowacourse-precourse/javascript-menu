@@ -11,7 +11,18 @@ class MainController {
     this.#recommendationController = new RecommendationController(this);
   }
 
-  initializeRecommendation() {}
+  processCoachNameInput() {
+    this.#categoryController.processCoachNameInput();
+    this.readHateFoodInput();
+  }
+
+  readCoachNameInput() {
+    InputView.readCoachNameInput(this.processCoachNameInput.bind(this));
+  }
+
+  initializeRecommendation() {
+    this.readCoachNameInput();
+  }
 }
 
 module.exports = MainController;
