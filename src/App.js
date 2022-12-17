@@ -1,8 +1,9 @@
 const CategoryMaker = require('./CategoryMaker');
+const MenuMaker = require('./MenuMaker');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 const { validateCoachName, validateDislikeMenu } = require('./utils/validate');
-
+const { Random } = require('@woowacourse/mission-utils');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -14,6 +15,7 @@ const SAMPLE = {
 class App {
   constructor() {
     this.coach = null;
+    this.category = null;
     this.dislikeMenu = {};
   }
   play() {
@@ -24,16 +26,19 @@ class App {
   getCoachNameInput(name) {
     this.coach = name.split(',');
     validateCoachName(this.coach);
+    this.category = CategoryMaker.createCategory();
     InputView.readDislikeMenu(this.coach[0], 0, this.getDislikeMenuInput.bind(this));
   }
 
   getDislikeMenuInput(menu, idx) {
-    const menuArr = menu.split(',');
-    validateDislikeMenu(menuArr);
-    this.dislikeMenu[this.coach[idx]] = menuArr;
+    const dislikeMenu = menu.split(',');
+    validateDislikeMenu(dislikeMenu);
+    //this.dislikeMenu[this.coach[idx]] = menuArr;
+    const menuMaker = new MenuMaker(this.category, dislikeMenu);
+    menuMaker.createMenu();
+
     idx++;
     if (idx === this.coach.length) {
-      const category = CategoryMaker.createCategory();
       return;
     }
     InputView.readDislikeMenu(this.coach[idx], idx, this.getDislikeMenuInput.bind(this));
