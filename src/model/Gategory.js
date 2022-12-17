@@ -7,8 +7,6 @@ class Gategory {
     this.#index = index;
     this.#category = category;
     this.#menus = menus.split(',');
-
-    console.log(this.#index, this.#category, this.#menus);
   }
 }
 
