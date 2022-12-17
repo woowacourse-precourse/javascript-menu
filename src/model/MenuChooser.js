@@ -5,6 +5,17 @@ class MenuChooser {
   #chosenMenus;
   #shuffler = [];
 
+  choose(categories, banMenus) {
+    this.#setShuffler();
+    this.#chosenMenus = [];
+
+    for (let index = 0; index < CATEGORY.MAX_LIMIT; index += 1) {
+      this.#chooseOnce(categories[index], banMenus);
+    }
+
+    return this.#chosenMenus;
+  }
+
   #setShuffler() {
     for (let index = 0; index < MENUS.SIZE; index += 1) {
       this.#shuffler.push(index);
