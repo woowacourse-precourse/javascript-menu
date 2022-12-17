@@ -7,6 +7,7 @@ class MenuCtrl {
     this.currentCoachFlag = 0;
     this.coachNames = null;
     this.coachCantEat = [];
+    this.randomCategories = null;
   }
 
   readCoachName() {
@@ -46,7 +47,7 @@ class MenuCtrl {
   makeRandomCategories() {
     const map = new Map();
     let flag = true;
-    let answer = ['카테고리'];
+    let answer = [];
 
     while (flag) {
       const category = Random.pickNumberInRange(1, 5);
@@ -63,9 +64,21 @@ class MenuCtrl {
     for (const [key, value] of map) {
       answer.push(key);
     }
-
+    this.randomCategories = answer;
     let categories = answer.join(' | ');
-    Console.print(`[ ${categories} ]`);
+    Console.print(`[ 카테고리 | ${categories} ]`);
+    this.makeRandomMenus();
+  }
+
+  makeRandomMenus() {
+    let coaches = this.coachNames;
+    let randomCategories = this.randomCategories;
+    randomCategories.forEach((eat, idx) => {
+      let index = randomCategories[idx];
+      const menus = MENUS[index].split(' ');
+      const recommendedMenu = Random.shuffle(menus); // 무작위 새로운 배열
+      Console.print(recommendedMenu);
+    });
   }
 }
 
