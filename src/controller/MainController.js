@@ -1,5 +1,6 @@
 const CategoryController = require("./CategoryController");
 const InputView = require("../view/InputView");
+const OutputView = require("../view/OutputView");
 const RecommendationController = require("./RecommendationController");
 
 class MainController {
@@ -20,7 +21,12 @@ class MainController {
     InputView.readCoachNameInput(this.processCoachNameInput.bind(this));
   }
 
+  printFirstMessage() {
+    OutputView.printFirstMessage();
+  }
+
   initializeRecommendation() {
+    this.printFirstMessage();
     this.readCoachNameInput();
   }
 }
