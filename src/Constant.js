@@ -19,6 +19,8 @@ const RANDOM_RANGE_NUMBER = {
   RANDOM_LOWER_INCLUSIVE: 1,
   RANDOM_UPPER_INCLUSIVE: 5,
 }
+
+const DAYS = ["월요일", "화요일", "수요일", "목요일", "금요일"]
 const RESULT = {
   resultTitle : '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
 }
@@ -26,4 +28,4 @@ const RESULT = {
 const ERROR_MESSAGE = {}
 
 
-module.exports = {MENU_OBJ,RANDOM_RANGE_NUMBER,INPUT_MESSAGE,OUTPUT_MESSAGE,ERROR_MESSAGE,RESULT}
+module.exports = {DAYS, MENU_OBJ,RANDOM_RANGE_NUMBER,INPUT_MESSAGE,OUTPUT_MESSAGE,ERROR_MESSAGE,RESULT}

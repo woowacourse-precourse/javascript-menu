@@ -3,6 +3,7 @@ const OutputView = require("../View/Outputview");
 const { Console } = require("@woowacourse/mission-utils");
 const Menu = require("../Model/Menu");
 const { generate } = require("../util/RandomGenerator");
+const { DAYS } = require("../Constant");
 
 class Controller {
   constructor() {
@@ -11,7 +12,6 @@ class Controller {
     this.startCount = 0;
     this.count = this.coachesName.length - 1;
     this.menu = new Menu();
-    this.days = ["월요일", "화요일", "수요일", "목요일", "금요일"];
     this.recommendMenu = [];
   }
   showgameStartGuide() {
@@ -44,7 +44,7 @@ class Controller {
     this.showResultCategory();
   }
   userCategory() {
-    this.categoryOfday = this.days.reduce((acc, curr) => {
+    this.categoryOfday = DAYS.reduce((acc, curr) => {
       return { ...acc, [curr]: this.menu.getCategory(generate) };
     }, {});
       return Object.values(this.categoryOfday).join(" | ");
