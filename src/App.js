@@ -74,30 +74,29 @@ class App {
   }
 
   getResult() {
-    // const menu = Random.shuffle(menus)[0];
-    for (let i = 0; i < 5; i++) {
-      // 각 요일별 메뉴 선정
-      const category = this.#categories[i];
-      const menus = SAMPLE[categoryKey[category]]
-        .split(", ")
-        .map((menu) => menu.trim());
+    for (const [name, attrs] of this.#coaches) {
+      const coachMenus = [];
+      for (const category of this.#categories) {
+        // 월화수목금 메뉴 추천 해야함
+        const menus = SAMPLE[categoryKey[category]]
+          .split(", ")
+          .map((menu) => menu.trim());
 
-      for (const [name, attrs] of this.#coaches) {
-        const canMenu = menus.filter((menu) => !attrs.canNotEat.includes(menu));
         const numMenus = Array.from(
-          { length: canMenu.length },
-          (_, idx) => idx,
+          { length: menus.length },
+          (_, idx) => idx + 1,
         );
+
         while (true) {
-          const menuIdx = Random.shuffle(numMenus)[0]; // 이제 같은 음식이 안나오게끔 해야 함.
-          if (attrs.menus.includes(canMenu[menuIdx])) continue;
-          this.#coaches.set(name, {
-            ...attrs,
-            menus: [...attrs.menus, canMenu[menuIdx]],
-          });
+          const menuIdx = Random.shuffle([...numMenus])[0]; // 이제 같은 음식이 안나오게끔 해야 함.
+          const menu = menus[menuIdx - 1];
+          if (coachMenus.includes(menu) || attrs.canNotEat.includes(menu))
+            continue;
+          coachMenus.push(menu);
           break; // 겹치는 음식이 없게끔 설정
         }
       }
+      this.#coaches.set(name, { ...attrs, menus: [...coachMenus] });
     }
 
     Console.print("메뉴 추천 결과입니다.");
@@ -106,13 +105,13 @@ class App {
     const categories = this.#categories.reduce((acc, cur) => {
       return acc + `| ${categoryKey[cur]} `;
     }, "");
-    Console.print(`[ 카테고리 ${categories} ]`);
+    Console.print(`[ 카테고리 ${categories}]`);
 
     for (const [name, { menus }] of this.#coaches) {
       const recommandMenus = menus.reduce((acc, cur) => {
         return acc + `| ${cur} `;
       }, "");
-      Console.print(`[ ${name} ${recommandMenus} ]`);
+      Console.print(`[ ${name} ${recommandMenus}]`);
     }
 
     Console.print("추천을 완료했습니다.");
