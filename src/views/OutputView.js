@@ -28,7 +28,7 @@ const OutputView = {
       Console.print(`[ ${key} | ${value.join(' | ')} ]`);
     });
     Console.print('추천을 완료했습니다.');
-    // Console.close();
+    Console.close();
   },
 };
 
