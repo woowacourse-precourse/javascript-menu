@@ -1,10 +1,17 @@
 class Coach {
   #unableEatList;
   #eatenFoods;
+  #name;
 
-  constructor() {
+  constructor(name) {
+    this.#name = name;
     this.#unableEatList = [];
     this.#eatenFoods = [];
+  }
+
+  setUnableFood(location) {
+    this.#unableEatList.push(...location.slice());
+    console.log(this.#unableEatList);
   }
 
   hasUnableToEatList() {
@@ -17,6 +24,11 @@ class Coach {
     food = food.filter((value) => value === menu);
     if (food.length > 2) return true;
     return false;
+  }
+
+  getCoachName() {
+    const coachName = this.#name + '';
+    return coachName;
   }
 
   suggestMenu() {}
