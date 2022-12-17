@@ -19,15 +19,19 @@ class App {
   }
 
   inputCoachNames() {
-    InputView.readBridgeSize(this.actionCoachNames.bind(this));
+    InputView.readCoachNames(this.actionCoachNames.bind(this));
   }
 
   actionCoachNames(coachNames) {
     this.coachs = new Coachs(coachNames);
+
+    // 각 코치가 못 먹는 메뉴를 입력받는다.
+    this.coachs.setCoachNotEatMenu("구구", "김밥");
+    this.coachs.setCoachNotEatMenu("구구", "떡볶이");
   }
 }
 
 const app = new App();
-app.play();
+app.set();
 
 module.exports = App;

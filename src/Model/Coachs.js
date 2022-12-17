@@ -1,8 +1,18 @@
 class Coachs {
-  #coachNames = {};
+  #coachs = {};
   constructor(coachNames) {
     coachNames.split(",").forEach((coachName) => {
-      this.#coachNames[coachName] = { notEatMenu: [], ateMenu: [] };
+      this.#coachs[coachName] = { notEatMenu: [], ateMenu: [] };
+    });
+  }
+
+  getCoachName() {
+    return Object.keys(this.#coachs);
+  }
+
+  setCoachNotEatMenu(coachName, notEatMenus) {
+    notEatMenus.split(",").forEach((notEatMenu) => {
+      this.#coachs[coachName].notEatMenu.push(notEatMenu);
     });
   }
 }
