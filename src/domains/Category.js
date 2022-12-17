@@ -32,6 +32,13 @@ class Category {
   getMenus() {
     return this.#menus;
   }
+
+  /**
+   * @param {string} menuName
+   */
+  getMenu(menuName) {
+    return this.#menus.find((menu) => menu.getName() === menuName) ?? null;
+  }
 }
 
 module.exports = Category;
