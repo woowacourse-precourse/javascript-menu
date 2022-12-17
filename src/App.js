@@ -1,4 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
+const Coach = require('./Coach');
 const { PRINT_STRING, PRINT_ERROR_STRING } = require('./constants');
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -10,6 +11,8 @@ const SAMPLE = {
 };
 
 class App {
+  #coaches;
+  #currentBanCoachIndex;
   constructor() {
     this.namesCallback = this.namesCallback.bind(this);
   }
@@ -26,10 +29,17 @@ class App {
     const coachArray = coachName.split(',');
     try {
       this.validateNames(coachArray);
+      this.handleNames(coachName);
     } catch (error) {
       MissionUtils.Console.print(error.message);
       this.readCoachName(this.namesCallback);
     }
+  }
+
+  handleNames(coachName) {
+    this.#coaches = [];
+    this.#coaches.push(new Coach(coachName));
+    this.#currentBanCoachIndex = 0;
   }
 
   validateNames(coachArray) {
