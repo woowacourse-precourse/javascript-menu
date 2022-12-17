@@ -6,10 +6,10 @@ const OutputView = {
     Console.print(message);
   },
 
-  printResult(result) {
+  printResult(result, categories) {
     Console.print(MESSAGE.result);
     Console.print(RESULT.days);
-    Console.print(RESULT.category);
+    Console.print(categories);
     Console.print(result);
     Console.print(NEW_LINE + MESSAGE.end);
   },

@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const Coach = require("./Coach");
-const { NEW_LINE, MESSAGE } = require("./Constant");
+const { NEW_LINE, MESSAGE, RESULT } = require("./Constant");
 const { readCoachName, readCoachPickyFoods } = require("./InputView");
 const { print, printResult } = require("./OutputView");
 const { getMenu, getFood } = require("./RandomMachine");
@@ -97,7 +97,8 @@ class App {
 
   endGame() {
     const resultLines = this.getResultLines();
-    printResult(resultLines);
+    const categories = `[ ${this.#category.join(RESULT.divider)} ]`;
+    printResult(resultLines, categories);
     Console.close();
   }
 
