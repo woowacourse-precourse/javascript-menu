@@ -16,6 +16,19 @@ class ChooseSystem {
   addCoach(coachName) {
     this.#coachNames.push(coachName);
   }
+
+  banMenu(coachName, menus) {
+    const trimmedMenus = menus.split(',');
+    this.#bans[coachName] = trimmedMenus;
+  }
+
+  chooseAllMenus() {
+    this.#coachNames.forEach((coachName) => {
+      console.log('LETS TEST', { cat: this.#categories, ba: this.#bans[coachName] });
+      const chosenMenus = this.#menuChooser.choose(this.#categories, this.#bans[coachName]);
+      this.#results[coachName] = chosenMenus;
+    });
+  }
 }
 
 module.exports = MenuChooser;
