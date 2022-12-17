@@ -5,12 +5,20 @@ class CoachList {
     this.#coachs = coachs;
   }
 
-  getCoach(name) {
-    for (coach of this.#coachs) {
-      if (coach.getName() === name) return coach;
-    }
-    return false;
+  getFirstCoach() {
+    return this.#coachs[0];
   }
 
-  addVannedMenu(name, vannedMenu) {}
+  getNextCoach(name) {
+    for (let i = 0; i < this.#coachs.length; i++) {
+      if (i === this.#coachs.length - 1) return false;
+      if (this.#coachs[i].getName() === name) return this.#coachs[i + 1];
+    }
+  }
+
+  getCoachs() {
+    return this.#coachs;
+  }
 }
+
+module.exports = CoachList;

@@ -1,3 +1,5 @@
+const Coach = require("./Coach");
+const CoachList = require("./CoachList");
 const Validator = require("./Validator");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
@@ -15,19 +17,45 @@ class App {
 
   play() {
     OutputView.printOpening();
+    this.requestCoachName();
   }
 
   requestCoachName() {
-    InputView.readCoachName((names) => {
-      this.handleError(this.registCoachs.bind(this, names), this.requestCoachName.bind(this));
+    InputView.readCoachName((nameInput) => {
+      this.handleError(this.registCoachs.bind(this, nameInput), this.requestCoachName.bind(this));
     });
   }
 
-  registCoachs(names) {
-    Validator.validateCoachNames(names);
-    const coachNameList = names.split(",");
+  registCoachs(nameInput) {
+    Validator.validateCoachNames(nameInput);
+    const coachNameList = nameInput.split(",");
     const coachs = coachNameList.map((name) => new Coach(name));
     this.#coachList = new CoachList(coachs);
+    this.requestFirstCoachsBannedMenu();
+  }
+
+  requestFirstCoachsBannedMenu() {
+    const firstCoach = this.#coachList.getFirstCoach();
+    this.requestBannedMenu(firstCoach);
+  }
+
+  requestBannedMenu(coach) {
+    InputView.readBannedFood(coach.getName(), (menuInput) => {
+      this.handleError(this.registBannedMenu.bind(this, coach, menuInput), this.requestBannedMenu.bind(this, coach));
+    });
+  }
+
+  registBannedMenu(coach, menuInput) {
+    Validator.validateBannedMenu(menuInput);
+    const menus = menuInput.split(",");
+    coach.addBannedMenu(menus);
+
+    const nextCoach = this.#coachList.getNextCoach(coach.getName());
+    if (!nextCoach) {
+      console.log("wow");
+      return;
+    }
+    this.requestBannedMenu(nextCoach);
   }
 
   handleError(callback, request) {
@@ -39,5 +67,8 @@ class App {
     }
   }
 }
+
+const app = new App();
+app.play();
 
 module.exports = App;
