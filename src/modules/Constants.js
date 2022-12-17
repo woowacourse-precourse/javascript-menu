@@ -13,6 +13,7 @@ const MESSAGE = {
 const ERROR = {
   NAME_SIZE: `[ERROR] 닉네임은 최소 2글자 최대 4글자로 입력해야 합니다.`,
   GROUP_SIZE: `[ERROR] 코치는 최소 2명 이상 최대 5명 이하로 입력해야 합니다.`,
+  IMPOSSIBLE_SIZE: `[ERROR] 못 먹는 메뉴는 최대 2개로 입력해야 합니다.`,
 };
 
 module.exports = { MESSAGE, ERROR };

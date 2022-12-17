@@ -7,10 +7,12 @@ const Validation = {
     if (coaches.length > 5) throw new Error(ERROR.GROUP_SIZE);
     return;
   },
+
   validateName(name) {
     if (name.length < 2 || name.length > 4) throw new Error(ERROR.NAME_SIZE);
     return;
   },
+
   validateDuplicateCategory(categories) {
     const board = {};
     for (const category of categories) {
@@ -20,6 +22,11 @@ const Validation = {
       if (count > 2) return false;
     }
     return true;
+  },
+
+  validateImpossibleSize(impossibleList) {
+    if (impossibleList.length > 2) throw new Error(ERROR.IMPOSSIBLE_SIZE);
+    return;
   },
 };
 
