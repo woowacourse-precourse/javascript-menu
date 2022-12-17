@@ -16,7 +16,7 @@ class menuGameController {
       this.#menuGame.setCoaches(names);
     });
 
-    this.inputHateMenu();
+    if (Object.keys(this.#menuGame.getCoaches())) this.inputHateMenu();
   }
 
   inputHateMenu() {
