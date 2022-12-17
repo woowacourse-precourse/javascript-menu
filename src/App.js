@@ -18,17 +18,24 @@ class App {
   #coaches;
 
   play() {
-    runGenerator(this.#routines.bind(this));
+    runGenerator(this.#run.bind(this));
+  }
+
+  * #run() {
+    for (const routine of this.#routines()) {
+      yield* routine;
+      this.#outputView.printDivider();
+    }
   }
 
   * #routines() {
-    yield* this.#routinePrintHello();
-    yield* this.#routineReadCoaches();
+    yield this.#routinePrintHello();
+    yield this.#routineReadCoaches();
     for (const coach of this.#coaches) {
-      yield* this.#routineReadDislikeMenus(coach);
+      yield this.#routineReadDislikeMenus(coach);
     }
-    yield* this.#routinePrintSuggestionTable();
-    yield* this.#routinePrintGoodbye();
+    yield this.#routinePrintSuggestionTable();
+    yield this.#routinePrintGoodbye();
 
     this.#inputView.close();
   }
