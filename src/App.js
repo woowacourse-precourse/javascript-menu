@@ -3,6 +3,7 @@ const {Console} = MissionUtils;
 
 const InputView = require("./InputView.js");
 const OutputView = require("./OutputView.js");
+const {MESSAGE} = require("./Constants.js");
 const Recommend = require("./Recommend.js");
 
 // const SAMPLE = {
@@ -19,13 +20,13 @@ class App {
 	#inputIter;
 
 	play() {
-		Console.print("점심 메뉴 추천을 시작합니다.\n");
+		Console.print(MESSAGE.GAME_START);
 		this.#inputIter = 0;
 		this.inputName();
 	}
 
 	inputName(){
-		Console.readLine(`코치의 이름을 입력해 주세요. (, 로 구분)\n`, (names)=>{
+		Console.readLine(MESSAGE.INPUT_NAMES, (names)=>{
 			if(!InputView.validateNames(names)){
 				this.inputName();
 				return;
@@ -55,7 +56,7 @@ class App {
 	recommend(){
 		this.#recommend.randomCategory();
 		this.#recommend.randomFoodAll();
-		
+
 		this.result();
 	}
 

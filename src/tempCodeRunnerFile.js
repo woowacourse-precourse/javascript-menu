@@ -1,3 +1,3 @@
 
-
-		OutputView.printResult(categories, names, menus);
+		this.inputName();
+	}
