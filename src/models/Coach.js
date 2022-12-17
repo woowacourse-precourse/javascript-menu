@@ -1,7 +1,11 @@
+const Menus = require('./Menus');
+
 class Coach {
   #name;
 
   #menus;
+
+  toEat = new Menus();
 
   constructor(name) {
     Coach.#validate(name);
@@ -24,6 +28,14 @@ class Coach {
 
   setMenus(menus) {
     this.#menus = menus;
+  }
+
+  isIncludeToEat(menu) {
+    return this.toEat.contains(menu);
+  }
+
+  addToEat(menu) {
+    this.toEat.add(menu);
   }
 }
 

@@ -31,6 +31,10 @@ class Coaches {
   getCoachName(index) {
     return this.#state[index].getName();
   }
+
+  getState() {
+    return this.#state;
+  }
 }
 
 module.exports = Coaches;

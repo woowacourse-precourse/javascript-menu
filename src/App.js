@@ -2,6 +2,9 @@ const { Console } = require('@woowacourse/mission-utils');
 
 const Coach = require('./models/Coach');
 const Coaches = require('./models/Coaches');
+const CategoryMaker = require('./utils/CategoryMaker');
+const MenuPicker = require('./utils/MenuPicker');
+const RandomNumberGenerator = require('./utils/RandomNumberGenerator');
 const { readCoaches, readMenu } = require('./views/InputView');
 const { printStart } = require('./views/OutputView');
 
@@ -35,10 +38,31 @@ class App {
     this.#index += 1;
 
     if (this.#index === this.#coaches.count()) {
+      this.#runFinish();
       return Console.close();
     }
 
     return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
+  }
+
+  #runFinish() {
+    const categories = CategoryMaker.makeCategories(RandomNumberGenerator.generate);
+    categories.forEach((category) => {
+      const menus = SAMPLE[category].split(', ');
+      this.#addToEat(menus);
+    });
+
+    console.log(this.#coaches.getState());
+  }
+
+  #addToEat(menus) {
+    this.#coaches.getState().forEach((coach) => {
+      let recommend = MenuPicker.pickMenu(menus);
+      while (coach.isIncludeToEat(recommend)) {
+        recommend = MenuPicker.pickMenu(menus);
+      }
+      coach.addToEat(recommend);
+    });
   }
 }
 
