@@ -1,3 +1,11 @@
+const ERROR_PREFIX = '[ERROR]';
+
+const ERROR = {
+  OUT_OF_RANGE: `${ERROR_PREFIX} 코치는 2명 이상, 5명 이하입니다.`,
+  COACH_NAME_LENGTH: `${ERROR_PREFIX} 코치의 이름은 2글자 이상, 4글자 이하입니다.`,
+  NUM_DISLIKE_MENU: `${ERROR_PREFIX} 못 먹는 음식은 0개 이상 2개 이하입니다.`,
+};
+
 const CATEGORIES = ['일식', '한식', '중식', '아시안', '양식'];
 
 const MENUS = [
@@ -28,4 +36,4 @@ const MENUS = [
   ['라자냐', '그라탱', '뇨끼', '끼슈', '프렌치 토스트', '바게트', '스파게티', '피자', '파니니'],
 ];
 
-module.exports = { CATEGORIES, MENUS };
+module.exports = { ERROR, CATEGORIES, MENUS };
