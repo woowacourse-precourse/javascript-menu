@@ -9,6 +9,10 @@ const SAMPLE = {
 const READ_MESSAGE = Object.freeze({
   readCoaches: '코치의 이름을 입력해 주세요. (, 로 구분)',
 });
+const ERROR_MESSAGE = Object.freeze({
+  coachesNumberGreaterThanOrEqualTwo: '[ERROR] 코치는 최소 2명 이상 입력해야 합니다.',
+  coachesNumberLessThanOrEqualFive: '[ERROR] 코치는 최대 5명 까지 입력할 수 있습니다.',
+});
 module.exports = {
-  SAMPLE, READ_MESSAGE,
+  SAMPLE, READ_MESSAGE, ERROR_MESSAGE,
 };
