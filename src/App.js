@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const Console = MissionUtils.Console;
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
 
@@ -87,7 +88,7 @@ class App {
   }
 
   quit() {
-    MissionUtils.Console.close();
+    Console.close();
   }
 }
 
