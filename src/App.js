@@ -13,10 +13,20 @@ const SAMPLE = {
   양식: "라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니",
 };
 
-const categorysArray = Object.keys(SAMPLE);
+const categorysNames = Object.keys(SAMPLE);
 
 class App {
-  categorysCount = {};
+  categorys = [];
+
+  getCategoryCount(target) {
+    return this.categorys.reduce((count, category) => {
+      if (target === category) {
+        return (count += 1);
+      }
+      return count;
+    }, 0);
+  }
+
   play() {
     OutputView.printServiceStart();
 
@@ -44,9 +54,8 @@ class App {
   decideCategory() {
     const categoryName = this.getCategoryName();
 
-    if (this.categorysCount[categoryName] || 0 <= 2) {
-      this.categorysCount[categoryName] =
-        this.categorysCount[categoryName] + 1 || 1;
+    if (this.getCategoryCount(categoryName) <= 2) {
+      this.categorys.push(categoryName);
       this.recommendMenu(categoryName);
       return;
     }
@@ -54,7 +63,7 @@ class App {
   }
 
   getCategoryName() {
-    return categorysArray[CategoryRandomNumberGenerator.generate() - 1];
+    return categorysNames[CategoryRandomNumberGenerator.generate() - 1];
   }
 
   recommendMenu(categoryName) {
@@ -79,7 +88,7 @@ class App {
 
   printResultRecommendMenu() {
     OutputView.printResultRecommendMenu(
-      this.categorysCount,
+      this.categorys,
       this.coachs.getCoachs()
     );
   }
