@@ -32,9 +32,20 @@ const InputView = {
     readHateFood(coachName, callback) {
         MissionUtils.Console.readLine(`${coachName}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (answer) => {
             const foodList = answer.split(',');
-
+            try {
+                this.invaildate_hateFood(foodList);
+            } catch {
+                MissionUtils.Console.print(e);
+                this.readHateFood(coachName, callback);
+                return;
+            }
             callback(foodList);
         });
+    },
+    invaildate_hateFood(foodList) {
+        if(foodList.length < constants.HATEFOOD_NUMS.MINIMUM  || foodList.length > constants.HATEFOOD_NUMS.MAXIMUM) {
+            throw `[ERROR] 못 먹는 음식은 최소 ${constants.HATEFOOD_NUMS.MINIMUM}개 최대 ${constants.HATEFOOD_NUMS.MAXIMUM}개입니다.`;
+        }
     },
 }
 
