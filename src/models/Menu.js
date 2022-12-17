@@ -6,7 +6,6 @@ class Menu {
   #foods;
 
   constructor(hates) {
-    this.#categoris = categoris;
     this.#hates = hates;
     this.#foods = [];
   }
@@ -15,7 +14,7 @@ class Menu {
     while (this.#foods.length < 5) {
       const categori = categoris[this.#foods.length];
       const menu = MENU_MAP[categori];
-      const menuNumbers = new Array(menu.length).fill().map((value, index) => index + 1);
+      const menuNumbers = menu.map((value, index) => index + 1);
       const food = menu[Random.shuffle(menuNumbers)[0] - 1];
       if (this.#foods.includes(food) || this.#hates.includes(food)) continue;
       this.#foods.push(food);
