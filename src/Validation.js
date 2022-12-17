@@ -26,7 +26,7 @@ const Validation = {
     );
   },
 
-  validatePickyFood(foods) {
+  validatePickyFoods(foods) {
     if (Validation.isFoodNumberInRange(foods)) {
       throw new Error(ERROR_MESSAGE.notValidPickyFoodNumber);
     }

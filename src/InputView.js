@@ -6,9 +6,9 @@ const InputVeiew = {
     Console.readLine(MESSAGE.askName, actWithCoachName);
   },
 
-  readCoachPickyFood(name, actWithPickyFood) {
+  readCoachPickyFoods(name, actWithPickyFoods) {
     Console.readLine(MESSAGE.askPickyFood(name), (foods) => {
-      actWithPickyFood(name, foods);
+      actWithPickyFoods(name, foods);
     });
   },
 };

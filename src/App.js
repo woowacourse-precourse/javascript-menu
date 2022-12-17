@@ -1,5 +1,5 @@
 const Coach = require("./Coach");
-const { readCoachName, readCoachPickyFood } = require("./InputView");
+const { readCoachName, readCoachPickyFoods } = require("./InputView");
 const { print } = require("./OutputView");
 const {
   validateCoachNumber,
@@ -46,14 +46,14 @@ class App {
     });
   }
 
-  getPickFoods(name) {
-    readCoachPickyFood(name, actWithPickyFood.bind(this));
+  getPickyFoods(name) {
+    readCoachPickyFoods(name, actWithPickyFood.bind(this));
   }
 
-  actWithPickyFood(name, foods) {
+  actWithPickyFoods(name, foods) {
     const pikcyFoods = foods.split(",");
     try {
-      validatePickyFood(pikcyFoods);
+      validatePickyFoods(pikcyFoods);
     } catch (e) {
       print(e);
       this.getPickFoods(name);
