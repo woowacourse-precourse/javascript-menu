@@ -26,10 +26,7 @@ const MenuRecommender = class {
       let menu = categoryMenus[menuNumber];
 
       while (1) {
-        if (
-          !this.#isAlreadyEaten(menus, menu) &&
-          !this.#isHateThisFood(hateMenus, menu)
-        ) {
+        if (this.#isValidMenu(menu, hateMenus, menu)) {
           menus.push(menu);
           break;
         }
@@ -41,6 +38,12 @@ const MenuRecommender = class {
     }, []);
   }
 
+  #isValidMenu(menus, hateMenus, menu) {
+    return (
+      !this.#isAlreadyEaten(menus, menu) &&
+      !this.#isHateThisFood(hateMenus, menu)
+    );
+  }
   #isHateThisFood(hateMenus, menu) {
     return hateMenus.includes(menu);
   }
@@ -73,14 +76,14 @@ const MenuRecommender = class {
   }
 };
 
-const a = new MenuRecommender();
-console.log(
-  a.recommend(
-    ['세현', '상준'],
-    [
-      ['김치찌개', '제육볶음'],
-      ['스파게티', '라자냐'],
-    ]
-  )
-);
+// const a = new MenuRecommender();
+// console.log(
+//   a.recommend(
+//     ['세현', '상준'],
+//     [
+//       ['김치찌개', '제육볶음'],
+//       ['스파게티', '라자냐'],
+//     ]
+//   )
+// );
 module.exports = MenuRecommender;
