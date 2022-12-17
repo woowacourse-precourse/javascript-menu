@@ -1,14 +1,82 @@
-const SAMPLE = {
-	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
-	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
-	중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
-	아시안:
-		'팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
-	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-};
+const { randomCategory } = require("./GetRandomCategories");
+const { getRandomMenues } = require("./RecommendMenus");
+const { splitString, trim } = require("./utils/UtilityFunctions");
+const { checkCoach, checkFood } = require("./Validate");
+const { InputView } = require("./View/InputView");
+const { OutputView } = require("./View/OutputView");
 
 class App {
-  play() {}
+  #coaches; // 코치들이 저장되는 배열. 코치의 이름과(string), 요일별 먹을 메뉴(string), 그리고 먹지 못하는 메뉴(string[])가 저장
+  #categories; // 요일별로 카테고리를 저장하는 배열. 0,1,2,3,4 -> 월화수목금 으로 보면 된다.
+
+  play() {
+    this.#coaches = new Map();
+    this.#categories = [];
+    OutputView.startRecommend();
+    this.#categories = randomCategory(this.#categories);
+
+    InputView.inputCoachNames((names) => this.getCoachesNameCallBack(names));
+  }
+
+  getCoachesNameCallBack(names) {
+    const coaches = splitString(names, ",").map(trim); // 이름 깔끔하게 정리
+    const result = checkCoach(coaches, () =>
+      InputView.inputCoachNames((names) => this.getCoachesNameCallBack(names)),
+    );
+    if (!result) return;
+    this.setCoachesToMap(coaches);
+    this.askNotEatMenu(this.#coaches, 0);
+  }
+
+  setCoachesToMap(coaches) {
+    for (const coach of coaches) {
+      this.#coaches.set(coach, {
+        menus: [],
+        canNotEat: [],
+      });
+    }
+  }
+
+  askNotEatMenu(coaches, index) {
+    if (index === coaches.size) {
+      this.getResult();
+      return;
+    }
+
+    const [name] = [...coaches][index];
+    InputView.askMenues(name, (menus) =>
+      this.notEatMenusCallback(menus, coaches, index),
+    );
+  }
+
+  notEatMenusCallback(menus, coaches, index) {
+    const coach = [...coaches][index];
+    const [name, attrs] = coach;
+    const foods = splitString(menus, ",").map((name) => name.trim()); // 여기도 한번 검증 해야함. 여기서 SAMPLEDATA에 있지 않는 음식이라면 다시 입력하라고 해줘야 함.
+    checkFood(foods, () => this.askNotEatMenu(coaches, index));
+
+    this.#coaches.set(name, { ...attrs, canNotEat: foods });
+    this.askNotEatMenu(coaches, index + 1);
+  }
+
+  appendRandomMenus() {
+    for (const [name, attrs] of this.#coaches) {
+      const coachMenus = getRandomMenues(this.#categories, attrs.canNotEat);
+      this.#coaches.set(name, { ...attrs, menus: [...coachMenus] });
+    }
+  }
+
+  getResult() {
+    this.appendRandomMenus();
+
+    OutputView.printRecommendMenuResult();
+    OutputView.printDayRow();
+    OutputView.printCategoryRow(this.#categories);
+    for (const [name, { menus }] of this.#coaches) {
+      OutputView.printCoachRecommendMenus(name, menus);
+    }
+    OutputView.printRecommendEnd();
+  }
 }
 
 module.exports = App;
