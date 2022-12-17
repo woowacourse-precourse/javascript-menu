@@ -39,7 +39,7 @@ class App {
   #onCoachesSubmit(names) {
     try {
       const nameList = names.split(',');
-      ListValidator.validate(nameList);
+      ListValidator.validate(nameList, 2, 5);
       const coaches = names.split(',').map((coach) => new Coach(coach));
       this.#coaches = new Coaches(coaches);
       return readMenu(this.#coaches, this.#index, this.#onMenuSubmit.bind(this));
@@ -52,7 +52,7 @@ class App {
   #onMenuSubmit(menu) {
     try {
       const menus = menu.split(',');
-      ListValidator.validate(menus);
+      ListValidator.validate(menus, 0, 2);
       this.#coaches.setCoachMenu(this.#index, menus);
       this.#index += 1;
 
