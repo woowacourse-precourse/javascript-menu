@@ -8,7 +8,7 @@ const SAMPLE = {
 };
 
 class App {
-  play() {}
+	play() { }
 }
 
 module.exports = App;
