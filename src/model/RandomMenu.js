@@ -90,10 +90,10 @@ class RandomMenu {
       (element) => element === category
     );
     const randomNumber = RandomMenu.createRandomNumber(
-      this.#category[categoryIndex]
+      this.#menus[categoryIndex]
     );
-    const menu = this.#menus[categoryIndex][randomNumber];
-    return menu;
+    const menuIndex = randomNumber === 0 ? 0 : randomNumber - 1;
+    return this.#menus[categoryIndex][menuIndex];
   }
 
   getResults() {

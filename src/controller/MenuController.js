@@ -9,6 +9,7 @@ class MenuController {
   #randomMenu = new RandomMenu();
 
   start() {
+    this.#randomMenu.checkCategory();
     printStart();
     this.#randomMenu.setCategoryDays();
     readCoachesName(this.checkCoachesName.bind(this));
@@ -30,7 +31,8 @@ class MenuController {
     this.#coachData.setHateMenus(name, menu);
     const coachesLength = this.#coachData.getCoachLength() - 1;
     if (count === coachesLength) {
-      return this.calculateResult();
+      this.calculateResult();
+      return;
     }
     this.checkDontLikeMenu(count + 1);
   }

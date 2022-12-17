@@ -1,4 +1,3 @@
-const { GAME_STRING } = require('../Constant');
 const SplitAndTrim = require('../utils/SplitAndTrim');
 
 class CoachData {
@@ -10,12 +9,8 @@ class CoachData {
     const coachArray = SplitAndTrim(coaches);
     this.#coaches = coachArray;
     this.#coaches.forEach((coachName) => {
-      this.#hateMenus[coachName] = '';
+      this.#hateMenus[coachName] = [];
     });
-  }
-
-  checkCoach() {
-    console.log(this.#coaches);
   }
 
   getCoachName(count) {
@@ -33,10 +28,6 @@ class CoachData {
 
   getHateMenus() {
     return this.#hateMenus;
-  }
-
-  checkHateMenus() {
-    console.log(this.#hateMenus);
   }
 }
 
