@@ -1,4 +1,3 @@
-const { Random } = require('@woowacourse/mission-utils');
 const CategoryChooser = require('./CategoryChooser');
 const MenuChooser = require('./MenuChooser');
 
@@ -13,13 +12,15 @@ class ChooseSystem {
     this.#categories = CategoryChooser.choose();
   }
 
-  addCoach(coachName) {
-    this.#coachNames.push(coachName);
+  addCoaches(names) {
+    this.#coachNames = names;
   }
 
   banMenu(coachName, menus) {
     const trimmedMenus = menus.split(',');
     this.#bans[coachName] = trimmedMenus;
+    console.log(this.#coachNames);
+    console.log({ ban: this.#bans });
   }
 
   chooseAllMenus() {
@@ -39,4 +40,4 @@ class ChooseSystem {
   }
 }
 
-module.exports = MenuChooser;
+module.exports = ChooseSystem;
