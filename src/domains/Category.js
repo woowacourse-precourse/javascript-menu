@@ -11,7 +11,6 @@ class Category {
   #menus;
 
   /**
-   *
    * @param {number} id
    * @param {string} name
    * @param {Menu[]} menus
