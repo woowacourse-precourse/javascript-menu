@@ -51,7 +51,7 @@ class MenuController {
   }
 
   startRealService() {
-    this.#menuService.pickCategory();
+    this.#menuService.recommend();
   }
 }
 

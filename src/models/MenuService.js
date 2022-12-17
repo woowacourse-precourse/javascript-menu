@@ -1,6 +1,7 @@
 const Coach = require('./Coach');
 const { CATEGORY } = require('../utils/constants');
 const { Random } = require('@woowacourse/mission-utils');
+const { validateCoachNames } = require('../utils/InputValidator');
 
 class MenuService {
   #coaches = [];
@@ -15,8 +16,18 @@ class MenuService {
     if (foods[0] !== '') this.#coaches[index].setHateFoods(foods);
   }
 
-  pickCategory() {
-    const category = CATEGORY[Random.pickNumberInRange(CATEGORY.min, CATEGORY.max)];
+  recommend() {
+    this.#coaches.forEach((coach, index) => {
+      coach.addCategory(this.pickCategory(index));
+    });
+  }
+
+  pickCategory(index) {
+    let category = CATEGORY[Random.pickNumberInRange(CATEGORY.min, CATEGORY.max)];
+    while (!this.#coaches[index].isValidCategory(category)) {
+      category = CATEGORY[Random.pickNumberInRange(CATEGORY.min, CATEGORY.max)];
+    }
+    return category;
   }
 }
 
