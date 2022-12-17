@@ -14,6 +14,16 @@ class MenuRecommendController {
         this.#categorys = [];
         this.#coachs = [];
     }
+
+    exetute() {
+        InputView.readCoachsName((result) => {
+            result.array.forEach(name => {
+                InputView.readHateFood(name, (result) => {
+                    this.#coachs.add(new Coach(name, result));
+                });
+            });
+        });
+    }
 }
 
 module.exports = MenuRecommendController;
