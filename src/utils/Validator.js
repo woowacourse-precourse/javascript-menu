@@ -27,7 +27,7 @@ class Validator {
     if (!this.#isValidInputFormat(dislikeMenu)) {
       throw new Error('[ERROR] 메뉴를 ,(쉼표)로 구분하여 입력해주세요.');
     }
-    if (!this.#isMoreThanMaximumDislikeMenuNumber(dislikeMenu)) {
+    if (this.#isMoreThanMaximumDislikeMenuNumber(dislikeMenu)) {
       throw new Error('[ERROR] 메뉴는 최대 2개까지만 입력가능합니다.');
     }
   }
