@@ -11,7 +11,7 @@ const SAMPLE = {
 
 class App {
   static play() {
-    const recommendController = new RecommendController();
+    const recommendController = new RecommendController(SAMPLE);
     recommendController.inputCoachName();
   }
 }

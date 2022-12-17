@@ -1,15 +1,20 @@
+const { Random } = require('@woowacourse/mission-utils');
 const OutputView = require('../view/OutputView');
 const InputView = require('../view/InputView');
 const Validator = require('../utils/Validator');
 const Utils = require('../utils/Utils');
 const Coach = require('../model/Coach');
+const Menus = require('../model/Menus');
 const IO = require('../utils/IO');
 
 class RecommendController {
   #coaches;
 
-  constructor() {
+  #menus;
+
+  constructor(sample) {
     OutputView.printStart();
+    this.#menus = new Menus(sample);
   }
 
   inputCoachName() {
@@ -47,12 +52,14 @@ class RecommendController {
       this.inputCoachCantEatMenus(coachIndex + 1);
     }
     if (coachIndex + 1 === this.#coaches.length) {
-      RecommendController.recommend();
+      this.recommendCategory();
     }
   }
 
-  static recommend() {
-    IO.close();
+  recommendCategory() {
+    const categoryMenus = this.#menus.getCategory(
+      Random.pickNumberInRange(1, 5),
+    );
   }
 }
 
