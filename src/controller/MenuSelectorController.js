@@ -19,14 +19,19 @@ class MenuSelectorController {
 
   //["토미,제임스" Coach(토미), Coach(제임스), ..]
   #registerCoachPhase(names) {
-    Validator.checkCoachNames(names);
-    this.#menuSelector = new MenuSelector(
-      names.split(',').map((name) => {
-        Validator.checkNameLength(name);
-        return new Coach(name);
-      })
-    );
-    this.#startReadingDislikePhase(this.#menuSelector.getCoachs());
+    try {
+      Validator.checkCoachNames(names);
+      this.#menuSelector = new MenuSelector(
+        names.split(',').map((name) => {
+          Validator.checkNameLength(name);
+          return new Coach(name);
+        })
+      );
+      this.#startReadingDislikePhase(this.#menuSelector.getCoachs());
+    } catch (error) {
+      OutputView.printErrorMessage(error.message);
+      this.#readCoachNamesPhase();
+    }
   }
 
   #startReadingDislikePhase(coachs) {
