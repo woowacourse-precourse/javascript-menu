@@ -11,4 +11,4 @@ const MENU_CONSTANTS = {
 const PROCESS_CONSTANTS = {
 };
 
-module.exports = { PROCESS_CONSTANTS };
+module.exports = { MENU_CONSTANTS, PROCESS_CONSTANTS };
