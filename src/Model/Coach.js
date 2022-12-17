@@ -1,5 +1,6 @@
 class Coach {
   #name;
+  #hateFoods;
 
   constructor(name) {
     this.#name = name;
@@ -7,6 +8,10 @@ class Coach {
 
   getName() {
     return this.#name;
+  }
+
+  setHateFoods(hateFoods) {
+    this.#hateFoods = [...hateFoods];
   }
 }
 

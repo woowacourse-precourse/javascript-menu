@@ -39,6 +39,8 @@ class MenuRecommandationController {
     InputView.readHateFoods(coach.getName(), (hateFoods) => {
       this.checkHateFoodsInMenus(hateFoods);
 
+      coach.setHateFoods(hateFoods);
+
       this.readHateFoods(coaches, index + 1);
     });
   }
