@@ -76,11 +76,12 @@
   - [x] 못 먹는 음식을 추가할 수 있어야 한다.(로직 상 이름과 싫어하는 부분을 동시에 받을 수 없으므로)
   - [x] 코치의 이름에 대한 필드를 가지고 있어야 한다.
 
-- [ ] Recommandation과 관련해서 실제로 비지니스 로직이 행해지도록 구현
+- [x] Recommandation과 관련해서 실제로 비지니스 로직이 행해지도록 구현
 
-  - [ ] 사용자로부터의 상호작용을 통한 실제 로직이 구현되도록 한다.
-  - [ ] view와 model에 관련된 필드들을 주입받는다.
-  - [ ] start / askName / askDislikes / printResult 메서드로 구성
+  - [x] 사용자로부터의 상호작용을 통한 실제 로직이 구현되도록 한다.
+  - [x] view와 model에 관련된 필드들을 주입받는다.
+  - [x] ~~start / askName / askDislikes / printResult 메서드로 구성~~
+  - [x] processNames, processHates,ProcessResult로 변경하여 메서드를 구성하였다. ask와 print는 view에 맡기는 편이 낫다는 판단에서 지은 이름이다.
 
 - [ ] util 함수를 제작하기
 

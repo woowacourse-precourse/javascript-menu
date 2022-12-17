@@ -12,7 +12,10 @@ class Coach {
   getName() {
     return this.#name;
   }
-  addHates(hate) {
-    this.#hates.push(hate);
+  addHates(hates) {
+    const split = hates.split(",").map((v) => v.trim());
+    this.#hates.push(...split);
   }
 }
+
+module.exports = Coach;

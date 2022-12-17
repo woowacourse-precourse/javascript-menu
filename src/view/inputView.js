@@ -2,14 +2,15 @@ const { Console } = require("@woowacourse/mission-utils");
 const message = require("../constant/message");
 
 const inputView = {
-  read(...arg) {
-    return Console.readLine(...arg);
+  read(message, next) {
+    return Console.readLine(message, next);
   },
-  askName(cb) {
-    this.read(message.NAME, cb);
+  askName(next) {
+    this.read(message.NAME, next);
   },
-  askHates(name, cb) {
-    this.read(message.hates(name), cb);
+  askHates(name, next) {
+    console.log(name, next);
+    this.read(message.hates(name), next);
   },
 };
 

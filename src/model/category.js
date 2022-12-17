@@ -11,6 +11,8 @@ class Category {
   }
 
   recommend() {
-    return Random.shuffle(menus)[0];
+    return Random.shuffle(this.#menus)[0];
   }
 }
+
+module.exports = Category;

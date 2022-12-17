@@ -11,12 +11,13 @@ const outputView = {
   start() {
     this.print(message.START);
   },
-  result(stringifiedMenu) {
+  result(stringifiedMenu = "") {
     this.print(message.RESULT);
     this.print(stringifiedMenu);
   },
   complete() {
     this.print(message.COMPLETE);
+    this.close();
   },
 };
 
