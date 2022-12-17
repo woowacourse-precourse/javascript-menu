@@ -4,7 +4,6 @@ const CategoryRandomGenerator = {
   categoryGenerate(categories) {
     const randomIndex = Random.pickNumberInRange(1, 5);
 
-    console.log(randomIndex);
     return categories[randomIndex - 1];
   },
 };

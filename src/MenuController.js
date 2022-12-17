@@ -52,19 +52,16 @@ class MenuController {
 
     for (let i = 0; i < 5; i++) {
       let category = categoryGenerate(menuKeys);
-      console.log(category);
       while (this.#categories.filter((el) => category === el).length == 2) {
         category = categoryGenerate(menuKeys);
       }
       this.#categories.push(category);
     }
-    console.log(this.#categories);
     return this.recommendMenu();
   }
 
   recommendCoachMenu(menuList) {
     for (const coach of this.#coachs) {
-      console.log(coach.name);
       let menu = menuGenerate(menuList);
       while (!coach.checkMenu(menu)) {
         menu = menuGenerate(menuList);
