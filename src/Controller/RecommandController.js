@@ -69,10 +69,8 @@ class RecommandController {
   recommandMenuPhase() {
     for (let i = 0; i < 5; i += 1) {
       this.selectCategory();
-      // console.log("this.categories: ", this.categories);
     }
     this.selectMenuEachCoach();
-    // console.log("this.menusEachCoach: ", this.menusEachCoach);
     OutputView.printResult(this.categories, this.menusEachCoach);
   }
 
