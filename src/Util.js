@@ -1,4 +1,4 @@
-const { Console } = require('@woowacourse/mission-utils');
+const { Console, Random } = require("@woowacourse/mission-utils");
 
 const catchError = (input, validation) => {
   try {
@@ -9,4 +9,18 @@ const catchError = (input, validation) => {
   }
 };
 
-module.exports = { catchError };
+const makeRandomNumber = () => {
+  return Random.pickNumberInRange(1, 5);
+};
+
+const makeRandomCategory = (SAMPLE) => {
+  const categories = new Map();
+  categoryArray = Object.keys(SAMPLE);
+  categoryArray.map((category, index) => {
+    categories.set(index + 1, category);
+  });
+  const recommendCategory = categories.get(makeRandomNumber());
+  return recommendCategory;
+};
+
+module.exports = { catchError, makeRandomCategory };
