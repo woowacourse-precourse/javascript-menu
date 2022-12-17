@@ -1,3 +1,4 @@
+const MissionUtils = require('@woowacourse/mission-utils');
 const InputView = require('./InputView');
 const OutputView = require('./OutputView');
 
@@ -29,10 +30,10 @@ class MenuController {
     const name = coaches[this.#order];
 
     InputView.readHateFood(name, (foodList) => {
-      console.log(foodList);
+      this.#machine.setHateFood(name, foodList);
 
       if (this.#order === coaches.length - 1) {
-        this.recommendMenu();
+        this.recommend();
         return;
       }
 
@@ -41,10 +42,18 @@ class MenuController {
     });
   }
 
-  recommendMenu() {}
+  recommend() {
+    const result = this.#machine.getResult();
+    OutputView.printResult(result);
+    this.quit();
+  }
 
   countOrder() {
     this.#order += 1;
+  }
+
+  quit() {
+    MissionUtils.Console.close();
   }
 }
 
