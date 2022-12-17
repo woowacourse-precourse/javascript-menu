@@ -31,6 +31,10 @@ class GameController {
   remove() {
     this.#service.remove();
   }
+
+  outputDaily() {
+    return this.#service.outputDaily();
+  }
 }
 
 module.exports = Object.freeze(new GameController());

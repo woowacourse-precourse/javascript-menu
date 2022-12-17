@@ -131,6 +131,10 @@ class GameService {
     const inputList = input.split(',');
     this.#inputNotingNotEat(inputList).#inputNotEatFor(inputList, coach);
   }
+
+  outputDaily() {
+    return this.#repo.read(MODEL_KEY.daily);
+  }
 }
 
 module.exports = GameService;
