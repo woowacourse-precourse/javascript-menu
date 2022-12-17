@@ -30,15 +30,15 @@ class MenuRecommendController {
     InputView.readCoachName(coachNames => {
       coachNames.forEach(name => this.#coachRepository.addCoach(name));
 
-      this.#readNotGoodFoodEachCoachs(this.#coachRepository.getEachCoach());
+      this.#readNotGoodMenuEachCoachs(this.#coachRepository.getEachCoach());
     });
   }
 
-  #readNotGoodFoodEachCoachs(coach) {
-    InputView.readNotGoodFood(coach, foods => {
-      coach.setNotGoodFood(foods);
+  #readNotGoodMenuEachCoachs(coach) {
+    InputView.readNotGoodMenu(coach, foods => {
+      coach.setNotGoodMenu(foods);
       if (this.#coachRepository.checkNextCoach()) {
-        this.#readNotGoodFoodEachCoachs(this.#coachRepository.getEachCoach());
+        this.#readNotGoodMenuEachCoachs(this.#coachRepository.getEachCoach());
       } else {
         this.#returnRecommendMenu();
       }
@@ -48,7 +48,7 @@ class MenuRecommendController {
   #returnRecommendMenu() {
     this.#setRecommendCategory();
     this.#setRecommendMenu();
-    
+
     OutputView.printMenu();
   }
 
@@ -60,9 +60,9 @@ class MenuRecommendController {
   }
 
   #setRecommendMenu() {
-    this.#recommendWeeklyMenu.getWeeklyCategory().forEach((category)=>{
-      
-    })
+    this.#recommendWeeklyMenu.getWeeklyCategory().forEach(category => {
+
+    });
   }
 }
 

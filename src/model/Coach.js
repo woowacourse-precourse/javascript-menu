@@ -1,6 +1,7 @@
 class Coach {
   #name;
-  #notGoodFood;
+  #NotGoodMenu;
+  #weeklyMenu;
 
   constructor(name) {
     this.#name = name;
@@ -10,12 +11,16 @@ class Coach {
     return this.#name;
   }
 
-  setNotGoodFood(notGoodFood) {
-    this.#notGoodFood = notGoodFood;
+  setNotGoodMenu(NotGoodMenu) {
+    this.#NotGoodMenu = NotGoodMenu;
   }
 
-  getNotGoodFood() {
-    return this.#notGoodFood;
+  setWeeklyMenu(menus) {
+    this.#weeklyMenu = menus;
+  }
+
+  getNotGoodMenu() {
+    return this.#NotGoodMenu;
   }
 }
 

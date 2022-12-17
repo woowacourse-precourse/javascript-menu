@@ -12,8 +12,8 @@ const InputView = {
     });
   },
 
-  readNotGoodFood(coach, callback) {
-    InputView.question(`\n${coach.getName() + MESSAGE.process.inputNotGoodFood}`, input => {
+  readNotGoodMenu(coach, callback) {
+    InputView.question(`\n${coach.getName() + MESSAGE.process.inputNotGoodMenu}`, input => {
       const foods = InputView.convertInputToItems(input);
 
       callback(foods);
