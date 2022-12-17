@@ -8,9 +8,9 @@ const InputView = {
     });
   },
 
-  readHateFoodInput(singleCoachName, callbackFunction) {
+  readHateFoodInput(validCoachNames, singleCoachName, callbackFunction) {
     Console.readLine(`\n${singleCoachName}${HATE_FOOD.INPUT}`, (coachNameInput) => {
-      callbackFunction(singleCoachName, coachNameInput);
+      callbackFunction(validCoachNames, singleCoachName, coachNameInput);
     });
   },
 };

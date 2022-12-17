@@ -14,11 +14,28 @@ class MainController {
 
   processCoachNameInput(coachNameInput) {
     this.#categoryController.processCoachNameInput(coachNameInput);
-    this.readHateFoodInput();
+    const validCoachNames = this.#categoryController.getCoachNames();
+    this.readHateFoodInput(validCoachNames, validCoachNames[0]);
+  }
+
+  processHateFoodInput(validCoachNames, singleCoachName, hateFoodInput) {
+    this.#recommendationController.processHateFoodInput(
+      validCoachNames,
+      singleCoachName,
+      hateFoodInput,
+    );
   }
 
   readCoachNameInput() {
     InputView.readCoachNameInput(this.processCoachNameInput.bind(this));
+  }
+
+  readHateFoodInput(validCoachNames, coachName) {
+    InputView.readHateFoodInput(
+      validCoachNames,
+      coachName,
+      this.processHateFoodInput.bind(this),
+    );
   }
 
   printFirstMessage() {
