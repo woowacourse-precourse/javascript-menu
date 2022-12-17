@@ -7,6 +7,7 @@ const InputView = {
     Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", (names) => {
       names = catchError(names, checkCoachNames)
       if (!names) return this.readCoachNames(readCoachNamesCallback);
+      readCoachNamesCallback(names);
     })
   }
 }
