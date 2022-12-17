@@ -11,7 +11,7 @@ const RandomMenuGenerator = (category) => {
   const menus = SAMPLE[category].split(',');
   const idxOfMenus = [0, 1, 2, 3, 4, 5, 6, 7, 8];
   const idxofRandomMenu = Random.shuffle(idxOfMenus)[0];
-  const menu = menus[idxofRandomMenu];
+  const menu = menus[idxofRandomMenu].trimStart();
   return menu;
 };
 
