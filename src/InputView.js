@@ -22,19 +22,17 @@ class InputView {
 
   readUnableToEat() {
     const coachesList = this.coachNames[this.currentCoachFlag];
-    const message = `${coachesList}(이)가 못 먹는 메뉴를 입력해 주세요\n`;
+    const message = `\n${coachesList}(이)가 못 먹는 메뉴를 입력해 주세요\n`;
 
     Console.readLine(`${message}`, (menusCoachCantEat) => {
-      try {
-        const divideMenusCoachCantEat = menusCoachCantEat.split(',');
+      const error = Validation.isValidRangeOfFoodLength(menusCoachCantEat);
+      if (error) return this.readUnableToEat();
 
-        if (coachesList.length > this.currentCoachFlag) {
-          this.currentCoachFlag += 1;
-          return this.readUnableToEat();
-        }
-      } catch (error) {
-        Console.print(error.message);
-        this.readUnableToEat();
+      const divideMenusCoachCantEat = menusCoachCantEat.split(',');
+
+      if (coachesList.length > this.currentCoachFlag) {
+        this.currentCoachFlag += 1;
+        return this.readUnableToEat();
       }
     });
   }
