@@ -138,6 +138,8 @@ MenuServiceController = class {
   }
 
   exit() {
+    this.view.printEndMessage();
+
     Console.close();
   }
 };
