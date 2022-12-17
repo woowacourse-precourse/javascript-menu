@@ -32,25 +32,25 @@ class App {
     try {
       Validator.checkHates(input);
       const hates = input.split(',');
-      this.#controllHates(hates);
+      this.#initCoach(hates);
     } catch (e) {
       OutputView.printError(e);
       InputView.readHates(this.#handleHates.bind(this), this.#names[this.#coachs.length]);
     }
   }
 
-  #controllHates(hates) {
+  #initCoach(hates) {
     this.#coachs.push(new Coach(hates));
     if (this.#coachs.length < this.#names.length) {
       InputView.readHates(this.#handleHates.bind(this), this.#names[this.#coachs.length]);
     } else {
-      this.#showMenus();
+      this.#showFoods();
     }
   }
 
-  #showMenus() {
+  #showFoods() {
     const foodsList = this.#coachs.map((coach) => coach.choiceFoods(this.#categoris));
-    OutputView.printMenus(this.#categoris, this.#names, foodsList);
+    OutputView.printFoods(this.#categoris, this.#names, foodsList);
     InputView.close();
   }
 }
