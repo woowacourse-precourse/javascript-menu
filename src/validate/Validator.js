@@ -9,7 +9,14 @@ class Validator {
     return true;
   }
 
-  checkCoachNameLength(coachMembers) {}
+  checkCoachNameLength(coachMembers) {
+    coachMembers.forEach((name) => {
+      if (name.length < MEMBER.minNameLength || name.length > MEMBER.maxNameLength) {
+        throw ERROR_MESSAGES.invalidNameLength;
+      }
+      return true;
+    });
+  }
 
   checkSeperator() {
     // 콤마가 구분자가 아닌 경우 예외처리
