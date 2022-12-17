@@ -17,7 +17,7 @@ const makeRandomMenuForNum = () => {
   return result;
 };
 
-const makeRandomMenu = () => {
+const makeRandomCategory = () => {
   const result = makeRandomMenuForNum();
   return result.map((value) => {
     if (value === 1) return '일식';
@@ -30,7 +30,7 @@ const makeRandomMenu = () => {
 };
 
 // 못먹는 음식을 뺀 메뉴
-const makeRandomCategory = (menu) => {
+const makeRandomFoods = (menu) => {
   const result = [];
   const menuList = menu.split(', ');
 
@@ -45,6 +45,6 @@ const makeRandomCategory = (menu) => {
 };
 
 module.exports = {
-  makeRandomMenu,
+  makeRandomFoods,
   makeRandomCategory,
 };

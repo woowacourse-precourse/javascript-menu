@@ -6,6 +6,7 @@ const controller = require('./GameController');
 const { GAME_TEXT } = require('./utils/constants');
 const { errorCheckFor } = require('./utils/errorCheckFor');
 const InputException = require('./utils/InputException');
+const { makeRandomCategory } = require('./utils/makeRandomMenu');
 
 const SAMPLE = {
   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -52,11 +53,25 @@ class App {
     return true;
   }
 
+  static categoryTemplate() {
+    const category = makeRandomCategory();
+
+    return `[ 카테고리 | ${category[0]} | | ${category[1]} | | ${category[2]} | | ${category[3]} | | ${category[4]} ]`;
+  }
+
+  #printFinalResult() {
+    Console.print('메뉴 추천 결과입니다.');
+    Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    Console.print(App.categoryTemplate());
+
+    return this;
+  }
+
   #successNotReadEvent(input, coach) {
     InputException.checkNotEat(input, SAMPLE);
     controller.inputNotEat(input, coach);
     if (this.#questionNotEat()) {
-      // 메뉴 추천 결과 출력
+      this.#printFinalResult();
     }
 
     return this;

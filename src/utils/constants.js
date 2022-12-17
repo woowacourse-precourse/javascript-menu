@@ -18,7 +18,8 @@ const ERROR_MESSAGE = Object.freeze({
 });
 
 const MODEL_KEY = Object.freeze({
-  // change: 'VENDING_CHANGE',
+  coach: 'MENU_COACH',
+  daily: 'MENU_DAILY',
 });
 
 const GAME_TEXT = Object.freeze({
