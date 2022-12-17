@@ -83,7 +83,6 @@ class App {
 
   getResult() {
     // const menu = Random.shuffle(menus)[0];
-    console.log(this.#coaches, "코치들 못먹는 음식");
     for (let i = 0; i < 5; i++) {
       // 각 요일별 메뉴 선정
       const category = this.#categories[i];
@@ -110,7 +109,23 @@ class App {
         }
       }
     }
-    console.log(this.#coaches);
+
+    Console.print("메뉴 추천 결과입니다.");
+    Console.print("[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]");
+
+    const categories = this.#categories.reduce((acc, cur) => {
+      return acc + `| ${categoryKey[cur]} `;
+    }, "");
+    Console.print(`[ 카테고리 ${categories} ]`);
+
+    for (const [name, { menus }] of this.#coaches) {
+      const recommandMenus = menus.reduce((acc, cur) => {
+        return acc + `| ${cur} `;
+      }, "");
+      Console.print(`[ ${name} ${recommandMenus} ]`);
+    }
+
+    Console.print("추천을 완료했습니다.");
   }
 }
 
