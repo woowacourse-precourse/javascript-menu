@@ -5,7 +5,7 @@ const Coach = require('./Coach');
 const InputProcessor = require('./util/InputProcessor');
 const Food = require('./Food');
 const MenuUtil = require('./util/menuUtil');
-const { Random } = require('@woowacourse/mission-utils');
+const MissionUtils = require('@woowacourse/mission-utils');
 const categoryTable = require('./constant/categoryTable');
 const MENUS = require('./constant/menus');
 
@@ -20,10 +20,7 @@ class App {
   }
   play() {
     this.output.print('점심 메뉴 추천을 시작합니다.');
-    this.input.readLine(
-      this.inputCoachs.bind(this),
-      '코치의 이름을 입력해 주세요. (, 로 구분)'
-    );
+    this.input.readLine(this.inputCoachs.bind(this));
   }
 
   inputCoachs(input) {
@@ -51,10 +48,7 @@ class App {
       this.showResult();
       return;
     }
-    this.input.readLine(
-      this.inputDislikeFoodByCoach.bind(this),
-      `${this.coachs[this.dislikeIdx].name}(이)가 못 먹는 메뉴를 입력해 주세요.`
-    );
+    this.input.readLine(this.inputDislikeFoodByCoach.bind(this));
   }
 
   inputDislikeFoodByCoach(input) {
@@ -87,7 +81,7 @@ class App {
 
   selectCategory() {
     while (true) {
-      const category = Random.pickNumberInRange(1, 5);
+      const category = MissionUtils.Random.pickNumberInRange(1, 5);
       if (!this.categoryCounts[category] <= 2) {
         this.categoryCounts[category]++;
         return category;
@@ -96,24 +90,29 @@ class App {
   }
 
   recommendByCoach(foodList, coach) {
-    const [...totalFoodList] = foodList;
-    console.log(totalFoodList);
-    let selectFood = Random.shuffle(totalFoodList)[0];
+    let selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
+    selectFoodIdx -= 1;
+
     while (true) {
-      if (coach.dislikeFoods.some((food) => food.name === selectFood)) {
-        selectFood = Random.shuffle(totalFoodList)[0];
+      if (
+        coach.dislikeFoods.some((food) => food.name === foodList[selectFoodIdx])
+      ) {
+        selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
         continue;
       }
-      if (coach.ateFoods.some((food) => food.name === selectFood)) {
-        selectFood = Random.shuffle(totalFoodList)[0];
+      if (
+        coach.ateFoods.some((food) => food.name === foodList[selectFoodIdx])
+      ) {
+        selectFoodIdx = MissionUtils.Random.shuffle(foodList)[0];
         continue;
       }
       break;
     }
-    return selectFood;
+    return foodList[selectFoodIdx];
   }
 
   showResult() {
+    this.output.print('메뉴 추천 결과입니다.');
     this.output.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
     this.output.print(this.makeCategoryResult());
     this.printByCoachs();
@@ -133,7 +132,7 @@ class App {
     this.coachs.forEach((coach) => {
       let result = `[ ${coach.name} `;
       coach.ateFoods.forEach((food) => {
-        result += `| ${food} `;
+        result += `| ${food.name} `;
       });
       result += ']';
       this.output.print(result);
