@@ -28,6 +28,15 @@ class Menus {
     return null;
   }
 
+  getCategoryNum(category) {
+    if (category === '일식') return 1;
+    if (category === '한식') return 2;
+    if (category === '중식') return 3;
+    if (category === '아시안') return 4;
+    if (category === '양식') return 5;
+    return null;
+  }
+
   getCategoryMenu(categoryNum) {
     if (categoryNum === 1) return this.#japaneseFood;
     if (categoryNum === 2) return this.#koreanFood;
