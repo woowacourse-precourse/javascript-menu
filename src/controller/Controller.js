@@ -1,4 +1,6 @@
+const CategoryMaker = require('../model/CategoryMaker');
 const validator = require('../utils/InputValidator');
+const { generate } = require('../utils/RandomNumGenerator');
 const InputView = require('../view/inputView');
 const OutputView = require('../view/OutputView');
 
@@ -10,7 +12,7 @@ class Controller {
   constructor() {
     this.#coachNames;
     this.#hateMenus;
-    this.#count = 1;
+    this.#count = 0;
   }
   start() {
     OutputView.printServiceStart();
@@ -41,10 +43,11 @@ class Controller {
 
   getHateMenu(menus) {
     try {
+      this.#count += 1;
       let coachNum = this.#coachNames.length;
       this.#hateMenus = menus.split(',');
-      this.checkCoachNum(coachNum);
       validator.hateMenuValidate(this.#hateMenus, this.#coachNames);
+      this.checkCoachNum(coachNum);
     } catch {
       this.inputHateMenu();
     }
@@ -52,9 +55,15 @@ class Controller {
 
   checkCoachNum(coachNum) {
     if (this.#count < coachNum) {
-      this.#count += 1;
       this.inputHateMenu();
     }
+    if (this.#count === coachNum) this.getCategory();
+  }
+
+  getCategory() {
+    const categoryArr = CategoryMaker.makeCategory(generate);
+    // console.log(categoryArr);
+    OutputView.printRecommand(categoryArr);
   }
 }
 

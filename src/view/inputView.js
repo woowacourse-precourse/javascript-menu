@@ -8,7 +8,7 @@ const InputView = {
 
   readHateMenu(callback, coachNames, count) {
     Console.readLine(
-      coachNames[count - 1] + INPUT_MESSAGE.GET_HATE_MENU,
+      coachNames[count] + INPUT_MESSAGE.GET_HATE_MENU,
       callback
     );
   },
