@@ -1,6 +1,6 @@
 const { Console } = require("@woowacourse/mission-utils");
 const { catchError } = require("./util");
-const { checkCoachNames } = require("./Validation");
+const { checkCoachNames, checkAvoidMenu } = require("./Validation");
 
 const InputView = {
   readCoachNames(readCoachNamesCallback) {
@@ -12,10 +12,9 @@ const InputView = {
   },
 
   readAvoidMenu(name, readAvoidMenuCallback) {
-    Console.readLine(
-      `${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
-      (name) => {
-        readAvoidMenuCallback(name);
+    Console.readLine(`${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (menu) => {
+      menu = catchError(menu, checkAvoidMenu)  
+      readAvoidMenuCallback(menu);
       }
     );
   },

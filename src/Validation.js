@@ -1,3 +1,6 @@
+const SAMPLE = require("./Constants");
+const SAMPLE_MENU = Object.values(SAMPLE).join(',')
+
 const Validation = {
   checkCoachNames(names) {
     if (!names.trim()) throw new Error("아무것도 입력되지 않았습니다.");
@@ -11,6 +14,13 @@ const Validation = {
       throw new Error("중복된 코치 이름이 있습니다.");
     return names;
   },
+
+  checkAvoidMenu(menu) {
+    if (!menu.trim()) throw new Error("아무것도 입력되지 않았습니다.")
+    menu = menu.split(',');
+    menu = menu.map((kind) => kind.trim());
+    if(menu.some((kind) => !SAMPLE_MENU.includes(kind))) throw new Error('메뉴 목록에 없는 메뉴입니다.')
+  }
 };
 
 module.exports = Validation;
