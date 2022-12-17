@@ -11,5 +11,9 @@ const OutputView = {
 
     printFinishMessage() {
         Console.print("추천을 완료했습니다.")
+    },
+
+    printResults(results) {
+        Console.print(results)
     }
 }
