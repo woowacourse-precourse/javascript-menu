@@ -9,7 +9,6 @@ const isFoodNumberTooBig = (foods) => {
 };
 const isValidFoods = (answer) => {
   const foods = answer.split(',');
-  console.log(`입력된 음식의 길이는!${foods.length}`);
   if (isFoodNumberTooBig(foods)) {
     OutputView.print(ERROR_MESSAGE.tooManyFoods);
     throw new Error(ERROR_MESSAGE.tooManyFoods);
