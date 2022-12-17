@@ -1,6 +1,7 @@
+const Coach = require("./Coach");
 const { readCoachName } = require("./InputView");
 const { print } = require("./OutputView");
-const { validateCoachNumber } = require("./Validation");
+const { validateCoachNumber, validateNameLength } = require("./Validation");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -22,10 +23,23 @@ class App {
     const names = nameInput.split(",");
     try {
       validateCoachNumber(names);
+      this.makeEachCoachField(names);
     } catch (e) {
       print(e);
       this.getCoachName();
     }
+  }
+
+  makeEachCoachField(names) {
+    names.forEach((name) => {
+      try {
+        validateNameLength(name);
+        this.#coaches.push(new Coach(name));
+      } catch (e) {
+        print(e);
+        this.getCoachName();
+      }
+    });
   }
 
   play() {}

@@ -1,12 +1,13 @@
 const { Console } = require("@woowacourse/mission-utils");
+const { MESSAGE } = require("./Constant");
 
 const InputVeiew = {
-  readCoachName() {
-    Console.readLine();
+  readCoachName(actWithCoachName) {
+    Console.readLine(MESSAGE.askName, actWithCoachName);
   },
 
-  readCoachPickyFood() {
-    Console.readLine();
+  readCoachPickyFood(name, actWithPickyFood) {
+    Console.readLine(MESSAGE.askPickyFood(name), actWithPickyFood);
   },
 };
 

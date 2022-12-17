@@ -2,9 +2,12 @@ class Coach {
   #name;
   #pickyFoods;
 
-  constructor(name, pickyFoods) {
+  constructor(name) {
     this.#name = name;
-    this.#pickyFoods = pickyFoods;
+  }
+
+  setPickyFoods(foods) {
+    this.#pickyFoods = foods;
   }
 }
 
