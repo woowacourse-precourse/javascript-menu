@@ -21,10 +21,12 @@ class MenuRecommendController {
   }
 
   run() {
+    this.#readCrewName();
   }
 
-  readCrewName() {
+  #readCrewName() {
     InputView.readCoachName(coachNames => {
+      coachNames.forEach(name => this.#coachRepository.addCoach(name));
     });
   }
 }
