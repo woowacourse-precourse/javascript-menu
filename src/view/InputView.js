@@ -27,7 +27,15 @@ const InputView = {
         if(name.length < constants.COACHNAME.MINIMUM  || name.length > constants.COACHNAME.MAXIMUM) {
             throw `[ERROR] 코치의 이름은 최소 ${constants.COACHNAME.MINIMUM}글자 최대 ${constants.COACHNAME.MAXIMUM}글자입니다.`;
         }
-    }
+    },
+
+    readHateFood(coachName, callback) {
+        MissionUtils.Console.readLine(`${coachName}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (answer) => {
+            const foodList = answer.split(',');
+
+            callback(foodList);
+        });
+    },
 }
 
 module.exports = InputView;
