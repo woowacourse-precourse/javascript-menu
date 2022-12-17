@@ -11,7 +11,7 @@ const MenuRecommender = class {
     }, {});
   }
 
-  #personalRecommend(name, hateMenus) {}
+  #personalRecommend(weekCategory, name, hateMenus) {}
 
   #initWeekCategory() {
     const category = [];
@@ -27,8 +27,7 @@ const MenuRecommender = class {
     const duplicatedCount = category.filter(
       (already) => already === selected
     ).length;
-    if (duplicatedCount >= CATEGORY.max) return true;
-    return false;
+    return duplicatedCount >= CATEGORY.max;
   }
 };
 
