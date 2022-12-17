@@ -64,6 +64,14 @@ class RecommendController {
     for (let i = 0; i < 5; i++) {
       this.recommendCategory();
     }
+    this.#coaches.forEach((coach) => {
+      this.#categories.forEach((category) => {
+        const categoryNum = this.#menus.getCategoryNum(category);
+        const categoryMenus = this.#menus.getCategoryMenu(categoryNum);
+        this.insertRecommendToCoach(categoryMenus, coach);
+      });
+    });
+
     this.printResult();
   }
 
@@ -100,18 +108,15 @@ class RecommendController {
 
     if (this.checkValidCategory(category, categoryMenus)) {
       this.#categories.push(category);
-      this.#coaches.forEach((coach) => {
-        this.insertRecommendToCoach(categoryMenus, coach);
-      });
     } else {
       this.recommendCategory();
     }
   }
 
   insertRecommendToCoach(menus, coach) {
-    const menuIndex = menus.map((__, index) => index);
-    const recommendedMenuIndex = Random.shuffle(menuIndex)[0]; //shuffle 이상함..
-    const recommendedMenu = menus[recommendedMenuIndex];
+    const menuIndex = menus.map((__, index) => index + 1);
+    const recommendedMenuIndex = Random.shuffle(menuIndex)[0];
+    const recommendedMenu = menus[recommendedMenuIndex - 1];
 
     if (
       coach.checkCanEatMenu(recommendedMenu) &&

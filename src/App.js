@@ -10,12 +10,10 @@ const SAMPLE = {
 };
 
 class App {
-  static play() {
+  play() {
     const recommendController = new RecommendController(SAMPLE);
     recommendController.inputCoachName();
   }
 }
-
-App.play();
 
 module.exports = App;
