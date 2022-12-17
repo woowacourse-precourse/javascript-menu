@@ -24,20 +24,27 @@ class Recommend {
   makeRecommendCategory() {
     let categories = Object.keys(SAMPLE);
     let rcmCategory = new Array(1).fill(0);
-    let i = 0;
-    while (i < 5) {
-      const category = categories[Random.pickNumberInRange(MIN, MAX) - 1];
-      if (i > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
-        rcmCategory.push(category);
-        i += 1;
-      }
-      if (i == 0) {
-        rcmCategory.push(category);
-        i += 1;
-      }
-    }
+    this.makeRandomCategory(categories, rcmCategory);
     this.#categories = rcmCategory;
     this.#result = this.makeRcmDishes();
+  }
+
+  makeRandomCategory(categories, rcmCategory) {
+    let idx = 0;
+    while (idx < 5) {
+      const category = categories[Random.pickNumberInRange(MIN, MAX) - 1];
+      if (idx > 0 && this.checkDuplicateCategory(rcmCategory, category)) {
+        idx = this.addCategory(rcmCategory, category, idx);
+      }
+      if (idx == 0) {
+        idx = this.addCategory(rcmCategory, category, idx);
+      }
+    }
+  }
+
+  addCategory(rcmCategory, category, idx) {
+    rcmCategory.push(category);
+    return (idx += 1);
   }
 
   checkDuplicateCategory(rcmCategory, category) {
@@ -58,11 +65,20 @@ class Recommend {
 
   checkRcmDishes(idx) {
     let menu = [];
-    let day = 1;
     let idx_menu = [];
+    this.makeIdxMenu(idx_menu);
+    this.makeCoachesMenu(idx, menu, idx_menu);
+    return menu;
+  }
+
+  makeIdxMenu(idx_menu) {
     for (let i = 0; i < MAX; i++) {
       idx_menu.push(i);
     }
+  }
+
+  makeCoachesMenu(idx, menu, idx_menu) {
+    let day = 1;
     while (day <= DAYS) {
       const dishes = SAMPLE[this.#categories[day]].split(", ");
       const dish = dishes[Random.shuffle(idx_menu)[0] - 1];
@@ -74,7 +90,6 @@ class Recommend {
         day += 1;
       }
     }
-    return menu;
   }
 
   checkDuplicatedDish(menu, dish) {
