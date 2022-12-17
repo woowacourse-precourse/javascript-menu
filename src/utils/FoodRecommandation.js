@@ -8,15 +8,6 @@ const CATEGORIES = {
   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 };
 
-const categoryFormatter = (categories) => {
-  const menus = Object.values(categories);
-  return menus.reduce((acc, menu) => {
-    const foods = menu.split(', ');
-    acc.push(foods);
-    return acc;
-  }, []);
-};
-
 const isCourseDuplicateMax = (courseNumbers, number) => {
   if (courseNumbers.filter((courseNumber) => number === courseNumber).length > 1) {
     return true;
@@ -35,27 +26,21 @@ const makeCourseNumbers = () => {
   return courseNumbers;
 };
 
-const getMenu = (recommand, menus, excludeFood) => {
-  let menu = '';
-  while (menu === '') {
-    const menuNumber = Random.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9])[0];
-    const food = recommand + excludeFood;
-    if (!food.includes(menus[menuNumber - 1])) {
-      menu = menus[menuNumber];
-    }
-  }
-  return menu;
-};
+const courseNumbers = makeCourseNumbers();
 
 const recommandFood = (excludeFood) => {
-  const category = categoryFormatter(CATEGORIES);
-  const courseNumbers = makeCourseNumbers();
-  return courseNumbers.reduce((recommand, courseNumber) => {
-    const menus = category[courseNumber - 1];
-    const menu = getMenu(recommand, menus, excludeFood.split(', '));
-    recommand.push(menu);
-    return recommand;
+  const recommand = [];
+  courseNumbers.forEach((courseNumber) => {
+    const menus = Object.values(CATEGORIES)[courseNumber - 1].split(', ');
+    const menuNumber = Random.shuffle([1, 2, 3, 4, 5, 6, 7, 8, 9])[0];
+    const exception = excludeFood + recommand;
+    if (!exception.includes(menus[menuNumber - 1])) {
+      recommand.push(menus[menuNumber - 1]);
+    }
   }, []);
+  return recommand;
 };
 
 module.exports = recommandFood;
+
+// console.log(recommandFood('asdas'));
