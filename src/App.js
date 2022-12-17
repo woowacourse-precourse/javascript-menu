@@ -45,9 +45,14 @@ class App {
     });
   }
 
+  splitMenu(menuInput) {
+    if (menus === "") return [];
+    return menuInput.split(",");
+  }
+
   registBannedMenu(coach, menuInput) {
     Validator.validateBannedMenu(menuInput);
-    const menus = menuInput.split(",");
+    const menus = this.splitMenu(menuInput);
     coach.addBannedMenu(menus);
 
     const nextCoach = this.#coachList.getNextCoach(coach.getName());
