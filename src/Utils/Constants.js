@@ -16,7 +16,9 @@ const MESSAGE = {
 const ERROR = {
   coachCountError: `[ERROR] 코치의 수는 2~5명 입니다.`,
   coachNameLength: `[ERROR] 각 코치의 이름은 2~4글자입니다.`,
-  coachWord: `[ERROR] 공백을 입력하면 안됩니다.`
+  coachWord: `[ERROR] 공백을 입력하면 안됩니다.`,
+  foodCount: `[ERROR] 입력 음식은 2개를 초과하면 안됩니다.`,
+  sameFood: `[ERROR] 같은 음식을 입력하면 안됩니다.`
 };
 
 module.exports = {

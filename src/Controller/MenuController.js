@@ -7,6 +7,7 @@ const FoodCheck = require('../Models/FoodCheck');
 class MenuController {
   coachNames = [];
   index = 0;
+  notFoods = [];
 
   constructor() {
     this.NameCheck = new NameCheck();
@@ -31,22 +32,30 @@ class MenuController {
 
   foodInputStart() {
     if (this.index < this.coachNames.length) {
-      return this.notFoodInput(this.coachNames[this.index]);
+      return this.notFoodInput();
     };
-
-    // return this.setNotFood();
   };
 
-  notFoodInput(eachCoach) {
-    InputView.inputNotFood(eachCoach, food => {
-      this.index += 1;
-      this.foodInputStart();
+  notFoodInput() {
+    InputView.inputNotFood(this.coachNames[this.index], food => {
+      this.foodValidate(this.FoodCheck.validate(food), food);
     });
   };
 
-  // setNotFood() {
+  foodValidate(isValid, food) {
+    if (!isValid) {
+      return this.notFoodInput();
+    };
 
-  // };
+    this.setNotFood(food);
+  };
+
+  setNotFood(food) {
+    this.notFoods.push(food.split(','));
+    Console.print(this.notFoods)
+    this.index += 1;
+    this.foodInputStart();
+  };
 
 
 };
