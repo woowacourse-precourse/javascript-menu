@@ -1,10 +1,20 @@
 const { ERROR_MESSAGE } = require("../utils/constants");
-const { SAMPLE } = require("../utils/Menu");
+const { Console } = require("@woowacourse/mission-utils");
 
 const InputValidation = {
 
     isValidName(nameArr) {
-        console.log(nameArr);
+        try {
+            this.isValidNum(nameArr); //총 인원 유효성 검사
+            this.checkDuplicate(nameArr);
+            nameArr.forEach(name => {
+                this.isValidLength(name);
+            });
+        } catch (err) {
+            Console.print(err.message);
+            return true;
+        }
+        //console.log(nameArr);
         this.isValidNum(nameArr); //총 인원 유효성 검사
         this.checkDuplicate(nameArr);
         nameArr.forEach(name => {

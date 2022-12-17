@@ -28,7 +28,7 @@ class App {
   askName() {
 	InputView.readName((names)=>{
 		const nameList = names.split(',');
-		InputValidation.isValidName(nameList); //유효성 검사
+		if(InputValidation.isValidName(nameList)) return this.askName();	
 		this.nameList = nameList; //코치님 이름 목록 저장해두기
 		this.askMenu(nameList[this.personCnt]);	
 	});
