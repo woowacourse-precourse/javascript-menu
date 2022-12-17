@@ -4,7 +4,7 @@ const {
   checkDislikeCountValid,
   checkDislikeMenuValid,
 } = require("../validator/index");
-const { getCategory } = require("../picker/index");
+const { getCategory, getMenu } = require("../picker/index");
 
 MenuServiceController = class {
   constructor(view, model) {
@@ -81,10 +81,44 @@ MenuServiceController = class {
   }
 
   pickMenu() {
+    const names = this.model.getCoachName();
+    const dislikes = this.model.getCoachDislike();
     const weekCategories = this.model.getWeekCategories();
+    const dislikeHash = new Map();
+    const recommendHash = new Map();
 
-    console.log(weekCategories);
+    dislikes.forEach((d) => dislikeHash.set(d[0], d[1]));
+
+    weekCategories.forEach((weekCategory) => {
+      names.forEach((name) => {
+        const dislikes = dislikeHash.get(name);
+
+        const pick = () => {
+          const menu = getMenu(weekCategory);
+
+          if (dislikes.includes(menu)) return pick();
+
+          dislikeHash.set(
+            name,
+            dislikeHash.has(name) ? [...dislikeHash.get(name), menu] : [menu]
+          );
+
+          recommendHash.set(
+            name,
+            recommendHash.has(name)
+              ? [...recommendHash.get(name), menu]
+              : [menu]
+          );
+        };
+
+        pick();
+      });
+    });
+
+    this.outputResult(dislikeHash, recommendHash);
   }
+
+  outputResult(dislikeHash, recommendHash) {}
 };
 
 module.exports = MenuServiceController;
