@@ -23,6 +23,7 @@ const ERROR_MESSAGES = Object.freeze({
   invalidMemberCount: '[ERROR] 코치는 최소 2명 이상, 최대 5명까지만 입력해야 합니다.\n',
   invalidNameLength: '[ERROR] 코치의 이름은 최소 2글자, 최대 4글자 입력할 수 있습니다.\n',
   invalidUnableToEatMenuLength: '[ERROR] 못 먹는 메뉴는 최대 2개까지만 입력할 수 있습니다.\n',
+  invalidSeparator: '[ERROR] 구분자는 콤마(,)만 사용할 수 있습니다\n',
 });
 
 module.exports = {
