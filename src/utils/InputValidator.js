@@ -8,6 +8,14 @@ const validator = {
     );
   },
 
+  hateMenuValidate(menuArr) {
+    function checkLength(menu) {
+      return 0 <= menu.length && menu.length <= 2;
+    }
+
+    return menuArr.every(checkLength);
+  },
+
   checkNameLength(names) {
     function checkLength(name) {
       return 2 <= name.length && name.length <= 4;
