@@ -1,4 +1,4 @@
-const { MenuConfig } = require('./Config');
+const { MenuConfig } = require('../Config');
 const Recommend = require('./Recommend');
 
 const Category = {

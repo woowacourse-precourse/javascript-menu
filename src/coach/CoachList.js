@@ -1,5 +1,5 @@
 const Coach = require('./Coach');
-const Category = require('./Category');
+const Category = require('../selector/Category');
 
 class CoachList {
   #list = {};

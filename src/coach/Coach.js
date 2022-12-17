@@ -1,4 +1,4 @@
-const Recommend = require('./Recommend');
+const Recommend = require('../selector/Recommend');
 
 class Coach {
   #cannotEat;

@@ -1,4 +1,4 @@
-const CoachList = require('./CoachList');
+const CoachList = require('./coach/CoachList');
 const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
 const { AppConfig, Message } = require('./Config');

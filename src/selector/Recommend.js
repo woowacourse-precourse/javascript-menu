@@ -1,5 +1,5 @@
 const MissionUtils = require('@woowacourse/mission-utils');
-const { MenuConfig } = require('./Config');
+const { MenuConfig } = require('../Config');
 
 const sequenced = (_, idx) => idx + 1;
 
