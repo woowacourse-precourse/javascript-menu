@@ -1,9 +1,13 @@
 const { Random } = require('@woowacourse/mission-utils');
 
 const MenuRandomGenerator = {
-  menuGenerate(menus) {
-    const menusNums = Array.from({ length: menus.length }, (v, i) => i);
-    return menus[Random.shuffle(menusNums)[0]];
+  MENU_COUNT: 9,
+
+  menuGenerate(menuList) {
+    const menuNums = Array.from({ length: 9 }, (v, i) => i);
+    const randomIndex = Random.shuffle(menuNums)[0];
+
+    return menuList[randomIndex];
   },
 };
 

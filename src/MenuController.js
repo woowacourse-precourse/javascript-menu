@@ -41,28 +41,33 @@ class MenuController {
     );
   }
 
-  makeCoach(coachName, menus) {
-    const hateMenu = menus.split(',');
+  makeCoach(coachName, foods) {
+    const hateMenu = foods.split(',');
     Validation.checkHateMenu(hateMenu);
     this.#coachs.push(new Coach(coachName, hateMenu));
   }
 
   getRandomCategory() {
+    const menuKeys = Object.keys(this.#menus);
+
     for (let i = 0; i < 5; i++) {
-      let category = categoryGenerate(Object.keys(this.#menus));
+      let category = categoryGenerate(menuKeys);
+      console.log(category);
       while (this.#categories.filter((el) => category === el).length == 2) {
-        category = categoryGenerate(Object.keys(this.#menus));
+        category = categoryGenerate(menuKeys);
       }
       this.#categories.push(category);
     }
+    console.log(this.#categories);
     return this.recommendMenu();
   }
 
-  recommendCoachMenu(menus) {
+  recommendCoachMenu(menuList) {
     for (const coach of this.#coachs) {
-      let menu = menuGenerate(menus);
+      console.log(coach.name);
+      let menu = menuGenerate(menuList);
       while (!coach.checkMenu(menu)) {
-        menu = menuGenerate(menus);
+        menu = menuGenerate(menuList);
       }
       coach.recommendedMenu.push(menu);
     }
@@ -70,8 +75,8 @@ class MenuController {
 
   recommendMenu() {
     for (const category of this.#categories) {
-      const menus = this.#menus[category];
-      this.recommendCoachMenu(menus);
+      const menuList = this.#menus[category];
+      this.recommendCoachMenu(menuList);
     }
     OutputView.printEndMessage(this.#categories, this.#coachs);
   }
