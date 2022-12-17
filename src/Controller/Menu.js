@@ -15,9 +15,10 @@ class Menu {
   handleCoachNames = (name) => {
     const error = CoachValidation.validateCoach(name)
     if (error) return this.getCoachNames();
-    // this.#coachNames = name.split(",").map((name) => {
-    //   return name;
-    // });
+    this.#coachNames = name.split(",").map((name) => {
+      return name;
+    });
+    console.log(this.#coachNames)
   };
 }
 
