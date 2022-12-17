@@ -2,8 +2,9 @@ const Console = require('./utils/Console');
 
 const OutputView = {
   printResult(userName, menus) {
+    const array = [];
     const menu = userName.map((value, index) =>
-      menus.filter((v, i) => (v = v[index]))
+      menus.filter((v, i) => array.push(v[index]))
     );
 
     Console.print(
@@ -12,7 +13,12 @@ const OutputView = {
       `[카테고리 | 한식 | 한식 | 일식 | 중식 | 아시안 ]`
     );
 
-    Console.print(`[ ${userName[0]} ${menu[0].join(' | ')}]`);
+    Console.print(
+      `[ ${userName[0]}| ${array
+        .splice('')
+        .slice(0, menus.length)
+        .join(' | ')}]`
+    );
     Console.print(`\n추천을 완료했습니다.`);
   },
 };
