@@ -13,4 +13,8 @@ const combineCoachMenu = (coach, menu) => {
   return menu;
 };
 
-module.exports = { convertCategory, combineCoachMenu };
+const joinResultMessage = (arr) => {
+  return '[ ' + `${arr.join(' | ')}` + ' ]';
+};
+
+module.exports = { convertCategory, combineCoachMenu, joinResultMessage };
