@@ -25,5 +25,3 @@ app.play();
 
 module.exports = App;
 module.exports = SAMPLE;
-
-// console.log(SAMPLE['일식'].split(', '));

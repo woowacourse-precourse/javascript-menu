@@ -38,11 +38,24 @@ class Category {
         count++;
       }
     }
-    // console.log(this.categories);
-    // return this.categories;
+  }
+
+  static getCategoryName(categoryIndex) {
+    if (categoryIndex === 1) {
+      return '일식';
+    }
+    if (categoryIndex === 2) {
+      return '한식';
+    }
+    if (categoryIndex === 3) {
+      return '중식';
+    }
+    return categoryIndex === 4 ? '아시안' : '양식';
+  }
+
+  static toString() {
+    const names = this.categories.map(this.getCategoryName);
+    return names.join(' | ');
   }
 }
 module.exports = Category;
-
-// Category.init();
-// Category.pickCategory();

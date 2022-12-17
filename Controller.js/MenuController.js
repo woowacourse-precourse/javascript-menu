@@ -84,12 +84,13 @@ class MenuController {
       );
       Coach.setMenu(coachName, recommendMenu);
     }
-
-    this.showCoach();
+    this.showResult();
   }
 
-  showCoach() {
-    Coach.showCoach();
+  showResult() {
+    const coaches = Coach.toString();
+    const category = Category.toString();
+    OutputView.printResult(coaches, category);
   }
 }
 

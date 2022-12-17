@@ -41,9 +41,9 @@ class Coach {
     this.#coaches.set(name, foodSet);
   }
 
-  static showCoach() {
-    return this.#coaches;
-  }
+  // static showCoach() {
+  //   console.log(this.#coaches);
+  // }
 
   static people() {
     return this.#coaches;
@@ -51,6 +51,14 @@ class Coach {
 
   static setMenu(coachName, menus) {
     this.#coaches.set(coachName, menus);
+  }
+
+  static toString() {
+    const strings = [];
+    for (const [name, datas] of this.#coaches) {
+      strings.push([name, ...datas].join(' | '));
+    }
+    return strings;
   }
 }
 
