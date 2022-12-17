@@ -15,7 +15,7 @@ class App {
     this.input = new InputUI();
     this.coachs = [];
     this.dislikeIdx = 0;
-    this.recommends = [];
+    this.recommendCategory = [];
     this.categoryCounts = [0, 0, 0, 0, 0, 0];
   }
   play() {
@@ -45,7 +45,10 @@ class App {
 
   inputCoachsDislikeFood() {
     if (this.dislikeIdx > this.coachs.length - 1) {
-      this.selectMenuByDay();
+      for (let i = 0; i < 5; i++) {
+        this.selectMenuByDay();
+      }
+      this.showResult();
       return;
     }
     this.input.readLine(
@@ -74,15 +77,16 @@ class App {
     const category = categoryTable[categoryNumber];
     // 카테고리 음식 전체 구해오기
     const [...foodList] = MENUS[category];
-
+    this.recommendCategory.push(category);
     this.coachs.forEach((coach) => {
       const recommendedMenu = this.recommendByCoach(foodList, coach);
       coach.ateFoods.push(new Food(recommendedMenu, category));
     });
+    return;
   }
 
   selectCategory() {
-    while (1) {
+    while (true) {
       const category = Random.pickNumberInRange(1, 5);
       if (!this.categoryCounts[category] <= 2) {
         this.categoryCounts[category]++;
@@ -94,7 +98,7 @@ class App {
   recommendByCoach(foodList, coach) {
     const [...totalFoodList] = foodList;
     let selectFood = Random.shuffle(totalFoodList)[0];
-    while (1) {
+    while (true) {
       if (coach.dislikeFoods.some((food) => food.name === selectFood)) {
         selectFood = Random.shuffle(totalFoodList)[0];
         continue;
@@ -106,6 +110,20 @@ class App {
       break;
     }
     return selectFood;
+  }
+
+  showResult() {
+    this.output.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    this.output.print(this.makeCategoryResult());
+  }
+
+  makeCategoryResult() {
+    let result = '[ 카테고리 ';
+    this.recommendCategory.forEach((category) => {
+      result += `| ${category} `;
+    });
+    result += ']';
+    return result;
   }
 }
 
