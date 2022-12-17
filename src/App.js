@@ -56,7 +56,7 @@ class App {
         this.#coaches[coachLength].setUnableFood(findFoodLocation(input));
         if (coachLength < this.#coaches.length - 1)
           return this.unableEatCheckStart(coachLength + 1);
-        return this.suggestMenu();
+        return this.mondaySuggest();
       } catch (error) {
         console.log(error);
         if (error.message === 'No Food') OutputView.ErrorNoMenu();
@@ -66,8 +66,39 @@ class App {
     });
   }
 
-  suggestMenu() {
-    console.log('메뉴 추천을 시작해볼까');
+  mondaySuggest() {
+    this.#coaches.forEach((coach) => {
+      coach.suggestMenu(this.#foodCategory[0]);
+    });
+    return this.tuesdaySuggest();
+  }
+
+  tuesdaySuggest() {
+    this.#coaches.forEach((coach) => {
+      coach.suggestMenu(this.#foodCategory[1]);
+    });
+    return this.wednesdaySuggest();
+  }
+
+  wednesdaySuggest() {
+    this.#coaches.forEach((coach) => {
+      coach.suggestMenu(this.#foodCategory[2]);
+    });
+    return this.thursdaySuggest();
+  }
+
+  thursdaySuggest() {
+    this.#coaches.forEach((coach) => {
+      coach.suggestMenu(this.#foodCategory[3]);
+    });
+    return this.fridaySuggest();
+  }
+
+  fridaySuggest() {
+    this.#coaches.forEach((coach) => {
+      coach.suggestMenu(this.#foodCategory[4]);
+    });
+    console.log(this.#foodCategory);
   }
 }
 
