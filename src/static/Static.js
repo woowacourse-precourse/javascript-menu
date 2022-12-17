@@ -4,6 +4,8 @@ const ErrorMsg = Object.freeze({
   UNLIKE_MENU_COUNT: "[ERROR] 못 먹는 메뉴는 0개에서 2개만 가능합니다.",
   MENU_NOT_EXIST: "[ERROR] 존재하지 않는 메뉴입니다.",
   CATEGORY_NOT_EXIST: "[ERROR] 존재하지 않는 카테고리입니다.",
+  CATEGORY_COUNT: "[ERROR] 카테고리의 수가 유효하지 않습니다.",
+  MENU_COUNT: "[ERROR] 메뉴의 수가 유효하지 않습니다.",
 });
 
 const AllMenu = Object.freeze({
@@ -70,8 +72,8 @@ const StaticValues = Object.freeze({
   EAT_TOGETHER_COUNT_MIN: 2,
   EAT_TOGETHER_COUNT_MAX: 5,
   EAT_TOGHTHER_DAYS: 5,
-  CAN_DUPLICATE_CATEGORIES: 2,
-  CAN_DUPLICATE_UNLIKE_MENUS: 2,
+  CAN_DUPLICATE_CATEGORIE_COUNT: 2,
+  CAN_INPUT_UNLIKE_MENU_COUNT: 2,
   COACH_NAME_LENGTH_MIN: 2,
   COACH_NAME_LENGTH_MAX: 4,
   CATEGORY_RANGE_START: 1,

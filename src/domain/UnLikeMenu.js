@@ -12,7 +12,7 @@ class UnLikeMenu {
   }
 
   validate(menus) {
-    if (menus.length > StaticValues.CAN_DUPLICATE_UNLIKE_MENUS)
+    if (menus.length > StaticValues.CAN_INPUT_UNLIKE_MENU_COUNT)
       throw new Error(ErrorMsg.UNLIKE_MENU_COUNT);
     menus.forEach((m) => {
       if (!SearchMenu.getIsMenuExist(m))

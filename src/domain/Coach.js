@@ -16,7 +16,7 @@ class Coach {
   validate(name) {
     if (
       name.length < StaticValues.COACH_NAME_LENGTH_MIN ||
-      name.length > StaticValues.EAT_TOGETHER_COUNT_MAX
+      name.length > StaticValues.COACH_NAME_LENGTH_MAX
     )
       throw new Error(ErrorMsg.COACH_NAME);
   }

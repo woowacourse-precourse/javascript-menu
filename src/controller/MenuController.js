@@ -70,7 +70,7 @@ class MenuController {
 
       if (
         category.filter((v) => v === newCategory).length <
-        StaticValues.CAN_DUPLICATE_CATEGORIES
+        StaticValues.CAN_DUPLICATE_CATEGORIE_COUNT
       )
         category.push(newCategory);
     }
