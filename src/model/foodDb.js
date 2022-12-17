@@ -23,15 +23,16 @@ class FoodDB {
 
     return food;
   }
+
   getAllMenus() {
     const allMenus = [];
-    const foodValues = Object.values(food);
+    const foodValues = Object.values(rawFood);
 
     foodValues.forEach((value) => {
       const trimmed = value.split(",").map((v) => v.trim());
       allMenus.push(...trimmed);
     });
-
+    console.log(allMenus);
     return allMenus;
   }
 }
