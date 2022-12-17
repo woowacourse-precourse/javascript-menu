@@ -1,14 +1,15 @@
 const InValidInputError = require("../error/InValidInputError");
 const ERROR_MESSAGE = require("../error/error.constants");
-const { makeCategory } = require("../utils/CategoryMaker");
+const MENU_LIST = require("../constants/menu.constants");
+const { getRandomMenu } = require("../utils/CategoryMaker");
 
 class CouchMenu {
-  #couchName;
+  #coachName;
   #notWantMenu;
-  #menuList;
+  #menuList = [];
 
   constructor(name, notWantMenu) {
-    this.#couchName = name;
+    this.#coachName = name;
     const notWantMenuList = notWantMenu.split(",");
     if (this.#isValidNotWantMenu(notWantMenuList))
       this.#notWantMenu = notWantMenuList;
@@ -18,11 +19,9 @@ class CouchMenu {
     if (!condition) throw new InValidInputError(message);
     return true;
   }
-
   #isValidNotWantMenu(notWantMenuList) {
     return this.#isValidMenuNum(notWantMenuList);
   }
-
   #isValidMenuNum(menuList) {
     return this.#baseValidate(
       menuList.length <= 2,
@@ -30,8 +29,29 @@ class CouchMenu {
     );
   }
 
+  #filterCategory(category) {
+    switch (category) {
+      case 1:
+        return "일식";
+      case 2:
+        return "한식";
+      case 3:
+        return "중식";
+      case 4:
+        return "아시안";
+      case 5:
+        return "양식";
+      default:
+        throw new Error("없는 카테고리입니다.");
+    }
+  }
+
   getNotWantMenu() {
     return this.#notWantMenu;
+  }
+
+  getMenus() {
+    return this.#menuList;
   }
 }
 
