@@ -1,4 +1,5 @@
 const ERROR_MESSAGE = Object.freeze({
+  DUPLICATED_COACH_NAME: "코치의 이름은 중복될 수 없습니다.",
   ERROR_PREFIX: "[ERROR]",
   INVALID_COUCH_NAME: "코치의 이름은 2 ~ 4글자입니다.",
   INVALID_COUCH_NUM: "코치는 최소 2명, 최대 5명까지 식사를 함께 해야합니다.",
