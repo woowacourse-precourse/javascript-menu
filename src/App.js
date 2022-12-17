@@ -69,6 +69,18 @@ class App {
     this.inputCoachsDislikeFood();
   }
 
+  selectMenuByDay() {
+    const categoryNumber = this.selectCategory();
+    const category = categoryTable[categoryNumber];
+    // 카테고리 음식 전체 구해오기
+    const [...foodList] = MENUS[category];
+
+    this.coachs.forEach((coach) => {
+      const recommendedMenu = this.recommendByCoach(foodList, coach);
+      coach.ateFoods.push(new Food(recommendedMenu, category));
+    });
+  }
+
   selectCategory() {
     while (1) {
       const category = Randoms.pickNumberInRange(1, 5);
@@ -77,6 +89,27 @@ class App {
         return category;
       }
     }
+  }
+
+  recommendByCoach(foodList, coach) {
+    let [...totalFoodList] = foodList;
+    // 못 먹는 음식 빼기
+    coach.dislikeFoods.forEach((food) => {
+      if (totalFoodList.includes(food.name)) {
+        const idx = totalFoodList.indexOf(food.name);
+        totalFoodList.splice(idx, 1);
+      }
+    });
+    // 먹었던 메뉴 빼기
+    coach.ateFoods.forEach((food) => {
+      if (totalFoodList.includes(food.name)) {
+        const idx = totalFoodList.indexOf(food.name);
+        totalFoodList.splice(idx, 1);
+      }
+    });
+
+    // 메뉴 선택
+    return Randoms.shuffle(totalFoodList)[0];
   }
 }
 
