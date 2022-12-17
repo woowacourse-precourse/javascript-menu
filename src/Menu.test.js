@@ -24,4 +24,10 @@ describe("Input_test", () => {
             Input.nameValidate(["aaa", "bbbbb"]);
         }).toThrow("[ERROR]")
     })
+
+    test("NotEatValidate_못먹는 음식 숫자가 많을 때", () => {
+        expect(() => {
+            Input.NotEatValidate(["aaa", "bbbb", "ccc"]);
+        }).toThrow("[ERROR]")
+    })
 })
