@@ -67,14 +67,12 @@ class App {
   inputDislikeFoodByCoach(input) {
     const inputFoods = InputProcessor.parseCommaStringsToArray(input);
 
-    // 개수가 올바른지 판단하기
     try {
       checkValid(inputFoods, isValidDislikeFoodsLength, ERROR.NOT_VALID);
     } catch (error) {
       this.output.print(error.message);
       this.inputCoachsDislikeFood();
     }
-    // 올바르다면
     inputFoods.forEach((food) => {
       const category = MenuUtil.findCategoryByFoodName(food);
       this.coachs[this.dislikeIdx].dislikeFoods.push(new Food(food, category));
@@ -85,7 +83,6 @@ class App {
   }
 
   selectMenuByCategory(category, coach) {
-    // 카테고리 음식 전체 구해오기
     const [...foodList] = MENUS[category];
     const recommendedMenu = this.recommendByCoach(foodList, coach);
     coach.ateFoods.push(new Food(recommendedMenu, category));
