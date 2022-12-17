@@ -11,7 +11,6 @@ class CoachDiet {
     this.#menu = [];
   }
 
-  // setName(name) {}
   getName() {
     return this.#name;
   }
