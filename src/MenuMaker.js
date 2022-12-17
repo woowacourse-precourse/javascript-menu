@@ -7,29 +7,38 @@ class MenuMaker {
   }
 
   creatMenu() {
-    return this.selectMenu(this.SAMPLE, this.randomCategories());
+    return this.selectMenu(this.SAMPLE, this.userName, this.randomCategories());
   }
 
-  selectMenu(SAMPLE, select) {
+  selectMenu(SAMPLE, userName, select) {
     if (select === 1) {
-      return this.mixMenu(SAMPLE.일식);
+      return this.mixMenu(SAMPLE.일식, userName);
     }
     if (select === 2) {
-      return this.mixMenu(SAMPLE.한식);
+      return this.mixMenu(SAMPLE.한식, userName);
     }
     if (select === 3) {
-      return this.mixMenu(SAMPLE.중식);
+      return this.mixMenu(SAMPLE.중식, userName);
     }
     if (select === 4) {
-      return this.mixMenu(SAMPLE.아시)안;
+      return this.mixMenu(SAMPLE.아시안, userName);
     }
     if (select === 5) {
-      return this.mixMenu(SAMPLE.양식);
+      return this.mixMenu(SAMPLE.양식, userName);
     }
   }
 
-  mixMenu(menus) {
-    return MissionUtils.Randoms.shuffle(menus)[0];
+  mixMenu(menus, userName) {
+    const splitMenus = menus.replace(/ /g, '').split(',');
+
+    const array = menus
+      .replace(/ /g, '')
+      .split(',')
+      .map((v, i) => i);
+
+    return userName.map(
+      value => (value = splitMenus[MissionUtils.Random.shuffle(array)[0]])
+    );
   }
 
   setSAMPLE(SAMPLE) {
@@ -41,7 +50,7 @@ class MenuMaker {
   }
 
   randomCategories() {
-    return MissionUtils.Randoms.pickNumberInRange(1, 5);
+    return MissionUtils.Random.pickNumberInRange(1, 5);
   }
 }
 module.exports = MenuMaker;

@@ -34,7 +34,7 @@ class MenuController {
         return this.progressSelectMenu();
       }
 
-      this.menuGame.setMenu([menu]);
+      this.menuGame.setMenu(menu);
       this.menuGame.increseUserCount();
       return this.menuGame.progressMenu();
     });
