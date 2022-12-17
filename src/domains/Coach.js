@@ -17,6 +17,10 @@ class Coach {
       throw new AppValidationError('코치의 이름은 최소 2글자, 최대 4글자여야 합니다.');
     }
   }
+
+  getName() {
+    return this.#name;
+  }
 }
 
 module.exports = Coach;
