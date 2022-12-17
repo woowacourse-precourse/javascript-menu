@@ -16,4 +16,22 @@ describe("MenuManager 클래스 테스트", () => {
     expect(thirdCoach.getName()).toEqual("정훈");
     expect(forthCoach).toBeFalsy();
   });
+
+  test("코치들의 메뉴 가져오기 테스트", () => {
+    const firstCoach = new Coach("정균");
+    firstCoach.addMenu("삼겹살");
+    firstCoach.addMenu("떡볶이");
+
+    const secondCoach = new Coach("정수");
+    secondCoach.addMenu("김밥");
+    secondCoach.addMenu("스파게티");
+
+    const menuManager = new MenuManager([firstCoach, secondCoach]);
+    const menusByCoaches = menuManager.getMenusByCoaches();
+
+    expect(menusByCoaches).toEqual([
+      { name: "정균", menus: ["삼겹살", "떡볶이"] },
+      { name: "정수", menus: ["김밥", "스파게티"] },
+    ]);
+  });
 });
