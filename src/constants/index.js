@@ -47,6 +47,5 @@ module.exports = {
   GAME_MESSAGE,
   ERROR_MESSAGE,
   VALIDATION_MESSAGE,
-  REGEX,
   SPACE,
 };

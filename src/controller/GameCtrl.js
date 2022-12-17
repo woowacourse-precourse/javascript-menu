@@ -11,7 +11,9 @@ class GameCtrl extends IGameCtrl {
     }
   }
 
-  start() {}
+  start() {
+    this.view.printStartMessage();
+  }
 
   gameProcess() {}
 
