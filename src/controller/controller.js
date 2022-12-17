@@ -14,7 +14,7 @@ class Controller {
   }
 
   play() {
-    this.view.showServiceStat();
+    this.view.showServiceStart();
     this.view.getCoaches((coaches) => {
       this.createCoach(coaches);
       this.askHates();
@@ -37,9 +37,6 @@ class Controller {
   }
 
   createRecommends() {
-    /**
-     * recommands = [[5][5][5][5][5]]
-     */
     const recommands =  this.service.weeklyRecommend(this.coaches);
 
     this.view.showRecommands(recommands);
