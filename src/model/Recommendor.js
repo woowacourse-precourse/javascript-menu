@@ -46,14 +46,15 @@ class Recommendor {
 
       while (recommendedMenusPerCoach.length !== CATEGORY_LENGTH) {
         const MENU_ORDER = RandomShuffler.shuffle();
+        // console.log(this.#categories[recommendedMenusPerCoach.length]);
+        // console.log(this.#allMenus[0][1]);
+        let category =
+          Number(this.#categories[recommendedMenusPerCoach.length]) - 1;
 
         // 메뉴를 못 먹는 경우 다시 shuffle
         if (
-          this.#hateMenus[index].includes(
-            this.#allMenus[this.#categories[recommendedMenusPerCoach.length]][
-              MENU_ORDER
-            ]
-          )
+          this.#hateMenus[index].length !== ZERO &&
+          this.#hateMenus[index].includes(this.#allMenus[category][MENU_ORDER])
         ) {
           continue;
         }
@@ -62,19 +63,13 @@ class Recommendor {
         if (
           recommendedMenusPerCoach.length !== ZERO &&
           recommendedMenusPerCoach.includes(
-            this.#allMenus[this.#categories[recommendedMenusPerCoach.length]][
-              MENU_ORDER
-            ]
+            this.#allMenus[category][MENU_ORDER]
           )
         ) {
           continue;
         }
 
-        recommendedMenusPerCoach.push(
-          this.#allMenus[this.#categories[recommendedMenusPerCoach.length]][
-            MENU_ORDER
-          ]
-        );
+        recommendedMenusPerCoach.push(this.#allMenus[category][MENU_ORDER]);
       }
 
       this.#recommendedMenus.push(recommendedMenusPerCoach);
