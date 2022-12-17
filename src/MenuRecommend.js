@@ -1,4 +1,3 @@
-const {Random} = require("@woowacourse/mission-utils")
 const MakeRandomCategory = require("./MakeRandomCategory")
 
 class MenuRecommend {
