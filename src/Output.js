@@ -19,12 +19,12 @@ const Output = {
 
     endHead() {
         Console.print(MESSAGE.END_SECOND);
+        Console.close();
     },
 
     Error(message) {
         Console.print(message);
     },
 }
-
 
 module.exports = Output;
