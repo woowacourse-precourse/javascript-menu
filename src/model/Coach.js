@@ -1,5 +1,3 @@
-const { RESULT } = require('../util/constants/string');
-
 class Coach {
   #name;
   #inedible = [];
@@ -28,8 +26,14 @@ class Coach {
   addMenu(menu) {
     this.#recommendation.push(menu);
     this.checkDeleteInedibleMenu(this.#recommendation, this.#inedible);
+    this.checkDeleteDuplicate(this.#recommendation);
   }
 
+  checkDeleteDuplicate(recommendation) {
+    const recommendationSet = new Set(recommendation);
+    const recommendationArray = Array.from(recommendationSet);
+    this.#recommendation = recommendationArray;
+  }
   checkDeleteInedibleMenu(recommendation, inedible) {
     const inedibleDeleted = recommendation.filter(
       (menu) => !inedible.includes(menu)

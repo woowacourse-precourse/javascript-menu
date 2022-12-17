@@ -37,7 +37,7 @@ class MenuRecommender {
   getRecommendationCategories() {
     const categories = [];
     while (categories.length < NUMBER.weekDays) {
-      const category = this.getRandomCategory();
+      const category = CATEGORY[randomGenerator.generateRandomCategoryNumber()];
       if (!categories.includes(category)) {
         categories.push(category);
       }
@@ -48,7 +48,9 @@ class MenuRecommender {
   getRecommendationMenus() {
     const indexArray = this.#categories.map((item) => CATEGORY.indexOf(item));
     this.#coaches.forEach((coach) => {
-      indexArray.forEach((index) => coach.addMenu(this.getRandomMenu(index)));
+      indexArray.forEach((index) => {
+        coach.addMenu(this.getRandomMenu(index));
+      });
     });
   }
 }
