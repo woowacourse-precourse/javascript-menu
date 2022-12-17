@@ -2,8 +2,10 @@ class Menu {
   #recommendedCategoryList
 
   constructor(){
-
+    this.#recommendedCategoryList = [];  
   }
+
+  
 
 }
 
