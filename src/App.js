@@ -10,7 +10,8 @@ const SAMPLE = {
 
 class App {
   play() {
-    LunchMenu.start();
+    const LUNCH = new LunchMenu();
+    LUNCH.start();
   }
 }
 const app = new App();
