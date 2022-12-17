@@ -24,6 +24,10 @@ class Coach {
     return this.#unLikeMenu.getUnLikeMenu();
   }
 
+  getRecommendMenu() {
+    return this.#recommendMenu.getRecommendMenu();
+  }
+
   getName() {
     return this.#name;
   }

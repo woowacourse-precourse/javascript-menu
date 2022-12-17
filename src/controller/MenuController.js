@@ -1,7 +1,7 @@
 const Category = require("../domain/Category");
 const Coach = require("../domain/Coach");
-const { AllCategory } = require("../static/Static");
-const RandomNumberGenerator = require("../utils/Utils");
+const { AllCategory, AllMenu } = require("../static/Static");
+const RandomNumberGenerator = require("../utils/RandomNumber");
 const InputView = require("../view/InputView");
 const OutputView = require("../view/OutputView");
 
@@ -34,10 +34,11 @@ class MenuController {
   }
 
   inputUnLikeMenu(index) {
+    if (index === this.#coachs.length) return this.recommendMenu();
     InputView.readUnLikeMenu((input) => {
       this.#coachs[index].setUnLikeMenu(input);
 
-      if (index < this.#coachs.length - 1) this.inputUnLikeMenu(index + 1);
+      this.inputUnLikeMenu(index + 1);
     }, this.#coachs[index].getName());
   }
 
@@ -53,6 +54,41 @@ class MenuController {
 
     this.#category = new Category(category);
   }
+
+  recommendMenu() {
+    const category = this.#category.getCategory();
+
+    this.#coachs.forEach((coach) => {
+      const unLikeMenu = coach.getUnLikeMenu();
+      const recommendMenu = [];
+      let index = 0;
+
+      while (recommendMenu.length < 5) {
+        const todayCategoryMenu =
+          AllMenu[category[index]][
+            RandomNumberGenerator.suffle(
+              Array(AllMenu[category[index]].length)
+                .fill(0)
+                .map((v, i) => i)
+            )[0]
+          ];
+
+        if (
+          !unLikeMenu.includes(todayCategoryMenu) &&
+          !recommendMenu.includes(todayCategoryMenu)
+        ) {
+          recommendMenu.push(todayCategoryMenu);
+          index++;
+        }
+      }
+
+      coach.setRecommendMenu(recommendMenu);
+    });
+
+    this.printResult();
+  }
+
+  printResult() {}
 }
 
 module.exports = MenuController;
