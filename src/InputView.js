@@ -2,8 +2,10 @@ const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('./modules/Constants');
 const Validation = require('./modules/Validation');
 const CoachDiet = require('./CoachDiet');
+const { RandomCategoryGenerator, CategoriesGenerator } = require('./RandomGenerator');
 
 const coachDietList = [];
+const categoryListOfWeek = [];
 
 const InputView = {
   readCoachesName() {
@@ -29,7 +31,8 @@ const InputView = {
         coachDietList[idx].setImpossibles(foods);
         console.log(coachDietList[idx].getImpossibles());
         if (idx === coachDietList.length - 1) {
-          console.log('end');
+          const categoryListOfWeek = CategoriesGenerator();
+          console.log(categoryListOfWeek);
           return;
         }
         this.readImpossibleFoods(coachDietList[idx + 1].getName(), idx + 1);
