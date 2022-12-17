@@ -44,7 +44,7 @@ class Menu {
 
   validateNotEat(foods) {
     try {
-      if (this.#cotchIndex == this.#cotchs.length) return this.makeCotchsSet();
+      if (this.#cotchIndex == this.#cotchs.length) return this.makeCotchsSet(this.#cotchs);
       new NotEatValidator(foods);
       Console.print('');
       this.inputNotEat();
@@ -91,9 +91,8 @@ class Menu {
   }
 
   result() {
-    console.log(this.#cotchsCategory);
-    // OutputView.printResult();
-    // OutputView.printDay();
+    OutputView.printResult();
+    OutputView.printDay();
   }
 
   play() {
