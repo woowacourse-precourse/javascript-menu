@@ -120,7 +120,9 @@ function recommendMenu(idx) {
 }
 
 function pushCategory(category) {
-  const categoryCnt = Categories.filter(element => element === category).length
+  const categoryCnt = Categories
+    .filter(element => element === category)
+    .length
   if(categoryCnt < 2) Categories.push(category)
 }
 
