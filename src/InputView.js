@@ -20,13 +20,13 @@ const InputView = {
     },
 
     validateNames(names){
-        const names_split = names.split(',');
-        if (names_split.length < 2 || names_split.length > 5){
+        const nameSplit = names.split(',');
+        if (nameSplit.length < 2 || nameSplit.length > 5){
             this.errorHandling("[ERROR] 인원은 2~5명이여야 합니다.\n");
             return false;
         }
         
-        for(let name of names_split){
+        for(let name of nameSplit){
             if(!this.validateName(name)) return false;
         }
 
@@ -34,7 +34,8 @@ const InputView = {
     },
 
     validateMenu(menus){
-        if (menus.length < 0 || menus.length > 2){
+        const menuSplit = menus.split(',');
+        if (menuSplit.length < 0 || menuSplit.length > 2){
             this.errorHandling("[ERROR] 못먹는 메뉴는 0~2개여야 합니다.\n");
             return false;
         }

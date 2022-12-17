@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const {Console} = MissionUtils;
 
 const InputView = require("./InputView.js");
+const Recommend = require("./Recommend.js");
 
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
@@ -13,23 +14,48 @@ const SAMPLE = {
 };
 
 class App {
-  play() {
-	Console.print("점심 메뉴 추천을 시작합니다.\n");
-	this.inputName();
-  }
+	#recommend;
+	#inputIter;
 
-  inputName(){
-	Console.readLine(`코치의 이름을 입력해 주세요. (, 로 구분)\n`, (input)=>{
-		if(!InputView.validateNames(input)){
-			this.inputName();
-			return;
-		}
-	});
+	play() {
+		Console.print("점심 메뉴 추천을 시작합니다.\n");
+		this.#inputIter = 0;
+		this.inputName();
+	}
 
-	this.inputMenu();
-  }
+	inputName(){
+		Console.readLine(`코치의 이름을 입력해 주세요. (, 로 구분)\n`, (names)=>{
+			if(!InputView.validateNames(names)){
+				this.inputName();
+				return;
+			}
 
-  coach();
+			this.#recommend = new Recommend(names);
+			Console.print(this.#recommend.getCoach());
+			this.inputMenu();
+		});
+	}
+
+	inputMenu(){
+		let name = Object.keys(this.#recommend.getCoach())[this.#inputIter];
+		Console.readLine(`\n${name}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (menus)=>{	
+			if(!InputView.validateMenu(menus)){
+				this.inputMenu();
+				return;
+			}
+			
+			this.#recommend.setMenus(name, menus);
+
+			this.#inputIter++;
+			if (Object.keys(this.#recommend.getCoach()).length > this.#inputIter) this.inputMenu();
+			else this.recommend();
+		});
+	}
+
+	recommend(){
+		Console.print("\n메뉴 추천 결과입니다.\n");
+		Console.print(this.#recommend.getCoach());
+	}
 }
 
 const app = new App();
