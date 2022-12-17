@@ -86,6 +86,7 @@ class App {
 
   getOnlyFood(coach) {
     const menu = coach.getMenuLength();
+    const food = getFood(this.#category[menu]);
     if (coach.compareFood(this.#category[menu])) {
       coach.addFoodtoMenu(this.#category[menu], food);
     }
@@ -97,7 +98,7 @@ class App {
 
   endGame() {
     const resultLines = this.getResultLines();
-    const categories = `[ ${this.#category.join(RESULT.divider)} ]`;
+    const categories = `[ 카테고리 | ${this.#category.join(RESULT.divider)} ]`;
     printResult(resultLines, categories);
     Console.close();
   }
