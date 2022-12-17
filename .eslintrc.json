@@ -378,7 +378,7 @@
     "max-lines-per-function": [
       "warn",
       {
-        "max": 10
+        "max": 15
       }
     ]
   }
