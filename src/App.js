@@ -17,18 +17,19 @@ const SAMPLE = {
 };
 
 class App {
-  #coaches;
+  #coaches = [];
 
   getCoachName() {
-    readCoachName(actWithCoachName.bind(this));
+    readCoachName(this.actWithCoachName.bind(this));
   }
 
   actWithCoachName(nameInput) {
     const names = nameInput.split(",");
+    console.log(names);
     try {
       validateCoachNumber(names);
       this.makeEachCoachField(names);
-      askPickyFoods();
+      this.askPickyFoods();
     } catch (e) {
       print(e);
       this.getCoachName();
@@ -48,28 +49,29 @@ class App {
   }
 
   askPickyFoods() {
-    this.#coaches.forEach((coach) => {
-      const name = coach.getName();
-      this.getPickyFoods(name);
-    });
+    this.getPickyFoods(this.#coaches[0]);
   }
 
   getPickyFoods(coach) {
-    readCoachPickyFoods(coach, actWithPickyFood.bind(this));
+    readCoachPickyFoods(coach, this.actWithPickyFoods.bind(this));
   }
 
   actWithPickyFoods(coach, foods) {
-    const pikcyFoods = foods.split(",");
+    const pickyFoods = foods.split(",");
+    console.log(pickyFoods);
     try {
-      validatePickyFoods(pikcyFoods);
-      coach.setPickyFoods(pikcyFoods);
+      validatePickyFoods(pickyFoods);
+      coach.setPickyFoods(pickyFoods);
     } catch (e) {
       print(e);
-      this.getPickFoods(coach);
+      this.getPickyFoods(coach);
     }
   }
 
-  play() {}
+  play() {
+    this.getCoachName();
+  }
 }
 
+new App().play();
 module.exports = App;

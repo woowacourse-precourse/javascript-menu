@@ -2,7 +2,7 @@ const { ERROR_MESSAGE, NUMBER } = require("./Constant");
 
 const Validation = {
   validateNameLength(name) {
-    if (Validation.isNameLengthTwoToFour(name)) {
+    if (!Validation.isNameLengthTwoToFour(name)) {
       throw new Error(ERROR_MESSAGE.notValidNameLength);
     }
   },
@@ -14,7 +14,7 @@ const Validation = {
   },
 
   validateCoachNumber(coaches) {
-    if (Validation.isCoachesInRange(coaches)) {
+    if (!Validation.isCoachesInRange(coaches)) {
       throw new Error(ERROR_MESSAGE.notValidCoachNumber);
     }
   },
@@ -27,7 +27,7 @@ const Validation = {
   },
 
   validatePickyFoods(foods) {
-    if (Validation.isFoodNumberInRange(foods)) {
+    if (!Validation.isFoodNumberInRange(foods)) {
       throw new Error(ERROR_MESSAGE.notValidPickyFoodNumber);
     }
   },
