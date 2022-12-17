@@ -1,4 +1,5 @@
 const { Console } = require('@woowacourse/mission-utils');
+const { DAYS } = require('./utils/constants');
 
 const OutputView = {
   //서비스 시작 문구 출력
@@ -8,7 +9,7 @@ const OutputView = {
 
   printResult(category, coachMenu) {
     Console.print('메뉴 추천 결과입니다.');
-    Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    Console.print('[ ' + `${DAYS.join(' | ')}` + ' ]');
     Console.print('[ ' + `${category.join(' | ')}` + ' ]');
     coachMenu.map((el) => {
       Console.print('[ ' + `${el.join(' | ')}` + ' ]');
