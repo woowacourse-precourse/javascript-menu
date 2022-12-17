@@ -29,3 +29,26 @@ describe('코치 이름 검사', () => {
     expect(() => Validator.validateCoachNames(input.split(','))).toThrow('[ERROR]');
   });
 });
+
+describe('못 먹는 메뉴 검사', () => {
+  test.each([
+    '',
+    '김치',
+    '김치,찌개',
+  ])('정상', (input) => {
+    expect(() => Validator.validateCannotEat(input.split(','))).not.toThrow();
+  });
+
+  test.each([
+    '사과, 배',
+  ])('예외: 잘못된 구분자', (input) => {
+    expect(() => Validator.validateCannotEat(input.split(','))).toThrow('[ERROR]');
+  });
+
+  test.each([
+    '사과,배,귤',
+    '사과,배,물,귤',
+  ])('예외: 인원수', (input) => {
+    expect(() => Validator.validateCannotEat(input.split(','))).toThrow('[ERROR]');
+  });
+});
