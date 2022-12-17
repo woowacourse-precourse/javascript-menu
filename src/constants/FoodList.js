@@ -1,4 +1,4 @@
-const FOODLIST = [
+const FOODLIST = Object.freeze([
   '규동',
   '우동',
   '미소시루',
@@ -44,7 +44,7 @@ const FOODLIST = [
   '스파게티',
   '피자',
   '파니니',
-];
+]);
 
 const FOODS = Object.freeze([
   Object.freeze([
