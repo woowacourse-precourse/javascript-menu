@@ -1,7 +1,7 @@
 const CoachValidation = require("../Validation/coachValidation");
 const InputView = require("../View/InputView");
-const { Console } = require("@woowacourse/mission-utils");
 const DislikeMenuValidation = require("../Validation/DislikeMenuValidation");
+const RandomCategory = require("../Model/RandomCategory");
 
 class Menu {
   #coachNames;
@@ -36,8 +36,13 @@ class Menu {
     this.#dislikeMenu = menu.split(",").map((menu) => {
       return menu;
     });
-    console.log(this.#dislikeMenu)
+    console.log(this.#dislikeMenu);
+    this.getCategory();
   };
+
+  getCategory() {
+    console.log(RandomCategory.generator())
+  }
 }
 
 module.exports = Menu;
