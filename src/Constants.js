@@ -7,4 +7,6 @@ module.exports = Object.freeze({
         MINIMUM: 2,
         MAXIMUM: 4,
     },
+
+    CLASS: ['월요일', '화요일', '수요일', '목요일', '금요일'],
 });

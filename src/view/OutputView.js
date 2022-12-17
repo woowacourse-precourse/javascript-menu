@@ -1,4 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
+const constants = require("../Constants");
 
 const OutputView = {
     printStart() {
@@ -10,11 +11,13 @@ const OutputView = {
     },
     printRecommandResult(categorys) {
         MissionUtils.Console.print('메뉴 추천 결과입니다.');
-        printClass();
+
+        MissionUtils.Console.print(this.classToString());
         MissionUtils.Console.print(this.categorysToString(categorys));
     },
-    printClass() {
-        MissionUtils.Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    classToString() {
+        const content = ['구분', ...constants.CLASS];
+        return '[ ' + content.join(' | ') + ' ]';
     },
     categorysToString(categorys) {
         const content = ['카테코리', ...categorys];
