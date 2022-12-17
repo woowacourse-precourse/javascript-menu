@@ -1,4 +1,5 @@
 const InputView = require('./InputView');
+const MenuRecommend = require('./MenuRecommend');
 const OutputView = require('./OutputView');
 
 class Controller {
@@ -7,6 +8,10 @@ class Controller {
   #coachDislikeFood = new Map();
 
   coachOrder = 0;
+
+  constructor() {
+    this.menuRecommend = new MenuRecommend();
+  }
 
   start() {
     OutputView.printStart();
@@ -31,6 +36,10 @@ class Controller {
     this.coachOrder += 1;
     if (this.coachOrder < this.#coachNames.length) {
       this.getDislikeFood(this.#coachNames[this.coachOrder]);
+    }
+    if (this.coachOrder === this.#coachNames.length) {
+      console.log(this.coachOrder, 'dkssud');
+      this.menuRecommend.createCategory();
     }
   }
 }
