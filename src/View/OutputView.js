@@ -6,6 +6,10 @@ const OutputView = {
   printServiceStart() {
     Console.print(OutputView.SERVICE_START);
   },
+
+  printError(error) {
+    Console.print(`[ERROR] ${error.message}`);
+  },
 };
 
 module.exports = OutputView;
