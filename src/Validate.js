@@ -1,61 +1,64 @@
 const { Console } = require("@woowacourse/mission-utils");
+const {
+  DEFAULT: { TRUE, FALSE },
+  ERROR,
+} = require("./utils/constant");
 
 const coachNameLength = function checkCoachNameLength(coaches, callback) {
-  // 이름에 띄워쓰기가 있다면?
   try {
     for (const name of coaches) {
-      if (name.length > 4 || name.length < 2)
-        throw new Error("[ERROR]: 코치의 이름은 2~4글자 사이여야 합니다.");
+      if (name.length > DEFAULT.MAX_CHAR || name.length < DEFAULT.MIN_CHAR)
+        throw new Error(ERROR.COACH_CHAR_LENGTH);
     }
-    return true;
+    return TRUE;
   } catch (error) {
     Console.print(error);
     callback();
-    return false;
+    return FALSE;
   }
 };
 
 const coachCount = function checkCoachTotalCount(coaches, callack) {
   try {
-    if (coaches.length > 5 || coaches.length < 2)
-      throw new Error(
-        "[ERROR]: 점심을 같이 먹을 코치의 수는 2 ~ 5명이어야 합니다.",
-      );
-    return true;
+    if (
+      coaches.length > DEFAULT.MAX_COACH ||
+      coaches.length < DEFAULT.MIN_COACH
+    )
+      throw new Error(ERROR.COACH_COUNT);
+    return TRUE;
   } catch (error) {
     Console.print(error);
     callack();
-    return false;
+    return FALSE;
   }
 };
 
 const checkCoach = function checkCoachValidation(coaches, callback) {
   const checkCoachesName = coachNameLength(coaches, () => callback());
-  if (!checkCoachesName) return false;
+  if (!checkCoachesName) return FALSE;
 
   const checkCoachCount = coachCount(coaches, () => callback());
-  if (!checkCoachCount) return false;
+  if (!checkCoachCount) return FALSE;
 
-  return true;
+  return TRUE;
 };
 
 const foodCount = function checkFoodCharCount(foods, callback) {
   try {
-    if (foods.length > 2)
-      throw new Error("[ERROR]: 못먹는 메뉴의 개수는 0 ~ 2개 입니다.");
-    return true;
+    if (foods.length > DEFAULT.MAX_FOOD) throw new Error(ERROR.FOOD_RANGE);
+    return TRUE;
   } catch (error) {
     Console.print(error);
     callback();
-    return false;
+    return FALSE;
   }
 };
 
 const checkFood = function checkCanNotEatValidation(foods, callback) {
   const checkFoodCount = foodCount(foods, callback);
-  if (!checkFoodCount) return false;
+  if (!checkFoodCount) return FALSE;
 
-  return true;
+  return TRUE;
 };
 
 module.exports = {

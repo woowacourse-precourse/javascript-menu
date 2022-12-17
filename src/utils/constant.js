@@ -27,10 +27,19 @@ const DEFAULT = Object.freeze({
   MAX_COACH: 5,
   MIN_COACH: 2,
   MAX_FOOD: 2,
+  MAX_CHAR: 4,
+  MIN_CHAR: 2,
+});
+
+const ERROR = Object.freeze({
+  COACH_CHAR_LENGTH: "[ERROR]: 코치의 이름은 2~4글자 사이여야 합니다.",
+  COACH_COUNT: "[ERROR]: 점심을 같이 먹을 코치의 수는 2 ~ 5명이어야 합니다.",
+  FOOD_RANGE: "[ERROR]: 못먹는 메뉴의 개수는 0 ~ 2개 입니다.",
 });
 
 module.exports = {
   SAMPLE,
   categoryKey,
   DEFAULT,
+  ERROR,
 };

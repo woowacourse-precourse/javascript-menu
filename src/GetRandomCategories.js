@@ -1,7 +1,10 @@
 const { Random } = require("@woowacourse/mission-utils");
+const {
+  DEFAULT: { ZERO, DAY_WEEKS, TRUE, ONE },
+} = require("./utils/constant");
 
 const randomCategory = function getRandomCategories(category) {
-  for (let i = 0; i < 5; i++) {
+  for (let i = ZERO; i < DAY_WEEKS; i++) {
     const curNum = getCategories(category);
     category.push(curNum);
   }
@@ -13,11 +16,11 @@ const countSameElement = (array, element) =>
   array.filter((ele) => ele === element).length;
 
 const getCategories = (categories) => {
-  while (true) {
-    const curCategory = Random.pickNumberInRange(1, 5);
+  while (TRUE) {
+    const curCategory = Random.pickNumberInRange(ONE, DAY_WEEKS);
     const count = countSameElement(categories, curCategory);
 
-    if (count > 1) continue;
+    if (count > ONE) continue;
 
     return curCategory;
   }
