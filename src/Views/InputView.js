@@ -16,6 +16,10 @@ const InputView = {
   readCoachName(setCoaches) {
     this.readInput(MESSAGE.COACH_NAME, setCoaches);
   },
+
+  readAvoidMenu(coachName, recommmandMenu) {
+    this.readInput(`\n${coachName}${MESSAGE.AVOID_MENU}`, recommmandMenu);
+  },
 };
 
 module.exports = InputView;

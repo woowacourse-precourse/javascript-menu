@@ -17,6 +17,20 @@ class MenuController {
 
   setCoaches(coaches) {
     this.coachList = coaches.split(',').map((coach) => new Coach(coach));
+    this.count = 0;
+    this.setAvoids();
+  }
+
+  setAvoids(avoidMenu) {
+    if (this.count !== 0) {
+      this.coachList[this.count - 1].setAvoidMenu(avoidMenu);
+    }
+    if (this.count === this.coachList.length) return this.recommandMenu();
+    InputView.readAvoidMenu(this.coachList[this.count++].name, this.setAvoids.bind(this));
+  }
+
+  recommandMenu() {
+    console.log('Coach list : \n', this.coachList);
   }
 }
 

@@ -1,10 +1,13 @@
 class Coach {
-  #avoid = [];
-
   #menuList = [];
 
   constructor(name) {
     this.name = name;
+    this.avoid = [];
+  }
+
+  setAvoidMenu(avoidMenu) {
+    if (avoidMenu !== '') { this.avoid = avoidMenu.split(','); }
   }
 }
 
