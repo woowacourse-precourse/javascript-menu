@@ -3,6 +3,8 @@ class Coach {
 
   #dislikeMenu;
 
+  #menu = [];
+
   constructor(name) {
     this.#name = name;
   }
@@ -13,6 +15,10 @@ class Coach {
 
   getName() {
     return this.#name;
+  }
+
+  hasSameMenu(menu) {
+    return this.#menu.includes(menu);
   }
 }
 
