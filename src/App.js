@@ -79,13 +79,13 @@ class App {
 		array.push(this.#coachNames[coach])
 		for(let menuNumber=0; menuNumber<this.#dayCategory.length; menuNumber++){
 			const menus = SAMPLE[this.#dayCategory[menuNumber]].split(', ')
-			for(let number=0; number<menus.length; number++) this.#menusNumber.push(number)
+			for(let number=1; number<=menus.length; number++) this.#menusNumber.push(number)
 			const menu =  MissionUtils.Random.shuffle(this.#menusNumber)[0];
 			if(array.includes(menus[menu])){
 				menuNumber--;
 				continue;
 			}
-			array.push(menus[menu])
+			array.push(menus[menu-1])
 		}
 		this.#result.push(array);
 	}
