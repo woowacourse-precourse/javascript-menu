@@ -122,7 +122,8 @@ MenuServiceController = class {
   outputResult(weekCategories, recommendHash) {
     this.view.printResultMessage();
 
-    const categoryMessage = "[ " + weekCategories.join(" | ") + " ]";
+    const categoryMessage =
+      "[ " + "카테고리 | " + weekCategories.join(" | ") + " ]";
     const coachMessages = [];
 
     [...recommendHash.entries()].forEach((e) => {
