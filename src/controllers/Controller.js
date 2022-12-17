@@ -1,10 +1,15 @@
 const Coach = require('../model/Coach');
 const Coachs = require('../model/Coachs');
+const Categorys = require('../model/Categorys');
 const { OutputView, InputView } = require('../views/View');
 
 class Controller {
+  #categorys = new Categorys();
   #coachs = new Coachs();
   #coachNames;
+  constructor(categorys) {
+    this.#categorys.addGategorys(categorys);
+  }
 
   start() {
     OutputView.printRecommendStart();
