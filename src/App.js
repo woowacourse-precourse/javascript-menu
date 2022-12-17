@@ -45,8 +45,8 @@ class App {
     InputView.inputCoachUnableMenu(this.#coaches[coachLength].getCoachName(), (input) => {
       try {
         verify.unableMenuLength(input);
-        verify.existMenu(input);
-        this.#coaches[coachLength].setUnableFood(findFoodLocation(input));
+        if (input !== '') verify.existMenu(input);
+        if (input !== '') this.#coaches[coachLength].setUnableFood(findFoodLocation(input));
         if (coachLength < this.#coaches.length - 1)
           return this.unableEatCheckStart(coachLength + 1);
         return this.suggestCoachMenu(0);
@@ -62,7 +62,6 @@ class App {
   suggestCoachMenu(coachLength) {
     if (coachLength === this.#coaches.length) return;
     this.#foodCategory.forEach((category) => {
-      console.log(category);
       this.#coaches[coachLength].suggestMenu(category, verify.eatenTwice, getSuggestMenu);
     });
     if (coachLength < this.#coaches.length - 1) return this.suggestCoachMenu(coachLength + 1);
