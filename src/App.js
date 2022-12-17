@@ -18,8 +18,8 @@ const MENU_INFO = {
 class App {
   #hateMenuInfo = {};
   #recommendedMenuInfo = {
-    categories: [],
-    menus: [],
+    구분: WEEKDAYS,
+    카테고리: [],
   };
 
   play() {
@@ -40,7 +40,7 @@ class App {
 
   inputHateMenus(coachNameList) {
     if (!coachNameList.length) {
-      this.recommendMenus();
+      this.initCategories();
       return;
     }
 
@@ -57,20 +57,15 @@ class App {
     });
   }
 
-  recommendMenus() {
-    // TODO: 월~금 반복
-    const coachList = Object.keys(this.#hateMenuInfo);
-
-    while (this.#recommendedMenuInfo.categories.length < 5) {
+  initCategories() {
+    while (this.#recommendedMenuInfo['카테고리'].length < 5) {
       const category = RecommendedMenuGenerator.getRandomCategory();
       if (this.isValidCategory(category)) {
-        this.#recommendedMenuInfo.categories.push(category);
+        this.#recommendedMenuInfo['카테고리'].push(category);
       }
     }
 
-    console.log(this.#recommendedMenuInfo);
-
-    // OutputView.printRecommendResult({});
+    this.initMenus();
   }
 
   isValidCategory(category) {
