@@ -27,7 +27,7 @@ class ServiceController {
       this.#service.setMenuForEachCoah(menu, index);
 
       if (index + 1 === names.length) {
-        this.choiceCategory();
+        this.choiceMenu();
       } else {
         this.recieveExcludeMenuForEachCoach(names, index + 1);
       }
@@ -36,8 +36,11 @@ class ServiceController {
     InputView.readExcludeMenu(name, onDeliveryMenu);
   }
 
-  choiceCategory() {
+  choiceMenu() {
     this.#service.choiceCategoryForWeek();
+    for (let dayIndex = 0; dayIndex < 5; dayIndex += 1) {
+      this.#service.choiceMenuForEachCoach(dayIndex);
+    }
   }
 }
 

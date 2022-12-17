@@ -1,9 +1,18 @@
 const { Random } = require('@woowacourse/mission-utils');
-const { SERVICE_SETTINGS, MENUS_FOR_EACH_CATEGORIES } = require('../constant/ServiceSettings');
+const { check } = require('prettier');
+const { MENUS_FOR_EACH_CATEGORIES } = require('../constant/ServiceSettings');
+const DAY_INDEX = {
+  0: 'Mon',
+  1: 'Tue',
+  2: 'Wed',
+  3: 'Thu',
+  4: 'Fri',
+};
 
 class RecommendationService {
   #coaches = [];
-  #menu = [];
+  #menus = [[], [], [], [], []];
+  #excludeMenu = [];
   #categoryForEachDay = {
     Mon: '',
     Tue: '',
@@ -18,11 +27,11 @@ class RecommendationService {
   }
 
   setMenuLength(size) {
-    this.#menu = Array.from({ length: size });
+    this.#excludeMenu = Array.from({ length: size });
   }
 
   setMenuForEachCoah(menus, index) {
-    this.#menu[index] = menus;
+    this.#excludeMenu[index] = menus;
   }
 
   choiceCategoryForWeek() {
@@ -38,14 +47,6 @@ class RecommendationService {
   }
 
   assignCategoryForEachDay(categories) {
-    const DAY_INDEX = {
-      0: 'Mon',
-      1: 'Tue',
-      2: 'Wed',
-      3: 'Thu',
-      4: 'Fri',
-    };
-
     for (let index = 0; index < 5; index += 1) {
       const day = DAY_INDEX[index];
       this.#categoryForEachDay[day] = categories[index];
@@ -77,6 +78,52 @@ class RecommendationService {
     };
 
     return categories[Random.pickNumberInRange(1, 5)];
+  }
+
+  choiceMenuForEachCoach(dayIndex) {
+    const category = this.#categoryForEachDay[DAY_INDEX[dayIndex]];
+    const coachLength = this.#coaches.length;
+    for (let coachIndex = 0; coachIndex < coachLength; coachIndex += 1) {
+      const menu = this.choiceMenuCanEatInCategory(coachIndex, category);
+      this.#menus[coachIndex].push(menu);
+    }
+  }
+
+  choiceMenuCanEatInCategory(coachIndex, category) {
+    while (true) {
+      const menu = this.randomChoiceMenuInCategory(category);
+      if (this.checkCanEat(coachIndex, menu) && this.checkNotDuplicateMenu(coachIndex, menu)) {
+        return menu;
+      }
+    }
+  }
+
+  checkCanEat(coachIndex, menu) {
+    return !this.#excludeMenu[coachIndex].includes(menu);
+  }
+
+  checkNotDuplicateMenu(coachIndex, menu) {
+    const menus = this.#menus[coachIndex];
+    if (menus.length === 0) {
+      return true;
+    }
+
+    const count = this.calculateCountSameMenu(menu, menus);
+    if (count < 2) {
+      return true;
+    }
+
+    return false;
+  }
+
+  calculateCountSameMenu(compareMenu, menus) {
+    let count = 0;
+    menus.forEach((menu) => {
+      if (menu === compareMenu) {
+        count += 1;
+      }
+    });
+    return count;
   }
 
   randomChoiceMenuInCategory(category) {
