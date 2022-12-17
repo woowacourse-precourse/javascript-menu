@@ -105,12 +105,13 @@ class App {
 
   // 주어진 배열에서 요소 1개를 랜덤하게 골라 반환하는 함수
   selectRandomMenu(everyDayMenu, menuForCategory, name) {
+	//console.log(menuForCategory.length);
 	const stringToNum = menuForCategory.map((element, index) => {
-		return index;
+		return index+1;
 	})
 	const randomNum = Random.shuffle(stringToNum)[0];
 	//console.log(randomMenu);
-	const randomMenu = menuForCategory[randomNum];
+	const randomMenu = menuForCategory[randomNum-1];
 	if(this.inEdible[name].includes(randomMenu)) return this.selectRandomMenu(everydayMenu, menuForCategory, name); //먹을 수 없는 메뉴이면 다시 고르기!
 	if(everyDayMenu.includes(randomMenu)) return this.selectRandomMenu(everyDayMenu, menuForCategory, name); //메뉴 중복 고려해야함!!!!!!!
 
