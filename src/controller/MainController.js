@@ -12,6 +12,12 @@ class MainController {
     this.#recommendationController = new RecommendationController(this);
   }
 
+  generateRecommendations() {
+    this.#recommendationController.generateRecommendations(
+      this.#categoryController.getCategories(),
+    );
+  }
+
   processCoachNameInput(coachNameInput) {
     this.#categoryController.processCoachNameInput(coachNameInput);
     const validCoachNames = this.#categoryController.getCoachNames();

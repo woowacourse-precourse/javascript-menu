@@ -24,11 +24,18 @@ class RecommendationController {
       if (validCoachNames.indexOf(singleCoachName) !== validCoachNames.length - 1) {
         this.makeAnotherCoach(validCoachNames, singleCoachName);
       }
-      this.#mainController.generateRecommendatations();
+      if (validCoachNames[validCoachNames.length - 1] === singleCoachName)
+        this.#mainController.generateRecommendations();
     } catch (errorLog) {
       this.#mainController.printError(errorLog);
       this.#mainController.readHateFoodInput(validCoachNames, singleCoachName);
     }
+  }
+
+  generateRecommendations(categories) {
+    this.#recommendationModel.generateRecommendations(categories);
+    const overallInformation = this.#recommendationModel.getOverallCoachInformation();
+    this.#mainController.printResult(categories, overallInformation);
   }
 }
 
