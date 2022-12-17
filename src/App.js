@@ -62,7 +62,6 @@ class App {
       this.#coaches[this.#currentBanCoachIndex].addBanMenus(banMenusArray);
       if (this.currentBanCoachIndex < this.#coaches.length - 1) {
         this.currentBanCoachIndex += 1;
-        this.#coaches += 1;
         this.readBanMenus(
           this.#coaches[this.#currentBanCoachIndex].getName(),
           this.banMenusCallback
@@ -75,8 +74,6 @@ class App {
       );
     }
   }
-
-  validateBanMenus(banMenus) {}
 
   validateNames(coachArray) {
     for (let i = 0; i < coachArray.length; i++) {
