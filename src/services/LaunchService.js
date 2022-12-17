@@ -27,6 +27,10 @@ class LaunchService {
     return this.#categories.find((category) => category.getId() === id) ?? null;
   }
 
+  getMenus() {
+    return this.#categories.flatMap((category) => category.getMenus());
+  }
+
   /**
    * @param {string} name
    */
@@ -42,62 +46,49 @@ class LaunchService {
   }
 
   /**
-   * @param {number[]} days
-   * @param {Coach[]} coaches
+   * @param {string} days
    */
-  suggest(days, coaches) {
-    const categoryFrequencies = Object.fromEntries(
-      this.#categories.map((category) => [category.getId(), 0]),
-    );
+  suggestCategories(days) {
+    const categories = [];
     return days.map(() => {
-      const availableCategories = Object.entries(categoryFrequencies)
-        .filter(([, frequency]) => frequency < 2)
-        .map(([categoryId]) => this.getCategory(categoryId));
-
-      const { category, suggestions } = this.suggestForCoaches(coaches, availableCategories);
-      categoryFrequencies[category.getId()] += 1;
-      return suggestions;
+      while (true) {
+        const category = this.getRandomCategory();
+        const frequency = categories.reduce((count, other) => {
+          if (other === category) return count + 1;
+          return count;
+        }, 0);
+        if (frequency < 2) {
+          return category;
+        }
+      }
     });
   }
 
   /**
    * @param {Coach[]} coaches
    * @param {Category[]} categories
-   * @returns {{ category: Category, suggestions: Suggestion[] }}
    */
-  suggestForCoaches(coaches, categories) {
-    while (true) {
-      const category = this.getRandomCategory();
-      if (!categories.includes(category)) continue;
-      const suggestions = coaches.map((coach) => {
-        const menu = this.suggestForCoach(coach, category);
-        if (menu !== null) return new Suggestion(coach, category, menu);
-        return null;
-      });
-      if (suggestions.every((suggestion) => suggestion !== null)) {
-        coaches.forEach((coach, index) => coach.addSuggestedMenu(suggestions[index].getMenu()));
-        return { category, suggestions };
-      }
-    }
+  suggestMenuTable(coaches, categories) {
+    return coaches.map((coach) => this.suggestForCoach(coach, categories));
   }
 
   /**
    * @param {Coach} coach
-   * @param {Category} category
-   * @returns {Menu | null}
+   * @param {Category[]} categories
+   * @returns {Menu[]}
    */
-  suggestForCoach(coach, category) {
-    const canSuggest = category
-      .getMenus()
-      .some((menu) => !coach.isDislikeMenu(menu) && !coach.isSuggestedMenu(menu));
-    if (!canSuggest) return null;
-
-    while (true) {
-      const menu = Random.shuffle([...category.getMenus()])[0];
-      if (!coach.isDislikeMenu(menu) && !coach.isSuggestedMenu(menu)) {
-        return menu;
+  suggestForCoach(coach, categories) {
+    const suggestedMenu = [];
+    return categories.map((category) => {
+      while (true) {
+        const menuIndex = Random.shuffle(category.getMenus().map((menu, index) => index + 1))[0];
+        const menu = category.getMenus()[menuIndex - 1];
+        if (!coach.isDislikeMenu(menu) && !suggestedMenu.includes(menu)) {
+          suggestedMenu.push(menu);
+          return menu;
+        }
       }
-    }
+    });
   }
 }
 
