@@ -59,7 +59,7 @@ describe('점심 메뉴 테스트', () => {
       const logSpy = getLogSpy();
 
       mockRandoms([2, 5, 1, 3, 4]);
-      mockQuestions(['구구,제임스', '김밥', '떡볶이']);
+      mockQuestions(['구구,제임스', '김밥', '']);
       mockShuffles([
         // 구구
         ...makeFalseShuffles([2, 7, 1, 4, 2]),
@@ -121,6 +121,31 @@ describe('점심 메뉴 테스트', () => {
           ].join(''),
         ),
       );
+    });
+  });
+
+  describe('예외 테스트', () => {
+    test.each([
+      ['구구 제임스'],
+      ['구구'],
+      ['구구,제임스,제임,임스,김규'],
+    ])('코치 이름 입력 오류', (errorName) => {
+      const logSpy = getLogSpy();
+      mockRandoms([2, 5, 1, 3, 4]);
+      mockQuestions([errorName, '구구,제임스', '김밥', '']);
+      mockShuffles([
+        // 구구
+        ...makeFalseShuffles([2, 7, 1, 4, 2]),
+
+        // 제임스
+        ...makeFalseShuffles([9, 1, 5, 5, 4]),
+      ]);
+
+      const app = new App();
+      app.play();
+      const log = getOutput(logSpy);
+
+      expectLogContains(log, ['[ERROR]']);
     });
   });
 });
