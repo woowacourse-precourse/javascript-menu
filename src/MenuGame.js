@@ -15,6 +15,10 @@ class MenuGame {
   setUserName(userName) {
     return (this.userName = userName);
   }
+
+  increseUserCount() {
+    return (this.userCount += 1);
+  }
 }
 
 module.exports = MenuGame;
