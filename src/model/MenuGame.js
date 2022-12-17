@@ -46,17 +46,6 @@ class MenuGame {
     });
   }
 
-  // selectCategory(category) {
-  //   if (this.#weeklyCategory[category] >= 2) return false;
-
-  //   this.#weeklyCategory[category] += 1;
-  //   Object.keys(this.#coaches).forEach(name => {
-  //     this.selectCoachDailyMenu(category, name);
-  //   });
-
-  //   return true;
-  // }
-
   selectCoachDailyMenu(category, name) {
     while (this.addCoachMenu(name, MenuRandomGenerator.generate(category)) === false);
   }
@@ -70,6 +59,10 @@ class MenuGame {
 
     this.#coaches[name].weeklyMenu.push(menu);
     return true;
+  }
+
+  getCategoryPlan() {
+    return this.#weeklyCategory.plan;
   }
 }
 

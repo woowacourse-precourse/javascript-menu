@@ -1,3 +1,4 @@
+const { Console } = require('@woowacourse/mission-utils');
 const MenuGame = require('../model/MenuGame');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
@@ -31,6 +32,13 @@ class menuGameController {
   decideWeeklyMenu() {
     this.#menuGame.decideWeeklyCategoty();
     this.#menuGame.decideWeeklyMenu();
+
+    this.end();
+  }
+
+  end() {
+    OutputView.printResult(this.#menuGame.getCoaches(), this.#menuGame.getCategoryPlan());
+    Console.close();
   }
 }
 

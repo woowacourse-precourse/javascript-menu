@@ -14,4 +14,6 @@ const CATEGORY = Object.freeze({
   5: '양식',
 });
 
-module.exports = { SAMPLE, CATEGORY };
+const WEEK = ['월요일', '화요일', '수요일', '목요일', '금요일'];
+
+module.exports = { SAMPLE, CATEGORY, WEEK };
