@@ -4,7 +4,9 @@ const Generator = {
     return Random.pickNumberInRange(1, 5);
   },
 
-  generateNewRecommendedFood() {},
+  generateNewRecommendedFood(foods) {
+    return Random.shuffle(foods)[0];
+  },
 };
 
 module.exports = Generator;
