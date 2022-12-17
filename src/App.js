@@ -17,11 +17,9 @@ class App {
 	this.coachs = [];
 	this.noFoodArr = [];
 	this.indexCount = 0;
-
   }
 
   play() {
-	this.menuRecomend(); 	
 	Console.print("점심 메뉴 추천을 시작합니다.");
 	this.inputCreatCoach();
   }
@@ -53,10 +51,7 @@ class App {
 	  this.validNoFood(noFoods);
 	  this.noFoodArr.push(noFoods);
 	  this.indexCount += 1;
-	//   console.log("###현재 인덱스", this.indexCount);
-	//   console.log("###노음식 배열", this.noFoodArr);
 	  this.replay();
-	  this.menuRecomend();
 	});
 	}
 
@@ -64,7 +59,10 @@ class App {
   replay() {
 	if(this.indexCount !== this.coachs.length) {
 		this.inputNoFoods();
+	} else{
+	  this.menuRecomend();
 	}
+
   }
 
   /** 6. 못 먹는 음식 유효성 검토  */
