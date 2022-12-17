@@ -29,7 +29,7 @@ class App {
 
   /** 2. 코치 이름 생성 */
   inputCreatCoach() {
-	Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분).\n", (names) => {
+	Console.readLine("\n코치의 이름을 입력해 주세요. (, 로 구분).\n", (names) => {
 	  this.coachs = names.split(",");
 	  this.validName();
 	  this.replay();
@@ -50,7 +50,7 @@ class App {
 
   /**5. 못 먹는 음식 코치마다 받기 */
   inputNoFoods() {
-	Console.readLine(`\n(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (noFoods) => {
+	Console.readLine(`\n${this.coachs[this.indexCount]}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (noFoods) => {
 	  this.validNoFood(noFoods);
 	  this.noFoodArr.push(noFoods);
 	  this.indexCount += 1;
