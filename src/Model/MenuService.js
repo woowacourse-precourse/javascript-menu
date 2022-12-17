@@ -1,16 +1,24 @@
+const Coach = require("./Coach");
+
 class MenuService {
   #status;
+  #names;
   #coaches;
   #categoryOfWeek;
 
   constructor(status) {
     this.#status = status;
+    this.#names = [];
     this.#coaches = [];
     this.#categoryOfWeek = [];
   }
 
   getStatus() {
     return this.#status;
+  }
+
+  getNames() {
+    return this.#names;
   }
 
   getCoaches() {
