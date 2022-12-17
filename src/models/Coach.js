@@ -30,7 +30,10 @@ class Coach {
 
   decideMenu(categoryMenus) {
     let recommendedMenu = Shuffle.getRandomMenu(categoryMenus);
-    while (this.#dislikeFoods.includes(recommendedMenu)) {
+    while (
+      this.#dislikeFoods.includes(recommendedMenu) ||
+      this.#recommendedMenus.includes(recommendedMenu)
+    ) {
       recommendedMenu = Shuffle.getRandomMenu(categoryMenus);
     }
 
