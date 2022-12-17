@@ -1,6 +1,7 @@
 const OutputView = require('../views/OutputView');
 const InputView = require('../views/InputView');
 const CoachNamesChecker = require('../utils/CoachNamesChecker');
+const HateMenusChecker = require('../utils/HateMenusChecker');
 const Coach = require('../models/Coach');
 
 class Service {
@@ -45,7 +46,12 @@ class Service {
   }
 
   #setHateMenus(length, hateMenus) {
-    this.#index++;
+    if (!HateMenusChecker.checkInput(hateMenus)) {
+      this.#enterHateMenus();
+      return;
+    }
+
+    this.#index += 1;
     if (this.#index < length) {
       this.#enterHateMenus();
     }
