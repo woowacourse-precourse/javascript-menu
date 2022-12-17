@@ -1,6 +1,6 @@
-class menuController{
-  run(){
-    
+class menuController {
+  run() {
+
   }
 }
 
