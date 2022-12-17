@@ -15,6 +15,10 @@ class GameController {
     instance = this;
     this.#service = new GameService();
   }
+
+  inputCoach(input) {
+    this.#service.inputCoach(input);
+  }
 }
 
 module.exports = Object.freeze(new GameController());
