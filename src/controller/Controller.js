@@ -1,9 +1,9 @@
-const { Random } = require('@woowacourse/mission-utils');
+const { Console, Random } = require('@woowacourse/mission-utils');
 const Category = require('../model/Category');
 const Coach = require('../model/Coach');
 const Menu = require('../model/Menu');
 const { readCoachName, readInedibleMenu } = require('../view/InputView');
-const { printStart } = require('../view/OutputView');
+const { printStart, printResult } = require('../view/OutputView');
 
 class Controller {
   #coach;
@@ -44,7 +44,9 @@ class Controller {
 
   recommend() {
     this.recommendCategory();
-    this.recommendMenu();
+    const recommendedResult = this.recommendMenu();
+
+    this.showResult(recommendedResult);
   }
 
   recommendCategory() {
@@ -52,9 +54,23 @@ class Controller {
   }
 
   recommendMenu() {
+    let recommendedResult;
+
     this.#categories.forEach((category) => {
-      this.#coach.decideMenu(Menu.recommend, category, Random.shuffle);
+      recommendedResult = this.#coach.decideMenu(Menu.recommend, category, Random.shuffle);
     });
+
+    return recommendedResult;
+  }
+
+  showResult(recommendedResult) {
+    printResult(this.#categories, recommendedResult);
+
+    Controller.quit();
+  }
+
+  static quit() {
+    Console.close();
   }
 }
 
