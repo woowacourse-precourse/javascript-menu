@@ -1,7 +1,7 @@
 const Validation = {
   validateGroup(stringOfCoaches) {
     if (!stringOfCoaches.includes(',')) throw new Error('!');
-    const coaches = names.split(',');
+    const coaches = stringOfCoaches.split(',');
     if (coaches.length > 5) throw new Error('!');
     return;
   },
