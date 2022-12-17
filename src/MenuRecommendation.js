@@ -20,17 +20,34 @@ const categories = {
   },
 };
 
+const category = [];
+
 class MenuRecommendation {
   constructor() {
     this.coachs = [];
     this.count = 0;
   }
 
+  receiveCat() {
+    OutputView.printCat(category);
+  }
+
+  receiveResult() {
+    OutputView.printEndText();
+    this.receiveCat();
+  }
+
   chooseCat() {
-    const category = categories.get(
-      MissionUtils.Random.pickNumberInRange(1, 5)
-    );
-    console.log(category);
+    while (category.length < 5) {
+      let random = categories.get(MissionUtils.Random.pickNumberInRange(1, 5));
+      if (category.includes(random)) {
+        if (new Set(random).size + 1 === category.length) {
+          category.push(random);
+        }
+      } else if (!category.includes(random)) category.push(random);
+    }
+
+    this.receiveResult();
   }
 
   receiveDislikeMenu(menus) {

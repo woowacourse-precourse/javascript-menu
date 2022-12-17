@@ -1,7 +1,5 @@
 const MissionUtils = require("@woowacourse/mission-utils");
 
-const { TEXT } = require("./constant");
-
 const InputView = {
   readCoachName(callback) {
     MissionUtils.Console.readLine(
