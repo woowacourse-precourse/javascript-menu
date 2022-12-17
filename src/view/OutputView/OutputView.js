@@ -1,5 +1,6 @@
 const { Console } = require('@woowacourse/mission-utils');
 const { MESSAGE } = require('../../constants/Constants');
+const IOutputView = require('./IOutputView');
 
 const OutputView = class extends IOutputView {
   printError(message) {
