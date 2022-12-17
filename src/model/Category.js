@@ -1,7 +1,7 @@
 class Category {
-  #menu;
+  #menus;
 
-  constructor(menu) {
-    this.#menu = menu;
+  constructor(menus) {
+    this.#menus = menus;
   }
 }
