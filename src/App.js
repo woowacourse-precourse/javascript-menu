@@ -2,6 +2,7 @@ const MissionUtils = require("@woowacourse/mission-utils");
 const Coach = require("./domain/Coach");
 const MenuManager = require("./domain/MenuManager");
 const RandomCategoryGenerator = require("./util/RandomCategoryGenerator");
+const { splitMenu, splitCoachName } = require("./util/SplitString");
 const Validator = require("./util/Validator");
 const InputView = require("./view/InputView");
 const OutputView = require("./view/OutputView");
@@ -22,7 +23,7 @@ class App {
 
   registCoachs(nameInput) {
     Validator.validateCoachNames(nameInput);
-    const coachNameList = nameInput.split(",");
+    const coachNameList = splitCoachName(nameInput);
     const coachs = coachNameList.map((name) => new Coach(name));
     this.#menuManager = new MenuManager(coachs);
     this.requestFirstCoachsBannedMenu();
@@ -39,14 +40,9 @@ class App {
     });
   }
 
-  splitMenu(menuInput) {
-    if (menuInput === "") return [];
-    return menuInput.split(",");
-  }
-
   registBannedMenu(coach, menuInput) {
     Validator.validateBannedMenu(menuInput);
-    const menus = this.splitMenu(menuInput);
+    const menus = splitMenu(menuInput);
     coach.addBannedMenu(menus);
 
     const nextCoach = this.#menuManager.getNextCoach(coach.getName());
