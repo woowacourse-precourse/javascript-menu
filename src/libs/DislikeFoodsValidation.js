@@ -1,5 +1,6 @@
 const DislikeFoodsValidation = {
   validation(dislikeFoods, isExistInMenus) {
+    if (dislikeFoods.length === 0) return;
     dislikeFoods = dislikeFoods.split(',');
     DislikeFoodsValidation.isCorrectLength(dislikeFoods);
     DislikeFoodsValidation.isExistMenu(isExistInMenus);
