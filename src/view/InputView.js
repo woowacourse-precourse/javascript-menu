@@ -6,7 +6,7 @@ const InputView = {
   },
 
   readDisabledFood(coach, callback) {
-    Console.readLine(`${coach}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback);
+    Console.readLine(`\n${coach}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback);
   },
 };
 

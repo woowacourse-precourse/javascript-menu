@@ -47,21 +47,23 @@ class App {
 
       this.#coaches.push(coach);
 		})
-		this.survey()
+		this.requestDisableFoods()
 	}
 
-	survey() {
+	requestDisableFoods() {
 		if(this.index !== this.#coaches.length) {
-			Console.readLine(`\n${this.#coaches[this.index].getName()}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (input) => {
-				this.#coaches[this.index].setDisabledFood(input);
-				this.index += 1;
-				this.survey();
-			});
+			InputView.readDisabledFood(this.#coaches[this.index].getName(), this.survey.bind(this))
 		} else if (this.index === this.#coaches.length) {
 			this.recommend();
 			OutputView.end();
 			Console.close();
 		}
+	}
+
+	survey(response) {
+		this.#coaches[this.index].setDisabledFood(response);
+		this.index += 1;
+		this.requestDisableFoods();
 	}
 
 	recommend() {
@@ -82,8 +84,6 @@ class App {
 			this.#coaches.map((coach) => {
 				coach.setDayFood(menus[Random.shuffle(menusIndex)[0]])
 			})
-			
-			
 
 		}
 		OutputView.result(this.#categoriesOfWeek, this.#coaches);
