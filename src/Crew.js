@@ -41,21 +41,34 @@ class Crew {
   setDetailMenu() {
     const categorys = this.menu.category;
     categorys.forEach(category => {
-      let menus = SAMPLE[category].replace(/ /g, '').split(',');
+      let menus = SAMPLE[category].split(', ');
       let numberMenu = this.getMenuIndex(menus);
-      let selectedNumber = MissionUtils.Random.shuffle(numberMenu)[0];
+      let selectedNumber = MissionUtils.Random.shuffle(numberMenu)[0] - 1;
       let recomendedMenu = menus[selectedNumber];
       while (this.canNotEat.includes(recomendedMenu)) {
-        selectedNumber = MissionUtils.Random.shuffle(numberMenu)[0];
+        selectedNumber = MissionUtils.Random.shuffle(numberMenu)[0] - 1;
+
         recomendedMenu = menus[selectedNumber];
       }
       this.menu.dayMenu.push(recomendedMenu);
     });
   }
 
+  // setDetailMenu() {
+  //   const categorys = this.menu.category;
+  //   categorys.forEach(category => {
+  //     let menus = SAMPLE[category].replace(/ /g, '').split(',');
+  //     let selectedNumber = MissionUtils.Random.shuffle(menus)[0];
+  //     while (this.canNotEat.includes(selectedNumber)) {
+  //       selectedNumber = MissionUtils.Random.shuffle(menus)[0];
+  //     }
+  //     this.menu.dayMenu.push(selectedNumber);
+  //   });
+  // }
+
   getMenuIndex(menus) {
     const temp = [];
-    menus.forEach((menu, idx) => temp.push(+idx));
+    menus.forEach((menu, idx) => temp.push(idx));
     return temp;
   }
 

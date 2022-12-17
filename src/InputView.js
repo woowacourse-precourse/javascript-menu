@@ -8,7 +8,7 @@ class InputView {
 
   readCrewNames(callback) {
     MissionUtils.Console.readLine(
-      '코치의 이름을 입력해 주세요. (, 로 구분)\n',
+      '코치의 이름을 입력해 주세요. (, 로 구분)',
       names => {
         callback(names);
       },
@@ -20,7 +20,7 @@ class InputView {
     if (crews[count] === undefined) return callback();
     let name = crews[count].getName();
     MissionUtils.Console.readLine(
-      `${name}(이)가 못 먹는 메뉴를 입력해 주세요\n`,
+      `${name}(이)가 못 먹는 메뉴를 입력해 주세요`,
       list => {
         crews[count].setCanNotEat(list);
 
