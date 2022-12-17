@@ -1,19 +1,43 @@
-const printRecommendResultTitle = () => {};
+const { Console } = require('@woowacourse/mission-utils');
+const { RESULT_MSG, GAME_MSG, COMMON_MSG } = require('../Constants');
 
-const printRecommendResultTable = () => {};
+const { leftBracket, pipeSeperator, rightBracket, tableHead, title, complete } =
+  RESULT_MSG;
 
-const printRecommendResultTableHead = () => {};
+const print = Console.print;
 
-const printRecommendResultTableCategory = () => {};
+const printRecommendResultTitle = () => {
+  print(title);
+};
 
-const printRecommendResultTableCoachRow = () => {};
+const printRecommendResultTableHead = () => {
+  print(tableHead);
+};
 
-const printResultComplete = () => {};
+const printRecommendResultTableRow = (infos) => {
+  print(leftBracket + infos.join(pipeSeperator) + rightBracket);
+};
+
+const printResultComplete = () => {
+  print(complete);
+};
+
+const printRecommendResultTable = (categories, coachs) => {
+  printRecommendResultTableHead();
+  printRecommendResultTableRow(categories);
+  coachs.forEach((coach) => coach.printInfo(printRecommendResultTableRow));
+  printResultComplete();
+};
 
 const OutputView = {
-  printResultTitle() {},
+  printStartMessage() {
+    print(GAME_MSG.start + COMMON_MSG.newLine);
+  },
 
-  printRecommendResult() {},
+  printRecommendResult(categories, coachs) {
+    printRecommendResultTitle();
+    printRecommendResultTable(categories, coachs);
+  },
 };
 
 module.exports = OutputView;

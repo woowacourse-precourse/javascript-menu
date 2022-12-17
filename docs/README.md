@@ -15,14 +15,13 @@
 
 #### 출력
 
-- [ ] 메뉴 추천 시작 메세지를 출력한다. - OutputView#printResultTitle()
-- [ ] 추천 결과 메세지를 출력한다. - OuputView#printRecommendResult()
-  - [ ] 타이틀 - OutputView#printRecommendResultTitle()
-  - [ ] 결과 표 - OuputView#printRecommendResultTable()
-    - [ ] 제목 - OuputView#printRecommendResultTableHead()
-    - [ ] 카테고리 - OuputView#printRecommendResultTableCategory()
-    - [ ] 코치별 추천 메뉴 - OuputView#printRecommendResultTableCoachRow()
-  - [ ] 완료 - OutputView#printResultComplete()
+- [x] 메뉴 추천 시작 메세지를 출력한다. - OutputView#printStartMessage()
+- [x] 추천 결과 메세지를 출력한다. - OuputView#printRecommendResult()
+  - [x] 타이틀 - OutputView#printRecommendResultTitle()
+  - [x] 결과 표 - OutputView#printRecommendResultTable()
+    - [x] 제목 - OutputView#printRecommendResultTableRow()
+    - [x] 행 출력 - OutputView#printRecommendResultTableRow()
+  - [x] 완료 - OutputView#printResultComplete()
 
 ## 예외 처리 목록
 
