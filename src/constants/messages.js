@@ -1,6 +1,14 @@
 const OUTPUT_MESSAGES = Object.freeze({
   start: '점심 메뉴 추천을 시작합니다.\n',
-  // weeks: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]\n',
+  result: '\n메뉴 추천 결과입니다.\n',
+  weeks: '[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]\n',
+  printCategory([mon, tue, wen, thu, fri]) {
+    return `[ 카테고리 | ${mon} | ${tue} | ${wen} | ${thu} | ${fri} ]`;
+  },
+  printCoachMenu(coachName, [mon, tue, wen, thu, fri]) {
+    return `[ ${coachName} | ${mon} | ${tue} | ${wen} | ${thu} | ${fri} ]`;
+  },
+  done: '\n추천을 완료했습니다.',
 });
 
 const INPUT_MESSAGES = Object.freeze({
