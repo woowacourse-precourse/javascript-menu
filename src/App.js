@@ -88,6 +88,11 @@ class App {
         )
         .join("") +
       "]\n";
+    const getCoachMenu = (arr) =>
+      arr
+        .getMenus()
+        .map((x) => "|" + strWithSideSpace(x))
+        .join("") + "]";
 
     const result =
       categoryStr +
