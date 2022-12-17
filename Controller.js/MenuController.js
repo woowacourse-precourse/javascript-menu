@@ -1,3 +1,4 @@
+const Category = require('../Model/Category');
 const Coach = require('../Model/Coach');
 const Validate = require('../Model/Validate');
 const InputView = require('../View/InputView');
@@ -55,10 +56,21 @@ class MenuController {
     const coachCount = Coach.getCoachCount();
 
     if (inputCount === coachCount) {
-      this.printResult();
+      this.generateCategory();
     } else {
       this.getCoach();
     }
+  }
+
+  generateCategory() {
+    Category.generate();
+    this.recommendMenu();
+  }
+
+  recommendMenu() {
+    Coach.people().forEach((coach) => {
+      Category.recommend(coach);
+    });
   }
 }
 

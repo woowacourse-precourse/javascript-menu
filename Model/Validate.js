@@ -1,6 +1,6 @@
 class Validate {
   static isNotKorean(input) {
-    return !/[가-힣]/.test(input);
+    return !/[가-힣]/.test(input) && !/^$/.test(input);
   }
 
   // 이름 중복
@@ -26,6 +26,12 @@ class Validate {
     }
   }
 
+  static menuCount(inputMenus) {
+    if (inputMenus.length > 2) {
+      throw new Error('[ERROR] 최대 2개 메뉴만 못 먹을 수 있습니다.');
+    }
+  }
+
   // 한글이 들어오지 않는 경우
   static isKorean(names) {
     names.forEach((name) => {
@@ -43,7 +49,7 @@ class Validate {
     this.isKorean(names);
   }
 
-  static noMenu(inputMenus) {
+  static noMenu(inputMenus = '') {
     const menus = inputMenus.split(',');
     this.hasDuplication(menus);
     this.isKorean(menus);

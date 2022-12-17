@@ -35,10 +35,14 @@ class Coach {
   // 코치의 못 먹는 음식 저장
   static addNoFood(foods) {
     const name = this.getName();
-    const foodSet = new Set(foods);
+    const foodSet = new Set(foods.split(','));
 
     this.addInputCount();
     this.#coaches.set(name, foodSet);
+  }
+
+  static people() {
+    return this.#coaches;
   }
 }
 
