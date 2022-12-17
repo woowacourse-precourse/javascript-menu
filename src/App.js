@@ -1,3 +1,5 @@
+const MissionUtils = require("@woowacourse/mission-utils");
+
 const SAMPLE = {
 	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
 	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
@@ -8,7 +10,24 @@ const SAMPLE = {
 };
 
 class App {
-  play() {}
+	#coachNames;
+
+	constructor(){
+		this.#coachNames=[]
+	}
+  play() {
+		this.insertCoachName()
+	}
+
+	insertCoachName(){
+		MissionUtils.Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)\n',(name)=>{
+			this.#coachNames=name.split(',');
+			console.log(this.#coachNames)
+		})
+	}
+
 }
 
-module.exports = App;
+const app = new App()
+app.play()
+module.exports = App
