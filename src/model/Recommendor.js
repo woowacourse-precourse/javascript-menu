@@ -45,7 +45,7 @@ class Recommendor {
       let recommendedMenusPerCoach = [];
 
       while (recommendedMenusPerCoach.length !== CATEGORY_LENGTH) {
-        const MENU_ORDER = RandomShuffler.shuffle();
+        const MENU_ORDER = RandomShuffler.shuffle() - 1;
         // console.log(this.#categories[recommendedMenusPerCoach.length]);
         // console.log(this.#allMenus[0][1]);
         let category =
