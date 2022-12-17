@@ -94,7 +94,7 @@ class Coach{
 			const menus = SAMPLE[this.#dayCategory[menuNumber]].split(', ')
 			for(let number=1; number<=menus.length; number++) this.#menusNumber.push(number)
 			const menu =  MissionUtils.Random.shuffle(this.#menusNumber)[0];
-			if(array.includes(menus[menu])){
+			if(this.menuCheck(array, menus, menu, coach)){
 				menuNumber--;
 				continue;
 			}
@@ -103,6 +103,20 @@ class Coach{
 		this.#result.push(array);
 	}
 
+  menuCheck(array, menus, menu, coach){
+    const trueOrNot=array.every((menu)=>{
+      this.#eachCoachUnableToEat[this.#coachNames[coach]].every(
+        (trash)=>trash !== menu
+      )
+    })
+    if(trueOrNot){
+      return true;
+    }
+    if(array.includes(menus[menu])){
+      return true;
+    }
+    return false;
+  }
 }
 
 module.exports = Coach
