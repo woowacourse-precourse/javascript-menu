@@ -1,5 +1,6 @@
 const { Console, Random } = require("@woowacourse/mission-utils");
 const { randomCategory } = require("./GetRandomCategories");
+const { splitString } = require("./utils/UtilityFunctions");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -28,14 +29,12 @@ class App {
     Console.print("점심 메뉴 추천을 시작합니다.");
     this.#categories = randomCategory(this.#categories);
 
-    console.log(this.#categories);
-
     this.getCoachesName();
   }
 
   getCoachesName() {
     Console.readLine("코치의 이름을 입력해 주세요. (, 로 구분)\n", (input) => {
-      const coaches = input.split(",");
+      const coaches = splitString(input, ",");
       console.log(input);
       // 여기서 한번 검사할 것. 검사 완료되면 그 이후 계속해서 감. 2-4글자, 중복 안됨.
       for (const coach of coaches) {
