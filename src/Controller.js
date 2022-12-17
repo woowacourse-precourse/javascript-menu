@@ -19,15 +19,14 @@ class Controller {
     InputView.readName(this.tryBuildUser.bind(this));
   }
 
-  requestFood() {
-    InputView.readMenu(this.tryBuildFood.bind(this));
+  requestFood(name) {
+    InputView.readMenu(name, this.tryBuildFood.bind(this));
   }
 
   tryBuildUser(name) {
     try {
       this.validate.validateUserName(name);
-      this.lunchModel(name);
-      this.requestFood();
+      this.requestFood(name);
     } catch(error) {
       this.retryRequestUser();
     }
@@ -36,7 +35,6 @@ class Controller {
   tryBuildFood(food) {
     try {
       this.validate.validateFood(food);
-      this.lunchModel(food);
       this.requestFood();
     } catch(error) {
       this.retryRequestFood();
