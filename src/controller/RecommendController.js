@@ -64,38 +64,68 @@ class RecommendController {
     for (let i = 0; i < 5; i++) {
       this.recommendCategory();
     }
-    this.#coaches.forEach((coach) => {
-      IO.output(coach.getRecommended());
-    });
+    this.printResult();
   }
 
-  checkValidCategory(categoryNum, categoryMenus) {
-    if (categoryMenus !== null) return true;
-    if (this.#categories.filter(categoryNum) < 2) return true;
-    this.recommendCategory();
+  checkValidNum(value) {
+    if (value != null) return true;
+    return false;
+  }
+
+  checkRepeatCategory(category) {
+    if (
+      this.#categories.filter(
+        (categoryElement) => categoryElement === category,
+      ) < 2
+    )
+      return true;
+    return false;
+  }
+
+  checkValidCategory(category, categoryMenus) {
+    if (
+      this.checkRepeatCategory(category) &&
+      this.checkValidNum(category) &&
+      this.checkValidNum(categoryMenus)
+    ) {
+      return true;
+    }
     return false;
   }
 
   recommendCategory() {
     const randomNum = Random.pickNumberInRange(1, 5);
-    const categoryMenus = this.#menus.getCategory(randomNum);
-    if (this.checkValidCategory(randomNum, categoryMenus)) {
-      this.#categories.push(this.#menus.getCategory(randomNum));
+    const category = this.#menus.getCategory(randomNum);
+    const categoryMenus = this.#menus.getCategoryMenu(randomNum);
+
+    if (this.checkValidCategory(category, categoryMenus)) {
+      this.#categories.push(category);
       this.#coaches.forEach((coach) => {
         this.insertRecommendToCoach(categoryMenus, coach);
       });
+    } else {
+      this.recommendCategory();
     }
   }
 
   insertRecommendToCoach(menus, coach) {
-    const recommendedMenu = Random.shuffle([0, 1, 2])[0]; //shuffle 이상함..
+    const menuIndex = menus.map((__, index) => index);
+    const recommendedMenuIndex = Random.shuffle(menuIndex)[0]; //shuffle 이상함..
+    const recommendedMenu = menus[recommendedMenuIndex];
 
     if (
       coach.checkCanEatMenu(recommendedMenu) &&
       coach.checkNotRepeatMenu(recommendedMenu)
     ) {
       coach.setRecommended(recommendedMenu);
+    } else {
+      this.insertRecommendToCoach();
     }
+  }
+
+  printResult() {
+    OutputView.printResult(this.#categories, this.#coaches);
+    IO.close();
   }
 }
 

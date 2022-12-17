@@ -6,7 +6,9 @@ const InputView = {
     IO.input(MESSAGE.INPUT_COACH, (names) => callback(names));
   },
   inputCantEatMenu(coachName, callback) {
-    IO.input(coachName + MESSAGE.INPUT_CANT_EAT, (menus) => callback(menus));
+    IO.input(`\n${coachName}${MESSAGE.INPUT_CANT_EAT}`, (menus) =>
+      callback(menus),
+    );
   },
 };
 

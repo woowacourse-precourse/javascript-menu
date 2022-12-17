@@ -25,6 +25,7 @@ class Menus {
     if (categoryNum === 3) return '중식';
     if (categoryNum === 4) return '아시안';
     if (categoryNum === 5) return '양식';
+    return null;
   }
 
   getCategoryMenu(categoryNum) {
