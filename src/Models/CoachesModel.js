@@ -1,19 +1,24 @@
 class CoachesModel {
-    #coaches = {}
+    #coaches = [];
     
     constructor(roster) {
-        const splitRoster = this.splitRoster(roster);
-        this.saveCoaches(splitRoster);
+        this.#coaches = this.splitRoster(roster);
+        // this.saveCoaches(splitRoster);
     }
 
     splitRoster(roster) {
         return roster.split(',');
     }
 
-    saveCoaches(splitRoster) {
-        splitRoster.forEach(coach => {
-            this.#coaches = { ...this.#coaches, [coach]: [] };
-        });
+    // saveCoaches(splitRoster) {
+    //     splitRoster.forEach(coach => {
+    //         this.#coaches = { ...this.#coaches, [coach]: [] };
+    //     });
+    // }
+
+    getCoaches() {
+        const coaches = this.#coaches;
+        return coaches;
     }
 }
   
