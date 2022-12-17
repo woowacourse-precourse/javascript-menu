@@ -1,3 +1,4 @@
+const { ERROR } = require('./constants/constants');
 const Coach = require('./domain/Coach');
 const InputView = require('./UI/InputView');
 const OutputView = require('./UI/OutputView');
@@ -33,8 +34,8 @@ class App {
 
         return this.unableEatCheckStart(0);
       } catch (error) {
-        if (error.message === 'Invalid Coach Count') OutputView.ErrorCoachCount();
-        if (error.message === 'Invalid Name Length') OutputView.ErrorCoachName();
+        if (error.message === ERROR.INVALID_COACH_COUNT) OutputView.ErrorCoachCount();
+        if (error.message === ERROR.INVALID_NAME_COUNT) OutputView.ErrorCoachName();
         return this.inputCoaches();
       }
     });

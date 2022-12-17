@@ -17,6 +17,10 @@ const ERROR = Object.freeze({
   COACHNAME: '[ERROR] 코치의 이름은 최소 2글자 최대 4글자 입니다.',
   NO_MENU: '[ERROR] 존재하지 않는 메뉴입니다.',
   NO_MENU_LENGTH: '[ERROR] 먹지 못하는 메뉴는 2개까지만 지정 가능합니다.',
+  INVALID_COACH_COUNT: 'Invalid Coach Count',
+  INVALID_NAME_COUNT: 'Invalid Name Length',
+  INVALID_ENABLE_EAT_FOOD: 'No Food',
+  INVALID_FOOD_LIST_LENGTH: 'OverFlow Foods',
 });
 
 const INPUT = Object.freeze({
