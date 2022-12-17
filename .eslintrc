@@ -1,0 +1,23 @@
+{
+  "parserOptions": {
+    "ecmaVersion": "latest"
+  },
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "max-depth": ["warn", 2],
+    "max-lines-per-function": ["warn", { "max": 15, "skipComments": true }],
+    "max-params": ["warn", 3],
+    "no-confusing-arrow": ["warn", { "allowParens": true, "onlyOneSimpleParam": false }],
+    "no-param-reassign": ["warn", { "props": true }],
+    "prefer-template": "warn",
+    "array-callback-return": "warn",
+    "object-shorthand": "warn",
+    "no-new-object": "warn",
+    "no-plusplus": "warn",
+    "indent": ["warn", 2]
+  },
+  "ignorePatterns": ["node_modules/", "__tests__/"]
+}
