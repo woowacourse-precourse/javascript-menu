@@ -12,6 +12,9 @@ const INPUT_HATE_MENU = (coachName) =>
 const SHOW_CATEGORY = (categories) =>
   `[ 카테고리 | ${categories[0]} | ${categories[1]} | ${categories[2]} | ${categories[3]} | ${categories[4]} ]`;
 
+const SHOW_MENUS = (coach, menus) =>
+  `[ ${coach} | ${menus[0]} | ${menus[1]} | ${menus[2]} | ${menus[3]} | ${menus[4]} ]`;
+
 const ERROR = Object.freeze({
   mustNotBeBlank: '[ERROR] 공백입니다. 값을 입력해주세요.',
   mustBeStringType: '[ERROR] 숫자가 아닌 문자로 입력해주세요.',
@@ -32,6 +35,7 @@ module.exports = {
   MESSAGE,
   INPUT_HATE_MENU,
   SHOW_CATEGORY,
+  SHOW_MENUS,
   ERROR,
   CATEGORY_LENGTH,
   ZERO,

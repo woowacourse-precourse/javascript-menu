@@ -1,5 +1,6 @@
 const { print } = require('../utils/utils');
-const { SHOW_CATEGORY } = require('../utils/constants');
+const { SHOW_CATEGORY, SHOW_MENUS } = require('../utils/constants');
+const Recommendor = require('../model/recommendor');
 
 const OutputView = {
   printMessage(message) {
@@ -19,6 +20,13 @@ const OutputView = {
     });
 
     print(SHOW_CATEGORY(categoryNames));
+  },
+
+  printMenus(recommendor) {
+    const COATCHES = recommendor.getCoaches();
+    recommendor.getRecommendedMenus().forEach((menus, index) => {
+      print(SHOW_MENUS(COATCHES[index], menus));
+    });
   },
 };
 

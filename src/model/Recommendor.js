@@ -80,6 +80,10 @@ class Recommendor {
       this.#recommendedMenus.push(recommendedMenusPerCoach);
     });
   }
+
+  getRecommendedMenus() {
+    return this.#recommendedMenus;
+  }
 }
 
 module.exports = Recommendor;

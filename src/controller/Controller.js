@@ -81,6 +81,7 @@ class Controller {
     OutputView.printMessage(MESSAGE.showResult);
     OutputView.printMessage(MESSAGE.showWeek);
     OutputView.printCategory(this.recommendor);
+    OutputView.printMenus(this.recommendor);
   }
 }
 
