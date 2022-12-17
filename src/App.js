@@ -2,6 +2,7 @@ const CategoryRandomNumberGenerator = require("./CategoryRandomNumberGenerator")
 const Coachs = require("./Model/Coachs");
 const InputView = require("./View/InputView");
 const OutputView = require("./View/OutputView");
+const { Random } = require("@woowacourse/mission-utils");
 
 const SAMPLE = {
   일식: "규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼",
@@ -41,6 +42,7 @@ class App {
 
     if (this.categorysCount[categoryName] || 0 <= 2) {
       this.categorysCount[category] = this.categorysCount[category] + 1 || 1;
+      this.recommendMenu(categoryName);
       return;
     }
     this.decideCategory();
@@ -49,9 +51,21 @@ class App {
   getCategoryName() {
     return categorysArray[CategoryRandomNumberGenerator.generate() - 1];
   }
+
+  recommendMenu(categoryName) {
+    this.coachs.getCoachName().forEach((element) => {});
+  }
+
+  getEatMenu(categoryName) {
+    const randomNumber = Random.shuffle(
+      Array.from({ length: 9 }, (_, i) => i)
+    )[0];
+    return SAMPLE[categoryName].split(",")[randomNumber];
+  }
 }
 
 const app = new App();
+app.getEatMenu("한식");
 app.play();
 
 module.exports = App;
