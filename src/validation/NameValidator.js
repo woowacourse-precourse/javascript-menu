@@ -7,6 +7,7 @@ class NameValidator {
   constructor(namesArr) {
     this.validateNameLength(namesArr);
     this.validateNamesCount(namesArr);
+    this.duplicationCheck(namesArr);
   }
 
   validateNameLength(namesArr) {
@@ -21,6 +22,11 @@ class NameValidator {
     const namesCount = namesArr.length;
     if (namesCount < MIN_NAMES_COUNT || namesCount > MAX_NAMES_COUNT)
       throw ERROR_MESSAGE.NAME_COUNT;
+  }
+
+  duplicationCheck(namesArr) {
+    const nameSet = new Set(namesArr);
+    if (namesArr.length !== nameSet.size) throw ERROR_MESSAGE.NAME_DUPLICATION;
   }
 }
 
