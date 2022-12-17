@@ -12,6 +12,14 @@ const InputView = {
     );
   },
 
+  readHateFood(name, callback) {
+    MissionUtils.Console.readLine(
+      `${name}${MESSAGE.HATES_FOOD}`,
+      (foodList) => {
+        callback(foodList);
+      },
+    );
+  },
 };
 
 module.exports = InputView;

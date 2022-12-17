@@ -4,6 +4,8 @@ const OutputView = require('./OutputView');
 class MenuController {
   #machine;
 
+  #order = 0;
+
   constructor({ machine }) {
     this.#machine = machine;
   }
@@ -16,8 +18,33 @@ class MenuController {
 
   setCoaches() {
     InputView.readCoachNames((names) => {
-      console.log(names);
+      this.#machine.setCoachesMap(names);
+
+      this.setHateFood();
     });
+  }
+
+  setHateFood() {
+    const coaches = this.#machine.getCoaches();
+    const name = coaches[this.#order];
+
+    InputView.readHateFood(name, (foodList) => {
+      console.log(foodList);
+
+      if (this.#order === coaches.length - 1) {
+        this.recommendMenu();
+        return;
+      }
+
+      this.countOrder();
+      this.setHateFood();
+    });
+  }
+
+  recommendMenu() {}
+
+  countOrder() {
+    this.#order += 1;
   }
 }
 
