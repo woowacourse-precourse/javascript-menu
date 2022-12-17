@@ -15,6 +15,7 @@ class App {
   #currentBanCoachIndex;
   constructor() {
     this.namesCallback = this.namesCallback.bind(this);
+    this.categories = [];
   }
 
   printRecommendedStart() {
@@ -59,19 +60,25 @@ class App {
     const banMenusArray = banMenus.split(',');
     try {
       this.validateBanMenus(banMenusArray);
-      this.#coaches[this.#currentBanCoachIndex].addBanMenus(banMenusArray);
-      if (this.currentBanCoachIndex < this.#coaches.length - 1) {
-        this.currentBanCoachIndex += 1;
-        this.readBanMenus(
-          this.#coaches[this.#currentBanCoachIndex].getName(),
-          this.banMenusCallback
-        );
-      }
+      this.handleBanMenus(banMenusArray);
     } catch {
       this.readBanMenus(
         this.#coaches[this.#currentBanCoachIndex].getName(),
         this.banMenusCallback
       );
+    }
+  }
+
+  handleBanMenus(banMenusArray) {
+    this.#coaches[this.#currentBanCoachIndex].addBanMenus(banMenusArray);
+    if (this.currentBanCoachIndex < this.#coaches.length - 1) {
+      this.currentBanCoachIndex += 1;
+      this.readBanMenus(
+        this.#coaches[this.#currentBanCoachIndex].getName(),
+        this.banMenusCallback
+      );
+    } else {
+      this.decideCategories();
     }
   }
 
@@ -91,8 +98,6 @@ class App {
   }
 
   validateBanMenus(notFoodArray) {}
-
-  handleBanMenus(notFoodArray) {}
 
   play() {
     this.printRecommendedStart();
