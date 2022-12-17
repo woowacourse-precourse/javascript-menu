@@ -58,7 +58,22 @@ class App {
       this.getDisableMenu();
     }
   }
-  category() {}
+  category() {
+    let menucategory = categorynumber[RandomNumber.generate()];
+    this.categoryList.push(menucategory);
+    let count = this.categoryList.filter(
+      (element) => menucategory === element
+    ).length;
+    if (count > 2) {
+      this.date = 0;
+      this.categoryList = [];
+      this.category();
+    }
+    if (this.date !== 4) {
+      this.date += 1;
+      this.category();
+    }
+  }
 }
 
 
