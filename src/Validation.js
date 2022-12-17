@@ -10,6 +10,11 @@ const Validation = {
       throw new Error(ERROR_MESSAGE.NAME_LENGTH);
     }
   },
+  food: foods => {
+    if (CONDITION.FODDS_LENGTH(foods)) {
+      throw new Error(ERROR_MESSAGE.FODDS_LENGTH);
+    }
+  },
 };
 
 module.exports = Validation;
