@@ -12,11 +12,13 @@ const OutputView = {
   },
 
   printCategory(category) {
-    Console.print(`[ 카테고리 | ${category.join(" | ")} ]`);
+    category.unshift("카테고리");
+    Console.print(`[ ${category.join(" | ")} ]`);
   },
 
   printMenu(name, menu) {
-    Console.print(`[ ${name} | ${menu.join(" | ")} ]`);
+    menu.unshift(name);
+    Console.print(`[ ${menu.join(" | ")} ]`);
   },
 
   printEnd() {

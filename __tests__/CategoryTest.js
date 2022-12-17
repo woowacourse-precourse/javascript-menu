@@ -5,6 +5,7 @@ describe("카테고리 클래스 테스트", () => {
     const invalidCategories = [
       ["일식", "양식", "우주식", "한식", "중식"],
       ["일식", "한식", "양식"],
+      ["일식", "한식", "양식", "일식", "중식", "한식"],
     ];
 
     invalidCategories.forEach((category) => {

@@ -52,7 +52,7 @@ class MenuController {
   }
 
   inputUnLikeMenu(index) {
-    if (index === this.#coachs.length) return this.recommendMenu();
+    if (index === this.#coachs.length) return this.makeRecommendMenu();
     InputView.readUnLikeMenu((input) => {
       this.#coachs[index].setUnLikeMenu(input);
 
@@ -78,14 +78,13 @@ class MenuController {
     this.#category = new Category(category);
   }
 
-  recommendMenu() {
+  makeRecommendMenu() {
     const category = this.#category.getCategory();
 
     this.#coachs.forEach((coach) => {
       const unLikeMenu = coach.getUnLikeMenu();
-      const recommendMenu = [];
+      const recommendMenu = this.fillRecommendMenu(category, unLikeMenu);
 
-      this.fillRecommendMenu(recommendMenu, category, unLikeMenu);
       coach.setRecommendMenu(recommendMenu);
     });
 
@@ -114,21 +113,22 @@ class MenuController {
     return todayCategoryMenus[randomIndex];
   }
 
-  fillRecommendMenu(recommendMenu, category, unLikeMenu) {
+  fillRecommendMenu(category, unLikeMenu) {
+    const recommendMenu = [];
     let index = 0;
 
     while (recommendMenu.length < StaticValues.EAT_TOGHTHER_DAYS) {
       const todayCategoryMenus = AllMenu[category[index]];
       const todayCategoryMenu = this.getTodayCategoryMenu(todayCategoryMenus);
-
       if (
-        !unLikeMenu.includes(todayCategoryMenu) &&
-        !recommendMenu.includes(todayCategoryMenu)
-      ) {
-        recommendMenu.push(todayCategoryMenu);
-        index++;
-      }
+        unLikeMenu.includes(todayCategoryMenu) ||
+        recommendMenu.includes(todayCategoryMenu)
+      )
+        continue;
+      recommendMenu.push(todayCategoryMenu);
+      index++;
     }
+    return recommendMenu;
   }
 }
 
