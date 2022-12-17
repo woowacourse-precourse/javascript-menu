@@ -26,7 +26,7 @@ class App {
       try {
         verify.nameCount(input);
         verify.nameLengthCount(input);
-        const names = input.split(',');
+        const names = input.split(',').map((name) => name.trim());
         names.forEach((name) => {
           this.#coaches.push(new Coach(name));
         });
@@ -45,8 +45,9 @@ class App {
     InputView.inputCoachUnableMenu(this.#coaches[coachLength].getCoachName(), (input) => {
       try {
         verify.unableMenuLength(input);
-        if (input !== '') verify.existMenu(input);
-        if (input !== '') this.#coaches[coachLength].setUnableFood(findFoodLocation(input));
+        if (input.trim() !== '') verify.existMenu(input.trim());
+        if (input.trim() !== '')
+          this.#coaches[coachLength].setUnableFood(findFoodLocation(input.trim()));
         if (coachLength < this.#coaches.length - 1)
           return this.unableEatCheckStart(coachLength + 1);
         return this.suggestCoachMenu(0);
