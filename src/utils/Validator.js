@@ -9,7 +9,7 @@ const Validator = {
     Validator.checkInput(input);
     const names = input.split(',');
     const isUnable = (coach) => coach.length < 2 || coach.length > 4;
-    if (names.some(isUnable)) throw new Error('불가능한 이름입니다.');
+    if (names.some(isUnable)) throw new Error('이름은 2~4자만 가능합니다.');
     if (new Set(names).size !== names.length) throw new Error('중복은 불가능합니다.');
     if (names.length < 2 || names.length > 5) throw new Error('최소 2명, 최대 5명까지 가능합니다.');
   },
