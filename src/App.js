@@ -19,7 +19,13 @@ const categorynumber = {
 };
 
 class App {
-  constructor() {}
+  constructor() {
+    this.coachList = null;
+    this.turn = 0;
+    this.disableFoodMap = {};
+    this.date = 0;
+    this.categoryList = [];
+  }
   play() {
     OutputView.printRecommendStartMessage();
     InputView.readCoachName(this.manageCoach.bind(this));
@@ -39,6 +45,20 @@ class App {
       this.manageCoachDisableMenu.bind(this)
     );
   }
+  manageCoachDisableMenu(disablemenu) {
+    const disablemenulist = disablemenu.split(",");
+    Validator.validateDisableMenu(disablemenulist);
+    this.disableFoodMap[this.coachList[this.turn]] = disablemenulist;
+    this.checkCoachTurn();
+    this.category();
+  }
+  checkCoachTurn() {
+    if (this.turn !== this.coachList.length - 1) {
+      this.turn += 1;
+      this.getDisableMenu();
+    }
+  }
+  category() {}
 }
 
 module.exports = App;
