@@ -11,19 +11,15 @@ const OutputView = {
         PrintRecommandResult();
         MissionUtils.Console.print('추천을 완료했습니다.');
     },
-    printRecommandResult(categorys, coachs) {
+    printRecommandResult(category, coachs) {
         MissionUtils.Console.print(this.classToString());
-        MissionUtils.Console.print(this.categorysToString(categorys));
+        MissionUtils.Console.print(categorys.toString());
         coachs.array.forEach(coach => {
             MissionUtils.Console.print(coach.toString());
         });
     },
     classToString() {
         const content = ['구분', ...constants.CLASS];
-        return '[ ' + content.join(' | ') + ' ]';
-    },
-    categorysToString(categorys) {
-        const content = ['카테고리', ...categorys];
         return '[ ' + content.join(' | ') + ' ]';
     },
 };
