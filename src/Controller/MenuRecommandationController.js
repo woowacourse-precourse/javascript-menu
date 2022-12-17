@@ -1,3 +1,4 @@
+const Menus = require('../Model/Menus');
 const CoachService = require('../Service/CoachService');
 const InputView = require('../View/InputView');
 const OutputView = require('../View/OutputView');
@@ -36,8 +37,17 @@ class MenuRecommandationController {
 
     const coach = coaches[index];
     InputView.readHateFoods(coach.getName(), (hateFoods) => {
-      console.log(hateFoods);
+      this.checkHateFoodsInMenus(hateFoods);
+
       this.readHateFoods(coaches, index + 1);
+    });
+  }
+
+  checkHateFoodsInMenus(hateFoods) {
+    hateFoods.forEach((hateFood) => {
+      if (!Menus.hasMenu(hateFood)) {
+        throw new Error('존재하지 않는 메뉴입니다.');
+      }
     });
   }
 }
