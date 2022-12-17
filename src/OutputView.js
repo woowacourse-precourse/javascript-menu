@@ -10,7 +10,7 @@ const OutputView = {
      * 시작 문장 출력
      */
     printStart() {
-        MU.Console.print('점심 메뉴 추천을 시작합니다.');
+        MU.Console.print('점심 메뉴 추천을 시작합니다.\n');
     },
     /**
      * 마지막 문장 출력
