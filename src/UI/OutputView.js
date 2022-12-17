@@ -13,6 +13,14 @@ const OutputView = {
   ErrorCoachName() {
     Console.print(ERROR.COACHNAME);
   },
+
+  ErrorNoMenu() {
+    Console.print(ERROR.NO_MENU);
+  },
+
+  ErrorNoMenuLength() {
+    Console.print(ERROR.NO_MENU_LENGTH);
+  },
 };
 
 module.exports = OutputView;
