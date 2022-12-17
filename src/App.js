@@ -16,8 +16,4 @@ class App {
   }
 }
 
-// 임시 실행 코드
-const app = new App;
-app.play();
-
 module.exports = App;

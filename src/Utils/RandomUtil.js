@@ -9,9 +9,9 @@ const RandomUtil = {
 
     randomMenu(menus) {
         const splitMenus = menus.split(', ');
-        const menu = Random.shuffle(splitMenus);
-        const setMenu = menu[0];
-        return setMenu;
+        const menu = Random.shuffle(splitMenus)[0];
+        const result = splitMenus[menu];
+        return result;
     }
 };
 
