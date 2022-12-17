@@ -3,6 +3,7 @@ const outputView = require("../view/outputView");
 const Category = require("../model/category");
 const Coach = require("../model/coach");
 const FoodDB = require("../model/foodDb");
+const validation = require("../validation");
 
 class Recommendation {
   #output;
@@ -42,12 +43,18 @@ class Recommendation {
   }
   #processNames(names) {
     const splitNames = names.split(",").map((v) => v.trim());
-    splitNames.forEach((name) => this.#coaches.push(new Coach(name)));
+    validation.validateCoachLength(splitNames);
 
-    const coachName = this.#getCurrentCoach().getName();
-    this.#input.askHates(coachName, this.#processHates.bind(this));
+    splitNames.forEach((name) => {
+      validation.validateCoachName(name);
+      this.#coaches.push(new Coach(name));
+    });
+
+    const curCoach = this.#getCurrentCoach().getName();
+    this.#input.askHates(curCoach, this.#processHates.bind(this));
   }
   #processHates(hates) {
+    validation.validateHates(hates);
     this.#addHatesToCurrentCoach(hates);
 
     if (this.#isCoachLengthExceed()) {
@@ -55,8 +62,8 @@ class Recommendation {
       return;
     }
 
-    const coachName = this.#getCurrentCoach().getName();
-    this.#input.askHates(coachName, this.#processHates.bind(this));
+    const curCoach = this.#getCurrentCoach().getName();
+    this.#input.askHates(curCoach, this.#processHates.bind(this));
   }
   #processResult() {
     this.#output.result();

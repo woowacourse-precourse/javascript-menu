@@ -7,8 +7,7 @@ const validation = {
       throw new Error(error.NAME_RANGE_ERROR);
     }
   },
-  validateCoachLength(coaches) {
-    const splitCoaches = coaches.split(",").map((v) => v.trim());
+  validateCoachLength(splitCoaches) {
     if (splitCoaches.length <= 1 || splitCoaches.length >= 6) {
       throw new Error(error.COACH_RANGE_ERROR);
     }
