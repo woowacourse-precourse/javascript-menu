@@ -1,13 +1,8 @@
 class Category {
-  #name;
   #menus;
 
-  constructor(name, menus) {
-    this.#name = name;
+  constructor(menus) {
     this.#menus = Category.#convertMenus(menus);
-  }
-  getName() {
-    return this.#name;
   }
 
   getRandomMenu() {

@@ -1,22 +1,31 @@
 const { MENU_CONSTANTS } = require('../constants/Setting');
+const CategoryRepository = require('../repositorys/CategoryRepository');
+const CoachRepository = require('../repositorys/CoachRepository');
+
 const Category = require('../model/Category');
+const InputView = require('../view/InputView');
 
 class MenuRecommendController {
-  #categories;
+  #categoryRepository = new CategoryRepository;
+  #coachRepository = new CoachRepository;
 
   constructor() {
     this.#initCategories();
   }
 
   #initCategories() {
-    this.#categories = Object.entries(MENU_CONSTANTS)
+    Object.entries(MENU_CONSTANTS)
       .map(
-        ([category, menus]) => new Category(category, menus),
+        ([category, menus]) => this.#categoryRepository.addCategory(category, menus),
       );
   }
 
   run() {
+  }
 
+  readCrewName() {
+    InputView.readCoachName(coachNames => {
+    });
   }
 }
 
