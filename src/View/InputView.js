@@ -26,7 +26,7 @@ const InputView = {
     });
   },
 
-  readHateFoods(coachName, callback) {
+  readHateMenus(coachName, callback) {
     InputView.question(`${coachName} ${InputView.HATE_FOODS}`, (input) => {
       const hateFoods = input.split(',');
 

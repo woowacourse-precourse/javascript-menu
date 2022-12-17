@@ -31,20 +31,20 @@ class MenuRecommandationController {
   createCoaches(coachNames) {
     this.#menuService.createCoaches(coachNames);
 
-    this.readHateFoods(this.#menuService.getCoaches(), 0);
+    this.readHateMenus(this.#menuService.getCoaches(), 0);
   }
 
-  readHateFoods(coaches, index) {
+  readHateMenus(coaches, index) {
     if (coaches.length === index) return this.recommand();
 
     const coach = coaches[index];
 
-    InputView.readHateFoods(coach.getName(), (hateFoods) => {
+    InputView.readHateMenus(coach.getName(), (hateFoods) => {
       this.checkHateFoodsInMenus(hateFoods);
 
       coach.setHateFoods(hateFoods);
 
-      this.readHateFoods(coaches, index + 1);
+      this.readHateMenus(coaches, index + 1);
     });
   }
 

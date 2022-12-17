@@ -16,7 +16,7 @@ class Coach {
     this.#hateFoods = [...hateFoods];
   }
 
-  hasHateFoods(menu) {
+  hasHateMenu(menu) {
     return this.#hateFoods.includes(menu);
   }
 

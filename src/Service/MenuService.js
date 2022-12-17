@@ -46,7 +46,7 @@ class MenuService {
     const menus = Menus[category];
     const menu = this.getRandomMenu(menus);
 
-    if (coach.hasHateFoods(menu) || coach.hasMenu(menu)) {
+    if (coach.hasHateMenu(menu) || coach.hasMenu(menu)) {
       return this.pickMenu(coach, category);
     }
 
