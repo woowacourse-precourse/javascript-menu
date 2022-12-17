@@ -9,4 +9,8 @@ class Coach {
   addVannedMenu(vannedMenu) {
     this.#vannedMenu = vannedMenu;
   }
+
+  getName() {
+    return this.#name;
+  }
 }
