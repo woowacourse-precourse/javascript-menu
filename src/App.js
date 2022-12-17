@@ -33,7 +33,6 @@ class App {
 
   inputCoachs(input) {
     const coachNames = InputProcessor.parseCommaStringsToArray(input);
-
     try {
       checkValid(coachNames, isValidCoachNumber, ERROR.OUT_RANGE);
       checkEveryVaild(coachNames, isValidNameLength, ERROR.NOT_VALID);
@@ -66,7 +65,6 @@ class App {
 
   inputDislikeFoodByCoach(input) {
     const inputFoods = InputProcessor.parseCommaStringsToArray(input);
-
     try {
       checkValid(inputFoods, isValidDislikeFoodsLength, ERROR.NOT_VALID);
     } catch (error) {
@@ -77,7 +75,6 @@ class App {
       const category = MenuUtil.findCategoryByFoodName(food);
       this.coachs[this.dislikeIdx].dislikeFoods.push(new Food(food, category));
     });
-
     this.dislikeIdx++;
     this.inputCoachsDislikeFood();
   }
