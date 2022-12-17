@@ -5,7 +5,7 @@ const RandomNumberGenerator = {
     return Random.pickNumberInRange(start, end);
   },
 
-  suffle(array) {
+  shuffle(array) {
     return Random.shuffle(array);
   },
 };

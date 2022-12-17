@@ -61,34 +61,51 @@ class MenuController {
     this.#coachs.forEach((coach) => {
       const unLikeMenu = coach.getUnLikeMenu();
       const recommendMenu = [];
-      let index = 0;
 
-      while (recommendMenu.length < 5) {
-        const todayCategoryMenu =
-          AllMenu[category[index]][
-            RandomNumberGenerator.suffle(
-              Array(AllMenu[category[index]].length)
-                .fill(0)
-                .map((v, i) => i)
-            )[0]
-          ];
-
-        if (
-          !unLikeMenu.includes(todayCategoryMenu) &&
-          !recommendMenu.includes(todayCategoryMenu)
-        ) {
-          recommendMenu.push(todayCategoryMenu);
-          index++;
-        }
-      }
-
+      this.fillRecommendMenu(recommendMenu, category, unLikeMenu);
       coach.setRecommendMenu(recommendMenu);
     });
 
     this.printResult();
   }
 
-  printResult() {}
+  printResult() {
+    OutputView.printResult();
+    OutputView.printCategory(this.#category.getCategory());
+
+    this.#coachs.forEach((coach) => {
+      OutputView.printMenu(coach.getName(), coach.getRecommendMenu());
+    });
+
+    OutputView.printEnd();
+  }
+
+  getTodayCategoryMenu(todayCategoryMenus) {
+    return todayCategoryMenus[
+      RandomNumberGenerator.shuffle(
+        Array(todayCategoryMenus.length)
+          .fill(0)
+          .map((v, i) => i)
+      )[0] - 1
+    ];
+  }
+
+  fillRecommendMenu(recommendMenu, category, unLikeMenu) {
+    let index = 0;
+
+    while (recommendMenu.length < 5) {
+      const todayCategoryMenus = AllMenu[category[index]];
+      const todayCategoryMenu = this.getTodayCategoryMenu(todayCategoryMenus);
+
+      if (
+        !unLikeMenu.includes(todayCategoryMenu) &&
+        !recommendMenu.includes(todayCategoryMenu)
+      ) {
+        recommendMenu.push(todayCategoryMenu);
+        index++;
+      }
+    }
+  }
 }
 
 module.exports = MenuController;
