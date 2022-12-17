@@ -82,6 +82,12 @@ class App {
 
   printCompleteMessage() {
     OutputView.printCompleteMessage();
+
+    this.quit();
+  }
+
+  quit() {
+    MissionUtils.Console.close();
   }
 }
 
