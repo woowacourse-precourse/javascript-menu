@@ -24,7 +24,7 @@ const InputView = {
       try {
         callback(input);
       } catch (error) {
-        Console.print(error);
+        Console.print(error.message);
 
         if (name) return redirect(callback, name);
         return redirect(callback);
