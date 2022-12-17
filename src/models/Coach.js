@@ -19,6 +19,10 @@ class Coach {
 
     return true;
   }
+
+  getCoachName() {
+    return this.#name;
+  }
 }
 
 module.exports = Coach;
