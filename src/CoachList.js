@@ -12,6 +12,7 @@ class CoachList {
 
   selectCategories(length) {
     this.#categories = Category.randomCategory(length);
+    return [...this.#categories];
   }
 
   getMenu(name, menu) {
