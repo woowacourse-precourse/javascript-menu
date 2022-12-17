@@ -10,11 +10,11 @@ class MenuMaker {
 
   createMenu() {
     const numMenu = MENUS[0].length;
-    const indexArr = Array.from(Array(numMenu).keys());
+    const menuIndexArr = Array.from({ length: numMenu }, (_, i) => i + 1);
     const weekMenu = [];
     for (const category of this.#categories) {
       while (true) {
-        const selectedMenuIndex = Random.shuffle(indexArr)[0];
+        const selectedMenuIndex = Random.shuffle(menuIndexArr)[0];
         const selectedMenu = MENUS[category - 1][selectedMenuIndex - 1];
         if (weekMenu.find((menu) => menu === selectedMenu)) continue; //이미 일주일 메뉴에 있는 경우
         if (this.#dislikeMenu.find((menu) => menu === selectedMenu)) continue; //못 먹는 메뉴일 경우
