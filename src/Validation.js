@@ -5,8 +5,15 @@ const Validation = {
     if (value.length < 2 || 4 < value.length) return true;
   },
 
-  checkCoachName(name) {
-    if (this.checkNameLength(name)) throw ERROR_MESSAGE.COACH_NAME_ERROR;
+  checkCountRange(value) {
+    if (value.length < 2 || 5 < value.length) return true;
+  },
+
+  checkCoachs(coachs) {
+    if (this.checkCountRange(coachs)) throw ERROR_MESSAGE.COACH_COUNT_ERROR;
+    for (const coach of coachs) {
+      if (this.checkNameLength(coach)) throw ERROR_MESSAGE.COACH_NAME_ERROR;
+    }
   },
 };
 

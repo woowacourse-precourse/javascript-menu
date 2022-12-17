@@ -27,9 +27,7 @@ class MenuController {
 
   getCoachsName(coachsName) {
     this.#coachsName = coachsName.split(',');
-    for (const name of this.#coachsName) {
-      Validation.checkCoachName(name);
-    }
+    Validation.checkCoachs(this.#coachsName);
     return this.readCoachsHateMenu();
   }
 
