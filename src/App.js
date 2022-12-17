@@ -53,6 +53,7 @@ class App {
   initCategories() {
     while (this.#recommendedMenuInfo['카테고리'].length < 5) {
       const category = Recommender.getRecommendedCategory();
+
       if (this.isValidCategory(category)) {
         this.#recommendedMenuInfo['카테고리'].push(category);
       }
@@ -73,15 +74,14 @@ class App {
     const categories = this.#recommendedMenuInfo['카테고리'];
     const coachList = Object.keys(this.#hateMenuInfo);
 
-    coachList.forEach(coach => (this.#recommendedMenuInfo[coach] = []));
-
     coachList.forEach(coach => {
+      this.#recommendedMenuInfo[coach] = [];
+
       categories.forEach(category => {
         const menuList = this.#recommendedMenuInfo[coach];
         const hateMenus = this.#hateMenuInfo[coach];
         let menu = Recommender.getRecommendedMenu(category);
 
-        // TODO: Refactor these
         while (!this.isValidMenu({ menuList, menu, hateMenus })) {
           menu = Recommender.getRecommendedMenu(category);
         }
