@@ -44,16 +44,66 @@ const expectLogContains = (received, logs) => {
 	});
 };
 
-describe('점심 메뉴 테스트', () => {
+describe('점심 메뉴 테스트1', () => {
 	afterEach(() => {
 		jest.clearAllMocks();
 	});
 
 	describe('전체 기능 테스트', () => {
-		test('카테고리 중복 있는 추천', () => {
+		test('카테고리 중복(2회) 있는 추천', () => {
 			const logSpy = getLogSpy();
 
 			mockRandoms([2, 5, 5, 1, 3]);
+			mockQuestions(['구구,제임스', '김밥', '떡볶이']);
+
+			const sequenced = (_, idx) => idx + 1;
+			mockShuffles([
+				// 구구
+				[2, Array.from({ length: 9 }, sequenced)],
+				[7, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[4, Array.from({ length: 9 }, sequenced)],
+				[2, Array.from({ length: 9 }, sequenced)],
+
+				//제임스
+				[9, Array.from({ length: 9 }, sequenced)],
+				[1, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[5, Array.from({ length: 9 }, sequenced)],
+				[4, Array.from({ length: 9 }, sequenced)],
+			]);
+
+			const app = new App();
+			app.play();
+			const log = getOutput(logSpy);
+
+			expect(log.replace(/\n/g, '')).toEqual(
+				expect.stringContaining(
+					[
+						'점심 메뉴 추천을 시작합니다.',
+						'메뉴 추천 결과입니다.',
+						'[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]',
+						'[ 카테고리 | 한식 | 양식 | 양식 | 일식 | 중식 ]',
+						'[ 구구 | 김치찌개 | 스파게티 | 라자냐 | 스시 | 볶음면 ]',
+						'[ 제임스 | 제육볶음 | 라자냐 | 프렌치 토스트 | 가츠동 | 짜장면 ]',
+						'추천을 완료했습니다.',
+					].join(''),
+				),
+			);
+		});
+	});
+});
+
+describe('점심 메뉴 테스트2', () => {
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
+	describe('전체 기능 테스트', () => {
+		test('카테고리 중복(3회) 있는 추천', () => {
+			const logSpy = getLogSpy();
+
+			mockRandoms([2, 5, 5, 1, 5, 3]);
 			mockQuestions(['구구,제임스', '김밥', '떡볶이']);
 
 			const sequenced = (_, idx) => idx + 1;
