@@ -14,10 +14,10 @@ const OutputView = {
     Console.print(`[ ${print} ]`);
   },
 
-  printResult(coaches) {
+  printResult(coaches, saveCategory) {
     this.printMessage(MESSAGE.RESULT);
     this.printArrayForm(DAYS, '구분');
-    this.printArrayForm(CATEGORY, '카테고리');
+    this.printArrayForm(saveCategory, '카테고리');
     coaches.forEach((coach) => this.printCoachesDailyMenu(coach));
     this.printMessage(MESSAGE.FINISH);
   },

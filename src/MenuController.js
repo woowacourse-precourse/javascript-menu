@@ -10,6 +10,7 @@ const { validateCoaches, validateAvoidMenu } = require('./Validate');
 class MenuController {
   constructor(sampleMenu) {
     this.setMenu(sampleMenu);
+    this.saveCategory = [];
   }
 
   setMenu(sampleMenu) {
@@ -41,6 +42,7 @@ class MenuController {
     DAYS.forEach(() => {
       const menuList = this.category.getMenuList();
       const randomCategory = this.category.pickValidCategory(RandomMaker.category);
+      this.saveCategory.push(menuList[randomCategory].name);
       this.pickMenu(menuList[randomCategory].list);
     });
     this.result();
@@ -53,7 +55,7 @@ class MenuController {
   }
 
   result() {
-    OutputView.printResult(this.coachList);
+    OutputView.printResult(this.coachList, this.saveCategory);
     Console.close();
   }
 }
