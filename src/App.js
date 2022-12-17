@@ -35,6 +35,7 @@ class App {
 	requestNotEatCallback(i, foods) {
 		this.#coachs[i].isNotEat(foods);
 		this.checkOverlapCategory();
+		this.pushMenu();
 
 	}
 
@@ -49,8 +50,12 @@ class App {
 		}
 	}
 
-	CheckCanEatFood(food) {
-
+	pushMenu() {
+		this.#coachs.forEach(coach => {
+			for (let i = 0; i < 5; i++) {
+				if (!coach.addMenu(Make.makeMenu(this.#weekCategory[i]))) i--;
+			}
+		})
 	}
 }
 
