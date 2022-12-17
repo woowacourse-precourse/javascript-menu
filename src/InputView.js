@@ -7,14 +7,14 @@ const InputView = {
     });
   },
 
-  readHateMenu(coachIndex, coachs, callback) {
+  readHateMenu(callback, secondCallback, coachIndex, coachs) {
     Console.readLine(
       `${coachs[coachIndex]}(이)가 못 먹는 메뉴를 입력해 주세요.\n`,
       (answer) => {
         callback(coachs[coachIndex], answer);
         coachIndex++;
-        if (coachIndex === coachs.length) return;
-        return this.readHateMenu(coachIndex, coachs, callback);
+        if (coachIndex === coachs.length) return secondCallback();
+        return this.readHateMenu(callback, secondCallback, coachIndex, coachs);
       }
     );
   },
