@@ -1,13 +1,13 @@
 const coachNameCheck = (coach)=>{
-  return coach.every((name)=>name.length>=2 && name.length<=4)
+  return coach.split(",").every((name)=>name.length>=2 && name.length<=4)
 }
 
 const coachNumberCheck = (coach)=>{
-  return coach.length >=2 && coach.length <=5
+  return coach.split(",").length >=2 && coach.split(",").length <=5
 }
 
 const unableToEatCheck = (food)=>{
-  return food.length>=0 && food.length<=2
+  return food.split(",").length>=0 && food.split(",").length<=2
 }
 
 
