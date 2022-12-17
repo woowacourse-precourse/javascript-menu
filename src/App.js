@@ -1,9 +1,10 @@
+const Recommender = require('./Recommender');
+
 const InputView = require('./views/InputView');
 const OutputView = require('./views/OutputView');
 
 const CoachNameValidator = require('./validators/CoachNameValidator');
 const CoachHateMenusValidator = require('./validators/CoachHateMenusValidator');
-const RecommendedMenuGenerator = require('./RecommendedMenuGenerator');
 
 const { WEEKDAYS } = require('./constants');
 
@@ -51,7 +52,7 @@ class App {
 
   initCategories() {
     while (this.#recommendedMenuInfo['카테고리'].length < 5) {
-      const category = RecommendedMenuGenerator.getRandomCategory();
+      const category = Recommender.getRecommendedCategory();
       if (this.isValidCategory(category)) {
         this.#recommendedMenuInfo['카테고리'].push(category);
       }
@@ -78,11 +79,11 @@ class App {
       categories.forEach(category => {
         const menuList = this.#recommendedMenuInfo[coach];
         const hateMenus = this.#hateMenuInfo[coach];
-        let menu = RecommendedMenuGenerator.getRandomMenu(category);
+        let menu = Recommender.getRecommendedMenu(category);
 
         // TODO: Refactor these
         while (!this.isValidMenu({ menuList, menu, hateMenus })) {
-          menu = RecommendedMenuGenerator.getRandomMenu(category);
+          menu = Recommender.getRecommendedMenu(category);
         }
 
         this.#recommendedMenuInfo[coach].push(menu);

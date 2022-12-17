@@ -2,7 +2,7 @@ const { Random } = require('@woowacourse/mission-utils');
 
 const { MENU_INFO } = require('./constants');
 
-const RecommendedMenuGenerator = {
+const Recommender = {
   CATEGORY_INFO: {
     1: '일식',
     2: '한식',
@@ -11,11 +11,11 @@ const RecommendedMenuGenerator = {
     5: '양식',
   },
 
-  getRandomCategory() {
+  getRecommendedCategory() {
     return this.CATEGORY_INFO[Random.pickNumberInRange(1, 5)];
   },
 
-  getRandomMenu(category) {
+  getRecommendedMenu(category) {
     const menuList = MENU_INFO[category].split(', ');
     const randomIndex = Random.shuffle(menuList.map((_, i) => i + 1))[0] - 1;
 
@@ -23,4 +23,4 @@ const RecommendedMenuGenerator = {
   },
 };
 
-module.exports = RecommendedMenuGenerator;
+module.exports = Recommender;
