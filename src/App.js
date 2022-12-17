@@ -16,7 +16,6 @@ class App {
   }
 }
 
-const app = new App();
 App.play();
 
 module.exports = App;
