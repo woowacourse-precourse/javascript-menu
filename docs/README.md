@@ -7,7 +7,7 @@
 - [x] 1 ~ 5 각 숫자를 해당 카테고리로 변환한다. - Converter#convertNumberToCategory()
 - [x] 입력(코치, 음식)을 구분자(,)로 구분해 문자열 배열로 변환한다. - Converter#convertToStringArray()
 - [x] 카테고리가 이미 2번 선택되었는지 확인한다. - Checker#checkCategoryTwice()
-- [ ] 이미 추천 받은 음식인지 확인한다. - Checker#checkDuplicateFood()
+- [x] 이미 추천 받은 음식인지 확인한다. - Checker#checkDuplicateFood()
 
 ### 입출력 관련
 

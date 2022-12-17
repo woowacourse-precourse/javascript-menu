@@ -14,7 +14,15 @@ const Checker = {
     return history.reduce(reduceFuncInCategory, {})[category] >= 2;
   },
 
-  checkDuplicateFood() {},
+  /**
+   * 새 추천 음식이 음식 이력에 있는지 확인한다.
+   * @param {string[]} history 추천 음식 이력
+   * @param {string} food 새 추천 음식
+   * @returns {boolean}
+   */
+  checkDuplicateFood(history, food) {
+    return history.includes(food);
+  },
 };
 
 module.exports = Checker;
