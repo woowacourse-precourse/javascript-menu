@@ -15,6 +15,8 @@ const CATEGORY = Object.freeze(['일식', '한식', '중식', '아시안', '양�
 const ERROR = Object.freeze({
   COACHCOUNT: '[ERROR] 코치는 최소 2명 이상 최대 5명 이하로 입력해야 합니다.',
   COACHNAME: '[ERROR] 코치의 이름은 최소 2글자 최대 4글자 입니다.',
+  NO_MENU: '[ERROR] 존재하지 않는 메뉴입니다.',
+  NO_MENU_LENGTH: '[ERROR] 먹지 못하는 메뉴는 2개까지만 지정 가능합니다.',
 });
 
 const INPUT = Object.freeze({
