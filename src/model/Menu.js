@@ -22,6 +22,8 @@ class Menu {
     this.#recommendedCategoryList.push(category);
   }
 
+  
+
 }
 
 module.exports = Menu;

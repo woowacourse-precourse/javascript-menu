@@ -22,6 +22,7 @@ class Coach {
   }
 
   inputInedibleMenu(coachName, inedibleMenus) {
+    
     if (inedibleMenus === "") { return; }
     const inedibleMenuList = inedibleMenus.split(",");
     this.#coachList.filter((coach) => {
@@ -29,6 +30,7 @@ class Coach {
         coach.inedibleMenuList = inedibleMenuList;
       }
     });
+
   }
 
   inputRecommendedMenu(coachName, recommendedMenu) {
