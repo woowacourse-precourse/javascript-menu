@@ -8,11 +8,14 @@ const MESSAGE = Object.freeze({
 
 const ERROR = Object.freeze({
   NUM_OF_COACH: '[ERROR] 코치는 최소 2명 이상 5명 이하로 입력해야 합니다.',
+  COACH_NAME_LENGTH: '[ERROR] 코치명은 최소 2글자에서 최대 4글자여야 합니다.',
 });
 
 const COACH = Object.freeze({
   MIN: 2,
   MAX: 5,
+  NAME_MIN: 2,
+  NAME_MAX: 4,
 });
 
 const DAYS = Object.freeze(['월요일', '화요일', '수요일', '목요일', '금요일']);

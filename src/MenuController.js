@@ -5,7 +5,7 @@ const InputView = require('./Views/InputView');
 const RandomMaker = require('./RandomMaker');
 const { MESSAGE, DAYS } = require('./Constants');
 const Category = require('./Category');
-const { validateCoaches } = require('./Validate');
+const { validateCoaches, validateAvoidMenu } = require('./Validate');
 
 class MenuController {
   constructor(sampleMenu) {
@@ -30,6 +30,7 @@ class MenuController {
 
   setAvoids(avoidMenu) {
     if (this.setCoachCount !== 0) {
+      validateAvoidMenu(avoidMenu);
       this.coachList[this.setCoachCount - 1].setAvoidMenu(avoidMenu);
     }
     if (this.setCoachCount === this.coachList.length) return this.recommandMenu();

@@ -6,15 +6,24 @@ const validateNumberOfCoach = (number) => {
   }
 };
 
+const validateCoache = (coach) => {
+  if (coach.length < COACH.NAME_MIN || coach.length > COACH.NAME_MAX) {
+    throw new Error(ERROR.COACH_NAME_LENGTH);
+  }
+};
+
 const validateCoaches = (input) => {
   const coaches = input.split(',');
   validateNumberOfCoach(coaches.length);
+  coaches.forEach((coach) => {
+    validateCoache(coach);
+  });
 };
 
-// const validateCoache = (coach) => {
-// 	if ()
-// }
+const validateAvoidMenu = (avoidMenu) => {
+};
 
 module.exports = {
   validateCoaches,
+  validateAvoidMenu,
 };
