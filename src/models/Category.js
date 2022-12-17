@@ -17,7 +17,7 @@ class Category {
   #init() {
     this.#data = {
       selected: '',
-      history: Array.from({ length: 5 }, () => 0),
+      history: Array.from({ length: 5 }, () => -1),
     };
   }
 
@@ -51,6 +51,7 @@ class Category {
 
   #checkHistory(number, i) {
     this.#data.history[i] = number;
+
     let count = 0;
     this.#data.history.forEach(v => {
       if (v === number) {
