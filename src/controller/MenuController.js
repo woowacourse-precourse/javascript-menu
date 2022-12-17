@@ -5,6 +5,7 @@ const OutputView = require('../views/OutputView');
 
 const Validator = require('../utils/Validator');
 const { REGEX } = require('../constants');
+const toArray = require('../utils/toArray');
 
 class MenuController {
   #menuService;
@@ -45,15 +46,16 @@ class MenuController {
     const lastCoachName = coaches[coaches.length - 1];
     InputView.askNonEdibleMenus(coaches[0], (menus) => {
       try {
-        this.#validateNonEdibleMenus(menus);
+        this.#validateNonEdibleMenus(toArray(menus));
       } catch ({ message }) {
         OutputView.printErrorMessage(message);
         return this.#inputNonEdibleMenus(coaches);
       }
       if (coaches[0] !== lastCoachName) {
-        return this.#onInputNonEdibleMenus(coaches.slice(1), menus);
+        this.#onInputNonEdibleMenus(coaches[0], toArray(menus));
+        return this.#inputNonEdibleMenus(coaches.slice(1));
       }
-      this.#onInputNonEdibleMenus(coaches[0], menus);
+      this.#onInputNonEdibleMenus(coaches[0], toArray(menus));
     });
   }
 
@@ -61,7 +63,9 @@ class MenuController {
     Validator.throwErrorIfInvalidNonEdibleMenus(menus);
   }
 
-  #onInputNonEdibleMenus(coachName, menus) {}
+  #onInputNonEdibleMenus(coachName, menus) {
+    this.#menuService.addNonEdibleMenus(coachName, menus);
+  }
 }
 
 module.exports = MenuController;

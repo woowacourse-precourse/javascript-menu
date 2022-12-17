@@ -11,6 +11,10 @@ class MenuService {
     names.forEach((name) => (this.#coaches[name] = new Coach(name)));
   }
 
+  addNonEdibleMenus(coachName, menus) {
+    this.#coaches[coachName].setNonEdibleMenus(menus);
+  }
+
   getCoachesName() {
     return Object.keys(this.#coaches);
   }

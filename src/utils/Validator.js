@@ -1,3 +1,4 @@
+const toArray = require('./toArray');
 const { REGEX, MENUS } = require('../constants');
 
 const ERROR_MESSAGE = {
@@ -11,14 +12,13 @@ const Validator = {
   throwErrorIfInvalidCoachesName(names) {
     if (!REGEX.COACHES_NAME.test(names)) throw new Error(ERROR_MESSAGE.INVALID_COACHES_NAME);
 
-    const coaches = names.replace(REGEX.SPACE, '').split(',');
+    const coaches = toArray(names);
     if (coaches.length < 2 || coaches.length > 5) {
       throw new Error(ERROR_MESSAGE.INVALID_COACHES_LENGTH);
     }
   },
 
   throwErrorIfInvalidNonEdibleMenus(menus) {
-    const menus = menus.replace(REGEX.SPACE, '').split(',');
     if (menus.length > 2) throw new Error(ERROR_MESSAGE.INVALID_NON_EDIBLE_MENUS_LENGTH);
 
     const allMenus = Object.keys(MENUS).reduce((acc, cur) => {
