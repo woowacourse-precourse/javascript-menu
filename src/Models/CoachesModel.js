@@ -18,6 +18,13 @@ class CoachesModel {
     saveReluctantFood(coach, splitFoods) {
         this.#reluctantFoods = { ...this.#reluctantFoods, [coach]: splitFoods };
     }
+
+    checkReluctant(coach, menu) {
+        const checkFoods = this.#reluctantFoods[coach];
+        if(checkFoods.includes(menu)) return false;
+        this.#reluctantFoods = { ...this.#reluctantFoods, [coach]: [...this.#reluctantFoods[coach], menu] };
+        return true;
+    }
 }
   
 module.exports = CoachesModel;

@@ -22,6 +22,7 @@ const InputView = {
         Console.readLine(`\n${coaches[index]}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, (foods) => {
             coachesController.saveReluctant(coaches[index], foods);
             if(coaches.length - 1 > index) this.readReluctantFood(coaches, index + 1);
+            else menuController.createRecommendMenu(coaches, coachesController);
         })
     },
 };
