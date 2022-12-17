@@ -53,7 +53,19 @@ class App {
     );
   }
 
-  banMenusCallback(notFood) {}
+  banMenusCallback(notFood) {
+    const notFoodArray = notFood.split(',');
+    try {
+      this.validateBanMenus(notFoodArray);
+    } catch (error) {
+      MissionUtils.Console.print(error.message);
+      this.readBanMenus(
+        this.#coaches[this.#currentBanCoachIndex].getName(),
+        this.banMenusCallback
+      );
+    }
+    this.handleBanMenus(notFoodArray);
+  }
 
   validateNames(coachArray) {
     for (let i = 0; i < coachArray.length; i++) {
@@ -69,6 +81,10 @@ class App {
     if (!(coachArray.length >= 2 && coachArray.length <= 5))
       throw Error(PRINT_ERROR_STRING.COACH_NAME_NUMBER);
   }
+
+  validateBanMenus(notFoodArray) {}
+
+  handleBanMenus(notFoodArray) {}
 
   play() {
     this.printRecommendedStart();
