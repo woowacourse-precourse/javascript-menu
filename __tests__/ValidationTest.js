@@ -2,7 +2,7 @@ const { validateCoachName, validateDislikeMenu } = require('../src/utils/validat
 
 describe('코치 이름 예외 케이스', () => {
   test.each([['포비'], ['포비', '크롱', '뽀로로', '루피', '에디', '패티']])(
-    '코치의 수가 1명 이하 5명 이상이면 예외가 발생한다.',
+    '코치의 수가 1명 이하 6명 이상이면 예외가 발생한다.',
     (input) => {
       expect(() => {
         validateCoachName(input).toThrow('[ERROR]');
