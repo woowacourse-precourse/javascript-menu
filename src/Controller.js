@@ -64,7 +64,9 @@ class Controller {
     }
   }
 
-  setOutput() {}
+  setOutput() {
+    OutputView.printResult();
+  }
 }
 
 module.exports = Controller;
