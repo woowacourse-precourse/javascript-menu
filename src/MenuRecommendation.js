@@ -90,22 +90,52 @@ class MenuRecommendation {
   receiveResult() {
     OutputView.printEndText();
     this.receiveCat();
+
+    OutputView.printCoachLunch(this.coachs);
+
+    // for (let i = 0; i < this.coachs.length; i++) {
+    //   console.log(
+    //     `[ ${this.coachs[i].getName()} | ${this.coachs[i]
+    //       .getLunch()
+    //       .join(" | ")}]`
+    //   );
+    // }
+
+    OutputView.printExit();
   }
 
-  chooseMenu() {
+  chooseMenuForCoach(coach) {
     for (let i = 0; i < 5; i++) {
       let todayCat = category[i];
 
       let numArr = [];
-      for (let i = 0; i < menus[todayCat].length; i++) {
-        numArr.push(i);
+      for (let j = 0; j < menus[todayCat].length; j++) {
+        numArr.push(j);
       }
 
       const menu = MissionUtils.Random.shuffle(numArr)[0];
 
-      console.log(menus[todayCat][menu]);
+      this.coachs[Number(coach)].setLunch(menus[todayCat][menu]);
+
+      // console.log(menus[todayCat][menu]);
+    }
+  }
+
+  chooseMenu() {
+    for (let i = 0; i < this.coachs.length; i++) {
+      this.chooseMenuForCoach(i);
+      console.log(this.coachs[i].getLunch());
+      console.log(new Set(this.coachs[i].getLunch()).size);
+      console.log(this.coachs[i].getLunch().length);
+      if (
+        !new Set(this.coachs[i].getLunch()).size ===
+        this.coachs[i].getLunch().length
+      ) {
+        i--;
+      }
     }
 
+    console.log(this.coachs);
     this.receiveResult();
   }
 
@@ -129,15 +159,15 @@ class MenuRecommendation {
   }
 
   receiveDislikeMenu(menus) {
-    if (this.count + 1 === this.coachs.length) {
-      console.log(this.coachs);
+    menus.split(",").forEach((menu) => {
+      this.coachs[this.count].setDislikeMenu(menu);
+    });
+    this.count++;
+
+    if (this.count === this.coachs.length) {
+      // console.log(this.coachs);
       this.chooseCat();
     } else {
-      menus.split(",").forEach((menu) => {
-        this.coachs[this.count].setDislikeMenu(menu);
-      });
-      this.count++;
-
       InputView.readDislikeMenu(
         this.receiveDislikeMenu.bind(this),
         this.coachs,
