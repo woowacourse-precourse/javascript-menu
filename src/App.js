@@ -31,7 +31,6 @@ class App {
         names.forEach((name) => {
           this.#coaches.push(new Coach(name));
         });
-
         return this.unableEatCheckStart(0);
       } catch (error) {
         if (error.message === ERROR.INVALID_COACH_COUNT) OutputView.ErrorCoachCount();
@@ -47,10 +46,8 @@ class App {
       try {
         verify.unableMenuLength(input);
         if (input.trim() !== '') verify.existMenu(input.trim());
-        if (input.trim() !== '')
-          this.#coaches[coachLength].setUnableFood(findFoodLocation(input.trim()));
-        if (coachLength < this.#coaches.length - 1)
-          return this.unableEatCheckStart(coachLength + 1);
+        if (input.trim() !== '') this.#coaches[coachLength].setUnableFood(findFoodLocation(input.trim()));
+        if (coachLength < this.#coaches.length - 1) return this.unableEatCheckStart(coachLength + 1);
         return this.suggestCoachMenu(0);
       } catch (error) {
         console.error(error);
