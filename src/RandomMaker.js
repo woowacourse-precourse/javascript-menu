@@ -7,7 +7,8 @@ const RandomMaker = {
 
   menu(menuList) {
     const list = menuList.map((_, index) => index);
-    return menuList[Random.shuffle(list)[0]];
+    const num = Random.shuffle(list)[0];
+    return menuList[num];
   },
 };
 

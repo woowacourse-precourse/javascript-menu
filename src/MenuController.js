@@ -33,7 +33,7 @@ class MenuController {
       validateAvoidMenu(avoidMenu);
       this.coachList[this.setCoachCount - 1].setAvoidMenu(avoidMenu);
     }
-    if (this.setCoachCount === this.coachList.length) return this.recommandMenu();
+    if (this.setCoachCount === this.coachList.length - 1) return this.recommandMenu();
     InputView.readAvoidMenu(this.coachList[this.setCoachCount++].name, this.setAvoids.bind(this));
   }
 
