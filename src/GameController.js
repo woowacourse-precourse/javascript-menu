@@ -27,6 +27,10 @@ class GameController {
   inputNotEat(input, coach) {
     this.#service.inputNotEat(input, coach);
   }
+
+  remove() {
+    this.#service.remove();
+  }
 }
 
 module.exports = Object.freeze(new GameController());
