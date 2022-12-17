@@ -28,6 +28,10 @@ class Coach {
   setMenu(menu) {
     this.#menu.push(menu);
   }
+
+  getMenu() {
+    return this.#menu;
+  }
 }
 
 module.exports = Coach;
