@@ -15,6 +15,7 @@ const SAMPLE = {
 class App {
   constructor() {
     this.names;
+    this.index = 0;
   }
 
   play() {
@@ -38,13 +39,23 @@ class App {
   }
 
   handleInputNameLength() {
-    for (let coach = 0; coach < this.names.length; coach++) {
-      let nameLength = this.names[coach].length;
+    for (let index = 0; index < this.names.length; index++) {
+      let nameLength = this.names[index].length;
       let checkLength = Validation.checkInputNameLength(nameLength);
       if (!checkLength) {
         this.inputCoachName();
       }
     }
+    this.inputCannotEatFoods();
+  }
+
+  inputCannotEatFoods() {
+    Console.readLine(`\n${this.names[this.index]}${INPUT.FOOD}`, (foods) => {
+      this.index += 1;
+      if (this.names.length !== this.index) {
+        this.inputCannotEatFoods();
+      }
+    });
   }
 }
 
