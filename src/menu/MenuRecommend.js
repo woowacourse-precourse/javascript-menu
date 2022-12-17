@@ -30,76 +30,39 @@ class MenuRecommend {
   }
   recommendMenus(loop) {
     let numberOfLoops = 0;
-    let categories = [];
-    let counter = 0;
-    while (counter !== loop) {
+
+    while (numberOfLoops !== loop) {
       const category = this.#menuList.getCategory();
+
       const moreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
+      if (moreThanTwice) continue;
 
       if (!moreThanTwice) {
         this.#categoryRecorder.writeRecord(category);
-        categories.push(category);
-        counter++;
-      }
-    }
-
-    let i = 0;
-    while (i !== this.#coaches.length) {
-      let categoryCount = 0;
-      while (categoryCount !== categories.length) {
-        const category = categories[categoryCount];
-        const targetCoach = this.#coaches[i];
-        const menu = this.#menuList.getMenu(category);
-
-        if (!targetCoach.canEat(menu)) continue;
-        if (targetCoach.ateBefore(menu)) continue;
-        targetCoach.writeEatingRecord(this.#day[numberOfLoops], menu, category);
-        this.#menuRecommendRecorder.writeMenuRecommendRecord(
-          targetCoach.getName(),
-          {
-            day: this.#day[numberOfLoops],
-            category,
+        let i = 0;
+        while (i !== this.#coaches.length) {
+          const targetCoach = this.#coaches[i];
+          const menu = this.#menuList.getMenu(category);
+          if (!targetCoach.canEat(menu)) continue;
+          if (targetCoach.ateBefore(menu)) continue;
+          targetCoach.writeEatingRecord(
+            this.#day[numberOfLoops],
             menu,
-          }
-        );
-        numberOfLoops++;
-        categoryCount++;
+            category
+          );
+          this.#menuRecommendRecorder.writeMenuRecommendRecord(
+            targetCoach.getName(),
+            {
+              day: this.#day[numberOfLoops],
+              category,
+              menu,
+            }
+          );
+          i++;
+        }
       }
-      i++;
+      numberOfLoops += 1;
     }
-
-    // while (numberOfLoops !== loop) {
-    //   const category = this.#menuList.getCategory();
-
-    //   const moreThanTwice = this.#categoryRecorder.isMoreThanTwice(category);
-    //   if (moreThanTwice) continue;
-
-    //   if (!moreThanTwice) {
-    //     this.#categoryRecorder.writeRecord(category);
-    //     let i = 0;
-    //     while (i !== this.#coaches.length) {
-    //       const targetCoach = this.#coaches[i];
-    //       const menu = this.#menuList.getMenu(category);
-    //       if (!targetCoach.canEat(menu)) continue;
-    //       if (targetCoach.ateBefore(menu)) continue;
-    //       targetCoach.writeEatingRecord(
-    //         this.#day[numberOfLoops],
-    //         menu,
-    //         category
-    //       );
-    //       this.#menuRecommendRecorder.writeMenuRecommendRecord(
-    //         targetCoach.getName(),
-    //         {
-    //           day: this.#day[numberOfLoops],
-    //           category,
-    //           menu,
-    //         }
-    //       );
-    //       i++;
-    //     }
-    //   }
-    //   numberOfLoops += 1;
-    // }
     return this.#menuRecommendRecorder.getMenuRecommendRecord();
   }
 }
