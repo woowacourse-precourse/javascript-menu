@@ -1,4 +1,5 @@
 const LunchRecommendation = require('../domain/LunchRecommendation');
+const menuDB = require('../storage/menuDB');
 const InputView = require('../view/InputView');
 const OutputView = require('../view/OutputView');
 
@@ -14,24 +15,40 @@ class Controller {
   }
 
   execute() {
-    //TODO: #input -> readCoachName --> handleSettingCoach
-    this.#inputView.readCoaches(this.#handleSettingCoach);
+    this.#outputView.printStart();
+    this.#inputView.readCoaches(this.#handleSettingCoach.bind(this));
   }
 
   #handleSettingCoach(coachNames) {
-    //TODO: #model -> coach 객체 생성하여 저장
+    console.log('coachNames', coachNames);
     this.#lunchRecommendation.setCoaches(coachNames);
-    //TODO: #model -> coach list 받기.
-    //TODO: 코치 못먹는 메뉴 설정
-    //TODO: #input ->  cannotEat(못먹는 메뉴)입력 --> handleSettingCannotEat
+
+    const coachList = this.#lunchRecommendation.getCoaches();
+    this.#inputView.readCannotEat(coachList[0], this.#handleSettingCannotEat(coachList).bind(this));
   }
 
-  #handleSettingCannotEat(coachList, cannotEatMenuList) {
-    //TODO: #model -> coach 객체에서 못먹는 메뉴 등록
-    //TODO: coachList가 남아 있는 경우)
-    //TODO: #input ->  cannotEat(못먹는 메뉴)입력 --> handleSettingCannotEat
-    //TODO: coachList가 없는 경우)
-    //TODO: 메뉴 추천 결과
+  #handleSettingCannotEat(coachList) {
+    return (menusCannotEat) => {
+      const coach = coachList.shift();
+
+      if (menusCannotEat[0] !== '') {
+        this.#lunchRecommendation.setMenusCannotEat(coach, menusCannotEat);
+      }
+
+      if (coachList.length === 0) {
+        return this.#recommendLunchMenu;
+      }
+
+      this.#inputView.readCannotEat(
+        coachList[0],
+        this.#handleSettingCannotEat(coachList).bind(this)
+      );
+      //TODO: #model -> coach 객체에서 못먹는 메뉴 등록
+      //TODO: coachList가 남아 있는 경우)
+      //TODO: #input ->  cannotEat(못먹는 메뉴)입력 --> handleSettingCannotEat
+      //TODO: coachList가 없는 경우)
+      //TODO: 메뉴 추천 결과
+    };
   }
 
   #recommendLunchMenu() {
@@ -43,5 +60,13 @@ class Controller {
     //TODO: #output -> 추천을 완료했습니다.
   }
 }
+
+// const controller = new Controller({
+//   일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
+//   한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
+//   중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
+//   아시안: '팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
+//   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
+// });
 
 module.exports = Controller;

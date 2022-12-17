@@ -18,6 +18,14 @@ class LunchRecommendation {
       this.coachList.push(new Coach(coachName));
     });
   }
+
+  getCoaches() {
+    return this.coachList;
+  }
+
+  setMenusCannotEat(coach, menus) {
+    coach.setCannotEat(menus);
+  }
 }
 
 // const lunch = new LunchRecommendation({
@@ -28,6 +36,6 @@ class LunchRecommendation {
 //   양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
 // });
 
-//?
+// menuDB
 
-lunch.module.exports = LunchRecommendation;
+module.exports = LunchRecommendation;

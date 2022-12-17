@@ -39,19 +39,19 @@ const InputValidator = Object.freeze({
 
   checkMenuLength(menuList) {
     if (menuList.length > 2) {
-      throw new Error(`[ERROR] 각 코치는 최소 0개, 최대 2개의 못 먹는 메뉴가 있습니다.`);
+      throw new Error(`[ERROR] 각 코치는 최소 0개, 최대 2개의 못 먹는 메뉴가 있습니다.\n`);
     }
   },
 
   checkMenuRepeat(menuList) {
     if (new Set(menuList).size !== menuList.length) {
-      throw new Error(`[ERROR] 중복된 메뉴가 있습니다.`);
+      throw new Error(`[ERROR] 중복된 메뉴가 있습니다.\n`);
     }
   },
 
   checkNotFoundMenu(menuList, wholeMenus) {
     menuList.forEach((menu) => {
-      if (!wholeMenus.contain(menu)) throw new Error(`[ERROR] 등록되지 않은 메뉴입니다.`);
+      if (!wholeMenus.includes(menu)) throw new Error(`[ERROR] 등록되지 않은 메뉴입니다.\n`);
     });
   },
 });
