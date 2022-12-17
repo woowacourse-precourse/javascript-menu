@@ -8,7 +8,7 @@ const InputView = {
 
   readCoachNames(callback) {
     InputView.question(InputView.COACH_NAMES, (input) => {
-      const coachNames = input.split(',');
+      const coachNames = input.replace(/\s/g, '').split(',');
 
       InputView.validateCoachNames(coachNames);
       callback(coachNames);
@@ -34,8 +34,8 @@ const InputView = {
   },
 
   readHateMenus(coachName, callback) {
-    InputView.question(`${coachName} ${InputView.HATE_FOODS}`, (input) => {
-      const hateMenus = input.split(',');
+    InputView.question(`\n${coachName}${InputView.HATE_FOODS}`, (input) => {
+      const hateMenus = input.replace(/\s/g, '').split(',');
 
       InputView.validateHateMenus(hateMenus);
       callback(hateMenus);
