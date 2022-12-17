@@ -23,6 +23,10 @@ class RecommandMenu {
   shuffleMenu(menu) {
     return Random.shuffle(menu);
   }
+
+  exceptHateFoodOfMenu(menu, hateFood) {
+    menu.filter((food) => !hateFood.includes(food));
+  }
 }
 
 module.exports = RecommandMenu;
