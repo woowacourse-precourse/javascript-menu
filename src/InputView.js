@@ -3,6 +3,7 @@ const { MESSAGE } = require('./modules/Constants');
 const Validation = require('./modules/Validation');
 const CoachDiet = require('./CoachDiet');
 const { RandomCategoryGenerator, CategoriesGenerator } = require('./RandomGenerator');
+const OutputView = require('./OutputView');
 
 const coachDietList = [];
 const categoryListOfWeek = [];
@@ -32,7 +33,14 @@ const InputView = {
         console.log(coachDietList[idx].getImpossibles());
         if (idx === coachDietList.length - 1) {
           const categoryListOfWeek = CategoriesGenerator();
+          console.log(coachDietList);
           console.log(categoryListOfWeek);
+          for (const category of categoryListOfWeek) {
+            for (const coach of coachDietList) {
+              coach.recommendMenu(category);
+            }
+          }
+          OutputView.printResult(categoryListOfWeek, coachDietList);
           return;
         }
         this.readImpossibleFoods(coachDietList[idx + 1].getName(), idx + 1);
