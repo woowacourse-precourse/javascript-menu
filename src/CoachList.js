@@ -15,10 +15,6 @@ class CoachList {
       if (this.#coachs[i].getName() === name) return this.#coachs[i + 1];
     }
   }
-
-  getCoachs() {
-    return this.#coachs;
-  }
 }
 
 module.exports = CoachList;
