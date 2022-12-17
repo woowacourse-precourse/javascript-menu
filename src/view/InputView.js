@@ -6,7 +6,7 @@ const InputView = {
   },
 
   notEat(coachName, callback) {
-    Console.readLine(`${coachName}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback);
+    Console.readLine(`\n${coachName}(이)가 못 먹는 메뉴를 입력해 주세요.\n`, callback);
   },
 };
 
