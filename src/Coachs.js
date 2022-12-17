@@ -33,7 +33,6 @@ class Coachs {
     }
 
     isNotEatFood(index, food) {
-        console.log(this.#notEat[this.#coachs[index]].includes(food), "tf")
         return this.#notEat[this.#coachs[index]].includes(food)
     }
 
