@@ -13,7 +13,7 @@ class Coach {
     this.#recommendedFood = [];
   }
 
-  getRandomFood(categoryFood) {
+  #getRandomFood(categoryFood) {
     return categoryFood[
       Random.shuffle(Array.from({ length: categoryFood.length }, (x, i) => i + 1))[0] - 1
     ];
@@ -21,12 +21,12 @@ class Coach {
 
   generateRecommendedFood(category) {
     const categoryFood = GIVEN_DATA[CategoryConverter.convert(category)];
-    let targetFood = this.getRandomFood(categoryFood);
+    let targetFood = this.#getRandomFood(categoryFood);
     while (
       this.#recommendedFood.includes(targetFood) ||
       this.#hateFood.includes(targetFood)
     ) {
-      targetFood = this.getRandomFood(categoryFood);
+      targetFood = this.#getRandomFood(categoryFood);
     }
     this.#recommendedFood.push(targetFood);
   }
