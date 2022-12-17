@@ -1,7 +1,10 @@
 const Coach = require('../models/Coach');
+const CoachList = require('../models/CoachList');
 const { Output, Input } = require('../views/View');
 
 class Controller {
+  #coachList = new CoachList();
+
   init() {
     Output.printInit();
     this.getCoachNameList();
@@ -16,6 +19,13 @@ class Controller {
   checkCoachNameList(coachNameList) {
     const validation = Coach.validateCoachNameList(coachNameList);
     if (validation === false) return this.getCoachNameList();
+    this.makeCoach(coachNameList);
+  }
+
+  makeCoach(coachNameList) {
+    coachNameList.split(',').forEach((coachName) => {
+      this.#coachList.addCoach(coachName);
+    });
   }
 }
 
