@@ -1,14 +1,77 @@
-const SAMPLE = {
-	일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
-	한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
-	중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
-	아시안:
-		'팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
-	양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-};
+const Input = require("./Input")
+const Output = require("./Output")
+const Coach = require("./Coach")
+const Make = require("./Random")
+const { Console } = require("@woowacourse/mission-utils");
 
 class App {
-  play() {}
+	#weekCategory
+	#coachs
+
+	constructor() {
+		this.#weekCategory = [];
+		this.#coachs = [];
+	}
+
+	play() {
+		Output.start();
+		Input.requestName(this.requestNameCallback.bind(this));
+	}
+
+	requestNameCallback(names) {  	//["이름","이름"...]
+		names.forEach(name => { this.#coachs.push(new Coach(name)) })
+		const name = this.#coachs[0].name
+		Input.requestNotEat(name, 0, this.requestNotEatCallbackVal.bind(this))
+	}
+	requestNotEatCallbackVal(i, foods) {
+		this.#coachs[i].isNotEat(foods);
+		const name = this.#coachs[i + 1] ? this.#coachs[i + 1].name : 0
+		if ((i + 2) !== this.#coachs.length) {
+			Input.requestNotEat(name, i + 1, this.requestNotEatCallbackVal.bind(this))
+		} else {
+			Input.requestNotEat(name, i + 1, this.requestNotEatCallback.bind(this))
+		}
+	}
+
+	requestNotEatCallback(i, foods) {
+		this.#coachs[i].isNotEat(foods);
+		this.checkOverlapCategory();
+		this.pushMenu();
+		this.isEnd();
+	}
+
+	checkOverlapCategory() {
+		while (this.#weekCategory.length !== 5) {
+			const foodStyle = Make.makeCategory();
+			let count = 0;
+			this.#weekCategory.forEach(x => {
+				if (foodStyle === x) count++
+			})
+			if (count < 3) this.#weekCategory.push(foodStyle);
+		}
+	}
+
+	pushMenu() {
+		this.#coachs.forEach(coach => {
+			for (let i = 0; i < 5; i++) {
+				if (coach.addMenu(Make.makeMenu(this.#weekCategory[i])) == false) i--;
+			}
+		})
+	}
+
+	isEnd() {
+		Output.endHead(this.#weekCategory);
+		this.#coachs.forEach(coach => {
+			Output.endBody(coach.printMenu());
+		})
+		Output.endtail();
+	}
+
+
 }
 
+const app = new App();
+app.play();
+
 module.exports = App;
+
