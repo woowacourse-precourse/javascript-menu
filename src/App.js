@@ -13,10 +13,13 @@ const SAMPLE = {
 class App {
   #coachNameArray;
   #categoriesArray;
-
+  #categoriesNameArray;
+  #coachFoodRecommendationArray;
   constructor() {
     this.#coachNameArray = [];
     this.#categoriesArray = [];
+    this.#categoriesNameArray = [];
+    this.#coachFoodRecommendationArray = [];
   }
 
   printGameStart() {
@@ -38,8 +41,20 @@ class App {
     }
 
     this.makeCategoriesArray();
+    Console.print('메뉴 추천 결과입니다.');
+    Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
+    Console.print(
+      `[ 카테고리 | ${this.#categoriesNameArray[0]} | ${
+        this.#categoriesNameArray[1]
+      } | ${this.#categoriesNameArray[2]} | ${this.#categoriesNameArray[3]} | ${
+        this.#categoriesNameArray[4]
+      } ]`
+    );
+    for (let i = 0; i < this.#coachFoodRecommendationArray.length; i++) {
+      Console.print(`[ ${this.#coachFoodRecommendationArray[i]} ]`);
+    }
 
-    console.log(this.#categoriesArray);
+    Console.print('추천을 완료했습니다.');
   }
 
   makeCategoriesArray() {
@@ -51,6 +66,92 @@ class App {
       if (duplicationCount <= 2) this.#categoriesArray.push(categoryRandom);
       else this.makeCategoriesArray();
     } while (this.#categoriesArray.length < 5);
+
+    this.makeCategoriesNameArray();
+    this.makeCoachFoodRecommendationArray();
+  }
+
+  makeCategoriesNameArray() {
+    for (let i = 0; i < this.#categoriesArray.length; i++) {
+      let categoryName;
+
+      if (this.#categoriesArray[i] == 1) categoryName = '일식';
+      if (this.#categoriesArray[i] == 2) categoryName = '한식';
+      if (this.#categoriesArray[i] == 3) categoryName = '중식';
+      if (this.#categoriesArray[i] == 4) categoryName = '아시안';
+      if (this.#categoriesArray[i] == 5) categoryName = '양식';
+
+      this.#categoriesNameArray.push(categoryName);
+    }
+  }
+
+  makeCoachFoodRecommendationArray() {
+    let coachName;
+    let coachCannotEat;
+    for (let i = 0; i < this.#coachNameArray.length; i++) {
+      let coachInfo = this.#coachNameArray[i].split('+');
+      for (let j = 0; j < coachInfo.length; j++) {
+        if (j == 0) coachName = coachInfo[j];
+        else coachCannotEat += ' ' + coachInfo[j];
+      }
+      this.makeOneCoachRecommendation(coachName, coachCannotEat);
+    }
+  }
+
+  makeOneCoachRecommendation(coachName, coachCannotEat) {
+    let recommendationOneWeek = coachName;
+
+    for (let i = 0; i < this.#categoriesNameArray.length; i++) {
+      let temp = 0;
+      do {
+        let menu;
+        let menuNameArray = [];
+        let menuName;
+
+        if (this.#categoriesNameArray[i] === '일식') {
+          menuNameArray = SAMPLE.일식.split(',');
+          menu = Random.shuffle(menuNameArray)[0];
+        }
+
+        if (this.#categoriesNameArray[i] === '한식') {
+          menuNameArray = SAMPLE.한식.split(',');
+          menu = Random.shuffle(menuNameArray)[0];
+        }
+
+        if (this.#categoriesNameArray[i] === '중식') {
+          menuNameArray = SAMPLE.중식.split(',');
+          menu = Random.shuffle(menuNameArray)[0];
+        }
+
+        if (this.#categoriesNameArray[i] === '아시안') {
+          menuNameArray = SAMPLE.아시안.split(',');
+          menu = Random.shuffle(menuNameArray)[0];
+        }
+
+        if (this.#categoriesNameArray[i] === '양식') {
+          menuNameArray = SAMPLE.양식.split(',');
+          menu = Random.shuffle(menuNameArray)[0];
+        }
+
+        menuName = menuNameArray[menu - 1];
+
+        if (
+          !coachCannotEat.includes(menuName) &&
+          !recommendationOneWeek.includes(menuName)
+        ) {
+          if (menuName.includes(' ')) {
+            recommendationOneWeek += ` |${menuName}`;
+          } else {
+            recommendationOneWeek += ` | ${menuName}`;
+          }
+
+          temp = 1;
+        } else {
+          temp = 0;
+        }
+      } while (temp == 0);
+    }
+    this.#coachFoodRecommendationArray.push(recommendationOneWeek);
   }
 }
 
