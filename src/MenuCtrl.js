@@ -1,11 +1,12 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
-const { CATEGORY } = require('./constants');
+const { CATEGORY, MENUS } = require('./constants');
 const Validation = require('./Validation');
 
 class MenuCtrl {
   constructor() {
     this.currentCoachFlag = 0;
     this.coachNames = null;
+    this.coachCantEat = [];
   }
 
   readCoachName() {
@@ -30,21 +31,19 @@ class MenuCtrl {
       if (error) return this.readUnableToEat();
 
       const divideMenusCoachCantEat = menusCoachCantEat.split(',');
-      // todo 먹지 못하는 음식 할당해야함
+      this.coachCantEat.push(divideMenusCoachCantEat);
       if (coachesList.length !== this.currentCoachFlag) {
         this.currentCoachFlag += 1;
         return this.readUnableToEat();
       } else {
         Console.print('\n메뉴 추천 결과입니다.');
         Console.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
-        this.makeRandomMenus();
+        this.makeRandomCategories();
       }
     });
   }
 
-  makeRandomMenus() {
-    // const category = Random.pickNumberInRange(1, 5); // ex. 1
-    // const selectedCategory = CATEGORY[category];
+  makeRandomCategories() {
     const map = new Map();
     let flag = true;
     let answer = ['카테고리'];
@@ -67,9 +66,6 @@ class MenuCtrl {
 
     let categories = answer.join(' | ');
     Console.print(`[ ${categories} ]`);
-
-    // const menus = MENUS[selectedCategory];
-    // const selectedMenu = Random.shuffle(menus);
   }
 }
 
