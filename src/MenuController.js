@@ -1,5 +1,6 @@
 const SAMPLE = require("./Constants");
 const InputView = require("./InputView");
+const OutputView = require("./OutputView");
 const { makeRandomCategory, makeRandomMenu } = require("./util");
 
 class MenuController {
@@ -7,6 +8,7 @@ class MenuController {
     this.coach = [];
     this.coachAvoidMenu = {};
     this.recommendMenu = [];
+    this.coachEachMenu = {};
     this.coachIndex = 0;
   }
 
@@ -31,7 +33,10 @@ class MenuController {
       this.recommendedCategories = Array(5)
       .fill("")
       .map((item) => item + makeRandomCategory());
-      this.recommendEachMenu()
+      this.coach.forEach((name) => {
+        this.coachEachMenu[name] = this.recommendEachMenu();
+      })
+      this.makeResult()
   }
 
   recommendEachMenu() {
@@ -39,10 +44,12 @@ class MenuController {
     this.recommendedCategories.map((category) => {
       this.recommendedMenu.push(makeRandomMenu(category))
     })
-    console.log(this.recommendedMenu)
+    return this.recommendEachMenu;
   }
 
-
+  makeResult(){
+    OutputView.printResult(this.recommendedCategories, this.coachEachMenu, this.coach)
+  }
 }
 
 module.exports = MenuController;
