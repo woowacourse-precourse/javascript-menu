@@ -13,6 +13,22 @@ const Converter = {
   convertNumberToFoodName(category, number) {
     return foodNames[category][number];
   },
+
+  convertCategoryToNumber(category) {
+    const { jp, kr, ch, asian, western } = CATEGORY;
+    switch (category) {
+      case jp:
+        return 1;
+      case kr:
+        return 2;
+      case ch:
+        return 3;
+      case asian:
+        return 4;
+      case western:
+        return 5;
+    }
+  },
 };
 
 module.exports = Converter;
