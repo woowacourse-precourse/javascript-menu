@@ -1,24 +1,72 @@
-const Coach = require('./Coach');
-
+const MissionUtils = require('@woowacourse/mission-utils');
+const { Random } = MissionUtils;
 
 class Recommend {
-    #SAMPLE = {
-        일식: '규동, 우동, 미소시루, 스시, 가츠동, 오니기리, 하이라이스, 라멘, 오코노미야끼',
-        한식: '김밥, 김치찌개, 쌈밥, 된장찌개, 비빔밥, 칼국수, 불고기, 떡볶이, 제육볶음',
-        중식: '깐풍기, 볶음면, 동파육, 짜장면, 짬뽕, 마파두부, 탕수육, 토마토 달걀볶음, 고추잡채',
-        아시안:
-            '팟타이, 카오 팟, 나시고렝, 파인애플 볶음밥, 쌀국수, 똠얌꿍, 반미, 월남쌈, 분짜',
-        양식: '라자냐, 그라탱, 뇨끼, 끼슈, 프렌치 토스트, 바게트, 스파게티, 피자, 파니니',
-    };
+    step = 0;
+    weekCategory;
+    coachMenus = [];
+    #indexArr = [];
+    #CATEGORY = ['', '일식', '한식', '중식', '아시안', '양식']
 
-    japanese = this.#SAMPLE['일식'];
-    korean = this.#SAMPLE['한식'];
-    chinese = this.#SAMPLE['중식'];
-    asian = this.#SAMPLE['아시안'];
-    western = this.#SAMPLE['양식'];
+    constructor(namesArr) {
+        this.coachNames = namesArr;
+        this.numberOfCoaches = namesArr.length;
+        this.setindexArr();
+        this.isValidMember(namesArr);
+    }
 
-    coaches = [];
+    isValidMember(namesArr) {
+        if (namesArr.length < 2 || namesArr.length > 5) throw new Error('[ERROR] 코치는 최소 2명, 최대 5명까지 입력 가능합니다.');
+    }
 
+    setindexArr() {
+        for (let i = 0; i < 5; i++) {
+            this.pushRandom(this.#indexArr);
+        }
+        this.setWeekCategory();
+    }
+
+    pushRandom(randomArray) {
+        let randomNumber = Random.pickNumberInRange(1, 5);
+        let count = randomArray.filter(x => x === randomNumber).length;
+        if (count < 2) {
+            randomArray.push(randomNumber);
+        }
+        if (count >= 2) {
+            this.pushRandom(randomArray);
+        }
+    }
+
+    setWeekCategory() {
+        this.weekCategory = this.#indexArr.map((i) => this.#CATEGORY[i]);
+        // console.log(this.weekCategory)
+    }
+
+    setCoachMenus(coach) {
+        let bucket = [];
+        this.weekCategory.forEach((category, i) => {
+            let first = coach.shuffled[category][0];
+            let second = coach.shuffled[category][1];
+            if (!bucket.includes(first)) {
+                bucket.push(first);
+            }
+            else {
+                bucket.push(second);
+            }
+        });
+        this.coachMenus.push({ name: coach.name, menu: bucket });
+    }
+
+    // setRandomMenu() {
+    //     this.randomMenu = this.#indexArr.map((i) => {
+    //         let pickedIndex = Random.shuffle(this.#likesIndexed[i].map((_, j) => j++))[0];
+    //         return this.#likesIndexed[i][pickedIndex];
+    //     })
+    // }
+
+    addStep() {
+        this.step += 1;
+    }
 
 }
 
