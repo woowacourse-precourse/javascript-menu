@@ -1,16 +1,16 @@
 const ExceptionController = require('./ExceptionController');
-const { menu , key } = require('../const/menu');
 const { Random } = require("@woowacourse/mission-utils");
+const Coach = require('../Models/Coach');
 
 class MenuController {
-    #checkedCoach = [];
     #coachList;
-    #foodList = {};
+    #coach;
 
     constructor({inputView, outputView}) {
         this.inputView = inputView;
         this.outputView = outputView;
         this.startMenuProgram();
+        this.#coach = new Coach();
     }
 
     startMenuProgram() {
@@ -23,55 +23,46 @@ class MenuController {
     }
 
     handleCoachList(coachList) {
-        const processedCoachList = this.processList(coachList);
-        if(!ExceptionController.isValidCoach(processedCoachList)) {
-            // 비정상 로직
+        const processedCoachList = this.processInputToList(coachList);
+        if(ExceptionController.isInvalidCoach(processedCoachList)) {
             this.requestCoach();
-        } 
-        // 정상 로직
+        }
         this.#coachList = processedCoachList;
-        this.requestNoEatFood();
+        this.requestNoEatFood(0);
     }
 
-    processList(input) {
+    processInputToList(input) {
         const newList = input.split(',');
         return newList.map((item) => item.trim());
     }
 
-    checkCoach(coach) {
-        if(!this.#checkedCoach.includes(coach)){
-            this.inputView.readNoEatFood(this.handleFoodList.bind(this), coach);
+    requestNoEatFood(coachIndex) {
+        // 토미, 제임스, 포코
+        // 만약 입력을 다 받았다면 메뉴 추천
+        if(coachIndex === this.#coachList.length) {
+            this.menuRecommand();
+            return;
         }
+        
+        // 코치 순서대로 입력받기
+        this.inputView.readNoEatFood(this.#coachList[coachIndex], (foodList) => {
+            this.handleFoodList(foodList, coachIndex);
+        });
     }
 
-    requestNoEatFood() {
-        this.#coachList.forEach((coach) => {
-            checkCoach(coach);
-        })
-    }
-
-    handleFoodList(foodList, coach) {
-        const processedFoodList = this.processList(foodList);
-        if(!ExceptionController.isValidFoodInput(processedFoodList)) {
+    handleFoodList(foodList, coachIndex) {
+        // 계속해서 인덱스를 올려가면서 메뉴 추천 받기
+        const processedFoodList = this.processInputToList(foodList);
+        if(ExceptionController.isInvalidFoodInput(processedFoodList)) {
             // 비정상 로직
-            this.requestNoEatFood();
+            this.requestNoEatFood(coachIndex);
         } 
         // 정상 로직
-        this.#foodList[`${coach}`] = processedFoodList;
-        this.#checkedCoach.push(coach);
-        this.requestNoEatFood();
-        this.menuRecommand();
+        this.#coach.addFoodList(this.#coachList[coachIndex], processedFoodList);
+        this.requestNoEatFood(coachIndex+1);
     }
 
     menuRecommand() {
-        this.selectCategory();
-    }
-
-    selectCategory() {
-        const randnum = Random.pickNumberInRange(1, 5);
-        const category = key[randnum];
-        const menuResult = menu[category];
-
         
     }
 }

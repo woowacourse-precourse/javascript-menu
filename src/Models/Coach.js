@@ -1,17 +1,8 @@
 class Coach {
-    #foodList = [];
-    #coachList;
+    #foodList = {};
 
-    constructor(coachList) {
-        this.#coachList = coachList;
-    }
-
-    getCoachList() {
-        return this.#coachList;
-    }
-
-    addFoodList(foodInput) {
-        this.#foodList.push(foodInput);
+    addFoodList(coach, foodInput) {
+        this.#foodList[`${coach}`] = foodInput;
     }
 
     getFoodList() {
