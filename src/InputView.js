@@ -44,8 +44,8 @@ const InputView = {
 
         if (recommendInfo.step === recommendInfo.numberOfCoaches) {
             OutputView.printResult(recommendInfo);
-            console.log(recommendInfo)
-            console.log(recommendInfo.coachMenus[0].menu)
+            // console.log(recommendInfo)
+            // console.log(recommendInfo.coachMenus[0].menu)
 
             OutputView.end();
         }
