@@ -47,7 +47,7 @@ class Coach {
             this.dislikes[category].forEach(x => {
                 menuStr = menuStr.replace(x, '');
             })
-            this.likes[category] = menuStr.split(',')
+            this.likes[category] = menuStr.split(',').map(x => x.trim())
                 .filter(x => x !== '')
                 .filter(x => x !== ' ');
         }
