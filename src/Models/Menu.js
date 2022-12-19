@@ -1,10 +1,11 @@
-const { key } = require('../const/menu');
+const { KEY, MENU } = require('../const/menu');
 
 class Menu {
 
     #category = [];
     #stringCategory = [];
-    #menu;
+    #selectableMenu = [];
+    #recommandedMenu = {};
 
     addCategory(number) {
         this.#category.push(number);
@@ -21,11 +22,34 @@ class Menu {
 
     matchCategory() {
         this.#category.forEach((categoryNumber) => {
-            this.#stringCategory.push(key[`${categoryNumber}`]);
+            this.#stringCategory.push(KEY[`${categoryNumber}`]);
         })
     }
 
-    
+    processSelectableMenu() {
+        this.#stringCategory.forEach((category) => {
+            this.#selectableMenu.push(MENU[`${category}`].split(', '));
+        })
+        return this.#selectableMenu;
+    }
+
+    saveRecommandedMenu(coach, menu) {
+        if(this.#recommandedMenu[`${coach}`] === undefined) this.#recommandedMenu[`${coach}`] = [menu];
+        else this.#recommandedMenu[`${coach}`] = [...this.#recommandedMenu[`${coach}`], menu];
+    }
+
+    haveSameMenu(coach, menu) {
+        if(this.#recommandedMenu[`${coach}`] && this.#recommandedMenu[`${coach}`].includes(menu)) return true;
+        return false;
+    }
+
+    getRecommandedMenu() {
+        return this.#recommandedMenu;
+    }
+
+    getCategory() {
+        return this.#stringCategory;
+    }
 }
 
 module.exports = Menu;
