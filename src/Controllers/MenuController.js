@@ -65,6 +65,9 @@ class MenuController {
 
     menuRecommand() {
         this.#recommandController = new RecommandController(this.#coach.getFoodList());
+        const recommandResult = this.#recommandController.getRecommandedMenu();
+        const categoryResult = this.#recommandController.getCategory();
+        this.outputView.printRecommandResult(categoryResult, recommandResult);
     }
 }
 
