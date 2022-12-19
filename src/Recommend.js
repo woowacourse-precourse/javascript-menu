@@ -11,15 +11,15 @@ class Recommend {
     constructor(namesArr) {
         this.coachNames = namesArr;
         this.numberOfCoaches = namesArr.length;
-        this.setindexArr();
-        this.isValidMember(namesArr);
+        this.setIndexArr();
+        this.isValidMembers(namesArr);
     }
 
-    isValidMember(namesArr) {
+    isValidMembers(namesArr) {
         if (namesArr.length < 2 || namesArr.length > 5) throw new Error('[ERROR] 코치는 최소 2명, 최대 5명까지 입력 가능합니다.');
     }
 
-    setindexArr() {
+    setIndexArr() {
         for (let i = 0; i < 5; i++) {
             this.pushRandom(this.#indexArr);
         }
@@ -56,13 +56,6 @@ class Recommend {
         });
         this.coachMenus.push({ name: coach.name, menu: bucket });
     }
-
-    // setRandomMenu() {
-    //     this.randomMenu = this.#indexArr.map((i) => {
-    //         let pickedIndex = Random.shuffle(this.#likesIndexed[i].map((_, j) => j++))[0];
-    //         return this.#likesIndexed[i][pickedIndex];
-    //     })
-    // }
 
     addStep() {
         this.step += 1;

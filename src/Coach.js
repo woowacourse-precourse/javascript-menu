@@ -56,7 +56,7 @@ class Coach {
     shuffleLikes() {
         for (let category in this.likes) {
             let bucket = [];
-            let indexArr = Random.shuffle(this.likes[category].map((x, i) => i++));
+            let indexArr = Random.shuffle(this.likes[category].map((_, i) => i++));
             bucket = indexArr.map(i => this.likes[category][i])
             this.shuffled[category] = bucket;
         }
