@@ -1,12 +1,12 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const { Random } = MissionUtils;
+const CONST = require('./Const');
 
 class Recommend {
     step = 0;
     weekCategory;
     coachMenus = [];
     #indexArr = [];
-    #CATEGORY = ['', '일식', '한식', '중식', '아시안', '양식']
 
     constructor(namesArr) {
         this.coachNames = namesArr;
@@ -38,8 +38,12 @@ class Recommend {
     }
 
     setWeekCategory() {
-        this.weekCategory = this.#indexArr.map((i) => this.#CATEGORY[i]);
-        // console.log(this.weekCategory)
+        let categoryArr = ['',];
+        for (let category in CONST.SAMPLE) {
+            categoryArr.push(category)
+        }
+        // console.log(categoryArr)
+        this.weekCategory = this.#indexArr.map((i) => categoryArr[i]);
     }
 
     setCoachMenus(coach) {
