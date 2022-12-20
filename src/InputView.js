@@ -6,14 +6,14 @@ const Recommend = require('./Recommend');
 
 const InputView = {
     readCoaches() {
-        Console.readLine('\n' + '코치의 이름을 입력해 주세요. (, 로 구분)' + '\n', (names) => {
+        Console.readLine('코치의 이름을 입력해 주세요. (, 로 구분)' + '\n', (names) => {
             this.tryCoaches(names);
         })
     },
 
     tryCoaches(names) {
         try {
-            const namesArr = names.split(',');
+            const namesArr = names.split(',').map(x => x.trim());
             const recommendInfo = new Recommend(namesArr);
             this.setCoaches(recommendInfo);
         }
@@ -53,7 +53,7 @@ const InputView = {
 
     tryDislikes(input, coach, coaches, recommendInfo) {
         try {
-            let namesArr = input.split(',');
+            let namesArr = input.split(',').map(x => x.trim());
             coach.setDislikes(namesArr);
             coach.setLikes();
             coach.shuffleLikes();
