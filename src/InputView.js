@@ -57,6 +57,8 @@ const InputView = {
             coach.setDislikes(namesArr);
             coach.setLikes();
             coach.shuffleLikes();
+            // console.log(coach.shuffled)
+
             recommendInfo.setCoachMenus(coach);
             recommendInfo.addStep();
             this.readDislikes(coaches, recommendInfo);
