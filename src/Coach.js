@@ -45,9 +45,11 @@ class Coach {
         for (let category in this.#SAMPLE) {
             let menuStr = this.#SAMPLE[category];
             this.dislikes[category].forEach(x => {
-                menuStr = menuStr.replace(x, 'vanned');
+                menuStr = menuStr.replace(x, '');
             })
-            this.likes[category] = menuStr.split(',').map(x => x.trim());
+            this.likes[category] = menuStr.split(',').map(x => x.trim())
+                .filter(x => x !== '')
+                .filter(x => x !== ' ');
         }
     }
 
@@ -55,8 +57,7 @@ class Coach {
         for (let category in this.likes) {
             let bucket = [];
             let indexArr = Random.shuffle(this.likes[category].map((_, i) => i++));
-            bucket = indexArr.map(i => this.likes[category][i]).filter(x => x !== 'vanned');
-            // console.log(bucket)
+            bucket = indexArr.map(i => this.likes[category][i])
             this.shuffled[category] = bucket;
         }
     }
