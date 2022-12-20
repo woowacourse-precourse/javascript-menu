@@ -11,7 +11,7 @@ const OutputView = {
         OutputView.print('[ 구분 | 월요일 | 화요일 | 수요일 | 목요일 | 금요일 ]');
 
         let weekCategoryStr = recommend.weekCategory.join(' | ');
-        OutputView.print(`[ 카테고리 | ${weekCategoryStr} `);
+        OutputView.print(`[ 카테고리 | ${weekCategoryStr} ]`);
 
         recommend.coachMenus.forEach(coachMenu => {
             let coachMenuStr = coachMenu.menu.join(' | ');
