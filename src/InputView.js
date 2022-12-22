@@ -46,7 +46,6 @@ const InputView = {
             OutputView.printResult(recommendInfo);
             // console.log(recommendInfo)
             // console.log(recommendInfo.coachMenus[0].menu)
-
             OutputView.end();
         }
     },
@@ -55,10 +54,8 @@ const InputView = {
         try {
             let namesArr = input.split(',').map(x => x.trim());
             coach.setDislikes(namesArr);
-            coach.setLikes();
-            coach.shuffleLikes();
-            // console.log(coach.shuffled)
-
+            // coach.setLikes();
+            // coach.shuffleLikes();
             recommendInfo.setCoachMenus(coach);
             recommendInfo.addStep();
             this.readDislikes(coaches, recommendInfo);

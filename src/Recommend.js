@@ -17,6 +17,10 @@ class Recommend {
 
     isValidMembers(namesArr) {
         if (namesArr.length < 2 || namesArr.length > 5) throw new Error('[ERROR] 코치는 최소 2명, 최대 5명까지 입력 가능합니다.');
+        namesArr.forEach((name, i, arr) => {
+            let count = arr.filter(x => x === name).length;
+            if (count > 1) throw new Error('[ERROR] 서로 다른 코치 이름만 입력 가능합니다.');
+        })
     }
 
     setIndexArr() {
@@ -48,18 +52,34 @@ class Recommend {
 
     setCoachMenus(coach) {
         let bucket = [];
-        this.weekCategory.forEach((category, i) => {
-            let first = coach.shuffled[category][0];
-            let second = coach.shuffled[category][1];
-            if (!bucket.includes(first)) {
-                bucket.push(first);
-            }
-            else {
-                bucket.push(second);
-            }
-        });
+        this.weekCategory.forEach((category) => {
+            this.pushDayMenu(coach, category, bucket);
+        })
         this.coachMenus.push({ name: coach.name, menu: bucket });
     }
+
+    pushDayMenu(coach, category, bucket) {
+        let shuffledDayMenu = this.shuffleMenu(category);
+        let menu = shuffledDayMenu[0].trim();
+        if (!coach.dislikes[category].includes(menu) && !bucket.includes(menu)) {
+            bucket.push(menu);
+        }
+        else {
+            this.pushDayMenu(coach, category, bucket);
+        }
+    }
+
+    shuffleMenu(category) {
+        let dayList = CONST.SAMPLE[category].split(',');
+        let dayListIndex = dayList.map((x, i) => {
+            let j = i + 1;
+            return j++;
+        });
+        let shuffuledIndexArr = Random.shuffle(dayListIndex);
+        let shuffledMenuArr = shuffuledIndexArr.map(j => dayList[j - 1]);
+        return shuffledMenuArr;
+    }
+
 
     addStep() {
         this.step += 1;

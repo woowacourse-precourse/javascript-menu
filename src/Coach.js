@@ -4,7 +4,6 @@ const CONST = require('./Const');
 
 class Coach {
     dislikes = {};
-    likes = {};
     shuffled = {};
     #SAMPLE = CONST.SAMPLE;
 
@@ -41,24 +40,12 @@ class Coach {
         }
     }
 
-    setLikes() {
+    shuffleMenu() {
         for (let category in this.#SAMPLE) {
-            let menuStr = this.#SAMPLE[category];
-            this.dislikes[category].forEach(x => {
-                menuStr = menuStr.replace(x, '');
-            })
-            this.likes[category] = menuStr.split(',').map(x => x.trim())
-                .filter(x => x !== '')
-                .filter(x => x !== ' ');
-        }
-    }
-
-    shuffleLikes() {
-        for (let category in this.likes) {
-            let bucket = [];
-            let indexArr = Random.shuffle(this.likes[category].map((_, i) => i++));
-            bucket = indexArr.map(i => this.likes[category][i])
-            this.shuffled[category] = bucket;
+            let menuArr = this.#SAMPLE[category].split(',');
+            let randomIndex = Random.shuffle(this.#SAMPLE[category].split(',').map((_, i) => i++));
+            let shuffledMenu = randomIndex.map(i => menuArr[i]);
+            this.shuffled[category] = shuffledMenu;
         }
     }
 }
