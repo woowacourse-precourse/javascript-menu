@@ -9,11 +9,15 @@ class Coach {
   }
 
   setHateFood(coachName, hateFood) {
-    this.coachHateFood.set(coachName, hateFood);
+    this.coachs.set(coachName, hateFood);
   }
 
   getNames() {
     return [...this.coachs.keys()];
+  }
+
+  getHateFood(coach) {
+    return this.coachs.get(coach).split(', ');
   }
 }
 
