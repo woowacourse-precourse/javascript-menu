@@ -4,7 +4,7 @@ class Coach {
   }
 
   setName(coach) {
-    const coachNameArray = coach.split(',');
+    const coachNameArray = coach.split(', ');
     coachNameArray.forEach(name => this.coachs.set(name));
   }
 
