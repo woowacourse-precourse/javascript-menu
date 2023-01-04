@@ -26,20 +26,8 @@ class RecommendMenu {
     return category;
   }
 
-  static convertArray(ovject) {
-    return ovject.split(', ');
-  }
-
-  static shuffleMenu(menu) {
-    return Random.shuffle(menu);
-  }
-
-  static exceptHateFoodOfMenu(menu, hateFood) {
-    return menu.filter(food => !hateFood.includes(food));
-  }
-
-  getFoodOfCategory(category) {
-    return this.convertArray([...this.menu.get(category)]);
+  shuffleArray(length) {
+    return Random.shuffle(Array.from({ length: length }, (value, index) => index + 1));
   }
 }
 
