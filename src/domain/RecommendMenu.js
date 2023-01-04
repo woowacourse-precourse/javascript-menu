@@ -29,6 +29,21 @@ class RecommendMenu {
   shuffleArray(length) {
     return Random.shuffle(Array.from({ length: length }, (value, index) => index + 1));
   }
+
+  create(coachHateFood, category) {
+    return category.map(menuStyle => {
+      while (true) {
+        const shuffleNumbersArray = this.shuffleArray(9);
+        const shuffledMenu = MenuMap.get(menuStyle)
+          .split(', ')
+          .map((food, index) => MenuMap.get(menuStyle).split(', ')[shuffleNumbersArray[index] - 1]);
+        if (coachHateFood.includes(shuffledMenu[0])) {
+          continue;
+        }
+        return shuffledMenu[0];
+      }
+    });
+  }
 }
 
 module.exports = RecommendMenu;
