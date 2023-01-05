@@ -1,16 +1,17 @@
 const { InputView } = require('../view/InputView');
 const { OutputView } = require('../view/OutputView');
-const { isCorrectInputHandler } = require('./isCorrectInputHandler');
+const { isCorrectInputHandler } = require('./IsCorrectInputHandler');
 const { Validation } = require('./Validation');
 
-class RecommandMenuSystem {
-  constructor(model, coachRepository) {
-    this.recommandMenu = model;
-    this.coach = coachRepository;
+class RecommendMenuSystem {
+  constructor(model, coachRepo) {
+    this.recommendMenu = model;
+    this.coach = coachRepo;
+    this.handlingCount = 0;
   }
 
   start() {
-    OutputView.printRecommandMenuStart();
+    OutputView.printRecommendMenuStart();
     this.requestCoachName();
   }
 
@@ -28,46 +29,52 @@ class RecommandMenuSystem {
 
   setCoachName(coach) {
     this.coach.setName(coach);
-    this.requestHateFoodOfFirstCoach();
+    this.requestHateFoods();
   }
 
-  requestHateFoodOfFirstCoach() {
-    const firstCoach = this.coach.getName()[0];
-    InputView.readNotEatMenu(firstCoach, this.saveFirstCoachCharacter.bind(this));
+  requestHateFoods() {
+    if (this.handlingCount < this.coach.getNames().length) {
+      const currentCoach = this.coach.getNames()[this.handlingCount];
+      InputView.readNotEatMenu(currentCoach, hateFood => {
+        this.coach.setHateFood(currentCoach, hateFood);
+        this.handlingCount += 1;
+        this.requestHateFoods();
+      });
+      return;
+    }
+    this.resetHandlingCount();
+    this.analyze();
   }
 
-  saveFirstCoachCharacter(userInputMenu) {
-    const firstCoach = this.coach.getName()[0];
-    this.coach.setHateFood(firstCoach, userInputMenu);
-    this.requestHateFoodOfSecondCoach();
-  }
-  requestHateFoodOfSecondCoach() {
-    const secondCoach = this.coach.getName()[1];
-    InputView.readNotEatMenu(secondCoach, this.saveSecondCoachCharacter.bind(this));
+  analyze() {
+    const randomCategory = this.recommendMenu.createRandomCateroy();
+    OutputView.printRecommendResult();
+    OutputView.printCategory(randomCategory);
+    this.announceResult(randomCategory);
   }
 
-  saveSecondCoachCharacter(userInputMenu) {
-    const secondCoach = this.coach.getName()[1];
-    this.coach.setHateFood(secondCoach, userInputMenu);
-    this.requestHateFoodOfThirdCoach();
-  }
-  requestHateFoodOfThirdCoach() {
-    const thirdCoach = this.coach.getName()[2];
-    InputView.readNotEatMenu(thirdCoach, this.saveThirdCoachCharacter.bind(this));
-  }
-
-  saveThirdCoachCharacter(userInputMenu) {
-    const thirdCoach = this.coach.getName()[2];
-    this.coach.setHateFood(thirdCoach, userInputMenu);
-    this.analyzeStart;
-  }
-
-  analyzeStart() {
-    OutputView.printRecommandMenuStart();
-    this.recommandMenu.analinzing();
+  announceResult(category) {
+    if (this.handlingCount < this.coach.getNames().length) {
+      const currentCoach = this.coach.getNames()[this.handlingCount];
+      OutputView.printCustomizedMenuForCoach([
+        currentCoach,
+        ...this.recommendMenu.create(this.coach.getHateFood(currentCoach), category),
+      ]);
+      this.handlingCount += 1;
+      this.announceResult(category);
+      return;
+    }
+    this.resetHandlingCount();
+    this.end();
   }
 
-  analinzing() {}
+  end() {
+    OutputView.printRecommendMenuAllDone();
+  }
+
+  resetHandlingCount() {
+    this.handlingCount = 0;
+  }
 }
 
-module.exports = RecommandMenuSystem;
+module.exports = RecommendMenuSystem;
