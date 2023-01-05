@@ -6,7 +6,7 @@ class App {
   constructor() {
     this.recommendMenuModel = new RecommendMenu();
     this.coach = new Coach();
-    this.recommendMenuController = new RecommendMenuSystem(this.RecommendMenuModel, this.coach);
+    this.recommendMenuController = new RecommendMenuSystem(this.recommendMenuModel, this.coach);
   }
 
   play() {
