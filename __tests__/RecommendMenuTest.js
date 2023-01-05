@@ -31,3 +31,18 @@ describe('RecommendMenu 클래스의 shuffleArray() 테스트', () => {
     expect(category).toHaveLength(9);
   });
 });
+
+describe('RecommendMenu 클래스의 create() 테스트', () => {
+  test('연속된 음식이 없는지 확인', () => {
+    const menu = recommendMenu.create(['김밥', '치킨'], ['한식', '한식', '한식', '한식', '한식']);
+    const stack = [];
+    menu.forEach(food => {
+      if (food !== stack[stack.length]) {
+        stack.push(food);
+        return;
+      }
+      stack.pop();
+    });
+    expect(stack).toHaveLength(5);
+  });
+});
