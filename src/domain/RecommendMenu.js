@@ -27,22 +27,25 @@ class RecommendMenu {
   }
 
   shuffleArray(length) {
-    return Random.shuffle(Array.from({ length: length }, (value, index) => index + 1));
+    return Random.shuffle(Array.from({ length: length }, (_, index) => index + 1));
   }
 
   create(coachHateFood, category) {
-    return category.map(menuStyle => {
+    const result = [];
+    category.forEach((menuStyle, idx) => {
       while (true) {
         const shuffleNumbersArray = this.shuffleArray(9);
         const shuffledMenu = MenuMap.get(menuStyle)
           .split(', ')
           .map((food, index) => MenuMap.get(menuStyle).split(', ')[shuffleNumbersArray[index] - 1]);
-        if (coachHateFood.includes(shuffledMenu[0])) {
+        if (coachHateFood.includes(shuffledMenu[0]) || shuffledMenu[0] === result[result.length - 1]) {
           continue;
         }
-        return shuffledMenu[0];
+        result.push(shuffledMenu[0]);
+        return;
       }
     });
+    return result;
   }
 }
 
