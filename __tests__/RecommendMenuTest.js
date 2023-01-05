@@ -24,3 +24,10 @@ describe('RecommendMenu 클래스의 createRandomCateroy() 테스트', () => {
     expect(category).toHaveLength(5);
   });
 });
+
+describe('RecommendMenu 클래스의 shuffleArray() 테스트', () => {
+  test('parameter로 받는 수만큼의 배열이 생성되었는지 확인', () => {
+    const category = recommendMenu.shuffleArray(9);
+    expect(category).toHaveLength(9);
+  });
+});
