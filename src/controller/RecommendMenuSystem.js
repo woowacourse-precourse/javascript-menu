@@ -36,6 +36,10 @@ class RecommendMenuSystem {
     if (this.handlingCount < this.coach.getNames().length) {
       const currentCoach = this.coach.getNames()[this.handlingCount];
       InputView.readNotEatMenu(currentCoach, hateFood => {
+        if (!isCorrectInputHandler(Validation.ofMenu, hateFood)) {
+          this.requestHateFoods();
+          return;
+        }
         this.coach.setHateFood(currentCoach, hateFood);
         this.handlingCount += 1;
         this.requestHateFoods();
