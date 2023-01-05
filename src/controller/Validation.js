@@ -1,5 +1,19 @@
 const { MenuMap } = require('../domain/MenuMap');
 
+const allFood = [...MenuMap.values()].join(', ').split(', ');
+
+const isCorrectLength = userInput => {
+  return userInput.split(',').every(name => name.length >= 2 && name.length <= 4);
+};
+
+const isCorrectHowManyCoach = userInput => {
+  return userInput.split(',').length < 2 || userInput.split(',').length > 5;
+};
+
+const isCorrectInputOfFood = userInput => {
+  return userInput.split(',').every(food => allFood.includes(food));
+};
+
 const Validation = {
   ofCoachName(userInput) {
     if (!isCorrectLength(userInput)) {
@@ -13,19 +27,6 @@ const Validation = {
   ofMenu(userInput) {
     if (!isCorrectInputOfFood(userInput)) throw new Error('[ERROR] 메뉴에 없는 메뉴입니다.');
   },
-};
-
-const isCorrectLength = (userInput) => {
-  return userInput.split(',').every((name) => name.length >= 2 && name.length <= 4);
-};
-
-const isCorrectHowManyCoach = (userInput) => {
-  return userInput.split(',').length < 2 || userInput.split(',').length > 5;
-};
-
-const isCorrectInputOfFood = (userInput) => {
-  const menu = [...MenuMap.values()].join(', ').split(', ');
-  return userInput.split(',').every((food) => menu.includes(food));
 };
 
 module.exports = { Validation };
