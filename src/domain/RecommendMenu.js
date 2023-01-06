@@ -18,11 +18,11 @@ class RecommendMenu {
     const result = [];
     category.forEach((menuStyle, idx) => {
       while (true) {
-        const shuffledMenu = this.shuffleMenu(menuStyle);
-        if (coachHateFood.includes(shuffledMenu[0]) || shuffledMenu[0] === result[result.length - 1]) {
+        const shuffledMenu = this.shuffleMenu(menuStyle)[0];
+        if (coachHateFood === shuffledMenu || shuffledMenu === result[result.length - 1]) {
           continue;
         }
-        result.push(shuffledMenu[0]);
+        result.push(shuffledMenu);
         return;
       }
     });
