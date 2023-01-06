@@ -21,8 +21,8 @@ const OutputView = {
     Console.print(`[ 카테고리 | ${category.join(' | ')} ]`);
   },
 
-  printCustomizedMenuForCoach(coachMenu) {
-    Console.print(`[ ${coachMenu.join(' | ')} ]`);
+  printCustomizedMenuForCoach(coach, Menu) {
+    Console.print(`[ ${[coach, ...Menu].join(' | ')} ]`);
   },
 };
 
