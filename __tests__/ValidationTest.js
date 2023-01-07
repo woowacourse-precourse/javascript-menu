@@ -24,10 +24,7 @@ describe('Validation 객체의 ofMenu 메서드 테스트', () => {
   test.each([['와플'], ['포카칩'], ['김치부침개']])('싫어하는 음식을 입력한 값이 메뉴에 없을때 에러 확인', input => {
     expect(() => Validation.ofMenu(input)).toThrow();
   });
-  test.each.failing([['김치찌개'], ['팟 타이']])(
-    '싫어하는 음식을 입력한 값이 메뉴에 있을때 에러 없는지 확인',
-    input => {
-      expect(() => Validation.ofMenu(input)).toThrow();
-    },
-  );
+  test.failing.each([['김치찌개'], ['팟타이']])('싫어하는 음식을 입력한 값이 메뉴에 있을때 에러 없는지 확인', input => {
+    expect(() => Validation.ofMenu(input)).toThrow();
+  });
 });
