@@ -30,14 +30,14 @@ describe('Coach 클래스의 getHateFood() 메서드 테스트', () => {
 });
 
 describe('Coach 클래스의 getCurrentCoach() 메서드 테스트', () => {
-  test('', () => {
+  test('코치님들의 이름이 순차적으로 나오는지 확인', () => {
     const firstCoach = coach.getCurrentCoach();
     const secondCoach = coach.getCurrentCoach();
     expect([firstCoach, secondCoach]).toEqual(coach.getNames());
   });
-  test('', () => {
+  test('메서드를 코치님들 이름 배열의 -1 만큼 호출했을때 handlingCount 확인', () => {
     const firstCoach = coach.getCurrentCoach();
     const secondCoach = coach.getCurrentCoach();
-    expect(coach.handlingCount).toEqual(0);
+    expect(coach.handlingCount).toEqual(2);
   });
 });
