@@ -7,7 +7,6 @@ class RecommendMenuSystem {
   constructor(model, coachRepo) {
     this.recommendMenu = model;
     this.coach = coachRepo;
-    this.handlingCount = 0;
   }
 
   start() {
@@ -29,17 +28,18 @@ class RecommendMenuSystem {
   }
 
   requestHateFoods() {
-    const currentCoach = this.coach.getNames()[this.handlingCount];
-    if (this.handlingCount < this.coach.getNames().length) {
+    const currentCoach = this.coach.getCurrentCoach();
+    if (this.coach.possibleGetCurrentCoach()) {
       InputView.readNotEatMenu(currentCoach, this.validateInputOfHateFoods.bind(this, currentCoach));
       return;
     }
-    this.resetHandlingCount();
+    this.coach.resetHandlingCount();
     this.analyseCategory();
   }
 
   validateInputOfHateFoods(coach, hateFood) {
     if (!isCorrectInputHandler(Validation.ofMenu, hateFood)) {
+      this.coach.decreaseHandlingCount();
       this.requestHateFoods();
       return;
     }
@@ -54,14 +54,13 @@ class RecommendMenuSystem {
   }
 
   analyseMenu(category) {
-    if (this.handlingCount < this.coach.getNames().length) {
-      const currentCoach = this.coach.getNames()[this.handlingCount];
+    const currentCoach = this.coach.getCurrentCoach();
+    if (this.coach.possibleGetCurrentCoach()) {
       this.announceMenu(currentCoach, this.recommendMenu.create(this.coach.getHateFood(currentCoach), category));
-      this.handlingCount += 1;
       this.analyseMenu(category);
       return;
     }
-    this.resetHandlingCount();
+    this.coach.resetHandlingCount();
     this.end();
   }
 
@@ -75,7 +74,6 @@ class RecommendMenuSystem {
 
   setCoachHateFood(coach, hateFood) {
     this.coach.setHateFood(coach, hateFood);
-    this.handlingCount += 1;
   }
 
   announceCategory(category) {
@@ -85,10 +83,6 @@ class RecommendMenuSystem {
 
   announceMenu(coach, recommendMenu) {
     OutputView.printCustomizedMenuForCoach(coach, recommendMenu);
-  }
-
-  resetHandlingCount() {
-    this.handlingCount = 0;
   }
 }
 
